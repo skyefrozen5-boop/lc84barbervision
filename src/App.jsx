@@ -1289,12 +1289,6 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin}){
         </div>
         {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>Código incorreto</div>}
         <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>Entrar</Btn>
-        <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:"11px 13px"}}>
-          <Lbl style={{marginBottom:7}}>PINs de demonstração</Lbl>
-          {barbers.map(b=><div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:"0.76rem"}}><span style={{color:T.mid}}>{b.name}</span><span style={{color:T.gold,fontFamily:"'Josefin Sans',sans-serif"}}>{b.pin}</span></div>)}
-          <div style={{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:"0.76rem",marginTop:6,paddingTop:7,borderTop:`1px solid ${T.border}`}}><span style={{color:T.mid}}>Admin</span><span style={{color:T.gold,fontFamily:"'Josefin Sans',sans-serif"}}>{shop.adminPin}</span></div>
-        </div>
-      </div>
     </div>
   );
 }
