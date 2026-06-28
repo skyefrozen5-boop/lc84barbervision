@@ -1291,7 +1291,7 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin}){
         <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>Entrar</Btn>
     </div>
   );
-}
+
 
 function EntryScreen({shop,onBarber,onClient}){
   return(
