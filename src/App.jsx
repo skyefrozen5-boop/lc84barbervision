@@ -1289,9 +1289,10 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin}){
         </div>
         {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>Código incorreto</div>}
         <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>Entrar</Btn>
+      </div>
     </div>
   );
-
+}
 
 function EntryScreen({shop,onBarber,onClient}){
   return(
