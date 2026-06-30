@@ -24,6 +24,275 @@ const GS = `
   @media print{body{background:white!important;color:black!important;}.no-print{display:none!important;}}
 `;
 
+// ─── LANGUAGES ───────────────────────────────────────────────────────────────
+const LANGS = {
+  pt:{ flag:"🇵🇹", name:"Português",
+    months:["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+    wdays:["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],
+    wdaysF:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
+    pay:["Dinheiro","MB Way","Multibanco","Transferência","Outro"],
+    t:{
+      client:"Sou Cliente", clientSub:"Marcar corte, ver marcações",
+      barber:"Sou Barbeiro / Admin", barberSub:"Gerir agenda e marcações",
+      platform:"A tua plataforma de barbearia",
+      accessCode:"Código de Acesso", enter:"Entrar", wrongPin:"Código incorreto",
+      hide:"Ocultar", show:"Ver",
+      barberArea:"Área do Barbeiro", clientArea:"Área do Cliente",
+      today:"Hoje", tomorrow:"Amanhã", yesterday:"Ontem",
+      bookings:"marcações", concluded:"concluídas", toConfirm:"Confirmar",
+      week:"Semana", revenue:"Receita Hoje", pendingRev:"por receber",
+      nextBookings:"Próximas marcações", noFuture:"Sem marcações futuras",
+      agenda:"Agenda", dashboard:"Início", notifications:"Alertas",
+      clients:"Clientes", reports:"Receita", schedule:"Horário", profile:"Perfil",
+      newBooking:"+ Novo", block:"🔒 Bloquear", addBooking:"Nova Marcação",
+      editBooking:"Editar Marcação", save:"Guardar", delete:"Eliminar", close:"Fechar",
+      clientName:"Nome do Cliente", fullName:"Nome completo", phone:"Telemóvel",
+      date:"Data", time:"Hora", service:"Serviço", payment:"Pago", payMethod:"— método —",
+      notes:"Notas", observations:"Observações…", back:"← Voltar", next:"Continuar →",
+      confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado",
+      freeSlots:"Horários livres", dayBlocked:"Dia inteiro bloqueado", unblock:"Desbloquear",
+      blockSlot:"Horário", blockDay:"Dia inteiro", blockPeriod:"Período",
+      blockSlotTitle:"Escolhe o horário a bloquear", blockDayTitle:"Bloquear dia inteiro",
+      blockPeriodTitle:"Bloquear período (ex: férias)", blockDays:"dias bloqueados",
+      noBookings:"Sem marcações — toque em + Novo", holiday:"Folga neste dia",
+      searchClient:"Pesquisar nome ou telemóvel…", visits:"visita", totalSpent:"gasto total",
+      barberNotes:"Notas do barbeiro", noNotes:"Sem notas — clique em Editar para adicionar",
+      edit:"Editar", cancel:"Cancelar", upcoming:"Próximas marcações", history:"Histórico de visitas",
+      noHistory:"Sem histórico", favorite:"Favorito",
+      confirmedRev:"✓ Receita Confirmada", pendingPayment:"⚠ Por Receber", scheduled:"Agendado",
+      payConfirm:"Confirmar Pagamento", confirmReceipt:"✓ Confirmar Recebimento de",
+      printToday:"🖨 Relatório Hoje", printMonth:"🖨 Relatório Mês",
+      byMethod:"Por método de pagamento", byService:"Por serviço", last7:"Receita confirmada — 7 dias",
+      records:"Registos", total:"total", services:"Serviços",
+      workDays:"Dias de trabalho", startHour:"Início", endHour:"Fim", generatedSlots:"Horários gerados",
+      saveSchedule:"Guardar Horário", barbershop:"Barbearia", barberName:"Nome do Barbeiro",
+      address:"Morada", bio:"Bio", newPin:"Novo PIN", keepPin:"Deixar vazio para manter",
+      logout:"Sair", chooseBarber:"1. Escolha o barbeiro", chooseService:"2. Escolha o serviço",
+      chooseDate:"3. Escolha a data", yourData:"4. Os seus dados", confirm:"Confirmar Marcação",
+      bookingConfirmed:"Confirmado!", newBookingBtn:"Nova Marcação", myBookings:"Ver Marcações",
+      myBookingsTitle:"As minhas marcações", cancelBooking:"Cancelar",
+      trialDays:"d trial", active:"✓ ATIVO", subscribeTitle:"Escolhe o teu plano",
+      subscribeSubtitle:"Sem compromisso. Cancela quando quiseres.",
+      trialStatus:"Estado do Trial", daysLeft:"dias restantes", trialExpired:"Trial expirado",
+      solo:"Solo", team:"Equipa", subscribeNow:"Subscrever Agora",
+      expiredTitle:"Trial expirado", expiredSub:"Os teus dados estão guardados.\nSubscreve para continuar.",
+      seePlans:"Ver Planos a partir de €9,99/mês", readMore:"Saber mais",
+    }
+  },
+  en:{ flag:"🇬🇧", name:"English",
+    months:["January","February","March","April","May","June","July","August","September","October","November","December"],
+    wdays:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+    wdaysF:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    pay:["Cash","MB Way","Debit Card","Transfer","Other"],
+    t:{
+      client:"I'm a Client", clientSub:"Book a haircut, see appointments",
+      barber:"I'm a Barber / Admin", barberSub:"Manage schedule and bookings",
+      platform:"Your barbershop platform",
+      accessCode:"Access Code", enter:"Enter", wrongPin:"Incorrect code",
+      hide:"Hide", show:"Show",
+      barberArea:"Barber Area", clientArea:"Client Area",
+      today:"Today", tomorrow:"Tomorrow", yesterday:"Yesterday",
+      bookings:"bookings", concluded:"completed", toConfirm:"Confirm",
+      week:"Week", revenue:"Today's Revenue", pendingRev:"pending",
+      nextBookings:"Upcoming bookings", noFuture:"No upcoming bookings",
+      agenda:"Agenda", dashboard:"Home", notifications:"Alerts",
+      clients:"Clients", reports:"Revenue", schedule:"Schedule", profile:"Profile",
+      newBooking:"+ New", block:"🔒 Block", addBooking:"New Booking",
+      editBooking:"Edit Booking", save:"Save", delete:"Delete", close:"Close",
+      clientName:"Client Name", fullName:"Full name", phone:"Phone",
+      date:"Date", time:"Time", service:"Service", payment:"Paid", payMethod:"— method —",
+      notes:"Notes", observations:"Observations…", back:"← Back", next:"Continue →",
+      confirmed:"Confirmed", done:"Completed", cancelled:"Cancelled", blocked:"Blocked",
+      freeSlots:"Available slots", dayBlocked:"Full day blocked", unblock:"Unblock",
+      blockSlot:"Time slot", blockDay:"Full day", blockPeriod:"Period",
+      blockSlotTitle:"Choose slot to block", blockDayTitle:"Block full day",
+      blockPeriodTitle:"Block period (e.g. holidays)", blockDays:"days blocked",
+      noBookings:"No bookings — tap + New to add", holiday:"Day off",
+      searchClient:"Search name or phone…", visits:"visit", totalSpent:"total spent",
+      barberNotes:"Barber notes", noNotes:"No notes — click Edit to add",
+      edit:"Edit", cancel:"Cancel", upcoming:"Upcoming bookings", history:"Visit history",
+      noHistory:"No history", favorite:"Favourite",
+      confirmedRev:"✓ Confirmed Revenue", pendingPayment:"⚠ Pending Payment", scheduled:"Scheduled",
+      payConfirm:"Confirm Payment", confirmReceipt:"✓ Confirm Receipt of",
+      printToday:"🖨 Today's Report", printMonth:"🖨 Monthly Report",
+      byMethod:"By payment method", byService:"By service", last7:"Confirmed revenue — 7 days",
+      records:"Records", total:"total", services:"Services",
+      workDays:"Work days", startHour:"Start", endHour:"End", generatedSlots:"Generated slots",
+      saveSchedule:"Save Schedule", barbershop:"Barbershop", barberName:"Barber Name",
+      address:"Address", bio:"Bio", newPin:"New PIN", keepPin:"Leave empty to keep current",
+      logout:"Sign out", chooseBarber:"1. Choose barber", chooseService:"2. Choose service",
+      chooseDate:"3. Choose date", yourData:"4. Your details", confirm:"Confirm Booking",
+      bookingConfirmed:"Confirmed!", newBookingBtn:"New Booking", myBookings:"My Bookings",
+      myBookingsTitle:"My bookings", cancelBooking:"Cancel",
+      trialDays:"d trial", active:"✓ ACTIVE", subscribeTitle:"Choose your plan",
+      subscribeSubtitle:"No commitment. Cancel anytime.",
+      trialStatus:"Trial Status", daysLeft:"days remaining", trialExpired:"Trial expired",
+      solo:"Solo", team:"Team", subscribeNow:"Subscribe Now",
+      expiredTitle:"Trial expired", expiredSub:"Your data is saved.\nSubscribe to continue.",
+      seePlans:"See Plans from €9.99/month", readMore:"Learn more",
+    }
+  },
+  es:{ flag:"🇪🇸", name:"Español",
+    months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+    wdays:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],
+    wdaysF:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
+    pay:["Efectivo","MB Way","Tarjeta","Transferencia","Otro"],
+    t:{
+      client:"Soy Cliente", clientSub:"Reservar corte, ver citas",
+      barber:"Soy Barbero / Admin", barberSub:"Gestionar agenda y reservas",
+      platform:"Tu plataforma de barbería",
+      accessCode:"Código de Acceso", enter:"Entrar", wrongPin:"Código incorrecto",
+      hide:"Ocultar", show:"Ver",
+      barberArea:"Área del Barbero", clientArea:"Área del Cliente",
+      today:"Hoy", tomorrow:"Mañana", yesterday:"Ayer",
+      bookings:"citas", concluded:"completadas", toConfirm:"Confirmar",
+      week:"Semana", revenue:"Ingresos Hoy", pendingRev:"pendiente",
+      nextBookings:"Próximas citas", noFuture:"Sin citas futuras",
+      agenda:"Agenda", dashboard:"Inicio", notifications:"Alertas",
+      clients:"Clientes", reports:"Ingresos", schedule:"Horario", profile:"Perfil",
+      newBooking:"+ Nuevo", block:"🔒 Bloquear", addBooking:"Nueva Cita",
+      editBooking:"Editar Cita", save:"Guardar", delete:"Eliminar", close:"Cerrar",
+      clientName:"Nombre del Cliente", fullName:"Nombre completo", phone:"Teléfono",
+      date:"Fecha", time:"Hora", service:"Servicio", payment:"Pagado", payMethod:"— método —",
+      notes:"Notas", observations:"Observaciones…", back:"← Volver", next:"Continuar →",
+      confirmed:"Confirmado", done:"Completado", cancelled:"Cancelado", blocked:"Bloqueado",
+      freeSlots:"Horarios libres", dayBlocked:"Día completo bloqueado", unblock:"Desbloquear",
+      blockSlot:"Horario", blockDay:"Día completo", blockPeriod:"Período",
+      blockSlotTitle:"Elige el horario a bloquear", blockDayTitle:"Bloquear día completo",
+      blockPeriodTitle:"Bloquear período (ej. vacaciones)", blockDays:"días bloqueados",
+      noBookings:"Sin citas — toca + Nuevo", holiday:"Día libre",
+      searchClient:"Buscar nombre o teléfono…", visits:"visita", totalSpent:"total gastado",
+      barberNotes:"Notas del barbero", noNotes:"Sin notas — haz clic en Editar",
+      edit:"Editar", cancel:"Cancelar", upcoming:"Próximas citas", history:"Historial de visitas",
+      noHistory:"Sin historial", favorite:"Favorito",
+      confirmedRev:"✓ Ingresos Confirmados", pendingPayment:"⚠ Por Cobrar", scheduled:"Programado",
+      payConfirm:"Confirmar Pago", confirmReceipt:"✓ Confirmar Cobro de",
+      printToday:"🖨 Informe Hoy", printMonth:"🖨 Informe Mes",
+      byMethod:"Por método de pago", byService:"Por servicio", last7:"Ingresos confirmados — 7 días",
+      records:"Registros", total:"total", services:"Servicios",
+      workDays:"Días de trabajo", startHour:"Inicio", endHour:"Fin", generatedSlots:"Horarios generados",
+      saveSchedule:"Guardar Horario", barbershop:"Barbería", barberName:"Nombre del Barbero",
+      address:"Dirección", bio:"Bio", newPin:"Nuevo PIN", keepPin:"Dejar vacío para mantener",
+      logout:"Salir", chooseBarber:"1. Elige el barbero", chooseService:"2. Elige el servicio",
+      chooseDate:"3. Elige la fecha", yourData:"4. Tus datos", confirm:"Confirmar Reserva",
+      bookingConfirmed:"¡Confirmado!", newBookingBtn:"Nueva Reserva", myBookings:"Mis Reservas",
+      myBookingsTitle:"Mis reservas", cancelBooking:"Cancelar",
+      trialDays:"d prueba", active:"✓ ACTIVO", subscribeTitle:"Elige tu plan",
+      subscribeSubtitle:"Sin compromiso. Cancela cuando quieras.",
+      trialStatus:"Estado de Prueba", daysLeft:"días restantes", trialExpired:"Prueba expirada",
+      solo:"Solo", team:"Equipo", subscribeNow:"Suscribirse Ahora",
+      expiredTitle:"Prueba expirada", expiredSub:"Tus datos están guardados.\nSuscríbete para continuar.",
+      seePlans:"Ver Planes desde €9,99/mes", readMore:"Saber más",
+    }
+  },
+  fr:{ flag:"🇫🇷", name:"Français",
+    months:["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+    wdays:["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
+    wdaysF:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
+    pay:["Espèces","MB Way","Carte","Virement","Autre"],
+    t:{
+      client:"Je suis Client", clientSub:"Réserver une coupe, voir mes rendez-vous",
+      barber:"Je suis Barbier / Admin", barberSub:"Gérer l'agenda et les réservations",
+      platform:"Votre plateforme de barbier",
+      accessCode:"Code d'Accès", enter:"Entrer", wrongPin:"Code incorrect",
+      hide:"Masquer", show:"Voir",
+      barberArea:"Espace Barbier", clientArea:"Espace Client",
+      today:"Aujourd'hui", tomorrow:"Demain", yesterday:"Hier",
+      bookings:"rendez-vous", concluded:"terminés", toConfirm:"Confirmer",
+      week:"Semaine", revenue:"Revenus Aujourd'hui", pendingRev:"en attente",
+      nextBookings:"Prochains rendez-vous", noFuture:"Aucun rendez-vous à venir",
+      agenda:"Agenda", dashboard:"Accueil", notifications:"Alertes",
+      clients:"Clients", reports:"Revenus", schedule:"Horaires", profile:"Profil",
+      newBooking:"+ Nouveau", block:"🔒 Bloquer", addBooking:"Nouveau Rendez-vous",
+      editBooking:"Modifier Rendez-vous", save:"Enregistrer", delete:"Supprimer", close:"Fermer",
+      clientName:"Nom du Client", fullName:"Nom complet", phone:"Téléphone",
+      date:"Date", time:"Heure", service:"Service", payment:"Payé", payMethod:"— méthode —",
+      notes:"Notes", observations:"Observations…", back:"← Retour", next:"Continuer →",
+      confirmed:"Confirmé", done:"Terminé", cancelled:"Annulé", blocked:"Bloqué",
+      freeSlots:"Créneaux disponibles", dayBlocked:"Journée entière bloquée", unblock:"Débloquer",
+      blockSlot:"Créneau", blockDay:"Journée entière", blockPeriod:"Période",
+      blockSlotTitle:"Choisir le créneau à bloquer", blockDayTitle:"Bloquer la journée entière",
+      blockPeriodTitle:"Bloquer une période (ex. vacances)", blockDays:"jours bloqués",
+      noBookings:"Aucun rendez-vous — appuyer sur + Nouveau", holiday:"Jour de repos",
+      searchClient:"Rechercher nom ou téléphone…", visits:"visite", totalSpent:"total dépensé",
+      barberNotes:"Notes du barbier", noNotes:"Aucune note — cliquer sur Modifier",
+      edit:"Modifier", cancel:"Annuler", upcoming:"Prochains rendez-vous", history:"Historique des visites",
+      noHistory:"Aucun historique", favorite:"Favori",
+      confirmedRev:"✓ Revenus Confirmés", pendingPayment:"⚠ À Encaisser", scheduled:"Planifié",
+      payConfirm:"Confirmer le Paiement", confirmReceipt:"✓ Confirmer l'encaissement de",
+      printToday:"🖨 Rapport Aujourd'hui", printMonth:"🖨 Rapport Mensuel",
+      byMethod:"Par méthode de paiement", byService:"Par service", last7:"Revenus confirmés — 7 jours",
+      records:"Registres", total:"total", services:"Services",
+      workDays:"Jours de travail", startHour:"Début", endHour:"Fin", generatedSlots:"Créneaux générés",
+      saveSchedule:"Enregistrer les Horaires", barbershop:"Salon de coiffure", barberName:"Nom du Barbier",
+      address:"Adresse", bio:"Bio", newPin:"Nouveau PIN", keepPin:"Laisser vide pour conserver",
+      logout:"Déconnexion", chooseBarber:"1. Choisir le barbier", chooseService:"2. Choisir le service",
+      chooseDate:"3. Choisir la date", yourData:"4. Vos coordonnées", confirm:"Confirmer la Réservation",
+      bookingConfirmed:"Confirmé!", newBookingBtn:"Nouvelle Réservation", myBookings:"Mes Réservations",
+      myBookingsTitle:"Mes réservations", cancelBooking:"Annuler",
+      trialDays:"j essai", active:"✓ ACTIF", subscribeTitle:"Choisissez votre plan",
+      subscribeSubtitle:"Sans engagement. Annulez quand vous voulez.",
+      trialStatus:"Statut d'Essai", daysLeft:"jours restants", trialExpired:"Essai expiré",
+      solo:"Solo", team:"Équipe", subscribeNow:"S'abonner Maintenant",
+      expiredTitle:"Essai expiré", expiredSub:"Vos données sont sauvegardées.\nAbonnez-vous pour continuer.",
+      seePlans:"Voir les Plans à partir de 9,99€/mois", readMore:"En savoir plus",
+    }
+  },
+  de:{ flag:"🇩🇪", name:"Deutsch",
+    months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+    wdays:["So","Mo","Di","Mi","Do","Fr","Sa"],
+    wdaysF:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
+    pay:["Bargeld","MB Way","Karte","Überweisung","Sonstiges"],
+    t:{
+      client:"Ich bin Kunde", clientSub:"Haarschnitt buchen, Termine sehen",
+      barber:"Ich bin Friseur / Admin", barberSub:"Termine und Kalender verwalten",
+      platform:"Ihre Barbershop-Plattform",
+      accessCode:"Zugangscode", enter:"Einloggen", wrongPin:"Falscher Code",
+      hide:"Verbergen", show:"Anzeigen",
+      barberArea:"Friseurbereich", clientArea:"Kundenbereich",
+      today:"Heute", tomorrow:"Morgen", yesterday:"Gestern",
+      bookings:"Termine", concluded:"abgeschlossen", toConfirm:"Bestätigen",
+      week:"Woche", revenue:"Heutiger Umsatz", pendingRev:"ausstehend",
+      nextBookings:"Nächste Termine", noFuture:"Keine bevorstehenden Termine",
+      agenda:"Kalender", dashboard:"Startseite", notifications:"Benachrichtigungen",
+      clients:"Kunden", reports:"Umsatz", schedule:"Arbeitszeiten", profile:"Profil",
+      newBooking:"+ Neu", block:"🔒 Sperren", addBooking:"Neuer Termin",
+      editBooking:"Termin bearbeiten", save:"Speichern", delete:"Löschen", close:"Schließen",
+      clientName:"Kundenname", fullName:"Vollständiger Name", phone:"Telefon",
+      date:"Datum", time:"Uhrzeit", service:"Leistung", payment:"Bezahlt", payMethod:"— Methode —",
+      notes:"Notizen", observations:"Anmerkungen…", back:"← Zurück", next:"Weiter →",
+      confirmed:"Bestätigt", done:"Abgeschlossen", cancelled:"Storniert", blocked:"Gesperrt",
+      freeSlots:"Freie Slots", dayBlocked:"Ganzer Tag gesperrt", unblock:"Entsperren",
+      blockSlot:"Zeitslot", blockDay:"Ganzer Tag", blockPeriod:"Zeitraum",
+      blockSlotTitle:"Zeitslot zum Sperren wählen", blockDayTitle:"Ganzen Tag sperren",
+      blockPeriodTitle:"Zeitraum sperren (z.B. Urlaub)", blockDays:"Tage gesperrt",
+      noBookings:"Keine Termine — + Neu tippen", holiday:"Freier Tag",
+      searchClient:"Name oder Telefon suchen…", visits:"Besuch", totalSpent:"gesamt ausgegeben",
+      barberNotes:"Friseur-Notizen", noNotes:"Keine Notizen — auf Bearbeiten klicken",
+      edit:"Bearbeiten", cancel:"Abbrechen", upcoming:"Bevorstehende Termine", history:"Besuchshistorie",
+      noHistory:"Keine Historie", favorite:"Favorit",
+      confirmedRev:"✓ Bestätigter Umsatz", pendingPayment:"⚠ Ausstehend", scheduled:"Geplant",
+      payConfirm:"Zahlung bestätigen", confirmReceipt:"✓ Eingang bestätigen von",
+      printToday:"🖨 Tagesbericht", printMonth:"🖨 Monatsbericht",
+      byMethod:"Nach Zahlungsmethode", byService:"Nach Leistung", last7:"Bestätigter Umsatz — 7 Tage",
+      records:"Aufzeichnungen", total:"gesamt", services:"Leistungen",
+      workDays:"Arbeitstage", startHour:"Beginn", endHour:"Ende", generatedSlots:"Generierte Slots",
+      saveSchedule:"Arbeitszeiten speichern", barbershop:"Friseursalon", barberName:"Friseurname",
+      address:"Adresse", bio:"Bio", newPin:"Neuer PIN", keepPin:"Leer lassen zum Beibehalten",
+      logout:"Abmelden", chooseBarber:"1. Friseur wählen", chooseService:"2. Leistung wählen",
+      chooseDate:"3. Datum wählen", yourData:"4. Ihre Daten", confirm:"Buchung bestätigen",
+      bookingConfirmed:"Bestätigt!", newBookingBtn:"Neue Buchung", myBookings:"Meine Buchungen",
+      myBookingsTitle:"Meine Buchungen", cancelBooking:"Stornieren",
+      trialDays:"T Testphase", active:"✓ AKTIV", subscribeTitle:"Plan wählen",
+      subscribeSubtitle:"Keine Bindung. Jederzeit kündbar.",
+      trialStatus:"Teststatus", daysLeft:"Tage verbleibend", trialExpired:"Testphase abgelaufen",
+      solo:"Solo", team:"Team", subscribeNow:"Jetzt abonnieren",
+      expiredTitle:"Testphase abgelaufen", expiredSub:"Ihre Daten sind gespeichert.\nAbonnieren Sie, um fortzufahren.",
+      seePlans:"Pläne ab 9,99€/Monat", readMore:"Mehr erfahren",
+    }
+  },
+};
+
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 const ALL_HOURS = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
                    "13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"];
@@ -1271,7 +1540,8 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGIN + ENTRY
 // ══════════════════════════════════════════════════════════════════════════════
-function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin}){
+function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,lang}){
+  const L=LANGS[lang].t;
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   return(
@@ -1279,37 +1549,43 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin}){
       <div style={{textAlign:"center",marginBottom:40}}>
         <svg width="42" height="42" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.7rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.25rem"}}>barbervision</span></div>
-        <div style={{fontSize:"0.58rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5}}>Área do Barbeiro</div>
+        <div style={{fontSize:"0.58rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5}}>{L.barberArea}</div>
       </div>
       <div style={{width:"100%",maxWidth:290}}>
-        <Lbl style={{textAlign:"center",marginBottom:12}}>Código de Acesso</Lbl>
+        <Lbl style={{textAlign:"center",marginBottom:12}}>{L.accessCode}</Lbl>
         <div style={{position:"relative",marginBottom:12}}>
           <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
-          <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?"Ocultar":"Ver"}</button>
+          <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?L.hide:L.show}</button>
         </div>
-        {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>Código incorreto</div>}
-        <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>Entrar</Btn>
+        {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
+        <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
       </div>
     </div>
   );
 }
 
-function EntryScreen({shop,onBarber,onClient}){
+function EntryScreen({shop,onBarber,onClient,lang,setLang}){
+  const L=LANGS[lang].t;
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
       <style>{GS}</style>
+      <div style={{position:"fixed",top:16,right:16,display:"flex",gap:6,zIndex:10}}>
+        {Object.entries(LANGS).map(([code,l])=>(
+          <button key={code} onClick={()=>setLang(code)} style={{padding:"4px 8px",borderRadius:4,cursor:"pointer",fontSize:"1rem",background:lang===code?T.goldLo:"transparent",border:`1px solid ${lang===code?T.gold:T.border}`}} title={l.name}>{l.flag}</button>
+        ))}
+      </div>
       <div style={{textAlign:"center",marginBottom:40}}>
         <svg width="48" height="48" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.9rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.4rem"}}>barbervision</span></div>
-        <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>A tua plataforma de barbearia</div>
+        <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
         <div style={{fontSize:"0.82rem",color:T.silver,marginTop:7}}>{shop.address}</div>
       </div>
       <div style={{width:"100%",maxWidth:290,display:"flex",flexDirection:"column",gap:9}}>
         <button onClick={onClient} style={{padding:"17px",background:T.goldLo,border:`1px solid ${T.gold}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
-          <div style={{fontSize:"1.3rem",marginBottom:5}}>✂</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>Sou Cliente</div><div style={{fontSize:"0.73rem",color:T.silver}}>Marcar corte, ver marcações</div>
+          <div style={{fontSize:"1.3rem",marginBottom:5}}>✂</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.client}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.clientSub}</div>
         </button>
         <button onClick={onBarber} style={{padding:"17px",background:T.surface,border:`1px solid ${T.border}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
-          <div style={{fontSize:"1.3rem",marginBottom:5}}>◉</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>Sou Barbeiro / Admin</div><div style={{fontSize:"0.73rem",color:T.silver}}>Gerir agenda e marcações</div>
+          <div style={{fontSize:"1.3rem",marginBottom:5}}>◉</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.barber}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.barberSub}</div>
         </button>
       </div>
     </div>
@@ -1507,6 +1783,7 @@ function ExpiredScreen({onSubscribe}){
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
 export default function App(){
+  const [lang,setLang]                   = useState("pt");
   const [barbers,setBarbers]             = useState(INIT_BARBERS);
   const [services,setServices]           = useState(INIT_SERVICES);
   const [shop,setShop]                   = useState(INIT_SHOP);
@@ -1544,8 +1821,8 @@ export default function App(){
 
   if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)}/>;
 
-  if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")}/>;
-  if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")}/>;
+  if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
+  if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} onLogout={()=>setRole("entry")}/>;
 
