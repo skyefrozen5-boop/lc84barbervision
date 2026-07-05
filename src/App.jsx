@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { supabase } from "./supabaseClient";
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
 const T = {
@@ -1344,7 +1345,82 @@ function ServicesAdmin({services,setServices}){
   </>);
 }
 
-function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,onBack}){
+function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,onNext,onBack}){
+  const [calY,setCalY]=useState(NOW.getFullYear());
+  const [calM,setCalM]=useState(NOW.getMonth());
+  const dim=new Date(calY,calM+1,0).getDate();
+  const fd=new Date(calY,calM,1).getDay();
+  const prevM=()=>{if(calM===0){setCalM(11);setCalY(y=>y-1);}else setCalM(m=>m-1);};
+  const nextM=()=>{if(calM===11){setCalM(0);setCalY(y=>y+1);}else setCalM(m=>m+1);};
+  const isDayBlocked=ds=>{
+    const hours=barber?getBarberHours(barber):[];
+    const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
+    const free=hours.filter(h=>!dayBks.find(b=>b.time===h));
+    return free.length===0&&hours.length>0;
+  };
+  return(<>
+    <Lbl style={{marginBottom:10}}>3. Escolha a data</Lbl>
+    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
+      <button onClick={prevM} disabled={calY===NOW.getFullYear()&&calM===NOW.getMonth()} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem",opacity:calY===NOW.getFullYear()&&calM===NOW.getMonth()?0.3:1}}>‹</button>
+      <span style={{fontSize:"0.95rem",color:T.white,letterSpacing:"0.06em"}}>{MONTHS[calM]} {calY}</span>
+      <button onClick={nextM} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem"}}>›</button>
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:4}}>
+      {WDAYS.map(d=><div key={d} style={{textAlign:"center",fontSize:"0.58rem",color:T.silver,padding:"2px 0",fontFamily:"'Josefin Sans',sans-serif"}}>{d}</div>)}
+    </div>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:16}}>
+      {Array(fd).fill(null).map((_,i)=><div key={"e"+i}/>)}
+      {Array(dim).fill(null).map((_,i)=>{
+        const day=i+1;
+        const ds=`${calY}-${String(calM+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+        const isPast=ds<TODAY;
+        const isSelected=ds===sel.date;
+        const isFolga=barber&&!barberWorksOnDate(barber,ds);
+        const isFullyBooked=!isPast&&!isFolga&&isDayBlocked(ds);
+        const isToday=ds===TODAY;
+        let bg="transparent", color=T.light, border=`1px solid ${T.border}`, cursor="pointer", opacity=1;
+        if(isPast){color=T.muted;border=`1px solid ${T.border}`;cursor="default";opacity=0.4;}
+        else if(isFolga){bg=T.redLo;color=T.red;border=`1px solid ${T.red}44`;cursor="not-allowed";opacity=0.6;}
+        else if(isFullyBooked){bg=T.muted;color=T.silver;cursor="not-allowed";}
+        else if(isSelected){bg=T.gold;color="#000";border=`1px solid ${T.gold}`;}
+        else if(isToday){bg=T.goldLo;color=T.gold;border=`1px solid ${T.gold}66`;}
+        return(
+          <div key={day} onClick={()=>!isPast&&!isFolga&&!isFullyBooked&&setSel(p=>({...p,date:ds,time:""}))} style={{aspectRatio:"1",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:5,cursor,background:bg,border,color,fontSize:"0.82rem",opacity,position:"relative"}}>
+            {day}
+            {!isPast&&!isFolga&&!isFullyBooked&&!isSelected&&(()=>{
+              const hours=barber?getBarberHours(barber):[];
+              const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
+              const free=hours.filter(h=>!dayBks.find(b=>b.time===h)).length;
+              if(free>0)return<div style={{width:4,height:4,borderRadius:"50%",background:T.green,position:"absolute",bottom:3}}/>;
+            })()}
+          </div>
+        );
+      })}
+    </div>
+    <div style={{display:"flex",gap:14,marginBottom:14,flexWrap:"wrap"}}>
+      {[[T.green,"Disponível"],[T.gold,"Selecionado"],[T.silver,"Lotado"],[T.red,"Folga"]].map(([c,l])=>(
+        <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
+          <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
+          <span style={{fontSize:"0.62rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif"}}>{l}</span>
+        </div>
+      ))}
+    </div>
+    {sel.date&&worksOnDate&&(<>
+      <Lbl style={{marginBottom:8}}>Horários disponíveis — {dateLabel(sel.date)}</Lbl>
+      {freeSlots.length===0
+        ?<div style={{color:T.silver,fontSize:"0.83rem",padding:"8px 0",marginBottom:12}}>Sem horários disponíveis neste dia</div>
+        :<div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:14}}>
+          {freeSlots.map(h=><button key={h} onClick={()=>setSel(p=>({...p,time:h}))} style={{padding:"8px 12px",borderRadius:4,cursor:"pointer",fontSize:"0.78rem",fontFamily:"'Josefin Sans',sans-serif",background:sel.time===h?T.gold:"transparent",color:sel.time===h?"#000":T.mid,border:`1px solid ${sel.time===h?T.gold:T.border}`}}>{h}</button>)}
+        </div>
+      }
+    </>)}
+    {sel.date&&!worksOnDate&&<div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:6,padding:"9px 13px",marginBottom:12,fontSize:"0.8rem",color:T.red}}>{barber?.name} não trabalha neste dia.</div>}
+    <Btn variant="gold" style={{width:"100%",marginTop:4}} onClick={onNext}>Continuar →</Btn>
+    <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={onBack}>← Voltar</Btn>
+  </>);
+}
+function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,lang,onBack}){
+  const L=LANGS[lang].t;
   const [screen,setScreen]=useState("home");
   const [step,setStep]=useState(1);
   const [sel,setSel]=useState({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});
@@ -1417,87 +1493,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
             <Btn variant="gold" style={{width:"100%",marginTop:7}} onClick={()=>sel.serviceId&&setStep(3)}>Continuar →</Btn>
             <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setStep(1)}>← Voltar</Btn>
           </>)}
-          {step===3&&(()=>{
-            const [calY,setCalY]=useState(NOW.getFullYear());
-            const [calM,setCalM]=useState(NOW.getMonth());
-            const dim=new Date(calY,calM+1,0).getDate();
-            const fd=new Date(calY,calM,1).getDay();
-            const prevM=()=>{if(calM===0){setCalM(11);setCalY(y=>y-1);}else setCalM(m=>m-1);};
-            const nextM=()=>{if(calM===11){setCalM(0);setCalY(y=>y+1);}else setCalM(m=>m+1);};
-            const isDayBlocked=ds=>{
-              const allBlocked=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&b.blocked);
-              const hours=barber?getBarberHours(barber):[];
-              const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
-              const free=hours.filter(h=>!dayBks.find(b=>b.time===h));
-              return free.length===0&&hours.length>0;
-            };
-            return(<>
-              <Lbl style={{marginBottom:10}}>3. Escolha a data</Lbl>
-              {/* Calendar nav */}
-              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
-                <button onClick={prevM} disabled={calY===NOW.getFullYear()&&calM===NOW.getMonth()} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem",opacity:calY===NOW.getFullYear()&&calM===NOW.getMonth()?0.3:1}}>‹</button>
-                <span style={{fontSize:"0.95rem",color:T.white,letterSpacing:"0.06em"}}>{MONTHS[calM]} {calY}</span>
-                <button onClick={nextM} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem"}}>›</button>
-              </div>
-              {/* Day headers */}
-              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:4}}>
-                {WDAYS.map(d=><div key={d} style={{textAlign:"center",fontSize:"0.58rem",color:T.silver,padding:"2px 0",fontFamily:"'Josefin Sans',sans-serif"}}>{d}</div>)}
-              </div>
-              {/* Days grid */}
-              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:16}}>
-                {Array(fd).fill(null).map((_,i)=><div key={"e"+i}/>)}
-                {Array(dim).fill(null).map((_,i)=>{
-                  const day=i+1;
-                  const ds=`${calY}-${String(calM+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-                  const isPast=ds<TODAY;
-                  const isSelected=ds===sel.date;
-                  const isFolga=barber&&!barberWorksOnDate(barber,ds);
-                  const isFullyBooked=!isPast&&!isFolga&&isDayBlocked(ds);
-                  const isToday=ds===TODAY;
-                  let bg="transparent", color=T.light, border=`1px solid ${T.border}`, cursor="pointer", opacity=1;
-                  if(isPast){color=T.muted;border=`1px solid ${T.border}`;cursor="default";opacity=0.4;}
-                  else if(isFolga){bg=T.redLo;color=T.red;border=`1px solid ${T.red}44`;cursor="not-allowed";opacity=0.6;}
-                  else if(isFullyBooked){bg=T.muted;color=T.silver;cursor="not-allowed";}
-                  else if(isSelected){bg=T.gold;color="#000";border=`1px solid ${T.gold}`;}
-                  else if(isToday){bg=T.goldLo;color=T.gold;border=`1px solid ${T.gold}66`;}
-                  else{bg="transparent";color=T.light;border=`1px solid ${T.border}`;}
-                  return(
-                    <div key={day} onClick={()=>!isPast&&!isFolga&&!isFullyBooked&&setSel(p=>({...p,date:ds,time:""}))} style={{aspectRatio:"1",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:5,cursor,background:bg,border,color,fontSize:"0.82rem",opacity,position:"relative"}}>
-                      {day}
-                      {!isPast&&!isFolga&&!isFullyBooked&&!isSelected&&(()=>{
-                        const hours=barber?getBarberHours(barber):[];
-                        const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
-                        const free=hours.filter(h=>!dayBks.find(b=>b.time===h)).length;
-                        if(free>0)return<div style={{width:4,height:4,borderRadius:"50%",background:T.green,position:"absolute",bottom:3}}/>;
-                      })()}
-                    </div>
-                  );
-                })}
-              </div>
-              {/* Legend */}
-              <div style={{display:"flex",gap:14,marginBottom:14,flexWrap:"wrap"}}>
-                {[[T.green,"Disponível"],[T.gold,"Selecionado"],[T.silver,"Lotado"],[T.red,"Folga"]].map(([c,l])=>(
-                  <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
-                    <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
-                    <span style={{fontSize:"0.62rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif"}}>{l}</span>
-                  </div>
-                ))}
-              </div>
-              {/* Time slots */}
-              {sel.date&&worksOnDate&&(<>
-                <Lbl style={{marginBottom:8}}>Horários disponíveis — {dateLabel(sel.date)}</Lbl>
-                {freeSlots.length===0
-                  ?<div style={{color:T.silver,fontSize:"0.83rem",padding:"8px 0",marginBottom:12}}>Sem horários disponíveis neste dia</div>
-                  :<div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:14}}>
-                    {freeSlots.map(h=><button key={h} onClick={()=>setSel(p=>({...p,time:h}))} style={{padding:"8px 12px",borderRadius:4,cursor:"pointer",fontSize:"0.78rem",fontFamily:"'Josefin Sans',sans-serif",background:sel.time===h?T.gold:"transparent",color:sel.time===h?"#000":T.mid,border:`1px solid ${sel.time===h?T.gold:T.border}`}}>{h}</button>)}
-                  </div>
-                }
-              </>)}
-              {sel.date&&!worksOnDate&&<div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:6,padding:"9px 13px",marginBottom:12,fontSize:"0.8rem",color:T.red}}>{barber?.name} não trabalha neste dia.</div>}
-              <Btn variant="gold" style={{width:"100%",marginTop:4}} onClick={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)}>Continuar →</Btn>
-              <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setStep(2)}>← Voltar</Btn>
-            </>);
-          })()}
+    {step===3&&<BookingCalendarStep sel={sel} setSel={setSel} barber={barber} bookings={bookings} freeSlots={freeSlots} worksOnDate={worksOnDate} onNext={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)} onBack={()=>setStep(2)}/>}
           {step===4&&(<>
             <Lbl style={{marginBottom:10}}>4. Os seus dados</Lbl>
             <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"13px",marginBottom:14}}>
@@ -1787,18 +1783,60 @@ export default function App(){
   const [barbers,setBarbers]             = useState(INIT_BARBERS);
   const [services,setServices]           = useState(INIT_SERVICES);
   const [shop,setShop]                   = useState(INIT_SHOP);
-  const [bookings,setBookings]           = useState(()=>seedBookings(INIT_BARBERS));
-  const [notifications,setNotifications] = useState(()=>seedNotifications(INIT_BARBERS));
+  const [bookings,setBookings]           = useState([]);
+const [notifications,setNotifications] = useState([]);
   const [clientNotes,setClientNotes]     = useState(INIT_CLIENT_NOTES);
   const [role,setRole]                   = useState("entry");
   const [activeBarber,setActiveBarber]   = useState(null);
   const [bScreen,setBScreen]             = useState("dashboard");
+  const [dataLoaded,setDataLoaded]       = useState(false);
+
+  useEffect(()=>{
+    (async()=>{
+      const{data,error}=await supabase.from("app_state").select("data").eq("id","main").single();
+      const d=data?.data;
+      if(error||!d||Object.keys(d).length===0){
+        if(error)console.error("Erro a carregar:",error);
+        setBarbers(INIT_BARBERS);setServices(INIT_SERVICES);setShop(INIT_SHOP);
+        setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS));
+        setClientNotes(INIT_CLIENT_NOTES);
+      } else {
+        setBarbers(d.barbers||INIT_BARBERS);
+        setServices(d.services||INIT_SERVICES);
+        setShop(d.shop||INIT_SHOP);
+        setBookings(d.bookings||[]);
+        setNotifications(d.notifications||[]);
+        setClientNotes(d.clientNotes||{});
+      }
+      setDataLoaded(true);
+    })();
+  },[]);
+
+  useEffect(()=>{
+    if(!dataLoaded)return;
+    const t=setTimeout(()=>{
+      supabase.from("app_state").upsert({
+        id:"main",
+        data:{barbers,services,shop,bookings,notifications,clientNotes},
+        updated_at:new Date().toISOString(),
+      }).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
+    },800);
+    return()=>clearTimeout(t);
+  },[barbers,services,shop,bookings,notifications,clientNotes,dataLoaded]);
+ 
 
   // Subscription state
   const [subscription,setSubscription]   = useState(null); // null=trial, {plan,date}=active
   const [showSub,setShowSub]             = useState(false);
   const trialDays = daysLeft(TRIAL_START);
   const trialExpired = trialDays === 0 && !subscription;
+  if(!dataLoaded){
+    return(
+      <div style={{minHeight:"100vh",background:T.bg,display:"flex",alignItems:"center",justifyContent:"center",color:T.gold,fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.8rem",letterSpacing:"0.2em"}}>
+        A CARREGAR...
+      </div>
+    );
+  }
 
   const addNotification=(barberId,type,title,body)=>{
     setNotifications(p=>[{id:mkId(),barberId,type,title,body,ts:Date.now(),read:false},...p]);
@@ -1808,6 +1846,7 @@ export default function App(){
     setActiveBarber(b);setBScreen("dashboard");setRole("barber");
     const todayCount=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
     if(todayCount>0){
+
       const first=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
       setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:`Bom dia, ${b.name.split(" ")[0]}!`,body:`Tens ${todayCount} marcação${todayCount>1?"s":""} hoje. Primeira às ${first?.time}h.`,ts:Date.now(),read:false},...p]);
     }
@@ -1823,7 +1862,7 @@ export default function App(){
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} lang={lang}/>;
-  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")}/>;
+  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} onLogout={()=>setRole("entry")}/>;
 
   // Trial expired — block barber access
