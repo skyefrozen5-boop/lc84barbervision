@@ -33,7 +33,7 @@ const LANGS = {
     wdaysF:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
     pay:["Dinheiro","MB Way","Multibanco","Transferência","Outro"],
     t:{
-      client:"Sou Cliente", clientSub:"Marcar corte, ver marcações",
+      client:"Sou Cliente", bookCta:"Marcar Corte", clientSub:"Marcar corte, ver marcações",
       barber:"Sou Barbeiro / Admin", barberSub:"Gerir agenda e marcações",
       platform:"A tua plataforma de barbearia",
       accessCode:"Código de Acesso", enter:"Entrar", wrongPin:"Código incorreto",
@@ -86,7 +86,7 @@ const LANGS = {
     wdaysF:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     pay:["Cash","MB Way","Debit Card","Transfer","Other"],
     t:{
-      client:"I'm a Client", clientSub:"Book a haircut, see appointments",
+      client:"I'm a Client", bookCta:"Book Appointment", clientSub:"Book a haircut, see appointments",
       barber:"I'm a Barber / Admin", barberSub:"Manage schedule and bookings",
       platform:"Your barbershop platform",
       accessCode:"Access Code", enter:"Enter", wrongPin:"Incorrect code",
@@ -139,7 +139,7 @@ const LANGS = {
     wdaysF:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
     pay:["Efectivo","MB Way","Tarjeta","Transferencia","Otro"],
     t:{
-      client:"Soy Cliente", clientSub:"Reservar corte, ver citas",
+      client:"Soy Cliente", bookCta:"Reservar Cita", clientSub:"Reservar corte, ver citas",
       barber:"Soy Barbero / Admin", barberSub:"Gestionar agenda y reservas",
       platform:"Tu plataforma de barbería",
       accessCode:"Código de Acceso", enter:"Entrar", wrongPin:"Código incorrecto",
@@ -192,7 +192,7 @@ const LANGS = {
     wdaysF:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
     pay:["Espèces","MB Way","Carte","Virement","Autre"],
     t:{
-      client:"Je suis Client", clientSub:"Réserver une coupe, voir mes rendez-vous",
+      client:"Je suis Client", bookCta:"Prendre RDV", clientSub:"Réserver une coupe, voir mes rendez-vous",
       barber:"Je suis Barbier / Admin", barberSub:"Gérer l'agenda et les réservations",
       platform:"Votre plateforme de barbier",
       accessCode:"Code d'Accès", enter:"Entrer", wrongPin:"Code incorrect",
@@ -245,7 +245,7 @@ const LANGS = {
     wdaysF:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
     pay:["Bargeld","MB Way","Karte","Überweisung","Sonstiges"],
     t:{
-      client:"Ich bin Kunde", clientSub:"Haarschnitt buchen, Termine sehen",
+      client:"Ich bin Kunde", bookCta:"Termin buchen", clientSub:"Haarschnitt buchen, Termine sehen",
       barber:"Ich bin Friseur / Admin", barberSub:"Termine und Kalender verwalten",
       platform:"Ihre Barbershop-Plattform",
       accessCode:"Zugangscode", enter:"Einloggen", wrongPin:"Falscher Code",
@@ -307,10 +307,10 @@ const fmt   = d  => d.toISOString().split("T")[0];
 const TODAY = fmt(new Date());
 const NOW   = new Date();
 
-function dateLabel(str) {
+function dateLabel(str,lang='pt') {
   const d=new Date(str+"T12:00:00"), diff=Math.round((d-new Date(TODAY+"T12:00:00"))/86400000);
   if(diff===0)return"Hoje"; if(diff===1)return"Amanhã"; if(diff===-1)return"Ontem";
-  return `${d.getDate()} ${MONTHS[d.getMonth()].slice(0,3)}`;
+  return `${d.getDate()} ${LANGS[lang].months[d.getMonth()].slice(0,3)}`;
 }
 function timeAgo(ts) {
   const diff=Math.round((Date.now()-ts)/60000);
@@ -1345,7 +1345,8 @@ function ServicesAdmin({services,setServices}){
   </>);
 }
 
-function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,onNext,onBack}){
+function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,onNext,onBack,lang}){
+  const L=LANGS[lang].t;
   const [calY,setCalY]=useState(NOW.getFullYear());
   const [calM,setCalM]=useState(NOW.getMonth());
   const dim=new Date(calY,calM+1,0).getDate();
@@ -1359,7 +1360,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
     return free.length===0&&hours.length>0;
   };
   return(<>
-    <Lbl style={{marginBottom:10}}>3. Escolha a data</Lbl>
+    <Lbl style={{marginBottom:10}}>{L.chooseDate}</Lbl>
     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
       <button onClick={prevM} disabled={calY===NOW.getFullYear()&&calM===NOW.getMonth()} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem",opacity:calY===NOW.getFullYear()&&calM===NOW.getMonth()?0.3:1}}>‹</button>
       <span style={{fontSize:"0.95rem",color:T.white,letterSpacing:"0.06em"}}>{MONTHS[calM]} {calY}</span>
@@ -1398,7 +1399,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
       })}
     </div>
     <div style={{display:"flex",gap:14,marginBottom:14,flexWrap:"wrap"}}>
-      {[[T.green,"Disponível"],[T.gold,"Selecionado"],[T.silver,"Lotado"],[T.red,"Folga"]].map(([c,l])=>(
+      {[[T.green,L.confirmed],[T.gold,L.confirmed==="Confirmado"?"Selecionado":"Selected"],[T.silver,L.blocked],[T.red,L.holiday]].map(([c,l])=>(
         <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
           <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
           <span style={{fontSize:"0.62rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif"}}>{l}</span>
@@ -1406,17 +1407,17 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
       ))}
     </div>
     {sel.date&&worksOnDate&&(<>
-      <Lbl style={{marginBottom:8}}>Horários disponíveis — {dateLabel(sel.date)}</Lbl>
+      <Lbl style={{marginBottom:8}}>{L.freeSlots} — {dateLabel(sel.date)}</Lbl>
       {freeSlots.length===0
-        ?<div style={{color:T.silver,fontSize:"0.83rem",padding:"8px 0",marginBottom:12}}>Sem horários disponíveis neste dia</div>
+        ?<div style={{color:T.silver,fontSize:"0.83rem",padding:"8px 0",marginBottom:12}}>{L.noBookings}</div>
         :<div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:14}}>
           {freeSlots.map(h=><button key={h} onClick={()=>setSel(p=>({...p,time:h}))} style={{padding:"8px 12px",borderRadius:4,cursor:"pointer",fontSize:"0.78rem",fontFamily:"'Josefin Sans',sans-serif",background:sel.time===h?T.gold:"transparent",color:sel.time===h?"#000":T.mid,border:`1px solid ${sel.time===h?T.gold:T.border}`}}>{h}</button>)}
         </div>
       }
     </>)}
-    {sel.date&&!worksOnDate&&<div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:6,padding:"9px 13px",marginBottom:12,fontSize:"0.8rem",color:T.red}}>{barber?.name} não trabalha neste dia.</div>}
-    <Btn variant="gold" style={{width:"100%",marginTop:4}} onClick={onNext}>Continuar →</Btn>
-    <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={onBack}>← Voltar</Btn>
+    {sel.date&&!worksOnDate&&<div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:6,padding:"9px 13px",marginBottom:12,fontSize:"0.8rem",color:T.red}}>{barber?.name} — {L.holiday}</div>}
+    <Btn variant="gold" style={{width:"100%",marginTop:4}} onClick={onNext}>{L.next}</Btn>
+    <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={onBack}>{L.back}</Btn>
   </>);
 }
 function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,lang,onBack}){
@@ -1460,7 +1461,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
       <main style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
         {screen==="home"&&(<>
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.silver,marginBottom:3}}>{shop.address}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
-          <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>✂ Marcar Corte</Btn>
+          <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>Ver as minhas marcações</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder="O seu telemóvel" value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>Ver</Btn></div></div>
           <Lbl style={{marginBottom:9}}>A nossa equipa</Lbl>
           {barbers.filter(b=>b.active).map(b=>(
@@ -1493,7 +1494,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
             <Btn variant="gold" style={{width:"100%",marginTop:7}} onClick={()=>sel.serviceId&&setStep(3)}>Continuar →</Btn>
             <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setStep(1)}>← Voltar</Btn>
           </>)}
-    {step===3&&<BookingCalendarStep sel={sel} setSel={setSel} barber={barber} bookings={bookings} freeSlots={freeSlots} worksOnDate={worksOnDate} onNext={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)} onBack={()=>setStep(2)}/>}
+    {step===3&&<BookingCalendarStep sel={sel} setSel={setSel} barber={barber} lang={lang} bookings={bookings} freeSlots={freeSlots} worksOnDate={worksOnDate} onNext={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)} onBack={()=>setStep(2)}/>}
           {step===4&&(<>
             <Lbl style={{marginBottom:10}}>4. Os seus dados</Lbl>
             <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"13px",marginBottom:14}}>
