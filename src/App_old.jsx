@@ -50,7 +50,7 @@ const LANGS = {
       clientName:"Nome do Cliente", fullName:"Nome completo", phone:"Telemóvel",
       date:"Data", time:"Hora", service:"Serviço", payment:"Pago", payMethod:"— método —",
       notes:"Notas", observations:"Observações…", back:"← Voltar", next:"Continuar →",
-      confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Selecionado",
+      confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado",
       freeSlots:"Horários livres", dayBlocked:"Dia inteiro bloqueado", unblock:"Desbloquear",
       blockSlot:"Horário", blockDay:"Dia inteiro", blockPeriod:"Período",
       blockSlotTitle:"Escolhe o horário a bloquear", blockDayTitle:"Bloquear dia inteiro",
@@ -118,7 +118,7 @@ const LANGS = {
       clientName:"Client Name", fullName:"Full name", phone:"Phone",
       date:"Date", time:"Time", service:"Service", payment:"Paid", payMethod:"— method —",
       notes:"Notes", observations:"Observations…", back:"← Back", next:"Continue →",
-      confirmed:"Confirmed", done:"Completed", cancelled:"Cancelled", blocked:"Blocked", selected:"Selected",
+      confirmed:"Confirmed", done:"Completed", cancelled:"Cancelled", blocked:"Blocked",
       freeSlots:"Available slots", dayBlocked:"Full day blocked", unblock:"Unblock",
       blockSlot:"Time slot", blockDay:"Full day", blockPeriod:"Period",
       blockSlotTitle:"Choose slot to block", blockDayTitle:"Block full day",
@@ -186,7 +186,7 @@ const LANGS = {
       clientName:"Nombre del Cliente", fullName:"Nombre completo", phone:"Teléfono",
       date:"Fecha", time:"Hora", service:"Servicio", payment:"Pagado", payMethod:"— método —",
       notes:"Notas", observations:"Observaciones…", back:"← Volver", next:"Continuar →",
-      confirmed:"Confirmado", done:"Completado", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Seleccionado",
+      confirmed:"Confirmado", done:"Completado", cancelled:"Cancelado", blocked:"Bloqueado",
       freeSlots:"Horarios libres", dayBlocked:"Día completo bloqueado", unblock:"Desbloquear",
       blockSlot:"Horario", blockDay:"Día completo", blockPeriod:"Período",
       blockSlotTitle:"Elige el horario a bloquear", blockDayTitle:"Bloquear día completo",
@@ -254,7 +254,7 @@ const LANGS = {
       clientName:"Nom du Client", fullName:"Nom complet", phone:"Téléphone",
       date:"Date", time:"Heure", service:"Service", payment:"Payé", payMethod:"— méthode —",
       notes:"Notes", observations:"Observations…", back:"← Retour", next:"Continuer →",
-      confirmed:"Confirmé", done:"Terminé", cancelled:"Annulé", blocked:"Bloqué", selected:"Sélectionné",
+      confirmed:"Confirmé", done:"Terminé", cancelled:"Annulé", blocked:"Bloqué",
       freeSlots:"Créneaux disponibles", dayBlocked:"Journée entière bloquée", unblock:"Débloquer",
       blockSlot:"Créneau", blockDay:"Journée entière", blockPeriod:"Période",
       blockSlotTitle:"Choisir le créneau à bloquer", blockDayTitle:"Bloquer la journée entière",
@@ -322,7 +322,7 @@ const LANGS = {
       clientName:"Kundenname", fullName:"Vollständiger Name", phone:"Telefon",
       date:"Datum", time:"Uhrzeit", service:"Leistung", payment:"Bezahlt", payMethod:"— Methode —",
       notes:"Notizen", observations:"Anmerkungen…", back:"← Zurück", next:"Weiter →",
-      confirmed:"Bestätigt", done:"Abgeschlossen", cancelled:"Storniert", blocked:"Gesperrt", selected:"Ausgewählt",
+      confirmed:"Bestätigt", done:"Abgeschlossen", cancelled:"Storniert", blocked:"Gesperrt",
       freeSlots:"Freie Slots", dayBlocked:"Ganzer Tag gesperrt", unblock:"Entsperren",
       blockSlot:"Zeitslot", blockDay:"Ganzer Tag", blockPeriod:"Zeitraum",
       blockSlotTitle:"Zeitslot zum Sperren wählen", blockDayTitle:"Ganzen Tag sperren",
@@ -1450,11 +1450,11 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
     <Lbl style={{marginBottom:10}}>{L.chooseDate}</Lbl>
     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
       <button onClick={prevM} disabled={calY===NOW.getFullYear()&&calM===NOW.getMonth()} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem",opacity:calY===NOW.getFullYear()&&calM===NOW.getMonth()?0.3:1}}>‹</button>
-      <span style={{fontSize:"0.95rem",color:T.white,letterSpacing:"0.06em"}}>{LANGS[lang].months[calM]} {calY}</span>
+      <span style={{fontSize:"0.95rem",color:T.white,letterSpacing:"0.06em"}}>{MONTHS[calM]} {calY}</span>
       <button onClick={nextM} style={{background:"none",border:`1px solid ${T.border}`,color:T.mid,width:32,height:32,borderRadius:4,cursor:"pointer",fontSize:"1rem"}}>›</button>
     </div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:4}}>
-      {LANGS[lang].wdays.map(d=><div key={d} style={{textAlign:"center",fontSize:"0.58rem",color:T.silver,padding:"2px 0",fontFamily:"'Josefin Sans',sans-serif"}}>{d}</div>)}
+      {WDAYS.map(d=><div key={d} style={{textAlign:"center",fontSize:"0.58rem",color:T.silver,padding:"2px 0",fontFamily:"'Josefin Sans',sans-serif"}}>{d}</div>)}
     </div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:3,marginBottom:16}}>
       {Array(fd).fill(null).map((_,i)=><div key={"e"+i}/>)}
@@ -1486,7 +1486,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
       })}
     </div>
     <div style={{display:"flex",gap:14,marginBottom:14,flexWrap:"wrap"}}>
-      {[[T.green,L.confirmed],[T.gold,L.selected],[T.silver,L.blocked],[T.red,L.holiday]].map(([c,l])=>(
+      {[[T.green,L.confirmed],[T.gold,L.confirmed==="Confirmado"?"Selecionado":"Selected"],[T.silver,L.blocked],[T.red,L.holiday]].map(([c,l])=>(
         <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
           <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
           <span style={{fontSize:"0.62rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif"}}>{l}</span>
@@ -1554,7 +1554,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
           {barbers.filter(b=>b.active).map(b=>(
             <div key={b.id} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
               <Avatar barber={b} size={38}/>
-              <div style={{flex:1}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div><div style={{fontSize:"0.6rem",color:b.color,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{LANGS[lang].wdaysF.filter((_,i)=>b.schedule.workDays.includes(i)).map(d=>d.slice(0,3)).join(" · ")} · {b.schedule.startHour}–{b.schedule.endHour}</div></div>
+              <div style={{flex:1}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div><div style={{fontSize:"0.6rem",color:b.color,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{WDAYS_F.filter((_,i)=>b.schedule.workDays.includes(i)).map(d=>d.slice(0,3)).join(" · ")} · {b.schedule.startHour}–{b.schedule.endHour}</div></div>
             </div>
           ))}
         </>)}
@@ -1564,7 +1564,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
             <Lbl style={{marginBottom:10}}>{L.chooseBarber}</Lbl>
             {barbers.filter(b=>b.active).map(b=>(
               <div key={b.id} onClick={()=>setSel(p=>({...p,barberId:b.id,time:""}))} style={{display:"flex",alignItems:"center",gap:11,padding:"13px",marginBottom:7,background:sel.barberId===b.id?T.goldLo:T.card,border:`1px solid ${sel.barberId===b.id?T.gold:T.border}`,borderRadius:6,cursor:"pointer"}}>
-                <Avatar barber={b} size={42}/><div><div style={{fontSize:"0.97rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.7rem",color:T.silver}}>{b.role}</div><div style={{fontSize:"0.6rem",color:b.color,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{LANGS[lang].wdaysF.filter((_,i)=>b.schedule.workDays.includes(i)).map(d=>d.slice(0,3)).join(" · ")}</div></div>
+                <Avatar barber={b} size={42}/><div><div style={{fontSize:"0.97rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.7rem",color:T.silver}}>{b.role}</div><div style={{fontSize:"0.6rem",color:b.color,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{WDAYS_F.filter((_,i)=>b.schedule.workDays.includes(i)).map(d=>d.slice(0,3)).join(" · ")}</div></div>
               </div>
             ))}
             <Btn variant="gold" style={{width:"100%",marginTop:7}} onClick={()=>sel.barberId&&setStep(2)}>{L.next}</Btn>
