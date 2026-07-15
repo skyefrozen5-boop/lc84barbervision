@@ -395,11 +395,16 @@ function timeAgo(ts) {
 
 // ─── SEED ────────────────────────────────────────────────────────────────────
 const INIT_SERVICES = [
-  {id:"s1",name:"Corte Clássico",    duration:30,price:15,active:true},
-  {id:"s2",name:"Corte + Barba",     duration:50,price:25,active:true},
-  {id:"s3",name:"Barba Completa",    duration:25,price:12,active:true},
-  {id:"s4",name:"Degradê",           duration:40,price:18,active:true},
-  {id:"s5",name:"Tratamento Capilar",duration:45,price:22,active:true},
+  {id:"s1",name:"Corte Clássico",    duration:30,price:15,active:true,
+    names:{pt:"Corte Clássico",en:"Classic Cut",es:"Corte Clásico",fr:"Coupe Classique",de:"Klassischer Schnitt"}},
+  {id:"s2",name:"Corte + Barba",     duration:50,price:25,active:true,
+    names:{pt:"Corte + Barba",en:"Cut + Beard",es:"Corte + Barba",fr:"Coupe + Barbe",de:"Schnitt + Bart"}},
+  {id:"s3",name:"Barba Completa",    duration:25,price:12,active:true,
+    names:{pt:"Barba Completa",en:"Full Beard",es:"Barba Completa",fr:"Barbe Complète",de:"Komplette Bartpflege"}},
+  {id:"s4",name:"Degradê",           duration:40,price:18,active:true,
+    names:{pt:"Degradê",en:"Fade",es:"Degradado",fr:"Dégradé",de:"Fade Cut"}},
+  {id:"s5",name:"Tratamento Capilar",duration:45,price:22,active:true,
+    names:{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"}},
 ];
 const INIT_BARBERS = [
   {id:"b1",name:"Luis Correia",role:"Barbeiro Sênior",pin:"1984",phone:"+351 912 345 678",bio:"Especialista em cortes clássicos e barba.",avatar:"LC",color:"#b8955a",schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00"},active:true},
@@ -474,6 +479,20 @@ function Modal({onClose,title,children}){
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function getBarberHours(barber){const{startHour,endHour}=barber.schedule;return ALL_HOURS.filter(h=>h>=startHour&&h<endHour);}
+const SERVICE_NAME_TRANSLATIONS = {
+  "Corte Clássico":    {pt:"Corte Clássico",en:"Classic Cut",es:"Corte Clásico",fr:"Coupe Classique",de:"Klassischer Schnitt"},
+  "Corte + Barba":     {pt:"Corte + Barba",en:"Cut + Beard",es:"Corte + Barba",fr:"Coupe + Barbe",de:"Schnitt + Bart"},
+  "Barba Completa":    {pt:"Barba Completa",en:"Full Beard",es:"Barba Completa",fr:"Barbe Complète",de:"Komplette Bartpflege"},
+  "Degradê":           {pt:"Degradê",en:"Fade",es:"Degradado",fr:"Dégradé",de:"Fade Cut"},
+  "Tratamento Capilar":{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"},
+};
+function svcName(s,lang){
+  if(!s)return"";
+  if(s.names?.[lang])return s.names[lang];
+  const fallback=SERVICE_NAME_TRANSLATIONS[s.name];
+  if(fallback?.[lang])return fallback[lang];
+  return s.name||"";
+}
 function barberWorksOnDate(barber,dateStr){return barber.schedule.workDays.includes(new Date(dateStr+"T12:00:00").getDay());}
 
 // ─── BOOKING FORM ─────────────────────────────────────────────────────────────
@@ -498,7 +517,7 @@ function BookingForm({initial,services,barbers,onSave,onDelete,onClose,fixedBarb
         <div><Lbl>{L.date}</Lbl><Inp type="date" value={f.date} onChange={e=>u("date")(e.target.value)}/></div>
         <div><Lbl>{L.time}</Lbl><Sel value={f.time} onChange={e=>u("time")(e.target.value)}><option value="">— {L.time} —</option>{hrs.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
       </div>
-      <div style={{marginBottom:11}}><Lbl>{L.service}</Lbl><Sel value={f.serviceId} onChange={e=>u("serviceId")(e.target.value)}>{services.filter(s=>s.active).map(s=><option key={s.id} value={s.id}>{s.name} — €{s.price} ({s.duration}min)</option>)}</Sel></div>
+      <div style={{marginBottom:11}}><Lbl>{L.service}</Lbl><Sel value={f.serviceId} onChange={e=>u("serviceId")(e.target.value)}>{services.filter(s=>s.active).map(s=><option key={s.id} value={s.id}>{svcName(s,lang)} — €{s.price} ({s.duration}min)</option>)}</Sel></div>
       <div style={{marginBottom:14}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
           <label style={{display:"flex",alignItems:"center",gap:6,cursor:"pointer",fontSize:"0.85rem",color:f.paid?T.green:T.mid}}><input type="checkbox" checked={f.paid} onChange={e=>u("paid")(e.target.checked)} style={{accentColor:T.green}}/> {L.payment}</label>
@@ -607,7 +626,7 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
   // fav service
   const favService=c=>{
     const map={};
-    c.visits.forEach(v=>{const s=svc(v.serviceId);if(s){map[s.name]=(map[s.name]||0)+1;}});
+    c.visits.forEach(v=>{const s=svc(v.serviceId);if(s){const n=svcName(s,lang);map[n]=(map[n]||0)+1;}});
     return Object.entries(map).sort((a,b)=>b[1]-a[1])[0]?.[0]||"—";
   };
 
@@ -699,7 +718,7 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
                 {upcoming.map(v=>(
                   <div key={v.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 12px",marginBottom:5,background:T.goldLo,border:`1px solid ${T.gold}44`,borderRadius:5}}>
                     <div>
-                      <div style={{fontSize:"0.85rem",color:T.white}}>{svc(v.serviceId)?.name}</div>
+                      <div style={{fontSize:"0.85rem",color:T.white}}>{svcName(svc(v.serviceId),lang)}</div>
                       <div style={{fontSize:"0.66rem",color:T.silver}}>{dateLabel(v.date)} · {v.time}h</div>
                     </div>
                     <div style={{fontSize:"0.82rem",color:T.gold}}>€{svc(v.serviceId)?.price}</div>
@@ -715,7 +734,7 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
               :past.map(v=>(
                 <div key={v.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:`1px solid ${T.border}`}}>
                   <div>
-                    <div style={{fontSize:"0.85rem",color:T.light}}>{svc(v.serviceId)?.name}</div>
+                    <div style={{fontSize:"0.85rem",color:T.light}}>{svcName(svc(v.serviceId),lang)}</div>
                     <div style={{fontSize:"0.65rem",color:T.silver,marginTop:2}}>{dateLabel(v.date)} · {v.time}h {v.paid?`· ${v.payMethod}`:""}</div>
                   </div>
                   <div style={{textAlign:"right"}}>
@@ -778,7 +797,7 @@ function BDashboard({bookings,services,barber,lang}){
           <Hr style={{width:1,height:26,alignSelf:"center"}}/>
           <div style={{flex:1,minWidth:0}}>
             <div style={{fontSize:"0.92rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div>
-            <div style={{fontSize:"0.7rem",color:T.silver}}>{svc(b.serviceId)?.name}</div>
+            <div style={{fontSize:"0.7rem",color:T.silver}}>{svcName(svc(b.serviceId),lang)}</div>
           </div>
           <div style={{fontSize:"0.88rem",color:T.gold}}>€{svc(b.serviceId)?.price}</div>
         </div>
@@ -822,7 +841,7 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
     if(f.id){setBookings(p=>p.map(b=>b.id===f.id?f:b));}
     else{
       setBookings(p=>[...p,{...f,id:mkId()}]);
-      addNotification(barber.id,"new","Nova marcação adicionada",`${f.name} — ${svc(f.serviceId)?.name} — ${f.date} às ${f.time}h`);
+      addNotification(barber.id,"new","Nova marcação adicionada",`${f.name} — ${svcName(svc(f.serviceId),lang)} — ${f.date} às ${f.time}h`);
     }
     setModal(null);
   };
@@ -1013,7 +1032,7 @@ function PrintReport({bookings,label,barberName,svc,onClose,lang}){
         <div style={{fontSize:"0.62rem",letterSpacing:"0.22em",textTransform:"uppercase",color:"#888",marginBottom:8,borderTop:"1px solid #ddd",paddingTop:12,marginTop:12}}>{L.paidServices} ({confirmed.length})</div>
         {confirmed.sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time)).map(b=>(
           <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid #f0f0f0",fontSize:"0.78rem"}}>
-            <div><span style={{fontWeight:600}}>{b.name}</span><span style={{color:"#888",marginLeft:6}}>{svc(b.serviceId)?.name}</span></div>
+            <div><span style={{fontWeight:600}}>{b.name}</span><span style={{color:"#888",marginLeft:6}}>{svcName(svc(b.serviceId),lang)}</span></div>
             <div style={{textAlign:"right"}}><div style={{fontSize:"0.7rem",color:"#888"}}>{b.date} {b.time}</div><div style={{fontWeight:700,color:"#4a8a5f"}}>€{svc(b.serviceId)?.price} <span style={{fontSize:"0.62rem",color:"#888"}}>({b.payMethod})</span></div></div>
           </div>
         ))}
@@ -1021,7 +1040,7 @@ function PrintReport({bookings,label,barberName,svc,onClose,lang}){
           <div style={{fontSize:"0.62rem",letterSpacing:"0.22em",textTransform:"uppercase",color:"#9e4040",marginBottom:8,borderTop:"1px solid #ddd",paddingTop:12,marginTop:12}}>⚠ {L.unconfirmedPayment} ({pending.length})</div>
           {pending.map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid #f0f0f0",fontSize:"0.78rem"}}>
-              <div><span style={{fontWeight:600}}>{b.name}</span><span style={{color:"#888",marginLeft:6}}>{svc(b.serviceId)?.name}</span></div>
+              <div><span style={{fontWeight:600}}>{b.name}</span><span style={{color:"#888",marginLeft:6}}>{svcName(svc(b.serviceId),lang)}</span></div>
               <div style={{textAlign:"right"}}><div style={{fontSize:"0.7rem",color:"#888"}}>{b.date} {b.time}</div><div style={{fontWeight:700,color:"#9e4040"}}>€{svc(b.serviceId)?.price} — {L.unconfirmedPayment}</div></div>
             </div>
           ))}
@@ -1029,7 +1048,7 @@ function PrintReport({bookings,label,barberName,svc,onClose,lang}){
         {cancelled.length>0&&(<>
           <div style={{fontSize:"0.62rem",letterSpacing:"0.22em",textTransform:"uppercase",color:"#888",marginBottom:8,borderTop:"1px solid #ddd",paddingTop:12,marginTop:12}}>{L.cancelled} ({cancelled.length})</div>
           {cancelled.map(b=>(
-            <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"4px 0",fontSize:"0.75rem",color:"#999"}}><span>{b.name} · {svc(b.serviceId)?.name}</span><span>{b.date} {b.time}</span></div>
+            <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"4px 0",fontSize:"0.75rem",color:"#999"}}><span>{b.name} · {svcName(svc(b.serviceId),lang)}</span><span>{b.date} {b.time}</span></div>
           ))}
         </>)}
         <div style={{marginTop:18,paddingTop:12,borderTop:"2px solid #111",textAlign:"center",fontSize:"0.66rem",color:"#888"}}>LC.84 BARBER VISION · {NOW.getDate()} {LANGS[lang].months[NOW.getMonth()]} {NOW.getFullYear()}</div>
@@ -1088,7 +1107,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
   const maxRev=Math.max(...chartDays.map(d=>d.rev),1);
 
   const svcBreakdown=useMemo(()=>{
-    const m={};confirmed.forEach(b=>{const s=svc(b.serviceId);if(!s)return;if(!m[s.id])m[s.id]={name:s.name,count:0,total:0};m[s.id].count++;m[s.id].total+=s.price;});
+    const m={};confirmed.forEach(b=>{const s=svc(b.serviceId);if(!s)return;if(!m[s.id])m[s.id]={name:svcName(s,lang),count:0,total:0};m[s.id].count++;m[s.id].total+=s.price;});
     return Object.values(m).sort((a,b)=>b.total-a.total);
   },[confirmed]);
   const maxSvc=Math.max(...svcBreakdown.map(s=>s.total),1);
@@ -1128,7 +1147,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
                 <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${T.red}22`}}>
                   <div>
                     <div style={{fontSize:"0.88rem",color:T.light,fontWeight:500}}>{b.name}</div>
-                    <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svc(b.serviceId)?.name} · {dateLabel(b.date)} {b.time}h</div>
+                    <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div>
                   </div>
                   <div style={{textAlign:"right",flexShrink:0,marginLeft:12}}>
                     <div style={{fontSize:"0.9rem",color:T.red,fontWeight:700,marginBottom:4}}>€{svc(b.serviceId)?.price}</div>
@@ -1224,7 +1243,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.green}}/><Lbl style={{margin:0,color:T.green}}>{L.paidAndConfirmed} ({confirmed.length})</Lbl></div>
           {confirmed.sort((a,b)=>b.date.localeCompare(a.date)).map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.green}33`,borderRadius:5}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svc(b.serviceId)?.name} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:10}}><div style={{fontSize:"0.88rem",color:T.green,fontWeight:700}}>€{svc(b.serviceId)?.price}</div><div style={{fontSize:"0.58rem",color:T.silver,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{b.payMethod}</div></div>
             </div>
           ))}
@@ -1234,7 +1253,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.red}}/><Lbl style={{margin:0,color:T.red}}>{L.serviceDonePaymentPending} ({pending.length})</Lbl></div>
           {pending.map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 12px",marginBottom:5,background:T.redLo,border:`1px solid ${T.red}44`,borderRadius:5}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svc(b.serviceId)?.name} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:10}}><div style={{fontSize:"0.88rem",color:T.red,fontWeight:700}}>€{svc(b.serviceId)?.price}</div><button onClick={()=>setConfirmModal(b)} style={{marginTop:4,padding:"3px 9px",background:T.gold,color:"#000",border:"none",borderRadius:3,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:700}}>{L.toConfirm}</button></div>
             </div>
           ))}
@@ -1244,7 +1263,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.gold}}/><Lbl style={{margin:0}}>{L.scheduledCount} ({scheduled.length})</Lbl></div>
           {scheduled.sort((a,b)=>a.date.localeCompare(b.date)).map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"8px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.border}`,borderRadius:5,opacity:0.7}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.84rem",color:T.white,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver,marginTop:2}}>{svc(b.serviceId)?.name} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.84rem",color:T.white,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
               <div style={{fontSize:"0.86rem",color:T.gold,flexShrink:0,marginLeft:10}}>€{svc(b.serviceId)?.price}</div>
             </div>
           ))}
@@ -1254,7 +1273,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.silver}}/><Lbl style={{margin:0}}>{L.cancelled} ({cancelled.length})</Lbl></div>
           {cancelled.map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"7px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.border}`,borderRadius:5,opacity:0.45}}>
-              <div><div style={{fontSize:"0.82rem",color:T.mid,textDecoration:"line-through"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver}}>{svc(b.serviceId)?.name} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div><div style={{fontSize:"0.82rem",color:T.mid,textDecoration:"line-through"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
               <div style={{fontSize:"0.8rem",color:T.silver,textDecoration:"line-through",flexShrink:0,marginLeft:10}}>€{svc(b.serviceId)?.price}</div>
             </div>
           ))}
@@ -1525,7 +1544,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
   const confirm=()=>{
     const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone,status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
     setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
-    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${selSvc?.name} para ${dateLabel(sel.date)} às ${sel.time}h.`);
+    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`);
     setScreen("success");
   };
   const cancel=id=>{
@@ -1574,7 +1593,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
             <Lbl style={{marginBottom:10}}>{L.chooseService}</Lbl>
             {services.filter(s=>s.active).map(s=>(
               <div key={s.id} onClick={()=>setSel(p=>({...p,serviceId:s.id}))} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 14px",marginBottom:6,background:sel.serviceId===s.id?T.goldLo:T.card,border:`1px solid ${sel.serviceId===s.id?T.gold:T.border}`,borderRadius:6,cursor:"pointer"}}>
-                <div><div style={{fontSize:"0.97rem",color:T.white,fontWeight:500}}>{s.name}</div><div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{s.duration} min</div></div>
+                <div><div style={{fontSize:"0.97rem",color:T.white,fontWeight:500}}>{svcName(s,lang)}</div><div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{s.duration} min</div></div>
                 <div style={{fontSize:"0.97rem",color:T.gold,fontWeight:600}}>€{s.price}</div>
               </div>
             ))}
@@ -1585,7 +1604,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
           {step===4&&(<>
             <Lbl style={{marginBottom:10}}>{L.yourData}</Lbl>
             <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"13px",marginBottom:14}}>
-              {[[L.barberLabel,barber?.name],[L.service,selSvc?.name],[L.date,dateLabel(sel.date,lang)],[L.time,sel.time],[L.priceLabel,`€${selSvc?.price}`]].map(([l,v])=>(
+              {[[L.barberLabel,barber?.name],[L.service,svcName(selSvc,lang)],[L.date,dateLabel(sel.date,lang)],[L.time,sel.time],[L.priceLabel,`€${selSvc?.price}`]].map(([l,v])=>(
                 <div key={l} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:`1px solid ${T.border}`}}><Lbl style={{marginBottom:0}}>{l}</Lbl><span style={{fontSize:"0.86rem",color:l===L.priceLabel?T.gold:T.white}}>{v}</span></div>
               ))}
             </div>
@@ -1598,7 +1617,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
         {screen==="success"&&done&&(<div style={{textAlign:"center",paddingTop:36}}>
           <div style={{width:58,height:58,borderRadius:"50%",background:T.greenLo,border:`2px solid ${T.green}`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 18px",fontSize:"1.3rem",color:T.green}}>✓</div>
           <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:7}}>{L.bookingConfirmed}</div>
-          <div style={{fontSize:"0.86rem",color:T.silver,lineHeight:1.8,marginBottom:24}}>{done.name}<br/><span style={{color:T.gold}}>{barbers.find(b=>b.id===done.barberId)?.name}</span> · {selSvc?.name}<br/>{done.time}h · {dateLabel(done.date,lang)}</div>
+          <div style={{fontSize:"0.86rem",color:T.silver,lineHeight:1.8,marginBottom:24}}>{done.name}<br/><span style={{color:T.gold}}>{barbers.find(b=>b.id===done.barberId)?.name}</span> · {svcName(selSvc,lang)}<br/>{done.time}h · {dateLabel(done.date,lang)}</div>
           <Btn variant="gold" style={{width:"100%",marginBottom:9}} onClick={reset}>{L.newBookingBtn}</Btn>
           <Btn variant="ghost" style={{width:"100%"}} onClick={()=>setScreen("mybookings")}>{L.myBookings}</Btn>
         </div>)}
@@ -1608,7 +1627,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
           :myBk.sort((a,b)=>b.date.localeCompare(a.date)).map(b=>(
             <div key={b.id} style={{padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:5}}>
-                <div><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{svc(b.serviceId)?.name}</div><div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{barbers.find(br=>br.id===b.barberId)?.name} · {b.time}h · {dateLabel(b.date,lang)}</div></div>
+                <div><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{svcName(svc(b.serviceId),lang)}</div><div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{barbers.find(br=>br.id===b.barberId)?.name} · {b.time}h · {dateLabel(b.date,lang)}</div></div>
                 <Tag status={b.status}/>
               </div>
               {b.status==="confirmado"&&b.date>=TODAY&&<Btn variant="danger" style={{padding:"4px 11px",fontSize:"0.56rem"}} onClick={()=>cancel(b.id)}>{L.cancelBooking}</Btn>}
