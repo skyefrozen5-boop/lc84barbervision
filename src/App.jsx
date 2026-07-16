@@ -384,7 +384,8 @@ const NOW   = new Date();
 
 function dateLabel(str,lang='pt') {
   const d=new Date(str+"T12:00:00"), diff=Math.round((d-new Date(TODAY+"T12:00:00"))/86400000);
-  if(diff===0)return"Hoje"; if(diff===1)return"Amanhã"; if(diff===-1)return"Ontem";
+  const L=LANGS[lang].t;
+  if(diff===0)return L.today; if(diff===1)return L.tomorrow; if(diff===-1)return L.yesterday;
   return `${d.getDate()} ${LANGS[lang].months[d.getMonth()].slice(0,3)}`;
 }
 function timeAgo(ts) {
@@ -1513,7 +1514,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
       ))}
     </div>
     {sel.date&&worksOnDate&&(<>
-      <Lbl style={{marginBottom:8}}>{L.freeSlots} — {dateLabel(sel.date)}</Lbl>
+      <Lbl style={{marginBottom:8}}>{L.freeSlots} — {dateLabel(sel.date,lang)}</Lbl>
       {freeSlots.length===0
         ?<div style={{color:T.silver,fontSize:"0.83rem",padding:"8px 0",marginBottom:12}}>{L.noBookings}</div>
         :<div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:14}}>
