@@ -1671,9 +1671,9 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,lang}){
 function EntryScreen({shop,onBarber,onClient,lang,setLang}){
   const L=LANGS[lang].t;
   return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
+    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif",position:"relative"}}>
       <style>{GS}</style>
-      <div style={{position:"fixed",top:16,right:16,display:"flex",gap:6,zIndex:10}}>
+      <div style={{position:"absolute",top:16,right:16,display:"flex",gap:6,zIndex:10}}>
         {Object.entries(LANGS).map(([code,l])=>(
           <button key={code} onClick={()=>setLang(code)} style={{padding:"4px 8px",borderRadius:4,cursor:"pointer",fontSize:"1rem",background:lang===code?T.goldLo:"transparent",border:`1px solid ${lang===code?T.gold:T.border}`}} title={l.name}>{l.flag}</button>
         ))}
