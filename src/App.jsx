@@ -14,6 +14,7 @@ const T = {
 const GS = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body,#root{background:${T.bg};min-height:100%;width:100%;}
   body{background:${T.bg};}
   ::-webkit-scrollbar{width:3px;height:3px;}
   ::-webkit-scrollbar-thumb{background:${T.border};border-radius:2px;}
@@ -1567,7 +1568,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
       </header>
       <main style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
         {screen==="home"&&(<>
-          <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.silver,marginBottom:3}}>{shop.address}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
+          <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>{L.myBookingsLabel}</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder={L.phonePlaceholder} value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>{L.show}</Btn></div></div>
           <Lbl style={{marginBottom:9}}>{L.ourTeam}</Lbl>
@@ -1644,12 +1645,13 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGIN + ENTRY
 // ══════════════════════════════════════════════════════════════════════════════
-function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,lang}){
+function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
   const L=LANGS[lang].t;
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
+    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif",position:"relative"}}>
+      <button onClick={onBack} style={{position:"absolute",top:16,left:16,background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       <div style={{textAlign:"center",marginBottom:40}}>
         <svg width="42" height="42" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.7rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.25rem"}}>barbervision</span></div>
@@ -1682,7 +1684,6 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         <svg width="48" height="48" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.9rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.4rem"}}>barbervision</span></div>
         <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
-        <div style={{fontSize:"0.82rem",color:T.silver,marginTop:7}}>{shop.address}</div>
       </div>
       <div style={{width:"100%",maxWidth:290,display:"flex",flexDirection:"column",gap:9}}>
         <button onClick={onClient} style={{padding:"17px",background:T.goldLo,border:`1px solid ${T.gold}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
@@ -1969,7 +1970,7 @@ const [notifications,setNotifications] = useState([]);
   if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)}/>;
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
-  if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} lang={lang}/>;
+  if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} onLogout={()=>setRole("entry")}/>;
 
@@ -1995,6 +1996,7 @@ const [notifications,setNotifications] = useState([]);
               ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ ATIVO</span>
               :<button onClick={()=>setShowSub(true)} style={{fontSize:"0.54rem",background:trialDays<=3?T.redLo:T.goldLo,color:trialDays<=3?T.red:T.gold,border:`1px solid ${trialDays<=3?T.red:T.gold}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",cursor:"pointer"}}>⏳ {trialDays}d</button>
             }
+            <button onClick={()=>setRole("entry")} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
           </div>
         </div>
         {/* Barbeiro + data */}
