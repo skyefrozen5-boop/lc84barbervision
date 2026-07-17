@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import logoIcon from './assets/logo-icon.png';
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
 const T = {
@@ -1686,7 +1687,7 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         ))}
       </div>
       <div style={{textAlign:"center",marginBottom:40}}>
-        <svg width="48" height="48" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+        <img src={logoIcon} style={{width:48,height:48,marginBottom:13,objectFit:"contain"}}/>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.9rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.4rem"}}>barbervision</span></div>
         <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
       </div>
