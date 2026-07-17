@@ -1362,6 +1362,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const TABS=[{id:"overview",l:"Geral"},{id:"barbers",l:"Barbeiros"},{id:"services",l:"Serviços"},{id:"shop",l:"Barbearia"}];
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
+      <style>{GS}</style>
       <header style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.88rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84 <span style={{color:T.silver,fontSize:"0.68rem"}}>Admin</span></div></div>
@@ -1559,6 +1560,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
   const reset=()=>{setSel({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});setStep(1);setDone(null);setScreen("home");};
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
+      <style>{GS}</style>
       <header style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:9}}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill={T.gold}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
@@ -1650,8 +1652,11 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif",position:"relative"}}>
-      <button onClick={onBack} style={{position:"absolute",top:16,left:16,background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
+    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
+      <style>{GS}</style>
+      <div style={{width:"100%",maxWidth:290,marginBottom:16}}>
+        <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
+      </div>
       <div style={{textAlign:"center",marginBottom:40}}>
         <svg width="42" height="42" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.7rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.25rem"}}>barbervision</span></div>
@@ -1739,6 +1744,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
 
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
+      <style>{GS}</style>
       <header style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div>
           <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.95rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"0.82rem"}}>barbervision</span></div>
@@ -1867,6 +1873,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
 function ExpiredScreen({onSubscribe}){
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
+      <style>{GS}</style>
       <div style={{textAlign:"center",maxWidth:300}}>
         <div style={{fontSize:"2.5rem",marginBottom:16}}>🔒</div>
         <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:8}}>Trial expirado</div>
