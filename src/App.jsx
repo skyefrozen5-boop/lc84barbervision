@@ -54,8 +54,8 @@ const LANGS = {
       notes:"Notas", observations:"Observações…", back:"← Voltar", next:"Continuar →",
       confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Selecionado",
       freeSlots:"Horários livres", dayBlocked:"Dia inteiro bloqueado", unblock:"Desbloquear",
-      blockSlot:"Horário", blockDay:"Dia inteiro", blockPeriod:"Período",
-      blockSlotTitle:"Escolhe o horário a bloquear", blockDayTitle:"Bloquear dia inteiro",
+      blockSlot:"Horário", blockDay:"Dia inteiro", blockPeriod:"Período", blockHours:"Ausência",
+      blockSlotTitle:"Escolhe o horário a bloquear", blockDayTitle:"Bloquear dia inteiro",blockHoursTitle:"Bloquear horas de ausência",
       blockPeriodTitle:"Bloquear período (ex: férias)", blockDays:"dias bloqueados",
       noBookings:"Sem marcações — toque em + Novo", holiday:"Folga neste dia",
       searchClient:"Pesquisar nome ou telemóvel…", visits:"visita", totalSpent:"gasto total",
@@ -817,6 +817,7 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
   const [blocking,setBlocking]=useState(false);
   const [blockMode,setBlockMode]=useState("slot"); // slot | day | period
   const [blockPeriod,setBlockPeriod]=useState({start:"",end:""});
+  const [blockRange,setBlockRange]=useState({start:"",end:""});
 
   const addBlockDay=()=>{
     setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time:"DIA_INTEIRO",blocked:true,name:"Dia Bloqueado",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
@@ -832,7 +833,14 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
     setBlockPeriod({start:"",end:""});
     setBlocking(false);
   };
-  const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===date&&b.time==="DIA_INTEIRO"&&b.blocked);
+  const addBlockRange=()=>{
+  if(!blockRange.start||!blockRange.end||blockRange.end<=blockRange.start)return;
+  const slots=hours.filter(h=>h>=blockRange.start&&h<blockRange.end&&!dayBk.find(b=>b.time===h));
+  setBookings(p=>[...p,...slots.map(time=>({id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:"Ausência",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}))]);
+  setBlockRange({start:"",end:""});
+  setBlocking(false);
+};
+const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===date&&b.time==="DIA_INTEIRO"&&b.blocked);
   const unblockDay=date=>setBookings(p=>p.filter(b=>!(b.barberId===barber.id&&b.date===date&&b.time==="DIA_INTEIRO"&&b.blocked)));
   const svc=id=>services.find(s=>s.id===id);
   const hours=getBarberHours(barber);
@@ -896,7 +904,7 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
             <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:14,marginBottom:12}}>
               {/* Mode tabs */}
               <div style={{display:"flex",gap:5,marginBottom:12}}>
-                {[["slot",L.blockSlot],["day",L.blockDay],["period",L.blockPeriod]].map(([id,l])=>(
+                {[["slot",L.blockSlot],["hours",L.blockHours],["day",L.blockDay],["period",L.blockPeriod]].map(([id,l])=>(
                   <button key={id} onClick={()=>setBlockMode(id)} style={{flex:1,padding:"6px 4px",borderRadius:4,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:blockMode===id?T.redLo:"transparent",color:blockMode===id?T.red:T.silver,border:`1px solid ${blockMode===id?T.red:T.border}`}}>{l}</button>
                 ))}
               </div>
@@ -909,6 +917,15 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
                   ))}
                 </div>
               </>)}
+
+              {blockMode==="hours"&&(<>
+  <Lbl style={{marginBottom:8}}>{L.blockHoursTitle}</Lbl>
+  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+    <div><Lbl>{L.fromDate}</Lbl><Sel value={blockRange.start} onChange={e=>setBlockRange(p=>({...p,start:e.target.value}))}><option value="">--</option>{hours.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+    <div><Lbl>{L.toDate}</Lbl><Sel value={blockRange.end} onChange={e=>setBlockRange(p=>({...p,end:e.target.value}))}><option value="">--</option>{hours.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+  </div>
+  <Btn variant="danger" style={{width:"100%"}} onClick={addBlockRange}>🔒 {L.blockHoursTitle}</Btn>
+</>)}
 
               {blockMode==="day"&&(<>
                 <Lbl style={{marginBottom:8}}>{L.blockDayTitle} — {dateLabel(selDate)}</Lbl>
