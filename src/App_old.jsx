@@ -419,27 +419,6 @@ const INIT_SHOP = {name:"LC.84 Barber Vision",address:"Rua do Comércio, 84 — 
 // seed client notes
 const INIT_CLIENT_NOTES = {};
 
-// ─── MULTI-SHOP HELPERS ──────────────────────────────────────────────────────
-function slugify(str){
-  return (str||"")
-    .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"") // remove accents
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/(^-|-$)/g,"")
-    .slice(0,30) || "loja";
-}
-async function generateUniqueSlug(base){
-  let slug = slugify(base);
-  let attempt = slug;
-  let n = 2;
-  while(true){
-    const {data} = await supabase.from("shops").select("id").eq("slug",attempt).maybeSingle();
-    if(!data) return attempt;
-    attempt = `${slug}-${n}`;
-    n++;
-  }
-}
-
 function seedBookings(barbers) {
   const names  = ["Miguel Ferreira","João Costa","Rafael Santos","André Pinto","Carlos Mendes","Bruno Sousa","Tiago Lopes","Pedro Nunes","Rui Alves","Diogo Vieira","Marco Silva","Nuno Rodrigues"];
   const phones = ["912111001","913222002","914333003","915444004","916555005","917666006","918777007","919888008","910999009","911000010","912000011","913000012"];
@@ -1931,126 +1910,6 @@ function ExpiredScreen({onSubscribe}){
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// OWNER PORTAL — login/registo de barbearias (multi-tenant)
-// ══════════════════════════════════════════════════════════════════════════════
-function OwnerPortal(){
-  const [mode,setMode]     = useState("login"); // login | signup
-  const [busy,setBusy]     = useState(false);
-  const [err,setErr]       = useState("");
-
-  // login fields
-  const [email,setEmail]   = useState("");
-  const [pass,setPass]     = useState("");
-
-  // signup fields
-  const [ownerName,setOwnerName] = useState("");
-  const [salonName,setSalonName] = useState("");
-  const [suEmail,setSuEmail]     = useState("");
-  const [suPass,setSuPass]       = useState("");
-  const [phone,setPhone]         = useState("");
-
-  const goToShop=(slug)=>{
-    const url=new URL(window.location.href);
-    url.searchParams.set("loja",slug);
-    window.location.href=url.toString();
-  };
-
-  const doLogin=async()=>{
-    setErr("");
-    if(!email||!pass){setErr("Preenche o email e a password.");return;}
-    setBusy(true);
-    const{data,error}=await supabase.from("shops").select("id,slug,owner_password").ilike("owner_email",email.trim()).maybeSingle();
-    setBusy(false);
-    if(error||!data){setErr("Não encontrámos nenhuma barbearia com esse email.");return;}
-    if(data.owner_password!==pass){setErr("Password incorreta.");return;}
-    goToShop(data.slug);
-  };
-
-  const doSignup=async()=>{
-    setErr("");
-    if(!ownerName||!salonName||!suEmail||!suPass){setErr("Preenche todos os campos.");return;}
-    setBusy(true);
-    const{data:existing}=await supabase.from("shops").select("id").eq("owner_email",suEmail.trim().toLowerCase()).maybeSingle();
-    if(existing){setBusy(false);setErr("Já existe uma barbearia registada com esse email.");return;}
-    const slug=await generateUniqueSlug(salonName);
-    const initData={
-      shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
-      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00"},active:true}],
-      services:INIT_SERVICES,
-      bookings:[],
-      notifications:[],
-      clientNotes:{},
-    };
-    const{error}=await supabase.from("shops").insert({
-      owner_email:suEmail.trim().toLowerCase(),
-      owner_password:suPass,
-      slug,
-      data:initData,
-    });
-    setBusy(false);
-    if(error){setErr("Não foi possível criar a barbearia. Tenta outra vez.");return;}
-    goToShop(slug);
-  };
-
-  return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Josefin Sans',sans-serif"}}>
-      <div style={{textAlign:"center",marginBottom:28}}>
-        <img src={logoIcon} style={{width:56,height:56,marginBottom:10,objectFit:"contain"}}/>
-        <div style={{fontSize:"1.5rem",color:T.white,fontWeight:600,letterSpacing:"0.08em"}}>Portal do Dono</div>
-        <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>Entra ou cria a tua barbearia</div>
-      </div>
-
-      <div style={{display:"flex",gap:6,marginBottom:20,background:T.card,borderRadius:6,padding:4}}>
-        <button onClick={()=>{setMode("login");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="login"?T.gold:"transparent",color:mode==="login"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>Já tenho conta</button>
-        <button onClick={()=>{setMode("signup");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="signup"?T.gold:"transparent",color:mode==="signup"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>Criar barbearia</button>
-      </div>
-
-      <div style={{width:"100%",maxWidth:340,background:T.card,border:`1px solid ${T.border}`,borderRadius:8,padding:22}}>
-        {mode==="login"?(
-          <>
-            <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Email</Lbl>
-              <Inp value={email} onChange={e=>setEmail(e.target.value)} placeholder="o-teu-email@exemplo.com"/>
-            </div>
-            <div style={{marginBottom:16}}>
-              <Lbl style={{marginBottom:6}}>Password</Lbl>
-              <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder="••••••••"/>
-            </div>
-            {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
-            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doLogin} disabled={busy}>{busy?"A entrar...":"Entrar"}</Btn>
-          </>
-        ):(
-          <>
-            <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>O teu nome</Lbl>
-              <Inp value={ownerName} onChange={e=>setOwnerName(e.target.value)} placeholder="Nome completo"/>
-            </div>
-            <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Nome da barbearia</Lbl>
-              <Inp value={salonName} onChange={e=>setSalonName(e.target.value)} placeholder="Ex: Barbearia do Zé"/>
-            </div>
-            <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Telefone (opcional)</Lbl>
-              <Inp value={phone} onChange={e=>setPhone(e.target.value)} placeholder="+351 9xx xxx xxx"/>
-            </div>
-            <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Email</Lbl>
-              <Inp value={suEmail} onChange={e=>setSuEmail(e.target.value)} placeholder="o-teu-email@exemplo.com"/>
-            </div>
-            <div style={{marginBottom:16}}>
-              <Lbl style={{marginBottom:6}}>Password</Lbl>
-              <Inp type="password" value={suPass} onChange={e=>setSuPass(e.target.value)} placeholder="Cria uma password"/>
-            </div>
-            {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
-            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doSignup} disabled={busy}>{busy?"A criar...":"Criar a minha barbearia"}</Btn>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
 export default function App(){
@@ -2065,29 +1924,13 @@ const [notifications,setNotifications] = useState([]);
   const [activeBarber,setActiveBarber]   = useState(null);
   const [bScreen,setBScreen]             = useState("dashboard");
   const [dataLoaded,setDataLoaded]       = useState(false);
-  const [shopId,setShopId]               = useState(null);
-  const [ownerMode,setOwnerMode]         = useState(false);
-  const [shopNotFound,setShopNotFound]   = useState(false);
 
   useEffect(()=>{
     (async()=>{
-      const params=new URLSearchParams(window.location.search);
-      const slug=params.get("loja");
-      if(!slug){
-        setOwnerMode(true);
-        setDataLoaded(true);
-        return;
-      }
-      const{data,error}=await supabase.from("shops").select("id,data").eq("slug",slug).maybeSingle();
-      if(error||!data){
+      const{data,error}=await supabase.from("app_state").select("data").eq("id","main").single();
+      const d=data?.data;
+      if(error||!d||Object.keys(d).length===0){
         if(error)console.error("Erro a carregar:",error);
-        setShopNotFound(true);
-        setDataLoaded(true);
-        return;
-      }
-      const d=data.data||{};
-      setShopId(data.id);
-      if(!d||Object.keys(d).length===0){
         setBarbers(INIT_BARBERS);setServices(INIT_SERVICES);setShop(INIT_SHOP);
         setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS));
         setClientNotes(INIT_CLIENT_NOTES);
@@ -2104,15 +1947,16 @@ const [notifications,setNotifications] = useState([]);
   },[]);
 
   useEffect(()=>{
-    if(!dataLoaded||!shopId)return;
+    if(!dataLoaded)return;
     const t=setTimeout(()=>{
-      supabase.from("shops").update({
+      supabase.from("app_state").upsert({
+        id:"main",
         data:{barbers,services,shop,bookings,notifications,clientNotes},
         updated_at:new Date().toISOString(),
-      }).eq("id",shopId).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
+      }).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
     },800);
     return()=>clearTimeout(t);
-  },[barbers,services,shop,bookings,notifications,clientNotes,dataLoaded,shopId]);
+  },[barbers,services,shop,bookings,notifications,clientNotes,dataLoaded]);
  
 
   // Subscription state
@@ -2124,19 +1968,6 @@ const [notifications,setNotifications] = useState([]);
     return(
       <div style={{minHeight:"100vh",background:T.bg,display:"flex",alignItems:"center",justifyContent:"center",color:T.gold,fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.8rem",letterSpacing:"0.2em"}}>
         A CARREGAR...
-      </div>
-    );
-  }
-
-  if(ownerMode) return <OwnerPortal/>;
-
-  if(shopNotFound){
-    return(
-      <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,textAlign:"center",fontFamily:"'Josefin Sans',sans-serif"}}>
-        <div style={{fontSize:"2rem",marginBottom:16}}>🔍</div>
-        <div style={{color:T.white,fontSize:"1.1rem",marginBottom:8}}>Barbearia não encontrada</div>
-        <div style={{color:T.silver,fontSize:"0.8rem",marginBottom:20}}>O link que usaste não corresponde a nenhuma barbearia registada.</div>
-        <Btn variant="gold" onClick={()=>{window.location.href=window.location.origin+window.location.pathname;}}>Ir para o Portal do Dono</Btn>
       </div>
     );
   }
