@@ -1686,10 +1686,21 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGIN + ENTRY
 // ══════════════════════════════════════════════════════════════════════════════
-function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
+function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
   const L=LANGS[lang].t;
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
+  const [joinMode,setJoinMode]=useState(false);
+  const [jName,setJName]=useState(""),[jPin,setJPin]=useState(""),[jPhone,setJPhone]=useState(""),[jErr,setJErr]=useState("");
   const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
+  const join=()=>{
+    setJErr("");
+    if(!jName.trim()){setJErr("Escreve o teu nome.");return;}
+    if(!/^\d{4,6}$/.test(jPin)){setJErr("O código deve ter entre 4 e 6 números.");return;}
+    if(jPin===shop.adminPin||barbers.find(b=>b.pin===jPin)){setJErr("Esse código já está a ser usado. Escolhe outro.");return;}
+    const nb={id:mkId(),name:jName.trim(),role:"Barbeiro",pin:jPin,phone:jPhone||"",bio:"",avatar:jName.trim().split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00"},active:true};
+    setBarbers(p=>[...p,nb]);
+    onBarberLogin(nb);
+  };
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
       <style>{GS}</style>
@@ -1701,15 +1712,34 @@ function LoginScreen({barbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.7rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.25rem"}}>barbervision</span></div>
         <div style={{fontSize:"0.58rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5}}>{L.barberArea}</div>
       </div>
-      <div style={{width:"100%",maxWidth:290}}>
-        <Lbl style={{textAlign:"center",marginBottom:12}}>{L.accessCode}</Lbl>
-        <div style={{position:"relative",marginBottom:12}}>
-          <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
-          <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?L.hide:L.show}</button>
+      {!joinMode?(
+        <div style={{width:"100%",maxWidth:290}}>
+          <Lbl style={{textAlign:"center",marginBottom:12}}>{L.accessCode}</Lbl>
+          <div style={{position:"relative",marginBottom:12}}>
+            <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
+            <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?L.hide:L.show}</button>
+          </div>
+          {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
+          <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
+          <div style={{textAlign:"center"}}>
+            <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>Sou novo colaborador, quero juntar-me →</button>
+          </div>
         </div>
-        {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
-        <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
-      </div>
+      ):(
+        <div style={{width:"100%",maxWidth:290}}>
+          <Lbl style={{marginBottom:6}}>O teu nome</Lbl>
+          <Inp value={jName} onChange={e=>setJName(e.target.value)} placeholder="Nome completo" style={{marginBottom:12}}/>
+          <Lbl style={{marginBottom:6}}>Cria o teu código de acesso (4-6 números)</Lbl>
+          <Inp value={jPin} onChange={e=>setJPin(e.target.value.replace(/\D/g,""))} placeholder="••••" style={{marginBottom:12,textAlign:"center",letterSpacing:"0.3em"}}/>
+          <Lbl style={{marginBottom:6}}>Telefone (opcional)</Lbl>
+          <Inp value={jPhone} onChange={e=>setJPhone(e.target.value)} placeholder="+351 9xx xxx xxx" style={{marginBottom:12}}/>
+          {jErr&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:12}}>{jErr}</div>}
+          <Btn variant="gold" style={{width:"100%",marginBottom:9}} onClick={join}>Juntar-me à equipa</Btn>
+          <div style={{textAlign:"center"}}>
+            <button onClick={()=>{setJoinMode(false);setJErr("");}} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>← Já tenho código de acesso</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -2164,7 +2194,7 @@ const [notifications,setNotifications] = useState([]);
   if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)}/>;
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
-  if(role==="login")  return <LoginScreen barbers={barbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} onLogout={()=>setRole("entry")}/>;
 
