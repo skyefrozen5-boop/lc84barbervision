@@ -487,7 +487,7 @@ const Tag = ({status}) => {
   return <span style={{fontSize:"0.55rem",letterSpacing:"0.12em",textTransform:"uppercase",padding:"2px 7px",borderRadius:3,background:cfg.bg,color:cfg.c,border:`1px solid ${cfg.c}`,fontFamily:"'Josefin Sans',sans-serif",whiteSpace:"nowrap"}}>{cfg.l}</span>;
 };
 const Hr = ({style}) => <div style={{height:1,background:T.border,...style}}/>;
-const Avatar = ({barber,size=36}) => <div style={{width:size,height:size,borderRadius:"50%",background:`${barber.color}22`,border:`2px solid ${barber.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:size*0.32,fontWeight:700,color:barber.color,flexShrink:0,fontFamily:"'Josefin Sans',sans-serif"}}>{barber.avatar}</div>;
+const Avatar = ({barber,size=36}) => barber.photoUrl ? <img src={barber.photoUrl} style={{width:size,height:size,borderRadius:"50%",objectFit:"cover",border:`2px solid ${barber.color}`,flexShrink:0}}/> : <div style={{width:size,height:size,borderRadius:"50%",background:`${barber.color}22`,border:`2px solid ${barber.color}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:size*0.32,fontWeight:700,color:barber.color,flexShrink:0,fontFamily:"'Josefin Sans',sans-serif"}}>{barber.avatar}</div>;
 
 function Modal({onClose,title,children}){
   return(
@@ -1353,15 +1353,42 @@ function BSchedule({barber,setBarbers,lang}){
   );
 }
 
-function BProfile({barber,setBarbers,onLogout,lang}){
+function BProfile({barber,setBarbers,shopId,onLogout,lang}){
   const L=LANGS[lang].t;
   const [edit,setEdit]=useState(false);
   const [f,setF]=useState({...barber});
+  const [photoBusy,setPhotoBusy]=useState(false);
+  const [photoErr,setPhotoErr]=useState("");
   const u=k=>e=>setF(p=>({...p,[k]:e.target.value}));
   const save=()=>{if(f.pinNew){f.pin=f.pinNew;delete f.pinNew;}setBarbers(p=>p.map(b=>b.id===barber.id?f:b));setEdit(false);};
+  const uploadPhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){setPhotoErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    setPhotoBusy(true);setPhotoErr("");
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/barbeiro-${barber.id}-${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(error){setPhotoBusy(false);setPhotoErr("Não foi possível enviar a imagem.");return;}
+    const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+    setBarbers(p=>p.map(b=>b.id===barber.id?{...b,photoUrl:data.publicUrl}:b));
+    setPhotoBusy(false);
+  };
   return(
     <div style={{padding:"0 20px"}}>
-      <div style={{textAlign:"center",marginBottom:22}}><Avatar barber={barber} size={62}/><div style={{fontSize:"1.15rem",color:T.white,fontWeight:600,marginTop:11}}>{barber.name}</div><div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{barber.role}</div></div>
+      <div style={{textAlign:"center",marginBottom:22}}>
+        <Avatar barber={barber} size={62}/>
+        <div style={{fontSize:"1.15rem",color:T.white,fontWeight:600,marginTop:11}}>{barber.name}</div>
+        <div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{barber.role}</div>
+        {edit&&(
+          <label style={{display:"inline-block",marginTop:10}}>
+            <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadPhoto(e.target.files?.[0])}/>
+            <div style={{padding:"6px 14px",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+              {photoBusy?"A enviar...":"Trocar foto de perfil"}
+            </div>
+          </label>
+        )}
+        {photoErr&&<div style={{color:T.red,fontSize:"0.72rem",marginTop:6}}>{photoErr}</div>}
+      </div>
       {!edit?(
         <>
           {[[L.nameLabel,barber.name],[L.role,barber.role],[L.phone,barber.phone],[L.bio,barber.bio]].map(([l,v])=>(
@@ -1389,7 +1416,7 @@ function BProfile({barber,setBarbers,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,onLogout}){
+function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout}){
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
   const [bf,setBf]=useState({});
@@ -1399,6 +1426,20 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00"},active:true});setModal("barber");};
   const saveBarber=()=>{if(!bf.name.trim()||!bf.pin.trim())return;if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?bf:b));else setBarbers(p=>[...p,{...bf,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);setModal(null);};
   const TABS=[{id:"overview",l:"Geral"},{id:"barbers",l:"Barbeiros"},{id:"services",l:"Serviços"},{id:"shop",l:"Barbearia"}];
+  const [photoBusy,setPhotoBusy]=useState(false);
+  const [photoErr,setPhotoErr]=useState("");
+  const uploadPhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){setPhotoErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    setPhotoBusy(true);setPhotoErr("");
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/foto-${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(error){setPhotoBusy(false);setPhotoErr("Não foi possível enviar a imagem.");return;}
+    const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+    setShop(p=>({...p,photoUrl:data.publicUrl}));
+    setPhotoBusy(false);
+  };
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
@@ -1456,6 +1497,19 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
           <ServicesAdmin services={services} setServices={setServices}/>
         </>)}
         {tab==="shop"&&(<>
+          <div style={{marginBottom:18}}>
+            <Lbl style={{marginBottom:8}}>Foto da barbearia</Lbl>
+            {shop.photoUrl&&(
+              <img src={shop.photoUrl} style={{width:"100%",height:150,objectFit:"cover",borderRadius:6,marginBottom:10,border:`1px solid ${T.border}`}}/>
+            )}
+            <label style={{display:"block"}}>
+              <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadPhoto(e.target.files?.[0])}/>
+              <div style={{padding:"10px",textAlign:"center",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.78rem",cursor:"pointer"}}>
+                {photoBusy?"A enviar...":shop.photoUrl?"Trocar foto":"Escolher foto"}
+              </div>
+            </label>
+            {photoErr&&<div style={{color:T.red,fontSize:"0.74rem",marginTop:6}}>{photoErr}</div>}
+          </div>
           {[["Nome","name","text"],["Morada","address","text"],["Telemóvel","phone","tel"],["PIN Admin","adminPin","text"]].map(([l,k,t])=>(
             <div key={k} style={{marginBottom:11}}><Lbl>{l}</Lbl><Inp type={t} value={shop[k]||""} onChange={e=>setShop(p=>({...p,[k]:e.target.value}))}/></div>
           ))}
@@ -1755,6 +1809,9 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         ))}
       </div>
       <div style={{textAlign:"center",marginBottom:40}}>
+        {shop.photoUrl&&(
+          <img src={shop.photoUrl} style={{width:"100%",maxWidth:290,height:140,objectFit:"cover",borderRadius:10,marginBottom:18,border:`1px solid ${T.border}`}}/>
+        )}
         <img src={logoIcon} style={{width:48,height:48,marginBottom:13,objectFit:"contain"}}/>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.9rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.4rem"}}>barbervision</span></div>
         <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
@@ -1989,11 +2046,11 @@ function OwnerPortal(){
     setErr("");
     if(!email||!pass){setErr("Preenche o email e a password.");return;}
     setBusy(true);
-    const{data,error}=await supabase.from("shops").select("id,slug,owner_password").ilike("owner_email",email.trim()).maybeSingle();
+    const{data,error}=await supabase.rpc("verify_owner_login",{p_email:email.trim(),p_password:pass});
     setBusy(false);
-    if(error||!data){setErr("Não encontrámos nenhuma barbearia com esse email.");return;}
-    if(data.owner_password!==pass){setErr("Password incorreta.");return;}
-    goToShop(data.slug);
+    const row=Array.isArray(data)?data[0]:data;
+    if(error||!row){setErr("Email ou password incorretos.");return;}
+    goToShop(row.slug);
   };
 
   const doSignup=async()=>{
@@ -2196,7 +2253,7 @@ const [notifications,setNotifications] = useState([]);
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} onLogout={()=>setRole("entry")}/>;
+  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")}/>;
 
   // Trial expired — block barber access
   if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)}/>;
@@ -2255,7 +2312,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="clients"  &&<BClients   bookings={bookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} lang={lang}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
-        {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} onLogout={()=>setRole("entry")} lang={lang}/>}
+        {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
       </main>
     </div>
   );
