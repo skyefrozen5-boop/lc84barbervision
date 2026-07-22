@@ -1371,6 +1371,7 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
     if(error){setPhotoBusy(false);setPhotoErr("Não foi possível enviar a imagem.");return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setBarbers(p=>p.map(b=>b.id===barber.id?{...b,photoUrl:data.publicUrl}:b));
+    setF(p=>({...p,photoUrl:data.publicUrl}));
     setPhotoBusy(false);
   };
   return(
