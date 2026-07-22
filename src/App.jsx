@@ -1440,6 +1440,23 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     setShop(p=>({...p,photoUrl:data.publicUrl}));
     setPhotoBusy(false);
   };
+  const [delOpen,setDelOpen]=useState(false);
+  const [delName,setDelName]=useState("");
+  const [delPass,setDelPass]=useState("");
+  const [delErr,setDelErr]=useState("");
+  const [delBusy,setDelBusy]=useState(false);
+  const doDeleteShop=async()=>{
+    setDelErr("");
+    if(delName.trim()!==(shop.name||"").trim()){setDelErr("O nome não corresponde ao nome da barbearia.");return;}
+    if(!delPass){setDelErr("Introduz a password para confirmar.");return;}
+    setDelBusy(true);
+    const{data,error}=await supabase.rpc("delete_owner_shop",{p_shop_id:shopId,p_password:delPass});
+    setDelBusy(false);
+    if(error||!data){setDelErr("Password incorreta ou não foi possível apagar.");return;}
+    const url=new URL(window.location.href);
+    url.searchParams.delete("loja");
+    window.location.href=url.toString();
+  };
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
@@ -1515,6 +1532,29 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
           ))}
           <div style={{marginBottom:14}}><Lbl>Bio</Lbl><Txta rows={3} value={shop.bio||""} onChange={e=>setShop(p=>({...p,bio:e.target.value}))}/></div>
           <Btn variant="gold" style={{width:"100%"}}>Guardar</Btn>
+
+          <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
+            <Lbl style={{marginBottom:8,color:T.red}}>Zona de perigo</Lbl>
+            <div style={{fontSize:"0.72rem",color:T.silver,marginBottom:10,lineHeight:1.5}}>
+              Apagar a barbearia remove definitivamente todos os dados (marcações, barbeiros, serviços). Esta ação não pode ser desfeita.
+            </div>
+            <Btn variant="danger" style={{width:"100%"}} onClick={()=>{setDelOpen(true);setDelName("");setDelPass("");setDelErr("");}}>Apagar barbearia</Btn>
+          </div>
+
+          {delOpen&&(
+            <Modal onClose={()=>setDelOpen(false)} title="Apagar barbearia">
+              <div style={{fontSize:"0.76rem",color:T.silver,marginBottom:14,lineHeight:1.5}}>
+                Esta ação é permanente. Para confirmar, escreve o nome exato da barbearia (<b style={{color:T.white}}>{shop.name}</b>) e a tua password.
+              </div>
+              <div style={{marginBottom:10}}><Lbl>Nome da barbearia</Lbl><Inp value={delName} onChange={e=>setDelName(e.target.value)}/></div>
+              <div style={{marginBottom:10}}><Lbl>Password</Lbl><Inp type="password" value={delPass} onChange={e=>setDelPass(e.target.value)}/></div>
+              {delErr&&<div style={{color:T.red,fontSize:"0.72rem",marginBottom:10}}>{delErr}</div>}
+              <div style={{display:"flex",gap:8}}>
+                <Btn variant="danger" style={{flex:1}} onClick={doDeleteShop} disabled={delBusy}>{delBusy?"A apagar...":"Apagar definitivamente"}</Btn>
+                <Btn variant="ghost" onClick={()=>setDelOpen(false)}>Cancelar</Btn>
+              </div>
+            </Modal>
+          )}
         </>)}
       </main>
     </div>
