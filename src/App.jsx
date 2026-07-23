@@ -611,12 +611,18 @@ function BNotifications({notifications,setNotifications,barber,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
+function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,shopId,lang}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
   const [editNote,setEditNote]=useState(false);
   const [noteText,setNoteText]=useState("");
+  const [addingCut,setAddingCut]=useState(false);
+  const [cutPhoto,setCutPhoto]=useState(null);
+  const [cutNotes,setCutNotes]=useState("");
+  const [cutBusy,setCutBusy]=useState(false);
+  const [cutErr,setCutErr]=useState("");
+  const [viewPhoto,setViewPhoto]=useState(null);
   const svc=id=>services.find(s=>s.id===id);
 
   // Build client map from this barber's bookings
@@ -640,11 +646,39 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
     setOpenClient(c);
     setNoteText(clientNotes[c.phone||c.name]||"");
     setEditNote(false);
+    setAddingCut(false);setCutPhoto(null);setCutNotes("");setCutErr("");
   };
   const saveNote=()=>{
     const key=openClient.phone||openClient.name;
     setClientNotes(p=>({...p,[key]:noteText}));
     setEditNote(false);
+  };
+
+  // Histórico de cortes — isolado por barbeiro: só este barbeiro vê os cortes que ele próprio registou
+  const cutKey=c=>`${barber.id}::${c.phone||c.name}`;
+  const myCuts=c=>(cutRecords[cutKey(c)]||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+  const uploadCutPhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){setCutErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    setCutBusy(true);setCutErr("");
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/cortes/${barber.id}-${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(error){setCutBusy(false);setCutErr("Não foi possível enviar a imagem.");return;}
+    const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+    setCutPhoto(data.publicUrl);
+    setCutBusy(false);
+  };
+  const saveCutRecord=()=>{
+    if(!cutPhoto){setCutErr("Adiciona uma foto do corte.");return;}
+    const key=cutKey(openClient);
+    const rec={id:Date.now().toString(36),date:TODAY,photoUrl:cutPhoto,notes:cutNotes.trim()};
+    setCutRecords(p=>({...p,[key]:[...(p[key]||[]),rec]}));
+    setAddingCut(false);setCutPhoto(null);setCutNotes("");setCutErr("");
+  };
+  const deleteCutRecord=recId=>{
+    const key=cutKey(openClient);
+    setCutRecords(p=>({...p,[key]:(p[key]||[]).filter(r=>r.id!==recId)}));
   };
 
   // fav service
@@ -735,6 +769,46 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
               )}
             </div>
 
+            {/* Histórico de cortes (fotos) — só visível para este barbeiro */}
+            <div style={{marginBottom:18}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                <Lbl style={{margin:0}}>Histórico de cortes</Lbl>
+                {!addingCut&&<button onClick={()=>{setAddingCut(true);setCutPhoto(null);setCutNotes("");setCutErr("");}} style={{background:"none",border:"none",color:T.gold,cursor:"pointer",fontSize:"0.7rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em"}}>+ Adicionar corte</button>}
+              </div>
+              {addingCut&&(
+                <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:12,marginBottom:10}}>
+                  {cutPhoto?(
+                    <img src={cutPhoto} alt="" style={{width:"100%",maxHeight:160,objectFit:"cover",borderRadius:5,marginBottom:8}}/>
+                  ):(
+                    <label style={{display:"block",marginBottom:8}}>
+                      <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
+                      <div style={{padding:"14px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.75rem",cursor:"pointer"}}>
+                        {cutBusy?"A enviar...":"📷 Tocar para tirar/escolher foto"}
+                      </div>
+                    </label>
+                  )}
+                  <Txta rows={2} placeholder="Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)" value={cutNotes} onChange={e=>setCutNotes(e.target.value)} style={{marginBottom:8}}/>
+                  {cutErr&&<div style={{color:T.red,fontSize:"0.7rem",marginBottom:8}}>{cutErr}</div>}
+                  <div style={{display:"flex",gap:8}}>
+                    <Btn variant="gold" style={{flex:1,padding:"8px"}} onClick={saveCutRecord}>Guardar corte</Btn>
+                    <Btn variant="ghost" style={{padding:"8px"}} onClick={()=>setAddingCut(false)}>{L.cancel}</Btn>
+                  </div>
+                </div>
+              )}
+              {myCuts(c).length===0&&!addingCut?(
+                <div style={{color:T.silver,fontSize:"0.78rem",padding:"6px 0"}}>Ainda não há cortes registados por ti para este cliente.</div>
+              ):(
+                <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
+                  {myCuts(c).map(r=>(
+                    <div key={r.id} onClick={()=>setViewPhoto(r)} style={{cursor:"pointer",position:"relative"}}>
+                      <img src={r.photoUrl} alt="" style={{width:"100%",aspectRatio:"1",objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`}}/>
+                      <div style={{fontSize:"0.6rem",color:T.silver,marginTop:3,textAlign:"center"}}>{dateLabel(r.date)}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Upcoming */}
             {upcoming.length>0&&(
               <div style={{marginBottom:16}}>
@@ -773,6 +847,19 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,lang}){
           </Modal>
         );
       })()}
+
+      {/* Ver foto de corte ampliada */}
+      {viewPhoto&&(
+        <Modal onClose={()=>setViewPhoto(null)} title="Corte">
+          <img src={viewPhoto.photoUrl} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>
+          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPhoto.date)}</div>
+          {viewPhoto.notes&&<div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:5,padding:"10px 12px",fontSize:"0.82rem",color:T.mid,fontStyle:"italic",marginBottom:12}}>{viewPhoto.notes}</div>}
+          <div style={{display:"flex",gap:8}}>
+            <Btn variant="danger" style={{flex:1}} onClick={()=>{deleteCutRecord(viewPhoto.id);setViewPhoto(null);}}>Apagar corte</Btn>
+            <Btn variant="ghost" onClick={()=>setViewPhoto(null)}>{L.close}</Btn>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
@@ -2189,6 +2276,7 @@ export default function App(){
   const [bookings,setBookings]           = useState([]);
 const [notifications,setNotifications] = useState([]);
   const [clientNotes,setClientNotes]     = useState(INIT_CLIENT_NOTES);
+  const [cutRecords,setCutRecords]       = useState({});
   const [role,setRole]                   = useState("entry");
   const [activeBarber,setActiveBarber]   = useState(null);
   const [bScreen,setBScreen]             = useState("dashboard");
@@ -2218,7 +2306,7 @@ const [notifications,setNotifications] = useState([]);
       if(!d||Object.keys(d).length===0){
         setBarbers(INIT_BARBERS);setServices(INIT_SERVICES);setShop(INIT_SHOP);
         setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS));
-        setClientNotes(INIT_CLIENT_NOTES);
+        setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});
       } else {
         setBarbers(d.barbers||INIT_BARBERS);
         setServices(d.services||INIT_SERVICES);
@@ -2226,6 +2314,7 @@ const [notifications,setNotifications] = useState([]);
         setBookings(d.bookings||[]);
         setNotifications(d.notifications||[]);
         setClientNotes(d.clientNotes||{});
+        setCutRecords(d.cutRecords||{});
       }
       setDataLoaded(true);
     })();
@@ -2235,12 +2324,12 @@ const [notifications,setNotifications] = useState([]);
     if(!dataLoaded||!shopId)return;
     const t=setTimeout(()=>{
       supabase.from("shops").update({
-        data:{barbers,services,shop,bookings,notifications,clientNotes},
+        data:{barbers,services,shop,bookings,notifications,clientNotes,cutRecords},
         updated_at:new Date().toISOString(),
       }).eq("id",shopId).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
     },800);
     return()=>clearTimeout(t);
-  },[barbers,services,shop,bookings,notifications,clientNotes,dataLoaded,shopId]);
+  },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,dataLoaded,shopId]);
  
 
   // Subscription state
@@ -2350,7 +2439,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} lang={lang}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} shopId={shopId} lang={lang}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
