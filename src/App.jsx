@@ -780,12 +780,20 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
                   {cutPhoto?(
                     <img src={cutPhoto} alt="" style={{width:"100%",maxHeight:160,objectFit:"cover",borderRadius:5,marginBottom:8}}/>
                   ):(
-                    <label style={{display:"block",marginBottom:8}}>
-                      <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
-                      <div style={{padding:"14px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.75rem",cursor:"pointer"}}>
-                        {cutBusy?"A enviar...":"📷 Tocar para tirar/escolher foto"}
-                      </div>
-                    </label>
+                    <div style={{display:"flex",gap:8,marginBottom:8}}>
+                      <label style={{flex:1}}>
+                        <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
+                        <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+                          {cutBusy?"A enviar...":"📷 Ligar câmara"}
+                        </div>
+                      </label>
+                      <label style={{flex:1}}>
+                        <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
+                        <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+                          {cutBusy?"A enviar...":"🖼️ Carregar ficheiro"}
+                        </div>
+                      </label>
+                    </div>
                   )}
                   <Txta rows={2} placeholder="Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)" value={cutNotes} onChange={e=>setCutNotes(e.target.value)} style={{marginBottom:8}}/>
                   {cutErr&&<div style={{color:T.red,fontSize:"0.7rem",marginBottom:8}}>{cutErr}</div>}
