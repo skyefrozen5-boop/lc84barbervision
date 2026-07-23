@@ -2288,12 +2288,18 @@ const [notifications,setNotifications] = useState([]);
   useEffect(()=>{
     (async()=>{
       const params=new URLSearchParams(window.location.search);
-      const slug=params.get("loja");
+      let slug=params.get("loja");
       if(!slug){
+        const lastShop=localStorage.getItem("lc84_last_shop");
+        if(lastShop){
+          window.location.replace(`${window.location.pathname}?loja=${lastShop}`);
+          return;
+        }
         setOwnerMode(true);
         setDataLoaded(true);
         return;
       }
+      localStorage.setItem("lc84_last_shop",slug);
       const{data,error}=await supabase.from("shops").select("id,data").eq("slug",slug).maybeSingle();
       if(error||!data){
         if(error)console.error("Erro a carregar:",error);
