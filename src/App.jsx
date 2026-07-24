@@ -371,6 +371,9 @@ const LANGS = {
   },
 };
 
+// Código ISO do país de cada bandeira (para imagem real, em vez de emoji — o Windows não renderiza bem emojis de bandeira)
+const FLAG_CC = { pt:"pt", en:"gb", es:"es", fr:"fr", de:"de" };
+
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 const ALL_HOURS = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
                    "13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"];
@@ -1941,7 +1944,9 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
       <style>{GS}</style>
       <div style={{position:"absolute",top:16,right:16,display:"flex",gap:6,zIndex:10}}>
         {Object.entries(LANGS).map(([code,l])=>(
-          <button key={code} onClick={()=>setLang(code)} style={{padding:"4px 8px",borderRadius:4,cursor:"pointer",fontSize:"1rem",background:lang===code?T.goldLo:"transparent",border:`1px solid ${lang===code?T.gold:T.border}`}} title={l.name}>{l.flag}</button>
+          <button key={code} onClick={()=>setLang(code)} style={{padding:"4px 8px",borderRadius:4,cursor:"pointer",display:"flex",alignItems:"center",background:lang===code?T.goldLo:"transparent",border:`1px solid ${lang===code?T.gold:T.border}`}} title={l.name}>
+            <img src={`https://flagcdn.com/w40/${FLAG_CC[code]}.png`} alt={l.name} style={{width:22,height:16,objectFit:"cover",borderRadius:2,display:"block"}}/>
+          </button>
         ))}
       </div>
       <div style={{textAlign:"center",marginBottom:40}}>
