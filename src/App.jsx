@@ -95,6 +95,25 @@ const LANGS = {
       paymentMethod:"Método de Pagamento", confirmAmountBtn:"✓ Confirmar",
       reportLabel:"Relatório", issuedOn:"Emitido em", billed:"Faturado", paidServices:"Serviços Pagos",
       unconfirmedPayment:"Sem Pagamento Confirmado", printBtn:"Imprimir",
+      adminOverview:"Geral", adminBarbersTab:"Barbeiros", totalBilled:"Total Faturado", barbersLabel:"Barbeiros", todayAllLabel:"Hoje (todos)", totalBookingsLabel:"Total Marcações", teamToday:"Equipa hoje", bookingsTodayCount:"marcações hoje", barbersCountSuffix:"barbeiros", addNew:"+ Novo", activeLabel:"Ativo", offLabel:"Off", editBarberTitle:"Editar Barbeiro", newBarberTitle:"Novo Barbeiro", pinLabel:"PIN", colorLabel:"Cor", adminPinLabel:"PIN Admin", shopPhoto:"Foto da barbearia", uploading:"A enviar...", changePhoto:"Trocar foto", choosePhoto:"Escolher foto", dangerZone:"Zona de perigo", deleteShopWarning:"Apagar a barbearia remove definitivamente todos os dados (marcações, barbeiros, serviços). Esta ação não pode ser desfeita.", deleteShopBtn:"Apagar barbearia", deleteShopConfirmPre:"Esta ação é permanente. Para confirmar, escreve o nome exato da barbearia (", deleteShopConfirmPost:") e a tua password.", shopNameLabel:"Nome da barbearia", passwordLabel:"Password", deleting:"A apagar...", deletePermanently:"Apagar definitivamente",
+      servicesCountSuffix:"serviços", editServiceTitle:"Editar Serviço", newServiceTitle:"Novo Serviço", durationLabel:"Duração (min)", servicePriceLabel:"Preço (€)",
+      trialExpiredShort:"Trial expirado", subscribeToContinue:"— subscreve para continuar", trialDaysRemaining:"{n} dia(s) de trial restante(s)", tapSeePlans:"Toca para ver planos a partir de €{price}/mês", seeArrow:"VER →",
+      subscriptionLabel:"Subscrição", freeTrialOfDays:"Trial gratuito de {days} dias", dayWord:"Dia", availablePlans:"Planos disponíveis", soloDesc:"1 barbeiro independente", perMonth:"/mês", soloFeatures:["Agenda completa","Clientes e histórico","Contabilidade","Relatórios e impressão","Notificações"], teamDesc:"Barbearia com colaboradores", perBarberMonth:"/barbeiro/mês", teamFeatures:["Tudo do plano Solo","Múltiplos barbeiros","Painel de administrador","Gestão de colaboradores","Métricas por barbeiro"], popularBadge:"POPULAR", teamCalcLabel:"Calculadora de equipa", activeBarbersCount:"{n} barbeiro(s) ativos", teamCalcFormula:"{n} × €{price} = €{total}/mês", savingsVsSolo:"poupas €{amount} vs Solo individual", planWord:"Plano", monthlyRenewal:"Renovação mensal automática", securePayment:"Pagamento seguro · Cancela a qualquer momento", demoNote:"Demo: clica para simular subscrição", faqTitle:"Perguntas frequentes", faqItems:[["Posso cancelar?","Sim, a qualquer momento. Sem penalizações."],["Como adiciono colaboradores?","No painel Admin crias o perfil de cada barbeiro. No plano Equipa cada um paga €7,99/mês."],["O que acontece após o trial?","A app bloqueia o acesso à agenda até subscreveres. Os dados ficam guardados."],["Existem custos ocultos?","Não. O preço é fixo por barbeiro por mês."]],
+      expiredFull:"Os teus 15 dias gratuitos terminaram.\nOs teus dados estão guardados.\nSubscreve para continuar a usar a app.", noCommitmentFooter:"Sem compromisso · Cancela quando quiseres",
+      photoTooLarge:"A imagem é demasiado grande (máx. 5MB).", uploadFailed:"Não foi possível enviar a imagem.", changeProfilePhoto:"Trocar foto de perfil",
+      cutHistoryTitle:"Histórico de cortes", addCutBtn:"+ Adicionar corte", tapCamera:"📷 Ligar câmara", tapGallery:"🖼️ Carregar ficheiro",
+      cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
+      deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.",
+      portalTitle:"Portal do Dono", portalSubtitle:"Entra ou cria a tua barbearia", haveAccountTab:"Já tenho conta", createShopTab:"Criar barbearia",
+      emailLabel:"Email", placeholderEmail:"o-teu-email@exemplo.com", placeholderPass:"••••••••", loginBtn:"Entrar", loggingIn:"A entrar...",
+      yourNameLabel:"O teu nome", placeholderFullName:"Nome completo", placeholderShopName:"Ex: Barbearia do Zé", phoneOptionalLabel:"Telefone (opcional)",
+      placeholderPhone:"+351 9xx xxx xxx", placeholderCreatePass:"Cria uma password", createShopBtn:"Criar a minha barbearia", creatingBtn:"A criar...",
+      fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
+      wrongCredentials:"Email ou password incorretos.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
+      loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para o Portal do Dono",
+      joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
+      phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
+      writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
     }
   },
   en:{ flag:"🇬🇧", name:"English",
@@ -163,6 +182,25 @@ const LANGS = {
       paymentMethod:"Payment Method", confirmAmountBtn:"✓ Confirm",
       reportLabel:"Report", issuedOn:"Issued on", billed:"Billed", paidServices:"Paid Services",
       unconfirmedPayment:"Unconfirmed Payment", printBtn:"Print",
+      adminOverview:"Overview", adminBarbersTab:"Barbers", totalBilled:"Total Billed", barbersLabel:"Barbers", todayAllLabel:"Today (all)", totalBookingsLabel:"Total Bookings", teamToday:"Team today", bookingsTodayCount:"bookings today", barbersCountSuffix:"barbers", addNew:"+ New", activeLabel:"Active", offLabel:"Off", editBarberTitle:"Edit Barber", newBarberTitle:"New Barber", pinLabel:"PIN", colorLabel:"Color", adminPinLabel:"Admin PIN", shopPhoto:"Barbershop photo", uploading:"Uploading...", changePhoto:"Change photo", choosePhoto:"Choose photo", dangerZone:"Danger zone", deleteShopWarning:"Deleting the barbershop permanently removes all data (bookings, barbers, services). This action cannot be undone.", deleteShopBtn:"Delete barbershop", deleteShopConfirmPre:"This action is permanent. To confirm, type the exact barbershop name (", deleteShopConfirmPost:") and your password.", shopNameLabel:"Barbershop name", passwordLabel:"Password", deleting:"Deleting...", deletePermanently:"Delete permanently",
+      servicesCountSuffix:"services", editServiceTitle:"Edit Service", newServiceTitle:"New Service", durationLabel:"Duration (min)", servicePriceLabel:"Price (€)",
+      trialExpiredShort:"Trial expired", subscribeToContinue:"— subscribe to continue", trialDaysRemaining:"{n} day(s) left in trial", tapSeePlans:"Tap to see plans from €{price}/month", seeArrow:"SEE →",
+      subscriptionLabel:"Subscription", freeTrialOfDays:"Free {days}-day trial", dayWord:"Day", availablePlans:"Available plans", soloDesc:"1 independent barber", perMonth:"/month", soloFeatures:["Full agenda","Clients and history","Accounting","Reports and printing","Notifications"], teamDesc:"Barbershop with collaborators", perBarberMonth:"/barber/month", teamFeatures:["Everything in Solo","Multiple barbers","Admin panel","Collaborator management","Per-barber metrics"], popularBadge:"POPULAR", teamCalcLabel:"Team calculator", activeBarbersCount:"{n} active barber(s)", teamCalcFormula:"{n} × €{price} = €{total}/month", savingsVsSolo:"you save €{amount} vs individual Solo", planWord:"Plan", monthlyRenewal:"Automatic monthly renewal", securePayment:"Secure payment · Cancel anytime", demoNote:"Demo: click to simulate subscription", faqTitle:"Frequently asked questions", faqItems:[["Can I cancel?","Yes, at any time. No penalties."],["How do I add collaborators?","In the Admin panel you create each barber's profile. On the Team plan each one costs €7.99/month."],["What happens after the trial?","The app blocks access to the agenda until you subscribe. Your data stays saved."],["Are there hidden costs?","No. The price is fixed per barber per month."]],
+      expiredFull:"Your 15 free days have ended.\nYour data is saved.\nSubscribe to keep using the app.", noCommitmentFooter:"No commitment · Cancel anytime",
+      photoTooLarge:"The image is too large (max 5MB).", uploadFailed:"Could not upload the image.", changeProfilePhoto:"Change profile photo",
+      cutHistoryTitle:"Cut history", addCutBtn:"+ Add cut", tapCamera:"📷 Open camera", tapGallery:"🖼️ Upload file",
+      cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
+      deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.",
+      portalTitle:"Owner Portal", portalSubtitle:"Log in or create your barbershop", haveAccountTab:"I have an account", createShopTab:"Create barbershop",
+      emailLabel:"Email", placeholderEmail:"your-email@example.com", placeholderPass:"••••••••", loginBtn:"Log in", loggingIn:"Logging in...",
+      yourNameLabel:"Your name", placeholderFullName:"Full name", placeholderShopName:"E.g.: Joe's Barbershop", phoneOptionalLabel:"Phone (optional)",
+      placeholderPhone:"+1 xxx xxx xxxx", placeholderCreatePass:"Create a password", createShopBtn:"Create my barbershop", creatingBtn:"Creating...",
+      fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
+      wrongCredentials:"Wrong email or password.", createShopFailed:"Could not create the barbershop. Try again.",
+      loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal",
+      joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
+      phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
+      writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
     }
   },
   es:{ flag:"🇪🇸", name:"Español",
@@ -231,6 +269,25 @@ const LANGS = {
       paymentMethod:"Método de Pago", confirmAmountBtn:"✓ Confirmar",
       reportLabel:"Informe", issuedOn:"Emitido el", billed:"Facturado", paidServices:"Servicios Pagados",
       unconfirmedPayment:"Pago No Confirmado", printBtn:"Imprimir",
+      adminOverview:"General", adminBarbersTab:"Barberos", totalBilled:"Total Facturado", barbersLabel:"Barberos", todayAllLabel:"Hoy (todos)", totalBookingsLabel:"Total de Citas", teamToday:"Equipo hoy", bookingsTodayCount:"citas hoy", barbersCountSuffix:"barberos", addNew:"+ Nuevo", activeLabel:"Activo", offLabel:"Off", editBarberTitle:"Editar Barbero", newBarberTitle:"Nuevo Barbero", pinLabel:"PIN", colorLabel:"Color", adminPinLabel:"PIN Admin", shopPhoto:"Foto de la barbería", uploading:"Subiendo...", changePhoto:"Cambiar foto", choosePhoto:"Elegir foto", dangerZone:"Zona de peligro", deleteShopWarning:"Eliminar la barbería borra definitivamente todos los datos (citas, barberos, servicios). Esta acción no se puede deshacer.", deleteShopBtn:"Eliminar barbería", deleteShopConfirmPre:"Esta acción es permanente. Para confirmar, escribe el nombre exacto de la barbería (", deleteShopConfirmPost:") y tu contraseña.", shopNameLabel:"Nombre de la barbería", passwordLabel:"Contraseña", deleting:"Eliminando...", deletePermanently:"Eliminar definitivamente",
+      servicesCountSuffix:"servicios", editServiceTitle:"Editar Servicio", newServiceTitle:"Nuevo Servicio", durationLabel:"Duración (min)", servicePriceLabel:"Precio (€)",
+      trialExpiredShort:"Prueba caducada", subscribeToContinue:"— suscríbete para continuar", trialDaysRemaining:"{n} día(s) de prueba restante(s)", tapSeePlans:"Toca para ver planes desde €{price}/mes", seeArrow:"VER →",
+      subscriptionLabel:"Suscripción", freeTrialOfDays:"Prueba gratuita de {days} días", dayWord:"Día", availablePlans:"Planes disponibles", soloDesc:"1 barbero independiente", perMonth:"/mes", soloFeatures:["Agenda completa","Clientes e historial","Contabilidad","Informes e impresión","Notificaciones"], teamDesc:"Barbería con colaboradores", perBarberMonth:"/barbero/mes", teamFeatures:["Todo del plan Solo","Múltiples barberos","Panel de administrador","Gestión de colaboradores","Métricas por barbero"], popularBadge:"POPULAR", teamCalcLabel:"Calculadora de equipo", activeBarbersCount:"{n} barbero(s) activo(s)", teamCalcFormula:"{n} × €{price} = €{total}/mes", savingsVsSolo:"ahorras €{amount} vs Solo individual", planWord:"Plan", monthlyRenewal:"Renovación mensual automática", securePayment:"Pago seguro · Cancela cuando quieras", demoNote:"Demo: haz clic para simular la suscripción", faqTitle:"Preguntas frecuentes", faqItems:[["¿Puedo cancelar?","Sí, en cualquier momento. Sin penalizaciones."],["¿Cómo añado colaboradores?","En el panel Admin creas el perfil de cada barbero. En el plan Equipo cada uno paga €7,99/mes."],["¿Qué pasa después de la prueba?","La app bloquea el acceso a la agenda hasta que te suscribas. Tus datos quedan guardados."],["¿Hay costes ocultos?","No. El precio es fijo por barbero al mes."]],
+      expiredFull:"Tus 15 días gratis han terminado.\nTus datos están guardados.\nSuscríbete para seguir usando la app.", noCommitmentFooter:"Sin compromiso · Cancela cuando quieras",
+      photoTooLarge:"La imagen es demasiado grande (máx. 5MB).", uploadFailed:"No se pudo subir la imagen.", changeProfilePhoto:"Cambiar foto de perfil",
+      cutHistoryTitle:"Historial de cortes", addCutBtn:"+ Añadir corte", tapCamera:"📷 Abrir cámara", tapGallery:"🖼️ Subir archivo",
+      cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
+      deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.",
+      portalTitle:"Portal del Dueño", portalSubtitle:"Entra o crea tu barbería", haveAccountTab:"Ya tengo cuenta", createShopTab:"Crear barbería",
+      emailLabel:"Email", placeholderEmail:"tu-email@ejemplo.com", placeholderPass:"••••••••", loginBtn:"Entrar", loggingIn:"Entrando...",
+      yourNameLabel:"Tu nombre", placeholderFullName:"Nombre completo", placeholderShopName:"Ej: Barbería de José", phoneOptionalLabel:"Teléfono (opcional)",
+      placeholderPhone:"+34 6xx xxx xxx", placeholderCreatePass:"Crea una contraseña", createShopBtn:"Crear mi barbería", creatingBtn:"Creando...",
+      fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
+      wrongCredentials:"Email o contraseña incorrectos.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
+      loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño",
+      joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
+      phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
+      writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
     }
   },
   fr:{ flag:"🇫🇷", name:"Français",
@@ -299,6 +356,25 @@ const LANGS = {
       paymentMethod:"Mode de Paiement", confirmAmountBtn:"✓ Confirmer",
       reportLabel:"Rapport", issuedOn:"Émis le", billed:"Facturé", paidServices:"Services Payés",
       unconfirmedPayment:"Paiement Non Confirmé", printBtn:"Imprimer",
+      adminOverview:"Général", adminBarbersTab:"Barbiers", totalBilled:"Total Facturé", barbersLabel:"Barbiers", todayAllLabel:"Aujourd'hui (tous)", totalBookingsLabel:"Total des Réservations", teamToday:"Équipe aujourd'hui", bookingsTodayCount:"réservations aujourd'hui", barbersCountSuffix:"barbiers", addNew:"+ Nouveau", activeLabel:"Actif", offLabel:"Off", editBarberTitle:"Modifier le Barbier", newBarberTitle:"Nouveau Barbier", pinLabel:"PIN", colorLabel:"Couleur", adminPinLabel:"PIN Admin", shopPhoto:"Photo du salon", uploading:"Envoi...", changePhoto:"Changer la photo", choosePhoto:"Choisir une photo", dangerZone:"Zone de danger", deleteShopWarning:"Supprimer le salon efface définitivement toutes les données (réservations, barbiers, services). Cette action est irréversible.", deleteShopBtn:"Supprimer le salon", deleteShopConfirmPre:"Cette action est permanente. Pour confirmer, tape le nom exact du salon (", deleteShopConfirmPost:") et ton mot de passe.", shopNameLabel:"Nom du salon", passwordLabel:"Mot de passe", deleting:"Suppression...", deletePermanently:"Supprimer définitivement",
+      servicesCountSuffix:"services", editServiceTitle:"Modifier le Service", newServiceTitle:"Nouveau Service", durationLabel:"Durée (min)", servicePriceLabel:"Prix (€)",
+      trialExpiredShort:"Essai expiré", subscribeToContinue:"— abonne-toi pour continuer", trialDaysRemaining:"{n} jour(s) d'essai restant(s)", tapSeePlans:"Touche pour voir les plans dès €{price}/mois", seeArrow:"VOIR →",
+      subscriptionLabel:"Abonnement", freeTrialOfDays:"Essai gratuit de {days} jours", dayWord:"Jour", availablePlans:"Plans disponibles", soloDesc:"1 barbier indépendant", perMonth:"/mois", soloFeatures:["Agenda complet","Clients et historique","Comptabilité","Rapports et impression","Notifications"], teamDesc:"Salon avec collaborateurs", perBarberMonth:"/barbier/mois", teamFeatures:["Tout du plan Solo","Plusieurs barbiers","Panneau d'administration","Gestion des collaborateurs","Statistiques par barbier"], popularBadge:"POPULAIRE", teamCalcLabel:"Calculateur d'équipe", activeBarbersCount:"{n} barbier(s) actif(s)", teamCalcFormula:"{n} × €{price} = €{total}/mois", savingsVsSolo:"tu économises €{amount} vs Solo individuel", planWord:"Plan", monthlyRenewal:"Renouvellement mensuel automatique", securePayment:"Paiement sécurisé · Annule à tout moment", demoNote:"Démo : clique pour simuler l'abonnement", faqTitle:"Questions fréquentes", faqItems:[["Puis-je annuler ?","Oui, à tout moment. Sans pénalités."],["Comment ajouter des collaborateurs ?","Dans le panneau Admin tu crées le profil de chaque barbier. Sur le plan Équipe chacun paie €7,99/mois."],["Que se passe-t-il après l'essai ?","L'app bloque l'accès à l'agenda jusqu'à ton abonnement. Tes données restent sauvegardées."],["Y a-t-il des coûts cachés ?","Non. Le prix est fixe par barbier et par mois."]],
+      expiredFull:"Tes 15 jours gratuits sont terminés.\nTes données sont sauvegardées.\nAbonne-toi pour continuer à utiliser l'app.", noCommitmentFooter:"Sans engagement · Annule quand tu veux",
+      photoTooLarge:"L'image est trop grande (max 5 Mo).", uploadFailed:"Impossible d'envoyer l'image.", changeProfilePhoto:"Changer la photo de profil",
+      cutHistoryTitle:"Historique des coupes", addCutBtn:"+ Ajouter une coupe", tapCamera:"📷 Ouvrir la caméra", tapGallery:"🖼️ Importer un fichier",
+      cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
+      deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.",
+      portalTitle:"Portail Propriétaire", portalSubtitle:"Connecte-toi ou crée ton salon", haveAccountTab:"J'ai déjà un compte", createShopTab:"Créer un salon",
+      emailLabel:"Email", placeholderEmail:"ton-email@exemple.com", placeholderPass:"••••••••", loginBtn:"Se connecter", loggingIn:"Connexion...",
+      yourNameLabel:"Ton nom", placeholderFullName:"Nom complet", placeholderShopName:"Ex : Salon de Jean", phoneOptionalLabel:"Téléphone (optionnel)",
+      placeholderPhone:"+33 6 xx xx xx xx", placeholderCreatePass:"Crée un mot de passe", createShopBtn:"Créer mon salon", creatingBtn:"Création...",
+      fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
+      wrongCredentials:"Email ou mot de passe incorrect.", createShopFailed:"Impossible de créer le salon. Réessaie.",
+      loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire",
+      joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
+      phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
+      writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
     }
   },
   de:{ flag:"🇩🇪", name:"Deutsch",
@@ -367,6 +443,25 @@ const LANGS = {
       paymentMethod:"Zahlungsmethode", confirmAmountBtn:"✓ Bestätigen",
       reportLabel:"Bericht", issuedOn:"Ausgestellt am", billed:"Abgerechnet", paidServices:"Bezahlte Leistungen",
       unconfirmedPayment:"Unbestätigte Zahlung", printBtn:"Drucken",
+      adminOverview:"Übersicht", adminBarbersTab:"Barbiere", totalBilled:"Gesamtumsatz", barbersLabel:"Barbiere", todayAllLabel:"Heute (alle)", totalBookingsLabel:"Gesamte Buchungen", teamToday:"Team heute", bookingsTodayCount:"Buchungen heute", barbersCountSuffix:"Barbiere", addNew:"+ Neu", activeLabel:"Aktiv", offLabel:"Aus", editBarberTitle:"Barbier Bearbeiten", newBarberTitle:"Neuer Barbier", pinLabel:"PIN", colorLabel:"Farbe", adminPinLabel:"Admin-PIN", shopPhoto:"Foto des Salons", uploading:"Wird hochgeladen...", changePhoto:"Foto ändern", choosePhoto:"Foto wählen", dangerZone:"Gefahrenzone", deleteShopWarning:"Das Löschen des Salons entfernt alle Daten dauerhaft (Buchungen, Barbiere, Dienstleistungen). Diese Aktion kann nicht rückgängig gemacht werden.", deleteShopBtn:"Salon löschen", deleteShopConfirmPre:"Diese Aktion ist endgültig. Gib zur Bestätigung den genauen Namen des Salons ein (", deleteShopConfirmPost:") und dein Passwort.", shopNameLabel:"Name des Salons", passwordLabel:"Passwort", deleting:"Wird gelöscht...", deletePermanently:"Endgültig löschen",
+      servicesCountSuffix:"Dienstleistungen", editServiceTitle:"Dienstleistung Bearbeiten", newServiceTitle:"Neue Dienstleistung", durationLabel:"Dauer (Min)", servicePriceLabel:"Preis (€)",
+      trialExpiredShort:"Testphase abgelaufen", subscribeToContinue:"— abonniere, um fortzufahren", trialDaysRemaining:"{n} Tag(e) der Testphase verbleibend", tapSeePlans:"Tippen, um Pläne ab €{price}/Monat zu sehen", seeArrow:"ANSEHEN →",
+      subscriptionLabel:"Abonnement", freeTrialOfDays:"{days} Tage kostenlose Testphase", dayWord:"Tag", availablePlans:"Verfügbare Pläne", soloDesc:"1 unabhängiger Barbier", perMonth:"/Monat", soloFeatures:["Vollständiger Kalender","Kunden und Verlauf","Buchhaltung","Berichte und Druck","Benachrichtigungen"], teamDesc:"Salon mit Mitarbeitern", perBarberMonth:"/Barbier/Monat", teamFeatures:["Alles aus Solo","Mehrere Barbiere","Admin-Panel","Mitarbeiterverwaltung","Statistiken pro Barbier"], popularBadge:"BELIEBT", teamCalcLabel:"Team-Rechner", activeBarbersCount:"{n} aktive(r) Barbier(e)", teamCalcFormula:"{n} × €{price} = €{total}/Monat", savingsVsSolo:"du sparst €{amount} vs. Solo einzeln", planWord:"Plan", monthlyRenewal:"Automatische monatliche Verlängerung", securePayment:"Sichere Zahlung · Jederzeit kündbar", demoNote:"Demo: klicken, um das Abonnement zu simulieren", faqTitle:"Häufige Fragen", faqItems:[["Kann ich kündigen?","Ja, jederzeit. Ohne Strafgebühren."],["Wie füge ich Mitarbeiter hinzu?","Im Admin-Panel erstellst du das Profil jedes Barbiers. Im Team-Plan zahlt jeder €7,99/Monat."],["Was passiert nach der Testphase?","Die App blockiert den Zugriff auf den Kalender, bis du abonnierst. Deine Daten bleiben gespeichert."],["Gibt es versteckte Kosten?","Nein. Der Preis ist pro Barbier und Monat fest."]],
+      expiredFull:"Deine 15 kostenlosen Tage sind abgelaufen.\nDeine Daten sind gespeichert.\nAbonniere, um die App weiter zu nutzen.", noCommitmentFooter:"Unverbindlich · Jederzeit kündbar",
+      photoTooLarge:"Das Bild ist zu groß (max. 5MB).", uploadFailed:"Das Bild konnte nicht hochgeladen werden.", changeProfilePhoto:"Profilfoto ändern",
+      cutHistoryTitle:"Schnitt-Verlauf", addCutBtn:"+ Schnitt hinzufügen", tapCamera:"📷 Kamera öffnen", tapGallery:"🖼️ Datei hochladen",
+      cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
+      deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.",
+      portalTitle:"Inhaber-Portal", portalSubtitle:"Melde dich an oder erstelle deinen Salon", haveAccountTab:"Ich habe schon ein Konto", createShopTab:"Salon erstellen",
+      emailLabel:"E-Mail", placeholderEmail:"deine-email@beispiel.com", placeholderPass:"••••••••", loginBtn:"Anmelden", loggingIn:"Anmeldung...",
+      yourNameLabel:"Dein Name", placeholderFullName:"Vollständiger Name", placeholderShopName:"Z. B.: Salon Müller", phoneOptionalLabel:"Telefon (optional)",
+      placeholderPhone:"+49 1xx xxxxxxx", placeholderCreatePass:"Erstelle ein Passwort", createShopBtn:"Meinen Salon erstellen", creatingBtn:"Wird erstellt...",
+      fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
+      wrongCredentials:"Falsche E-Mail oder Passwort.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
+      loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal",
+      joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
+      phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
+      writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
     }
   },
 };
@@ -662,18 +757,18 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
   const myCuts=c=>(cutRecords[cutKey(c)]||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
   const uploadCutPhoto=async(file)=>{
     if(!file||!shopId)return;
-    if(file.size>5*1024*1024){setCutErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    if(file.size>5*1024*1024){setCutErr(L.photoTooLarge);return;}
     setCutBusy(true);setCutErr("");
     const ext=file.name.split(".").pop();
     const path=`${shopId}/cortes/${barber.id}-${Date.now()}.${ext}`;
     const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
-    if(error){setCutBusy(false);setCutErr("Não foi possível enviar a imagem.");return;}
+    if(error){setCutBusy(false);setCutErr(L.uploadFailed);return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setCutPhoto(data.publicUrl);
     setCutBusy(false);
   };
   const saveCutRecord=()=>{
-    if(!cutPhoto){setCutErr("Adiciona uma foto do corte.");return;}
+    if(!cutPhoto){setCutErr(L.addCutPhotoErr);return;}
     const key=cutKey(openClient);
     const rec={id:Date.now().toString(36),date:TODAY,photoUrl:cutPhoto,notes:cutNotes.trim()};
     setCutRecords(p=>({...p,[key]:[...(p[key]||[]),rec]}));
@@ -775,8 +870,8 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
             {/* Histórico de cortes (fotos) — só visível para este barbeiro */}
             <div style={{marginBottom:18}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-                <Lbl style={{margin:0}}>Histórico de cortes</Lbl>
-                {!addingCut&&<button onClick={()=>{setAddingCut(true);setCutPhoto(null);setCutNotes("");setCutErr("");}} style={{background:"none",border:"none",color:T.gold,cursor:"pointer",fontSize:"0.7rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em"}}>+ Adicionar corte</button>}
+                <Lbl style={{margin:0}}>{L.cutHistoryTitle}</Lbl>
+                {!addingCut&&<button onClick={()=>{setAddingCut(true);setCutPhoto(null);setCutNotes("");setCutErr("");}} style={{background:"none",border:"none",color:T.gold,cursor:"pointer",fontSize:"0.7rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em"}}>{L.addCutBtn}</button>}
               </div>
               {addingCut&&(
                 <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:12,marginBottom:10}}>
@@ -787,27 +882,27 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
                       <label style={{flex:1}}>
                         <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
                         <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
-                          {cutBusy?"A enviar...":"📷 Ligar câmara"}
+                          {cutBusy?L.uploading:L.tapCamera}
                         </div>
                       </label>
                       <label style={{flex:1}}>
                         <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadCutPhoto(e.target.files?.[0])}/>
                         <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
-                          {cutBusy?"A enviar...":"🖼️ Carregar ficheiro"}
+                          {cutBusy?L.uploading:L.tapGallery}
                         </div>
                       </label>
                     </div>
                   )}
-                  <Txta rows={2} placeholder="Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)" value={cutNotes} onChange={e=>setCutNotes(e.target.value)} style={{marginBottom:8}}/>
+                  <Txta rows={2} placeholder={L.cutNotesPlaceholder} value={cutNotes} onChange={e=>setCutNotes(e.target.value)} style={{marginBottom:8}}/>
                   {cutErr&&<div style={{color:T.red,fontSize:"0.7rem",marginBottom:8}}>{cutErr}</div>}
                   <div style={{display:"flex",gap:8}}>
-                    <Btn variant="gold" style={{flex:1,padding:"8px"}} onClick={saveCutRecord}>Guardar corte</Btn>
+                    <Btn variant="gold" style={{flex:1,padding:"8px"}} onClick={saveCutRecord}>{L.saveCutBtn}</Btn>
                     <Btn variant="ghost" style={{padding:"8px"}} onClick={()=>setAddingCut(false)}>{L.cancel}</Btn>
                   </div>
                 </div>
               )}
               {myCuts(c).length===0&&!addingCut?(
-                <div style={{color:T.silver,fontSize:"0.78rem",padding:"6px 0"}}>Ainda não há cortes registados por ti para este cliente.</div>
+                <div style={{color:T.silver,fontSize:"0.78rem",padding:"6px 0"}}>{L.noCutsYet}</div>
               ):(
                 <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
                   {myCuts(c).map(r=>(
@@ -861,12 +956,12 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
 
       {/* Ver foto de corte ampliada */}
       {viewPhoto&&(
-        <Modal onClose={()=>setViewPhoto(null)} title="Corte">
+        <Modal onClose={()=>setViewPhoto(null)} title={L.cutRecordTitle}>
           <img src={viewPhoto.photoUrl} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>
           <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPhoto.date)}</div>
           {viewPhoto.notes&&<div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:5,padding:"10px 12px",fontSize:"0.82rem",color:T.mid,fontStyle:"italic",marginBottom:12}}>{viewPhoto.notes}</div>}
           <div style={{display:"flex",gap:8}}>
-            <Btn variant="danger" style={{flex:1}} onClick={()=>{deleteCutRecord(viewPhoto.id);setViewPhoto(null);}}>Apagar corte</Btn>
+            <Btn variant="danger" style={{flex:1}} onClick={()=>{deleteCutRecord(viewPhoto.id);setViewPhoto(null);}}>{L.deleteCutBtn}</Btn>
             <Btn variant="ghost" onClick={()=>setViewPhoto(null)}>{L.close}</Btn>
           </div>
         </Modal>
@@ -1461,12 +1556,12 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
   const save=()=>{if(f.pinNew){f.pin=f.pinNew;delete f.pinNew;}setBarbers(p=>p.map(b=>b.id===barber.id?f:b));setEdit(false);};
   const uploadPhoto=async(file)=>{
     if(!file||!shopId)return;
-    if(file.size>5*1024*1024){setPhotoErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    if(file.size>5*1024*1024){setPhotoErr(L.photoTooLarge);return;}
     setPhotoBusy(true);setPhotoErr("");
     const ext=file.name.split(".").pop();
     const path=`${shopId}/barbeiro-${barber.id}-${Date.now()}.${ext}`;
     const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
-    if(error){setPhotoBusy(false);setPhotoErr("Não foi possível enviar a imagem.");return;}
+    if(error){setPhotoBusy(false);setPhotoErr(L.uploadFailed);return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setBarbers(p=>p.map(b=>b.id===barber.id?{...b,photoUrl:data.publicUrl}:b));
     setF(p=>({...p,photoUrl:data.publicUrl}));
@@ -1482,7 +1577,7 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
           <label style={{display:"inline-block",marginTop:10}}>
             <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadPhoto(e.target.files?.[0])}/>
             <div style={{padding:"6px 14px",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
-              {photoBusy?"A enviar...":"Trocar foto de perfil"}
+              {photoBusy?L.uploading:L.changeProfilePhoto}
             </div>
           </label>
         )}
@@ -1515,7 +1610,8 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout}){
+function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout,lang}){
+  const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
   const [bf,setBf]=useState({});
@@ -1524,17 +1620,17 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const todayAll=bookings.filter(b=>b.date===TODAY&&!b.blocked);
   const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00"},active:true});setModal("barber");};
   const saveBarber=()=>{if(!bf.name.trim()||!bf.pin.trim())return;if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?bf:b));else setBarbers(p=>[...p,{...bf,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);setModal(null);};
-  const TABS=[{id:"overview",l:"Geral"},{id:"barbers",l:"Barbeiros"},{id:"services",l:"Serviços"},{id:"shop",l:"Barbearia"}];
+  const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop}];
   const [photoBusy,setPhotoBusy]=useState(false);
   const [photoErr,setPhotoErr]=useState("");
   const uploadPhoto=async(file)=>{
     if(!file||!shopId)return;
-    if(file.size>5*1024*1024){setPhotoErr("A imagem é demasiado grande (máx. 5MB).");return;}
+    if(file.size>5*1024*1024){setPhotoErr(L.photoTooLarge);return;}
     setPhotoBusy(true);setPhotoErr("");
     const ext=file.name.split(".").pop();
     const path=`${shopId}/foto-${Date.now()}.${ext}`;
     const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
-    if(error){setPhotoBusy(false);setPhotoErr("Não foi possível enviar a imagem.");return;}
+    if(error){setPhotoBusy(false);setPhotoErr(L.uploadFailed);return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setShop(p=>({...p,photoUrl:data.publicUrl}));
     setPhotoBusy(false);
@@ -1562,95 +1658,95 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
       <header style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.88rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84 <span style={{color:T.silver,fontSize:"0.68rem"}}>Admin</span></div></div>
-          <Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.56rem"}} onClick={onLogout}>Sair</Btn>
+          <Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.56rem"}} onClick={onLogout}>{L.logout}</Btn>
         </div>
         <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none"}}>{TABS.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:"8px 14px",background:"none",border:"none",borderBottom:`2px solid ${tab===t.id?T.gold:"transparent"}`,cursor:"pointer",color:tab===t.id?T.gold:T.silver,fontSize:"0.6rem",letterSpacing:"0.16em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:tab===t.id?700:400,whiteSpace:"nowrap"}}>{t.l}</button>)}</div>
       </header>
       <main style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
         {tab==="overview"&&(<>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
-            {[{l:"Total Faturado",v:`€${totalRev}`,c:T.gold},{l:"Barbeiros",v:barbers.filter(b=>b.active).length,c:T.white},{l:"Hoje (todos)",v:todayAll.length,c:T.mid},{l:"Total Marcações",v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
+            {[{l:L.totalBilled,v:`€${totalRev}`,c:T.gold},{l:L.barbersLabel,v:barbers.filter(b=>b.active).length,c:T.white},{l:L.todayAllLabel,v:todayAll.length,c:T.mid},{l:L.totalBookingsLabel,v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
               <div key={s.l} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"12px 13px"}}><Lbl style={{marginBottom:4}}>{s.l}</Lbl><div style={{fontSize:"1.45rem",color:s.c,fontWeight:600}}>{s.v}</div></div>
             ))}
           </div>
-          <Lbl style={{marginBottom:10}}>Equipa hoje</Lbl>
+          <Lbl style={{marginBottom:10}}>{L.teamToday}</Lbl>
           {barbers.filter(b=>b.active).map(b=>{const bBk=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked);const rev=bBk.filter(bk=>bk.paid).reduce((s,bk)=>s+(svc(bk.serviceId)?.price||0),0);return(
             <div key={b.id} style={{display:"flex",alignItems:"center",gap:12,padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
-              <Avatar barber={b} size={36}/><div style={{flex:1}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{bBk.length} marcações hoje</div></div>
+              <Avatar barber={b} size={36}/><div style={{flex:1}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{bBk.length} {L.bookingsTodayCount}</div></div>
               <div style={{textAlign:"right"}}><div style={{fontSize:"0.92rem",color:T.gold,fontWeight:600}}>€{rev}</div></div>
             </div>
           );})}
         </>)}
         {tab==="barbers"&&(<>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}><Lbl style={{margin:0}}>{barbers.length} barbeiros</Lbl><Btn variant="gold" style={{padding:"6px 13px"}} onClick={openAddBarber}>+ Novo</Btn></div>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}><Lbl style={{margin:0}}>{barbers.length} {L.barbersCountSuffix}</Lbl><Btn variant="gold" style={{padding:"6px 13px"}} onClick={openAddBarber}>{L.addNew}</Btn></div>
           {barbers.map(b=>(
             <div key={b.id} style={{display:"flex",alignItems:"center",gap:11,padding:"12px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:b.active?1:0.45}}>
               <Avatar barber={b} size={36}/>
               <div style={{flex:1,minWidth:0}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role} · PIN: {b.pin}</div></div>
               <div style={{display:"flex",flexDirection:"column",gap:4,alignItems:"flex-end"}}>
-                <button onClick={()=>setBarbers(p=>p.map(bb=>bb.id===b.id?{...bb,active:!bb.active}:bb))} style={{background:b.active?T.greenLo:T.muted,border:`1px solid ${b.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:b.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{b.active?"Ativo":"Off"}</button>
+                <button onClick={()=>setBarbers(p=>p.map(bb=>bb.id===b.id?{...bb,active:!bb.active}:bb))} style={{background:b.active?T.greenLo:T.muted,border:`1px solid ${b.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:b.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{b.active?L.activeLabel:L.offLabel}</button>
                 <button onClick={()=>{setBf({...b});setModal("barber");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.82rem"}}>✏</button>
               </div>
             </div>
           ))}
-          {modal==="barber"&&<Modal onClose={()=>setModal(null)} title={bf.id?"Editar Barbeiro":"Novo Barbeiro"}>
-            {[["Nome","name","text"],["Função","role","text"],["Telemóvel","phone","tel"],["PIN","pin","text"]].map(([l,k,t])=>(
+          {modal==="barber"&&<Modal onClose={()=>setModal(null)} title={bf.id?L.editBarberTitle:L.newBarberTitle}>
+            {[[L.nameLabel,"name","text"],[L.role,"role","text"],[L.phone,"phone","tel"],[L.pinLabel,"pin","text"]].map(([l,k,t])=>(
               <div key={k} style={{marginBottom:10}}><Lbl>{l}</Lbl><Inp type={t} value={bf[k]||""} onChange={e=>setBf(p=>({...p,[k]:e.target.value}))}/></div>
             ))}
-            <div style={{marginBottom:10}}><Lbl>Bio</Lbl><Txta rows={2} value={bf.bio||""} onChange={e=>setBf(p=>({...p,bio:e.target.value}))}/></div>
-            <Lbl style={{marginBottom:7}}>Cor</Lbl>
+            <div style={{marginBottom:10}}><Lbl>{L.bio}</Lbl><Txta rows={2} value={bf.bio||""} onChange={e=>setBf(p=>({...p,bio:e.target.value}))}/></div>
+            <Lbl style={{marginBottom:7}}>{L.colorLabel}</Lbl>
             <div style={{display:"flex",gap:8,marginBottom:12}}>{["#b8955a","#6a9eb8","#9e6a4a","#7a9e6a","#9a6a9e","#9e4a4a"].map(c=><div key={c} onClick={()=>setBf(p=>({...p,color:c}))} style={{width:26,height:26,borderRadius:"50%",background:c,cursor:"pointer",border:`2px solid ${bf.color===c?"#fff":"transparent"}`}}/>)}</div>
-            <Lbl style={{marginBottom:7}}>Dias de trabalho</Lbl>
-            <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:11}}>{WDAYS_F.map((d,i)=>{const on=(bf.schedule?.workDays||[]).includes(i);return(<button key={i} onClick={()=>setBf(p=>({...p,schedule:{...p.schedule,workDays:on?p.schedule.workDays.filter(x=>x!==i):[...(p.schedule?.workDays||[]),i].sort()}}))} style={{padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:on?T.goldLo:"transparent",color:on?T.gold:T.silver,border:`1px solid ${on?T.gold:T.border}`}}>{d.slice(0,3)}</button>);})}</div>
+            <Lbl style={{marginBottom:7}}>{L.workDays}</Lbl>
+            <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:11}}>{LANGS[lang].wdaysF.map((d,i)=>{const on=(bf.schedule?.workDays||[]).includes(i);return(<button key={i} onClick={()=>setBf(p=>({...p,schedule:{...p.schedule,workDays:on?p.schedule.workDays.filter(x=>x!==i):[...(p.schedule?.workDays||[]),i].sort()}}))} style={{padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:on?T.goldLo:"transparent",color:on?T.gold:T.silver,border:`1px solid ${on?T.gold:T.border}`}}>{d.slice(0,3)}</button>);})}</div>
             <div style={{display:"flex",gap:8,marginBottom:14}}>
-              <div style={{flex:1}}><Lbl>Início</Lbl><Sel value={bf.schedule?.startHour||"09:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,startHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
-              <div style={{flex:1}}><Lbl>Fim</Lbl><Sel value={bf.schedule?.endHour||"18:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,endHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+              <div style={{flex:1}}><Lbl>{L.startHour}</Lbl><Sel value={bf.schedule?.startHour||"09:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,startHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+              <div style={{flex:1}}><Lbl>{L.endHour}</Lbl><Sel value={bf.schedule?.endHour||"18:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,endHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
             </div>
-            <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={saveBarber}>Guardar</Btn>{bf.id&&<Btn variant="danger" onClick={()=>{setBarbers(p=>p.filter(b=>b.id!==bf.id));setModal(null);}}>Eliminar</Btn>}<Btn variant="ghost" onClick={()=>setModal(null)}>Fechar</Btn></div>
+            <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={saveBarber}>{L.save}</Btn>{bf.id&&<Btn variant="danger" onClick={()=>{setBarbers(p=>p.filter(b=>b.id!==bf.id));setModal(null);}}>{L.delete}</Btn>}<Btn variant="ghost" onClick={()=>setModal(null)}>{L.close}</Btn></div>
           </Modal>}
         </>)}
         {tab==="services"&&(<>
-          <ServicesAdmin services={services} setServices={setServices}/>
+          <ServicesAdmin services={services} setServices={setServices} lang={lang}/>
         </>)}
         {tab==="shop"&&(<>
           <div style={{marginBottom:18}}>
-            <Lbl style={{marginBottom:8}}>Foto da barbearia</Lbl>
+            <Lbl style={{marginBottom:8}}>{L.shopPhoto}</Lbl>
             {shop.photoUrl&&(
               <img src={shop.photoUrl} style={{width:"100%",height:150,objectFit:"cover",borderRadius:6,marginBottom:10,border:`1px solid ${T.border}`}}/>
             )}
             <label style={{display:"block"}}>
               <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadPhoto(e.target.files?.[0])}/>
               <div style={{padding:"10px",textAlign:"center",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.78rem",cursor:"pointer"}}>
-                {photoBusy?"A enviar...":shop.photoUrl?"Trocar foto":"Escolher foto"}
+                {photoBusy?L.uploading:shop.photoUrl?L.changePhoto:L.choosePhoto}
               </div>
             </label>
             {photoErr&&<div style={{color:T.red,fontSize:"0.74rem",marginTop:6}}>{photoErr}</div>}
           </div>
-          {[["Nome","name","text"],["Morada","address","text"],["Telemóvel","phone","tel"],["PIN Admin","adminPin","text"]].map(([l,k,t])=>(
+          {[[L.nameLabel,"name","text"],[L.address,"address","text"],[L.phone,"phone","tel"],[L.adminPinLabel,"adminPin","text"]].map(([l,k,t])=>(
             <div key={k} style={{marginBottom:11}}><Lbl>{l}</Lbl><Inp type={t} value={shop[k]||""} onChange={e=>setShop(p=>({...p,[k]:e.target.value}))}/></div>
           ))}
-          <div style={{marginBottom:14}}><Lbl>Bio</Lbl><Txta rows={3} value={shop.bio||""} onChange={e=>setShop(p=>({...p,bio:e.target.value}))}/></div>
-          <Btn variant="gold" style={{width:"100%"}}>Guardar</Btn>
+          <div style={{marginBottom:14}}><Lbl>{L.bio}</Lbl><Txta rows={3} value={shop.bio||""} onChange={e=>setShop(p=>({...p,bio:e.target.value}))}/></div>
+          <Btn variant="gold" style={{width:"100%"}}>{L.save}</Btn>
 
           <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
-            <Lbl style={{marginBottom:8,color:T.red}}>Zona de perigo</Lbl>
+            <Lbl style={{marginBottom:8,color:T.red}}>{L.dangerZone}</Lbl>
             <div style={{fontSize:"0.72rem",color:T.silver,marginBottom:10,lineHeight:1.5}}>
-              Apagar a barbearia remove definitivamente todos os dados (marcações, barbeiros, serviços). Esta ação não pode ser desfeita.
+              {L.deleteShopWarning}
             </div>
-            <Btn variant="danger" style={{width:"100%"}} onClick={()=>{setDelOpen(true);setDelName("");setDelPass("");setDelErr("");}}>Apagar barbearia</Btn>
+            <Btn variant="danger" style={{width:"100%"}} onClick={()=>{setDelOpen(true);setDelName("");setDelPass("");setDelErr("");}}>{L.deleteShopBtn}</Btn>
           </div>
 
           {delOpen&&(
-            <Modal onClose={()=>setDelOpen(false)} title="Apagar barbearia">
+            <Modal onClose={()=>setDelOpen(false)} title={L.deleteShopBtn}>
               <div style={{fontSize:"0.76rem",color:T.silver,marginBottom:14,lineHeight:1.5}}>
-                Esta ação é permanente. Para confirmar, escreve o nome exato da barbearia (<b style={{color:T.white}}>{shop.name}</b>) e a tua password.
+                {L.deleteShopConfirmPre}<b style={{color:T.white}}>{shop.name}</b>{L.deleteShopConfirmPost}
               </div>
-              <div style={{marginBottom:10}}><Lbl>Nome da barbearia</Lbl><Inp value={delName} onChange={e=>setDelName(e.target.value)}/></div>
-              <div style={{marginBottom:10}}><Lbl>Password</Lbl><Inp type="password" value={delPass} onChange={e=>setDelPass(e.target.value)}/></div>
+              <div style={{marginBottom:10}}><Lbl>{L.shopNameLabel}</Lbl><Inp value={delName} onChange={e=>setDelName(e.target.value)}/></div>
+              <div style={{marginBottom:10}}><Lbl>{L.passwordLabel}</Lbl><Inp type="password" value={delPass} onChange={e=>setDelPass(e.target.value)}/></div>
               {delErr&&<div style={{color:T.red,fontSize:"0.72rem",marginBottom:10}}>{delErr}</div>}
               <div style={{display:"flex",gap:8}}>
-                <Btn variant="danger" style={{flex:1}} onClick={doDeleteShop} disabled={delBusy}>{delBusy?"A apagar...":"Apagar definitivamente"}</Btn>
-                <Btn variant="ghost" onClick={()=>setDelOpen(false)}>Cancelar</Btn>
+                <Btn variant="danger" style={{flex:1}} onClick={doDeleteShop} disabled={delBusy}>{delBusy?L.deleting:L.deletePermanently}</Btn>
+                <Btn variant="ghost" onClick={()=>setDelOpen(false)}>{L.cancel}</Btn>
               </div>
             </Modal>
           )}
@@ -1660,28 +1756,29 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   );
 }
 
-function ServicesAdmin({services,setServices}){
+function ServicesAdmin({services,setServices,lang}){
+  const L=LANGS[lang].t;
   const [modal,setModal]=useState(false);const [f,setF]=useState({});
   const openAdd=()=>{setF({id:null,name:"",duration:30,price:0,active:true});setModal(true);};
   const openEdit=s=>{setF({...s});setModal(true);};
   const save=()=>{if(!f.name.trim())return;if(f.id)setServices(p=>p.map(s=>s.id===f.id?f:s));else setServices(p=>[...p,{...f,id:mkId()}]);setModal(false);};
   return(<>
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}><Lbl style={{margin:0}}>{services.length} serviços</Lbl><Btn variant="gold" style={{padding:"6px 13px"}} onClick={openAdd}>+ Novo</Btn></div>
+    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}><Lbl style={{margin:0}}>{services.length} {L.servicesCountSuffix}</Lbl><Btn variant="gold" style={{padding:"6px 13px"}} onClick={openAdd}>{L.addNew}</Btn></div>
     {services.map(s=>(
       <div key={s.id} style={{display:"flex",alignItems:"center",gap:9,padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:s.active?1:0.45}}>
         <div style={{flex:1}}><div style={{fontSize:"0.95rem",color:T.white,fontWeight:500}}>{s.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{s.duration} min</div></div>
         <div style={{fontSize:"0.95rem",color:T.gold,fontWeight:600}}>€{s.price}</div>
-        <button onClick={()=>setServices(p=>p.map(sv=>sv.id===s.id?{...sv,active:!sv.active}:sv))} style={{background:s.active?T.greenLo:T.muted,border:`1px solid ${s.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:s.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{s.active?"Ativo":"Off"}</button>
+        <button onClick={()=>setServices(p=>p.map(sv=>sv.id===s.id?{...sv,active:!sv.active}:sv))} style={{background:s.active?T.greenLo:T.muted,border:`1px solid ${s.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:s.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{s.active?L.activeLabel:L.offLabel}</button>
         <button onClick={()=>openEdit(s)} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.82rem"}}>✏</button>
       </div>
     ))}
-    {modal&&<Modal onClose={()=>setModal(false)} title={f.id?"Editar Serviço":"Novo Serviço"}>
-      <div style={{marginBottom:11}}><Lbl>Nome</Lbl><Inp value={f.name} onChange={e=>setF(p=>({...p,name:e.target.value}))}/></div>
+    {modal&&<Modal onClose={()=>setModal(false)} title={f.id?L.editServiceTitle:L.newServiceTitle}>
+      <div style={{marginBottom:11}}><Lbl>{L.nameLabel}</Lbl><Inp value={f.name} onChange={e=>setF(p=>({...p,name:e.target.value}))}/></div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:14}}>
-        <div><Lbl>Duração (min)</Lbl><Inp type="number" value={f.duration} onChange={e=>setF(p=>({...p,duration:Number(e.target.value)}))}/></div>
-        <div><Lbl>Preço (€)</Lbl><Inp type="number" value={f.price} onChange={e=>setF(p=>({...p,price:Number(e.target.value)}))}/></div>
+        <div><Lbl>{L.durationLabel}</Lbl><Inp type="number" value={f.duration} onChange={e=>setF(p=>({...p,duration:Number(e.target.value)}))}/></div>
+        <div><Lbl>{L.servicePriceLabel}</Lbl><Inp type="number" value={f.price} onChange={e=>setF(p=>({...p,price:Number(e.target.value)}))}/></div>
       </div>
-      <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={save}>Guardar</Btn>{f.id&&<Btn variant="danger" onClick={()=>{setServices(p=>p.filter(s=>s.id!==f.id));setModal(false);}}>Eliminar</Btn>}<Btn variant="ghost" onClick={()=>setModal(false)}>Fechar</Btn></div>
+      <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={save}>{L.save}</Btn>{f.id&&<Btn variant="danger" onClick={()=>{setServices(p=>p.filter(s=>s.id!==f.id));setModal(false);}}>{L.delete}</Btn>}<Btn variant="ghost" onClick={()=>setModal(false)}>{L.close}</Btn></div>
     </Modal>}
   </>);
 }
@@ -1887,9 +1984,9 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
   const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   const join=()=>{
     setJErr("");
-    if(!jName.trim()){setJErr("Escreve o teu nome.");return;}
-    if(!/^\d{4,6}$/.test(jPin)){setJErr("O código deve ter entre 4 e 6 números.");return;}
-    if(jPin===shop.adminPin||barbers.find(b=>b.pin===jPin)){setJErr("Esse código já está a ser usado. Escolhe outro.");return;}
+    if(!jName.trim()){setJErr(L.writeYourName);return;}
+    if(!/^\d{4,6}$/.test(jPin)){setJErr(L.codeLength);return;}
+    if(jPin===shop.adminPin||barbers.find(b=>b.pin===jPin)){setJErr(L.codeInUse);return;}
     const nb={id:mkId(),name:jName.trim(),role:"Barbeiro",pin:jPin,phone:jPhone||"",bio:"",avatar:jName.trim().split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00"},active:true};
     setBarbers(p=>[...p,nb]);
     onBarberLogin(nb);
@@ -1915,21 +2012,21 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
           {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
           <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
           <div style={{textAlign:"center"}}>
-            <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>Sou novo colaborador, quero juntar-me →</button>
+            <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>{L.joinAsNew}</button>
           </div>
         </div>
       ):(
         <div style={{width:"100%",maxWidth:290}}>
-          <Lbl style={{marginBottom:6}}>O teu nome</Lbl>
-          <Inp value={jName} onChange={e=>setJName(e.target.value)} placeholder="Nome completo" style={{marginBottom:12}}/>
-          <Lbl style={{marginBottom:6}}>Cria o teu código de acesso (4-6 números)</Lbl>
+          <Lbl style={{marginBottom:6}}>{L.yourNameShort}</Lbl>
+          <Inp value={jName} onChange={e=>setJName(e.target.value)} placeholder={L.fullNamePlaceholder} style={{marginBottom:12}}/>
+          <Lbl style={{marginBottom:6}}>{L.createAccessCode}</Lbl>
           <Inp value={jPin} onChange={e=>setJPin(e.target.value.replace(/\D/g,""))} placeholder="••••" style={{marginBottom:12,textAlign:"center",letterSpacing:"0.3em"}}/>
-          <Lbl style={{marginBottom:6}}>Telefone (opcional)</Lbl>
+          <Lbl style={{marginBottom:6}}>{L.phoneOptional}</Lbl>
           <Inp value={jPhone} onChange={e=>setJPhone(e.target.value)} placeholder="+351 9xx xxx xxx" style={{marginBottom:12}}/>
           {jErr&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:12}}>{jErr}</div>}
-          <Btn variant="gold" style={{width:"100%",marginBottom:9}} onClick={join}>Juntar-me à equipa</Btn>
+          <Btn variant="gold" style={{width:"100%",marginBottom:9}} onClick={join}>{L.joinTeamBtn}</Btn>
           <div style={{textAlign:"center"}}>
-            <button onClick={()=>{setJoinMode(false);setJErr("");}} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>← Já tenho código de acesso</button>
+            <button onClick={()=>{setJoinMode(false);setJErr("");}} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>{L.alreadyHaveCode}</button>
           </div>
         </div>
       )}
@@ -1984,23 +2081,25 @@ function daysLeft(trialStart){
   return Math.max(0, Math.ceil((end - Date.now()) / 86400000));
 }
 
-function TrialBanner({days, onSubscribe}){
+function TrialBanner({days, onSubscribe, lang}){
+  const L=LANGS[lang].t;
   if(days > 5) return null; // only show when close to expiry
   const urgent = days <= 1;
   return(
     <div onClick={onSubscribe} style={{margin:"0 20px 14px",padding:"11px 14px",background:urgent?T.redLo:T.goldLo,border:`1px solid ${urgent?T.red:T.gold}`,borderRadius:7,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
       <div>
         <div style={{fontSize:"0.82rem",color:urgent?T.red:T.gold,fontWeight:600}}>
-          {days===0?"Trial expirado ":"⏳ "}{days===0?"— subscreve para continuar":`${days} dia${days!==1?"s":""} de trial restante${days!==1?"s":""}`}
+          {days===0?`${L.trialExpiredShort} `:"⏳ "}{days===0?L.subscribeToContinue:L.trialDaysRemaining.replace("{n}",days)}
         </div>
-        <div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>Toca para ver planos a partir de €{PRICE_SOLO}/mês</div>
+        <div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{L.tapSeePlans.replace("{price}",PRICE_SOLO)}</div>
       </div>
-      <div style={{fontSize:"0.7rem",color:urgent?T.red:T.gold,fontWeight:700,fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em",flexShrink:0,marginLeft:10}}>VER →</div>
+      <div style={{fontSize:"0.7rem",color:urgent?T.red:T.gold,fontWeight:700,fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em",flexShrink:0,marginLeft:10}}>{L.seeArrow}</div>
     </div>
   );
 }
 
-function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
+function SubscriptionScreen({barbers, subscription, onSubscribe, onBack, lang}){
+  const L=LANGS[lang].t;
   const [plan,setPlan]=useState(subscription?.plan||"solo");
   const [collabs,setCollabs]=useState(Math.max(0,(barbers.filter(b=>b.active).length-1)));
   const soloPrice=PRICE_SOLO;
@@ -2015,9 +2114,9 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
       <header style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div>
           <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.95rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"0.82rem"}}>barbervision</span></div>
-          <div style={{fontSize:"0.55rem",letterSpacing:"0.25em",color:T.silver,textTransform:"uppercase",marginTop:2}}>Subscrição</div>
+          <div style={{fontSize:"0.55rem",letterSpacing:"0.25em",color:T.silver,textTransform:"uppercase",marginTop:2}}>{L.subscriptionLabel}</div>
         </div>
-        <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 10px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>← Voltar</button>
+        <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 10px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </header>
 
       <main style={{width:"100%",maxWidth:520,padding:"24px 20px 60px"}}>
@@ -2025,72 +2124,72 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
         {/* Hero */}
         <div style={{textAlign:"center",marginBottom:28}}>
           <div style={{fontSize:"2.2rem",marginBottom:8}}>💈</div>
-          <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:6}}>Escolhe o teu plano</div>
-          <div style={{fontSize:"0.82rem",color:T.silver}}>Sem compromisso. Cancela quando quiseres.</div>
+          <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:6}}>{L.subscribeTitle}</div>
+          <div style={{fontSize:"0.82rem",color:T.silver}}>{L.subscribeSubtitle}</div>
         </div>
 
         {/* Trial status */}
         <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:8,padding:"14px",marginBottom:20,textAlign:"center"}}>
-          <Lbl style={{marginBottom:6}}>Estado do Trial</Lbl>
+          <Lbl style={{marginBottom:6}}>{L.trialStatus}</Lbl>
           <div style={{fontSize:"1.5rem",color:daysLeft(TRIAL_START)>0?T.gold:T.red,fontWeight:700}}>
-            {daysLeft(TRIAL_START)>0?`${daysLeft(TRIAL_START)} dias restantes`:"Trial expirado"}
+            {daysLeft(TRIAL_START)>0?`${daysLeft(TRIAL_START)} ${L.daysLeft}`:L.trialExpired}
           </div>
-          <div style={{fontSize:"0.7rem",color:T.silver,marginTop:4}}>Trial gratuito de {TRIAL_DAYS} dias</div>
+          <div style={{fontSize:"0.7rem",color:T.silver,marginTop:4}}>{L.freeTrialOfDays.replace("{days}",TRIAL_DAYS)}</div>
           {/* progress bar */}
           <div style={{height:4,background:T.muted,borderRadius:2,marginTop:10,overflow:"hidden"}}>
             <div style={{height:"100%",background:daysLeft(TRIAL_START)>3?T.gold:T.red,borderRadius:2,width:`${Math.min(100,((TRIAL_DAYS-daysLeft(TRIAL_START))/TRIAL_DAYS)*100)}%`,transition:"width .5s"}}/>
           </div>
           <div style={{display:"flex",justifyContent:"space-between",fontSize:"0.58rem",color:T.silver,marginTop:4,fontFamily:"'Josefin Sans',sans-serif"}}>
-            <span>Dia 1</span><span>Dia {TRIAL_DAYS}</span>
+            <span>{L.dayWord} 1</span><span>{L.dayWord} {TRIAL_DAYS}</span>
           </div>
         </div>
 
         {/* Plans */}
-        <Lbl style={{marginBottom:12}}>Planos disponíveis</Lbl>
+        <Lbl style={{marginBottom:12}}>{L.availablePlans}</Lbl>
 
         {/* Solo */}
         <div onClick={()=>setPlan("solo")} style={{padding:"16px",marginBottom:10,background:plan==="solo"?T.goldLo:T.card,border:`2px solid ${plan==="solo"?T.gold:T.border}`,borderRadius:8,cursor:"pointer"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
             <div>
-              <div style={{fontSize:"1.1rem",color:T.white,fontWeight:600}}>✂ Solo</div>
-              <div style={{fontSize:"0.72rem",color:T.silver,marginTop:2}}>1 barbeiro independente</div>
+              <div style={{fontSize:"1.1rem",color:T.white,fontWeight:600}}>✂ {L.solo}</div>
+              <div style={{fontSize:"0.72rem",color:T.silver,marginTop:2}}>{L.soloDesc}</div>
             </div>
             <div style={{textAlign:"right"}}>
               <div style={{fontSize:"1.5rem",color:T.gold,fontWeight:700,lineHeight:1}}>€{soloPrice}</div>
-              <div style={{fontSize:"0.62rem",color:T.silver}}>/mês</div>
+              <div style={{fontSize:"0.62rem",color:T.silver}}>{L.perMonth}</div>
             </div>
           </div>
-          {["Agenda completa","Clientes e histórico","Contabilidade","Relatórios e impressão","Notificações"].map(f=>(
+          {L.soloFeatures.map(f=>(
             <div key={f} style={{fontSize:"0.76rem",color:T.mid,marginBottom:3}}>✓ {f}</div>
           ))}
         </div>
 
         {/* Team */}
         <div onClick={()=>setPlan("team")} style={{padding:"16px",marginBottom:20,background:plan==="team"?T.goldLo:T.card,border:`2px solid ${plan==="team"?T.gold:T.border}`,borderRadius:8,cursor:"pointer",position:"relative"}}>
-          <div style={{position:"absolute",top:-10,right:14,background:T.gold,color:"#000",fontSize:"0.58rem",letterSpacing:"0.15em",textTransform:"uppercase",padding:"3px 10px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",fontWeight:700}}>POPULAR</div>
+          <div style={{position:"absolute",top:-10,right:14,background:T.gold,color:"#000",fontSize:"0.58rem",letterSpacing:"0.15em",textTransform:"uppercase",padding:"3px 10px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",fontWeight:700}}>{L.popularBadge}</div>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
             <div>
-              <div style={{fontSize:"1.1rem",color:T.white,fontWeight:600}}>💈 Equipa</div>
-              <div style={{fontSize:"0.72rem",color:T.silver,marginTop:2}}>Barbearia com colaboradores</div>
+              <div style={{fontSize:"1.1rem",color:T.white,fontWeight:600}}>💈 {L.team}</div>
+              <div style={{fontSize:"0.72rem",color:T.silver,marginTop:2}}>{L.teamDesc}</div>
             </div>
             <div style={{textAlign:"right"}}>
               <div style={{fontSize:"1.5rem",color:T.gold,fontWeight:700,lineHeight:1}}>€{PRICE_TEAM}</div>
-              <div style={{fontSize:"0.62rem",color:T.silver}}>/barbeiro/mês</div>
+              <div style={{fontSize:"0.62rem",color:T.silver}}>{L.perBarberMonth}</div>
             </div>
           </div>
-          {["Tudo do plano Solo","Múltiplos barbeiros","Painel de administrador","Gestão de colaboradores","Métricas por barbeiro"].map(f=>(
+          {L.teamFeatures.map(f=>(
             <div key={f} style={{fontSize:"0.76rem",color:T.mid,marginBottom:3}}>✓ {f}</div>
           ))}
           {/* Team calculator */}
           <div style={{marginTop:12,padding:"12px",background:T.surface,borderRadius:6,border:`1px solid ${T.border}`}}>
-            <Lbl style={{marginBottom:8}}>Calculadora de equipa</Lbl>
+            <Lbl style={{marginBottom:8}}>{L.teamCalcLabel}</Lbl>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-              <div style={{fontSize:"0.82rem",color:T.mid}}>{barbers.filter(b=>b.active).length} barbeiro{barbers.filter(b=>b.active).length!==1?"s":""} ativos</div>
-              <div style={{fontSize:"1.1rem",color:T.gold,fontWeight:700}}>€{teamTotal.toFixed(2)}/mês</div>
+              <div style={{fontSize:"0.82rem",color:T.mid}}>{L.activeBarbersCount.replace("{n}",barbers.filter(b=>b.active).length)}</div>
+              <div style={{fontSize:"1.1rem",color:T.gold,fontWeight:700}}>€{teamTotal.toFixed(2)}{L.perMonth}</div>
             </div>
             <div style={{fontSize:"0.66rem",color:T.silver,marginTop:4}}>
-              {barbers.filter(b=>b.active).length} × €{PRICE_TEAM} = €{teamTotal.toFixed(2)}/mês
-              {barbers.filter(b=>b.active).length>1&&<span style={{color:T.green,marginLeft:6}}>poupas €{((soloPrice*barbers.filter(b=>b.active).length)-teamTotal).toFixed(2)} vs Solo individual</span>}
+              {L.teamCalcFormula.replace("{n}",barbers.filter(b=>b.active).length).replace("{price}",PRICE_TEAM).replace("{total}",teamTotal.toFixed(2))}
+              {barbers.filter(b=>b.active).length>1&&<span style={{color:T.green,marginLeft:6}}>{L.savingsVsSolo.replace("{amount}",((soloPrice*barbers.filter(b=>b.active).length)-teamTotal).toFixed(2))}</span>}
             </div>
           </div>
         </div>
@@ -2099,33 +2198,28 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
         <div style={{background:T.card,border:`1px solid ${T.gold}`,borderRadius:8,padding:"14px",marginBottom:20}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <div>
-              <div style={{fontSize:"0.9rem",color:T.white,fontWeight:500}}>Plano {plan==="solo"?"Solo":"Equipa"}</div>
-              <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>Renovação mensal automática</div>
+              <div style={{fontSize:"0.9rem",color:T.white,fontWeight:500}}>{L.planWord} {plan==="solo"?L.solo:L.team}</div>
+              <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{L.monthlyRenewal}</div>
             </div>
             <div style={{textAlign:"right"}}>
               <div style={{fontSize:"1.6rem",color:T.gold,fontWeight:700,lineHeight:1}}>€{plan==="solo"?soloPrice.toFixed(2):teamTotal.toFixed(2)}</div>
-              <div style={{fontSize:"0.6rem",color:T.silver}}>/mês</div>
+              <div style={{fontSize:"0.6rem",color:T.silver}}>{L.perMonth}</div>
             </div>
           </div>
         </div>
 
         <Btn variant="gold" style={{width:"100%",padding:"15px",fontSize:"0.75rem"}} onClick={()=>onSubscribe(plan)}>
-          Subscrever Agora — €{plan==="solo"?soloPrice.toFixed(2):teamTotal.toFixed(2)}/mês
+          {L.subscribeNow} — €{plan==="solo"?soloPrice.toFixed(2):teamTotal.toFixed(2)}{L.perMonth}
         </Btn>
         <div style={{textAlign:"center",marginTop:10,fontSize:"0.68rem",color:T.silver}}>
-          Pagamento seguro · Cancela a qualquer momento<br/>
-          <span style={{color:T.gold}}>Demo: clica para simular subscrição</span>
+          {L.securePayment}<br/>
+          <span style={{color:T.gold}}>{L.demoNote}</span>
         </div>
 
         {/* FAQ */}
         <div style={{marginTop:24}}>
-          <Lbl style={{marginBottom:12}}>Perguntas frequentes</Lbl>
-          {[
-            ["Posso cancelar?","Sim, a qualquer momento. Sem penalizações."],
-            ["Como adiciono colaboradores?","No painel Admin crias o perfil de cada barbeiro. No plano Equipa cada um paga €7,99/mês."],
-            ["O que acontece após o trial?","A app bloqueia o acesso à agenda até subscreveres. Os dados ficam guardados."],
-            ["Existem custos ocultos?","Não. O preço é fixo por barbeiro por mês."],
-          ].map(([q,a])=>(
+          <Lbl style={{marginBottom:12}}>{L.faqTitle}</Lbl>
+          {L.faqItems.map(([q,a])=>(
             <div key={q} style={{marginBottom:12,padding:"12px",background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
               <div style={{fontSize:"0.85rem",color:T.white,fontWeight:500,marginBottom:4}}>{q}</div>
               <div style={{fontSize:"0.76rem",color:T.silver,lineHeight:1.5}}>{a}</div>
@@ -2137,22 +2231,21 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack}){
   );
 }
 
-function ExpiredScreen({onSubscribe}){
+function ExpiredScreen({onSubscribe, lang}){
+  const L=LANGS[lang].t;
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
       <div style={{textAlign:"center",maxWidth:300}}>
         <div style={{fontSize:"2.5rem",marginBottom:16}}>🔒</div>
-        <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:8}}>Trial expirado</div>
-        <div style={{fontSize:"0.84rem",color:T.silver,lineHeight:1.7,marginBottom:28}}>
-          Os teus 15 dias gratuitos terminaram.<br/>
-          Os teus dados estão guardados.<br/>
-          Subscreve para continuar a usar a app.
+        <div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:8}}>{L.expiredTitle}</div>
+        <div style={{fontSize:"0.84rem",color:T.silver,lineHeight:1.7,marginBottom:28,whiteSpace:"pre-line"}}>
+          {L.expiredFull}
         </div>
         <Btn variant="gold" style={{width:"100%",padding:"15px",marginBottom:12}} onClick={onSubscribe}>
-          Ver Planos a partir de €9,99/mês
+          {L.seePlans}
         </Btn>
-        <div style={{fontSize:"0.68rem",color:T.silver}}>Sem compromisso · Cancela quando quiseres</div>
+        <div style={{fontSize:"0.68rem",color:T.silver}}>{L.noCommitmentFooter}</div>
       </div>
     </div>
   );
@@ -2161,7 +2254,8 @@ function ExpiredScreen({onSubscribe}){
 // ══════════════════════════════════════════════════════════════════════════════
 // OWNER PORTAL — login/registo de barbearias (multi-tenant)
 // ══════════════════════════════════════════════════════════════════════════════
-function OwnerPortal(){
+function OwnerPortal({lang,setLang}){
+  const L=LANGS[lang].t;
   const [mode,setMode]     = useState("login"); // login | signup
   const [busy,setBusy]     = useState(false);
   const [err,setErr]       = useState("");
@@ -2185,21 +2279,21 @@ function OwnerPortal(){
 
   const doLogin=async()=>{
     setErr("");
-    if(!email||!pass){setErr("Preenche o email e a password.");return;}
+    if(!email||!pass){setErr(L.fillEmailPass);return;}
     setBusy(true);
     const{data,error}=await supabase.rpc("verify_owner_login",{p_email:email.trim(),p_password:pass});
     setBusy(false);
     const row=Array.isArray(data)?data[0]:data;
-    if(error||!row){setErr("Email ou password incorretos.");return;}
+    if(error||!row){setErr(L.wrongCredentials);return;}
     goToShop(row.slug);
   };
 
   const doSignup=async()=>{
     setErr("");
-    if(!ownerName||!salonName||!suEmail||!suPass){setErr("Preenche todos os campos.");return;}
+    if(!ownerName||!salonName||!suEmail||!suPass){setErr(L.fillAllFields);return;}
     setBusy(true);
     const{data:existing}=await supabase.from("shops").select("id").eq("owner_email",suEmail.trim().toLowerCase()).maybeSingle();
-    if(existing){setBusy(false);setErr("Já existe uma barbearia registada com esse email.");return;}
+    if(existing){setBusy(false);setErr(L.shopAlreadyExists);return;}
     const slug=await generateUniqueSlug(salonName);
     const initData={
       shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
@@ -2216,61 +2310,68 @@ function OwnerPortal(){
       data:initData,
     });
     setBusy(false);
-    if(error){setErr("Não foi possível criar a barbearia. Tenta outra vez.");return;}
+    if(error){setErr(L.createShopFailed);return;}
     goToShop(slug);
   };
 
   return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Josefin Sans',sans-serif"}}>
+    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Josefin Sans',sans-serif",position:"relative"}}>
+      <div style={{position:"absolute",top:16,right:16,display:"flex",gap:6}}>
+        {Object.entries(LANGS).map(([code,l])=>(
+          <button key={code} onClick={()=>setLang(code)} style={{padding:"4px 8px",borderRadius:4,cursor:"pointer",display:"flex",alignItems:"center",background:lang===code?T.goldLo:"transparent",border:`1px solid ${lang===code?T.gold:T.border}`}} title={l.name}>
+            <img src={`https://flagcdn.com/w40/${FLAG_CC[code]}.png`} alt={l.name} style={{width:22,height:16,objectFit:"cover",borderRadius:2,display:"block"}}/>
+          </button>
+        ))}
+      </div>
       <div style={{textAlign:"center",marginBottom:28}}>
         <img src={logoIcon} style={{width:56,height:56,marginBottom:10,objectFit:"contain"}}/>
-        <div style={{fontSize:"1.5rem",color:T.white,fontWeight:600,letterSpacing:"0.08em"}}>Portal do Dono</div>
-        <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>Entra ou cria a tua barbearia</div>
+        <div style={{fontSize:"1.5rem",color:T.white,fontWeight:600,letterSpacing:"0.08em"}}>{L.portalTitle}</div>
+        <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>{L.portalSubtitle}</div>
       </div>
 
       <div style={{display:"flex",gap:6,marginBottom:20,background:T.card,borderRadius:6,padding:4}}>
-        <button onClick={()=>{setMode("login");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="login"?T.gold:"transparent",color:mode==="login"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>Já tenho conta</button>
-        <button onClick={()=>{setMode("signup");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="signup"?T.gold:"transparent",color:mode==="signup"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>Criar barbearia</button>
+        <button onClick={()=>{setMode("login");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="login"?T.gold:"transparent",color:mode==="login"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>{L.haveAccountTab}</button>
+        <button onClick={()=>{setMode("signup");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="signup"?T.gold:"transparent",color:mode==="signup"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>{L.createShopTab}</button>
       </div>
 
       <div style={{width:"100%",maxWidth:340,background:T.card,border:`1px solid ${T.border}`,borderRadius:8,padding:22}}>
         {mode==="login"?(
           <>
             <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Email</Lbl>
-              <Inp value={email} onChange={e=>setEmail(e.target.value)} placeholder="o-teu-email@exemplo.com"/>
+              <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
+              <Inp value={email} onChange={e=>setEmail(e.target.value)} placeholder={L.placeholderEmail}/>
             </div>
             <div style={{marginBottom:16}}>
-              <Lbl style={{marginBottom:6}}>Password</Lbl>
-              <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder="••••••••"/>
+              <Lbl style={{marginBottom:6}}>{L.passwordLabel}</Lbl>
+              <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder={L.placeholderPass}/>
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
-            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doLogin} disabled={busy}>{busy?"A entrar...":"Entrar"}</Btn>
+            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doLogin} disabled={busy}>{busy?L.loggingIn:L.loginBtn}</Btn>
           </>
         ):(
           <>
             <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>O teu nome</Lbl>
-              <Inp value={ownerName} onChange={e=>setOwnerName(e.target.value)} placeholder="Nome completo"/>
+              <Lbl style={{marginBottom:6}}>{L.yourNameLabel}</Lbl>
+              <Inp value={ownerName} onChange={e=>setOwnerName(e.target.value)} placeholder={L.placeholderFullName}/>
             </div>
             <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Nome da barbearia</Lbl>
-              <Inp value={salonName} onChange={e=>setSalonName(e.target.value)} placeholder="Ex: Barbearia do Zé"/>
+              <Lbl style={{marginBottom:6}}>{L.shopNameLabel}</Lbl>
+              <Inp value={salonName} onChange={e=>setSalonName(e.target.value)} placeholder={L.placeholderShopName}/>
             </div>
             <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Telefone (opcional)</Lbl>
-              <Inp value={phone} onChange={e=>setPhone(e.target.value)} placeholder="+351 9xx xxx xxx"/>
+              <Lbl style={{marginBottom:6}}>{L.phoneOptionalLabel}</Lbl>
+              <Inp value={phone} onChange={e=>setPhone(e.target.value)} placeholder={L.placeholderPhone}/>
             </div>
             <div style={{marginBottom:12}}>
-              <Lbl style={{marginBottom:6}}>Email</Lbl>
-              <Inp value={suEmail} onChange={e=>setSuEmail(e.target.value)} placeholder="o-teu-email@exemplo.com"/>
+              <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
+              <Inp value={suEmail} onChange={e=>setSuEmail(e.target.value)} placeholder={L.placeholderEmail}/>
             </div>
             <div style={{marginBottom:16}}>
-              <Lbl style={{marginBottom:6}}>Password</Lbl>
-              <Inp type="password" value={suPass} onChange={e=>setSuPass(e.target.value)} placeholder="Cria uma password"/>
+              <Lbl style={{marginBottom:6}}>{L.passwordLabel}</Lbl>
+              <Inp type="password" value={suPass} onChange={e=>setSuPass(e.target.value)} placeholder={L.placeholderCreatePass}/>
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
-            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doSignup} disabled={busy}>{busy?"A criar...":"Criar a minha barbearia"}</Btn>
+            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doSignup} disabled={busy}>{busy?L.creatingBtn:L.createShopBtn}</Btn>
           </>
         )}
       </div>
@@ -2359,20 +2460,20 @@ const [notifications,setNotifications] = useState([]);
   if(!dataLoaded){
     return(
       <div style={{minHeight:"100vh",background:T.bg,display:"flex",alignItems:"center",justifyContent:"center",color:T.gold,fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.8rem",letterSpacing:"0.2em"}}>
-        A CARREGAR...
+        {LANGS[lang].t.loadingText}
       </div>
     );
   }
 
-  if(ownerMode) return <OwnerPortal/>;
+  if(ownerMode) return <OwnerPortal lang={lang} setLang={setLang}/>;
 
   if(shopNotFound){
     return(
       <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,textAlign:"center",fontFamily:"'Josefin Sans',sans-serif"}}>
         <div style={{fontSize:"2rem",marginBottom:16}}>🔍</div>
-        <div style={{color:T.white,fontSize:"1.1rem",marginBottom:8}}>Barbearia não encontrada</div>
-        <div style={{color:T.silver,fontSize:"0.8rem",marginBottom:20}}>O link que usaste não corresponde a nenhuma barbearia registada.</div>
-        <Btn variant="gold" onClick={()=>{window.location.href=window.location.origin+window.location.pathname;}}>Ir para o Portal do Dono</Btn>
+        <div style={{color:T.white,fontSize:"1.1rem",marginBottom:8}}>{LANGS[lang].t.shopNotFoundTitle}</div>
+        <div style={{color:T.silver,fontSize:"0.8rem",marginBottom:20}}>{LANGS[lang].t.shopNotFoundBody}</div>
+        <Btn variant="gold" onClick={()=>{window.location.href=window.location.origin+window.location.pathname;}}>{LANGS[lang].t.goToOwnerPortal}</Btn>
       </div>
     );
   }
@@ -2397,15 +2498,15 @@ const [notifications,setNotifications] = useState([]);
     addNotification(activeBarber?.id||"b1","info","Subscrição ativada",`Plano ${plan==="solo"?"Solo":"Equipa"} ativo. Obrigado, Luis!`);
   };
 
-  if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)}/>;
+  if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)} lang={lang}/>;
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")}/>;
+  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>;
 
   // Trial expired — block barber access
-  if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)}/>;
+  if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)} lang={lang}/>;
 
   // BARBER APP
   const barber=barbers.find(b=>b.id===activeBarber?.id)||activeBarber;
@@ -2452,7 +2553,7 @@ const [notifications,setNotifications] = useState([]);
       </header>
 
       {/* Trial banner inside app */}
-      {!subscription&&<div style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)}/></div>}
+      {!subscription&&<div style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
 
       <main style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
