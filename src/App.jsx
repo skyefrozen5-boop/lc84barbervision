@@ -25,6 +25,8 @@ const GS = `
   .slot-h:hover{border-color:${T.gold}!important;color:${T.gold}!important;}
   .row-h:hover{background:rgba(255,255,255,0.02)!important;}
   @media print{body{background:white!important;color:black!important;}.no-print{display:none!important;}}
+  @media (min-width:900px){.app-shell{max-width:900px!important;}}
+  @media (min-width:1300px){.app-shell{max-width:1100px!important;}}
 `;
 
 // ─── LANGUAGES ───────────────────────────────────────────────────────────────
