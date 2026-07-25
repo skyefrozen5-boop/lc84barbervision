@@ -104,6 +104,15 @@ const LANGS = {
       cutHistoryTitle:"Histórico de cortes", addCutBtn:"+ Adicionar corte", tapCamera:"📷 Ligar câmara", tapGallery:"🖼️ Carregar ficheiro",
       cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
       deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.",
+      navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", todaySuffix:"hoje", activeSubBadge:"ATIVO",
+      blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado",
+      notifTodayTitle:"Marcações de hoje", notifTodayBody:"Tens {n} marcações hoje. A primeira às 09:00.",
+      notifCancelTitleDemo:"Marcação cancelada", notifCancelBodyDemo:"João Costa cancelou a marcação de hoje às 14:00.",
+      notifNewDemoTitle:"Nova marcação", notifNewDemoBody:"Miguel Ferreira marcou Corte Clássico para amanhã às 10:00.",
+      notifGoodMorning:"Bom dia, {name}!", notifTodaySummary:"Tens {n} marcação(ões) hoje. Primeira às {time}h.",
+      notifNewBookingTitle:"Nova marcação adicionada", notifBookingDeletedTitle:"Marcação eliminada", notifBookingDeletedBody:"{name} — {date} às {time}h foi removida.",
+      notifCancelTitle:"Marcação cancelada", notifCancelBody:"{name} cancelou — {date} às {time}h.",
+      notifSubActivatedTitle:"Subscrição ativada", notifSubActivatedBody:"Plano {plan} ativo. Obrigado, {owner}!", absenceName:"Ausência", yesterdaySummaryTitle:"Resumo de ontem", yesterdaySummaryBody:"Concluíste {n} serviços. Receita: €{amount}.",
       portalTitle:"Portal do Dono", portalSubtitle:"Entra ou cria a tua barbearia", haveAccountTab:"Já tenho conta", createShopTab:"Criar barbearia",
       emailLabel:"Email", placeholderEmail:"o-teu-email@exemplo.com", placeholderPass:"••••••••", loginBtn:"Entrar", loggingIn:"A entrar...",
       yourNameLabel:"O teu nome", placeholderFullName:"Nome completo", placeholderShopName:"Ex: Barbearia do Zé", phoneOptionalLabel:"Telefone (opcional)",
@@ -191,6 +200,15 @@ const LANGS = {
       cutHistoryTitle:"Cut history", addCutBtn:"+ Add cut", tapCamera:"📷 Open camera", tapGallery:"🖼️ Upload file",
       cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
       deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.",
+      navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", todaySuffix:"today", activeSubBadge:"ACTIVE",
+      blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period",
+      notifTodayTitle:"Today's bookings", notifTodayBody:"You have {n} bookings today. First at 09:00.",
+      notifCancelTitleDemo:"Booking cancelled", notifCancelBodyDemo:"João Costa cancelled today's 14:00 booking.",
+      notifNewDemoTitle:"New booking", notifNewDemoBody:"Miguel Ferreira booked a Classic Cut for tomorrow at 10:00.",
+      notifGoodMorning:"Good morning, {name}!", notifTodaySummary:"You have {n} booking(s) today. First at {time}h.",
+      notifNewBookingTitle:"New booking added", notifBookingDeletedTitle:"Booking deleted", notifBookingDeletedBody:"{name} — {date} at {time}h was removed.",
+      notifCancelTitle:"Booking cancelled", notifCancelBody:"{name} cancelled — {date} at {time}h.",
+      notifSubActivatedTitle:"Subscription activated", notifSubActivatedBody:"{plan} plan active. Thanks, {owner}!", absenceName:"Absence", yesterdaySummaryTitle:"Yesterday's summary", yesterdaySummaryBody:"You completed {n} services. Revenue: €{amount}.",
       portalTitle:"Owner Portal", portalSubtitle:"Log in or create your barbershop", haveAccountTab:"I have an account", createShopTab:"Create barbershop",
       emailLabel:"Email", placeholderEmail:"your-email@example.com", placeholderPass:"••••••••", loginBtn:"Log in", loggingIn:"Logging in...",
       yourNameLabel:"Your name", placeholderFullName:"Full name", placeholderShopName:"E.g.: Joe's Barbershop", phoneOptionalLabel:"Phone (optional)",
@@ -278,6 +296,15 @@ const LANGS = {
       cutHistoryTitle:"Historial de cortes", addCutBtn:"+ Añadir corte", tapCamera:"📷 Abrir cámara", tapGallery:"🖼️ Subir archivo",
       cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
       deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.",
+      navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
+      blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado",
+      notifTodayTitle:"Citas de hoy", notifTodayBody:"Tienes {n} citas hoy. La primera a las 09:00.",
+      notifCancelTitleDemo:"Cita cancelada", notifCancelBodyDemo:"João Costa canceló la cita de hoy a las 14:00.",
+      notifNewDemoTitle:"Nueva cita", notifNewDemoBody:"Miguel Ferreira reservó un Corte Clásico para mañana a las 10:00.",
+      notifGoodMorning:"Buenos días, {name}!", notifTodaySummary:"Tienes {n} cita(s) hoy. La primera a las {time}h.",
+      notifNewBookingTitle:"Nueva cita añadida", notifBookingDeletedTitle:"Cita eliminada", notifBookingDeletedBody:"{name} — {date} a las {time}h fue eliminada.",
+      notifCancelTitle:"Cita cancelada", notifCancelBody:"{name} canceló — {date} a las {time}h.",
+      notifSubActivatedTitle:"Suscripción activada", notifSubActivatedBody:"Plan {plan} activo. ¡Gracias, {owner}!", absenceName:"Ausencia", yesterdaySummaryTitle:"Resumen de ayer", yesterdaySummaryBody:"Completaste {n} servicios. Ingresos: €{amount}.",
       portalTitle:"Portal del Dueño", portalSubtitle:"Entra o crea tu barbería", haveAccountTab:"Ya tengo cuenta", createShopTab:"Crear barbería",
       emailLabel:"Email", placeholderEmail:"tu-email@ejemplo.com", placeholderPass:"••••••••", loginBtn:"Entrar", loggingIn:"Entrando...",
       yourNameLabel:"Tu nombre", placeholderFullName:"Nombre completo", placeholderShopName:"Ej: Barbería de José", phoneOptionalLabel:"Teléfono (opcional)",
@@ -365,6 +392,15 @@ const LANGS = {
       cutHistoryTitle:"Historique des coupes", addCutBtn:"+ Ajouter une coupe", tapCamera:"📷 Ouvrir la caméra", tapGallery:"🖼️ Importer un fichier",
       cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
       deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.",
+      navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
+      blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée",
+      notifTodayTitle:"Réservations du jour", notifTodayBody:"Tu as {n} réservations aujourd'hui. La première à 09:00.",
+      notifCancelTitleDemo:"Réservation annulée", notifCancelBodyDemo:"João Costa a annulé la réservation de 14:00 aujourd'hui.",
+      notifNewDemoTitle:"Nouvelle réservation", notifNewDemoBody:"Miguel Ferreira a réservé une Coupe Classique pour demain à 10:00.",
+      notifGoodMorning:"Bonjour, {name} !", notifTodaySummary:"Tu as {n} réservation(s) aujourd'hui. La première à {time}h.",
+      notifNewBookingTitle:"Nouvelle réservation ajoutée", notifBookingDeletedTitle:"Réservation supprimée", notifBookingDeletedBody:"{name} — {date} à {time}h a été supprimée.",
+      notifCancelTitle:"Réservation annulée", notifCancelBody:"{name} a annulé — {date} à {time}h.",
+      notifSubActivatedTitle:"Abonnement activé", notifSubActivatedBody:"Plan {plan} actif. Merci, {owner} !", absenceName:"Absence", yesterdaySummaryTitle:"Résumé d'hier", yesterdaySummaryBody:"Tu as réalisé {n} services. Revenus : €{amount}.",
       portalTitle:"Portail Propriétaire", portalSubtitle:"Connecte-toi ou crée ton salon", haveAccountTab:"J'ai déjà un compte", createShopTab:"Créer un salon",
       emailLabel:"Email", placeholderEmail:"ton-email@exemple.com", placeholderPass:"••••••••", loginBtn:"Se connecter", loggingIn:"Connexion...",
       yourNameLabel:"Ton nom", placeholderFullName:"Nom complet", placeholderShopName:"Ex : Salon de Jean", phoneOptionalLabel:"Téléphone (optionnel)",
@@ -452,6 +488,15 @@ const LANGS = {
       cutHistoryTitle:"Schnitt-Verlauf", addCutBtn:"+ Schnitt hinzufügen", tapCamera:"📷 Kamera öffnen", tapGallery:"🖼️ Datei hochladen",
       cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
       deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.",
+      navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", todaySuffix:"heute", activeSubBadge:"AKTIV",
+      blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum",
+      notifTodayTitle:"Heutige Termine", notifTodayBody:"Du hast heute {n} Termine. Der erste um 09:00.",
+      notifCancelTitleDemo:"Termin storniert", notifCancelBodyDemo:"João Costa hat den heutigen 14:00-Termin storniert.",
+      notifNewDemoTitle:"Neuer Termin", notifNewDemoBody:"Miguel Ferreira hat einen Klassischen Schnitt für morgen um 10:00 gebucht.",
+      notifGoodMorning:"Guten Morgen, {name}!", notifTodaySummary:"Du hast heute {n} Termin(e). Der erste um {time} Uhr.",
+      notifNewBookingTitle:"Neuer Termin hinzugefügt", notifBookingDeletedTitle:"Termin gelöscht", notifBookingDeletedBody:"{name} — {date} um {time} Uhr wurde entfernt.",
+      notifCancelTitle:"Termin storniert", notifCancelBody:"{name} hat storniert — {date} um {time} Uhr.",
+      notifSubActivatedTitle:"Abonnement aktiviert", notifSubActivatedBody:"Plan {plan} aktiv. Danke, {owner}!", absenceName:"Abwesenheit", yesterdaySummaryTitle:"Zusammenfassung von gestern", yesterdaySummaryBody:"Du hast {n} Leistungen abgeschlossen. Umsatz: €{amount}.",
       portalTitle:"Inhaber-Portal", portalSubtitle:"Melde dich an oder erstelle deinen Salon", haveAccountTab:"Ich habe schon ein Konto", createShopTab:"Salon erstellen",
       emailLabel:"E-Mail", placeholderEmail:"deine-email@beispiel.com", placeholderPass:"••••••••", loginBtn:"Anmelden", loggingIn:"Anmeldung...",
       yourNameLabel:"Dein Name", placeholderFullName:"Vollständiger Name", placeholderShopName:"Z. B.: Salon Müller", phoneOptionalLabel:"Telefon (optional)",
@@ -558,14 +603,16 @@ function seedBookings(barbers) {
   return out;
 }
 
-function seedNotifications(barbers) {
+function seedNotifications(barbers, lang="pt") {
+  const L=LANGS[lang].t;
   const now = Date.now();
   const out = [];
   barbers.forEach(b=>{
-    out.push({id:mkId(),barberId:b.id,type:"reminder",title:"Marcações de hoje",body:`Tens ${3+Math.floor(Math.random()*3)} marcações hoje. A primeira às 09:00.`,ts:now-5*60000,read:false});
-    out.push({id:mkId(),barberId:b.id,type:"new",title:"Nova marcação",body:"Miguel Ferreira marcou Corte Clássico para amanhã às 10:00.",ts:now-32*60000,read:false});
-    out.push({id:mkId(),barberId:b.id,type:"cancel",title:"Marcação cancelada",body:"João Costa cancelou a marcação de hoje às 14:00.",ts:now-2*3600000,read:true});
-    out.push({id:mkId(),barberId:b.id,type:"reminder",title:"Resumo de ontem",body:"Concluíste 4 serviços. Receita: €72.",ts:now-26*3600000,read:true});
+    const n=3+Math.floor(Math.random()*3);
+    out.push({id:mkId(),barberId:b.id,type:"reminder",title:L.notifTodayTitle,body:L.notifTodayBody.replace("{n}",n),ts:now-5*60000,read:false});
+    out.push({id:mkId(),barberId:b.id,type:"new",title:L.notifNewDemoTitle,body:L.notifNewDemoBody,ts:now-32*60000,read:false});
+    out.push({id:mkId(),barberId:b.id,type:"cancel",title:L.notifCancelTitleDemo,body:L.notifCancelBodyDemo,ts:now-2*3600000,read:true});
+    out.push({id:mkId(),barberId:b.id,type:"reminder",title:L.yesterdaySummaryTitle,body:L.yesterdaySummaryBody.replace("{n}",4).replace("{amount}",72),ts:now-26*3600000,read:true});
   });
   return out;
 }
@@ -1034,7 +1081,7 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
   const [blockRange,setBlockRange]=useState({start:"",end:""});
 
   const addBlockDay=()=>{
-    setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time:"DIA_INTEIRO",blocked:true,name:"Dia Bloqueado",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
+    setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time:"DIA_INTEIRO",blocked:true,name:L.blockedDayName,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
     setBlocking(false);
   };
   const addBlockPeriod=()=>{
@@ -1043,14 +1090,14 @@ function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,l
     const end=new Date(blockPeriod.end+"T12:00:00");
     const days=[];
     for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1))days.push(fmt(new Date(d)));
-    setBookings(p=>[...p,...days.map(date=>({id:mkId(),barberId:barber.id,date,time:"DIA_INTEIRO",blocked:true,name:"Período Bloqueado",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}))]);
+    setBookings(p=>[...p,...days.map(date=>({id:mkId(),barberId:barber.id,date,time:"DIA_INTEIRO",blocked:true,name:L.blockedPeriodName,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}))]);
     setBlockPeriod({start:"",end:""});
     setBlocking(false);
   };
   const addBlockRange=()=>{
   if(!blockRange.start||!blockRange.end||blockRange.end<=blockRange.start)return;
   const slots=hours.filter(h=>h>=blockRange.start&&h<blockRange.end&&!dayBk.find(b=>b.time===h));
-  setBookings(p=>[...p,...slots.map(time=>({id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:"Ausência",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}))]);
+  setBookings(p=>[...p,...slots.map(time=>({id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.absenceName,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}))]);
   setBlockRange({start:"",end:""});
   setBlocking(false);
 };
@@ -1066,21 +1113,21 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
     if(f.id){setBookings(p=>p.map(b=>b.id===f.id?f:b));}
     else{
       setBookings(p=>[...p,{...f,id:mkId()}]);
-      addNotification(barber.id,"new","Nova marcação adicionada",`${f.name} — ${svcName(svc(f.serviceId),lang)} — ${f.date} às ${f.time}h`);
+      addNotification(barber.id,"new",L.notifNewBookingTitle,`${f.name} — ${svcName(svc(f.serviceId),lang)} — ${f.date} às ${f.time}h`);
     }
     setModal(null);
   };
   const del=id=>{
     const b=bookings.find(b=>b.id===id);
-    if(b)addNotification(barber.id,"cancel","Marcação eliminada",`${b.name} — ${dateLabel(b.date)} às ${b.time}h foi removida.`);
+    if(b)addNotification(barber.id,"cancel",L.notifBookingDeletedTitle,L.notifBookingDeletedBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));
     setBookings(p=>p.filter(b=>b.id!==id));setModal(null);
   };
   const qStatus=(id,st)=>{
     setBookings(p=>p.map(b=>b.id===id?{...b,status:st}:b));
-    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel","Marcação cancelada",`${b.name} cancelou — ${dateLabel(b.date)} às ${b.time}h.`);}
+    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));}
   };
   const qPaid=id=>setBookings(p=>p.map(b=>b.id===id?{...b,paid:!b.paid}:b));
-  const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:"Bloqueado",status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
+  const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.blockedSlotLabel,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
   const worksToday=barberWorksOnDate(barber,selDate);
   return(
     <div style={{padding:"0 20px"}}>
@@ -1883,7 +1930,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
     const b=bookings.find(b=>b.id===id);
     setBookings(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
     setMyBk(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
-    if(b)addNotification(b.barberId,"cancel","Marcação cancelada",`${b.name} cancelou — ${dateLabel(b.date)} às ${b.time}h.`);
+    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));
   };
   const lookup=()=>{if(clientPhone.trim().length<5)return;setMyBk(bookings.filter(b=>b.phone===clientPhone.trim()));setScreen("mybookings");};
   const reset=()=>{setSel({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});setStep(1);setDone(null);setScreen("home");};
@@ -2425,7 +2472,7 @@ const [notifications,setNotifications] = useState([]);
       setShopId(data.id);
       if(!d||Object.keys(d).length===0){
         setBarbers(INIT_BARBERS);setServices(INIT_SERVICES);setShop(INIT_SHOP);
-        setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS));
+        setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS,lang));
         setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});
       } else {
         setBarbers(d.barbers||INIT_BARBERS);
@@ -2488,14 +2535,14 @@ const [notifications,setNotifications] = useState([]);
     if(todayCount>0){
 
       const first=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
-      setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:`Bom dia, ${b.name.split(" ")[0]}!`,body:`Tens ${todayCount} marcação${todayCount>1?"s":""} hoje. Primeira às ${first?.time}h.`,ts:Date.now(),read:false},...p]);
+      setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:LANGS[lang].t.notifGoodMorning.replace("{name}",b.name.split(" ")[0]),body:LANGS[lang].t.notifTodaySummary.replace("{n}",todayCount).replace("{time}",first?.time),ts:Date.now(),read:false},...p]);
     }
   };
 
   const handleSubscribe=(plan)=>{
     setSubscription({plan,date:TODAY,barbersCount:barbers.filter(b=>b.active).length});
     setShowSub(false);
-    addNotification(activeBarber?.id||"b1","info","Subscrição ativada",`Plano ${plan==="solo"?"Solo":"Equipa"} ativo. Obrigado, Luis!`);
+    addNotification(activeBarber?.id||"b1","info",LANGS[lang].t.notifSubActivatedTitle,LANGS[lang].t.notifSubActivatedBody.replace("{plan}",plan==="solo"?LANGS[lang].t.solo:LANGS[lang].t.team).replace("{owner}","Luis"));
   };
 
   if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)} lang={lang}/>;
@@ -2511,7 +2558,7 @@ const [notifications,setNotifications] = useState([]);
   // BARBER APP
   const barber=barbers.find(b=>b.id===activeBarber?.id)||activeBarber;
   const myUnread=notifications.filter(n=>n.barberId===barber.id&&!n.read).length;
-  const NAV=[{id:"dashboard",l:"Início"},{id:"agenda",l:"Agenda"},{id:"notifs",l:"Alertas",badge:myUnread},{id:"clients",l:"Clientes"},{id:"reports",l:"Receita"},{id:"schedule",l:"Horário"},{id:"profile",l:"Perfil"}];
+  const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile}];
 
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
@@ -2524,7 +2571,7 @@ const [notifications,setNotifications] = useState([]);
           </span>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
             {subscription
-              ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ ATIVO</span>
+              ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ {LANGS[lang].t.activeSubBadge}</span>
               :<button onClick={()=>setShowSub(true)} style={{fontSize:"0.54rem",background:trialDays<=3?T.redLo:T.goldLo,color:trialDays<=3?T.red:T.gold,border:`1px solid ${trialDays<=3?T.red:T.gold}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",cursor:"pointer"}}>⏳ {trialDays}d</button>
             }
             <button onClick={()=>setRole("entry")} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
@@ -2537,7 +2584,7 @@ const [notifications,setNotifications] = useState([]);
             <span style={{fontSize:"0.68rem",color:T.mid}}>{barber.name}</span>
           </div>
           <div style={{display:"flex",gap:10,alignItems:"center"}}>
-            <span style={{fontSize:"0.6rem",color:T.gold,fontFamily:"'Josefin Sans',sans-serif"}}>{bookings.filter(b=>b.barberId===barber.id&&b.date===TODAY&&!b.blocked).length} hoje</span>
+            <span style={{fontSize:"0.6rem",color:T.gold,fontFamily:"'Josefin Sans',sans-serif"}}>{bookings.filter(b=>b.barberId===barber.id&&b.date===TODAY&&!b.blocked).length} {LANGS[lang].t.todaySuffix}</span>
             <span style={{fontSize:"0.6rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif"}}>{LANGS[lang].wdays[NOW.getDay()]} {NOW.getDate()} {LANGS[lang].months[NOW.getMonth()].slice(0,3)}</span>
           </div>
         </div>
