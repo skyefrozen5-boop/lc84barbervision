@@ -1716,14 +1716,14 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.88rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84 <span style={{color:T.silver,fontSize:"0.68rem"}}>Admin</span></div></div>
           <Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.56rem"}} onClick={onLogout}>{L.logout}</Btn>
         </div>
         <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none"}}>{TABS.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:"8px 14px",background:"none",border:"none",borderBottom:`2px solid ${tab===t.id?T.gold:"transparent"}`,cursor:"pointer",color:tab===t.id?T.gold:T.silver,fontSize:"0.6rem",letterSpacing:"0.16em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:tab===t.id?700:400,whiteSpace:"nowrap"}}>{t.l}</button>)}</div>
       </header>
-      <main style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
         {tab==="overview"&&(<>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
             {[{l:L.totalBilled,v:`€${totalRev}`,c:T.gold},{l:L.barbersLabel,v:barbers.filter(b=>b.active).length,c:T.white},{l:L.todayAllLabel,v:todayAll.length,c:T.mid},{l:L.totalBookingsLabel,v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
@@ -1955,14 +1955,14 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:9}}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill={T.gold}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.85rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84</div><div style={{fontSize:"0.48rem",letterSpacing:"0.28em",color:T.silver,textTransform:"uppercase"}}>{L.clientArea}</div></div>
         </div>
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </header>
-      <main style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
         {screen==="home"&&(<>
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
@@ -2176,7 +2176,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack, lang}){
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div>
           <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.95rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"0.82rem"}}>barbervision</span></div>
           <div style={{fontSize:"0.55rem",letterSpacing:"0.25em",color:T.silver,textTransform:"uppercase",marginTop:2}}>{L.subscriptionLabel}</div>
@@ -2184,7 +2184,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack, lang}){
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 10px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </header>
 
-      <main style={{width:"100%",maxWidth:520,padding:"24px 20px 60px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,padding:"24px 20px 60px"}}>
 
         {/* Hero */}
         <div style={{textAlign:"center",marginBottom:28}}>
@@ -2581,7 +2581,7 @@ const [notifications,setNotifications] = useState([]);
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         {/* MARCA — sempre visível */}
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 20px",borderBottom:`1px solid ${T.border}`}}>
           <span style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.05rem",fontWeight:700,letterSpacing:"0.08em",color:T.white}}>
@@ -2618,9 +2618,9 @@ const [notifications,setNotifications] = useState([]);
       </header>
 
       {/* Trial banner inside app */}
-      {!subscription&&<div style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
+      {!subscription&&<div className="app-shell" style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
 
-      <main style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}
