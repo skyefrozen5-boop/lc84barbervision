@@ -25,6 +25,8 @@ const GS = `
   .slot-h:hover{border-color:${T.gold}!important;color:${T.gold}!important;}
   .row-h:hover{background:rgba(255,255,255,0.02)!important;}
   @media print{body{background:white!important;color:black!important;}.no-print{display:none!important;}}
+  @media (min-width:900px){.app-shell{max-width:900px!important;}}
+  @media (min-width:1300px){.app-shell{max-width:1100px!important;}}
 `;
 
 // ─── LANGUAGES ───────────────────────────────────────────────────────────────
@@ -105,7 +107,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
       deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.",
       navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", todaySuffix:"hoje", activeSubBadge:"ATIVO",
-      blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado",
+      blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Início da pausa", breakEndLabel:"Fim da pausa", noBreakOption:"Sem pausa",
       notifTodayTitle:"Marcações de hoje", notifTodayBody:"Tens {n} marcações hoje. A primeira às 09:00.",
       notifCancelTitleDemo:"Marcação cancelada", notifCancelBodyDemo:"João Costa cancelou a marcação de hoje às 14:00.",
       notifNewDemoTitle:"Nova marcação", notifNewDemoBody:"Miguel Ferreira marcou Corte Clássico para amanhã às 10:00.",
@@ -201,7 +203,7 @@ const LANGS = {
       cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
       deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.",
       navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", todaySuffix:"today", activeSubBadge:"ACTIVE",
-      blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period",
+      blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period", breakStartLabel:"Break start", breakEndLabel:"Break end", noBreakOption:"No break",
       notifTodayTitle:"Today's bookings", notifTodayBody:"You have {n} bookings today. First at 09:00.",
       notifCancelTitleDemo:"Booking cancelled", notifCancelBodyDemo:"João Costa cancelled today's 14:00 booking.",
       notifNewDemoTitle:"New booking", notifNewDemoBody:"Miguel Ferreira booked a Classic Cut for tomorrow at 10:00.",
@@ -297,7 +299,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
       deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.",
       navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
-      blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado",
+      blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Inicio de la pausa", breakEndLabel:"Fin de la pausa", noBreakOption:"Sin pausa",
       notifTodayTitle:"Citas de hoy", notifTodayBody:"Tienes {n} citas hoy. La primera a las 09:00.",
       notifCancelTitleDemo:"Cita cancelada", notifCancelBodyDemo:"João Costa canceló la cita de hoy a las 14:00.",
       notifNewDemoTitle:"Nueva cita", notifNewDemoBody:"Miguel Ferreira reservó un Corte Clásico para mañana a las 10:00.",
@@ -393,7 +395,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
       deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.",
       navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
-      blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée",
+      blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée", breakStartLabel:"Début de la pause", breakEndLabel:"Fin de la pause", noBreakOption:"Sans pause",
       notifTodayTitle:"Réservations du jour", notifTodayBody:"Tu as {n} réservations aujourd'hui. La première à 09:00.",
       notifCancelTitleDemo:"Réservation annulée", notifCancelBodyDemo:"João Costa a annulé la réservation de 14:00 aujourd'hui.",
       notifNewDemoTitle:"Nouvelle réservation", notifNewDemoBody:"Miguel Ferreira a réservé une Coupe Classique pour demain à 10:00.",
@@ -489,7 +491,7 @@ const LANGS = {
       cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
       deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.",
       navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", todaySuffix:"heute", activeSubBadge:"AKTIV",
-      blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum",
+      blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum", breakStartLabel:"Pausenbeginn", breakEndLabel:"Pausenende", noBreakOption:"Keine Pause",
       notifTodayTitle:"Heutige Termine", notifTodayBody:"Du hast heute {n} Termine. Der erste um 09:00.",
       notifCancelTitleDemo:"Termin storniert", notifCancelBodyDemo:"João Costa hat den heutigen 14:00-Termin storniert.",
       notifNewDemoTitle:"Neuer Termin", notifNewDemoBody:"Miguel Ferreira hat einen Klassischen Schnitt für morgen um 10:00 gebucht.",
@@ -515,8 +517,9 @@ const LANGS = {
 const FLAG_CC = { pt:"pt", en:"gb", es:"es", fr:"fr", de:"de" };
 
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
-const ALL_HOURS = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
-                   "13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"];
+const ALL_HOURS = ["06:00","06:30","07:00","07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30",
+                   "13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00",
+                   "19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00","23:30"];
 const MONTHS  = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 const WDAYS   = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
 const WDAYS_F = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
@@ -553,9 +556,9 @@ const INIT_SERVICES = [
     names:{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"}},
 ];
 const INIT_BARBERS = [
-  {id:"b1",name:"Luis Correia",role:"Barbeiro Sênior",pin:"1984",phone:"+351 912 345 678",bio:"Especialista em cortes clássicos e barba.",avatar:"LC",color:"#b8955a",schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00"},active:true},
-  {id:"b2",name:"André Silva",role:"Barbeiro",pin:"2000",phone:"+351 913 000 111",bio:"Especialista em degradê e cortes modernos.",avatar:"AS",color:"#6a9eb8",schedule:{workDays:[2,3,4,5,6],startHour:"10:00",endHour:"19:00"},active:true},
-  {id:"b3",name:"Rui Mendes",role:"Barbeiro Junior",pin:"1111",phone:"+351 914 111 222",bio:"Cortes rápidos e modernos.",avatar:"RM",color:"#9e6a4a",schedule:{workDays:[1,3,5,6],startHour:"09:00",endHour:"17:00"},active:true},
+  {id:"b1",name:"Luis Correia",role:"Barbeiro Sênior",pin:"1984",phone:"+351 912 345 678",bio:"Especialista em cortes clássicos e barba.",avatar:"LC",color:"#b8955a",schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00",breakStart:"12:00",breakEnd:"13:00"},active:true},
+  {id:"b2",name:"André Silva",role:"Barbeiro",pin:"2000",phone:"+351 913 000 111",bio:"Especialista em degradê e cortes modernos.",avatar:"AS",color:"#6a9eb8",schedule:{workDays:[2,3,4,5,6],startHour:"10:00",endHour:"19:00",breakStart:"13:00",breakEnd:"14:00"},active:true},
+  {id:"b3",name:"Rui Mendes",role:"Barbeiro Junior",pin:"1111",phone:"+351 914 111 222",bio:"Cortes rápidos e modernos.",avatar:"RM",color:"#9e6a4a",schedule:{workDays:[1,3,5,6],startHour:"09:00",endHour:"17:00",breakStart:"",breakEnd:""},active:true},
 ];
 const INIT_SHOP = {name:"LC.84 Barber Vision",address:"Rua do Comércio, 84 — Lisboa",phone:"+351 912 345 678",bio:"Barbearia de luxo com mais de 10 anos de experiência.",adminPin:"admin"};
 
@@ -647,7 +650,14 @@ function Modal({onClose,title,children}){
 }
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
-function getBarberHours(barber){const{startHour,endHour}=barber.schedule;return ALL_HOURS.filter(h=>h>=startHour&&h<endHour);}
+function getBarberHours(barber){
+  const{startHour,endHour,breakStart,breakEnd}=barber.schedule;
+  return ALL_HOURS.filter(h=>{
+    if(h<startHour||h>=endHour)return false;
+    if(breakStart&&breakEnd&&h>=breakStart&&h<breakEnd)return false;
+    return true;
+  });
+}
 const SERVICE_NAME_TRANSLATIONS = {
   "Corte Clássico":    {pt:"Corte Clássico",en:"Classic Cut",es:"Corte Clásico",fr:"Coupe Classique",de:"Klassischer Schnitt"},
   "Corte + Barba":     {pt:"Corte + Barba",en:"Cut + Beard",es:"Corte + Barba",fr:"Coupe + Barbe",de:"Schnitt + Bart"},
@@ -1584,6 +1594,10 @@ function BSchedule({barber,setBarbers,lang}){
         <div><Lbl>{L.startHour}</Lbl><Sel value={f.startHour} onChange={e=>setF(p=>({...p,startHour:e.target.value}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
         <div><Lbl>{L.endHour}</Lbl><Sel value={f.endHour} onChange={e=>setF(p=>({...p,endHour:e.target.value}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
       </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
+        <div><Lbl>{L.breakStartLabel}</Lbl><Sel value={f.breakStart||""} onChange={e=>setF(p=>({...p,breakStart:e.target.value}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+        <div><Lbl>{L.breakEndLabel}</Lbl><Sel value={f.breakEnd||""} onChange={e=>setF(p=>({...p,breakEnd:e.target.value}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+      </div>
       <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"12px 13px",marginBottom:16}}>
         <Lbl style={{marginBottom:7}}>{L.generatedSlots}</Lbl>
         <div style={{display:"flex",flexWrap:"wrap",gap:5}}>{getBarberHours({schedule:f}).map(h=><span key={h} style={{fontSize:"0.7rem",color:T.mid,padding:"3px 7px",background:T.muted,borderRadius:3,fontFamily:"'Josefin Sans',sans-serif"}}>{h}</span>)}</div>
@@ -1665,7 +1679,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const svc=id=>services.find(s=>s.id===id);
   const totalRev=bookings.filter(b=>b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const todayAll=bookings.filter(b=>b.date===TODAY&&!b.blocked);
-  const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00"},active:true});setModal("barber");};
+  const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00",breakStart:"",breakEnd:""},active:true});setModal("barber");};
   const saveBarber=()=>{if(!bf.name.trim()||!bf.pin.trim())return;if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?bf:b));else setBarbers(p=>[...p,{...bf,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);setModal(null);};
   const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop}];
   const [photoBusy,setPhotoBusy]=useState(false);
@@ -1702,14 +1716,14 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.88rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84 <span style={{color:T.silver,fontSize:"0.68rem"}}>Admin</span></div></div>
           <Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.56rem"}} onClick={onLogout}>{L.logout}</Btn>
         </div>
         <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none"}}>{TABS.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:"8px 14px",background:"none",border:"none",borderBottom:`2px solid ${tab===t.id?T.gold:"transparent"}`,cursor:"pointer",color:tab===t.id?T.gold:T.silver,fontSize:"0.6rem",letterSpacing:"0.16em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:tab===t.id?700:400,whiteSpace:"nowrap"}}>{t.l}</button>)}</div>
       </header>
-      <main style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
         {tab==="overview"&&(<>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
             {[{l:L.totalBilled,v:`€${totalRev}`,c:T.gold},{l:L.barbersLabel,v:barbers.filter(b=>b.active).length,c:T.white},{l:L.todayAllLabel,v:todayAll.length,c:T.mid},{l:L.totalBookingsLabel,v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
@@ -1748,6 +1762,10 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             <div style={{display:"flex",gap:8,marginBottom:14}}>
               <div style={{flex:1}}><Lbl>{L.startHour}</Lbl><Sel value={bf.schedule?.startHour||"09:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,startHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
               <div style={{flex:1}}><Lbl>{L.endHour}</Lbl><Sel value={bf.schedule?.endHour||"18:00"} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,endHour:e.target.value}}))}>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+            </div>
+            <div style={{display:"flex",gap:8,marginBottom:14}}>
+              <div style={{flex:1}}><Lbl>{L.breakStartLabel}</Lbl><Sel value={bf.schedule?.breakStart||""} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,breakStart:e.target.value}}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
+              <div style={{flex:1}}><Lbl>{L.breakEndLabel}</Lbl><Sel value={bf.schedule?.breakEnd||""} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,breakEnd:e.target.value}}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
             </div>
             <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={saveBarber}>{L.save}</Btn>{bf.id&&<Btn variant="danger" onClick={()=>{setBarbers(p=>p.filter(b=>b.id!==bf.id));setModal(null);}}>{L.delete}</Btn>}<Btn variant="ghost" onClick={()=>setModal(null)}>{L.close}</Btn></div>
           </Modal>}
@@ -1937,14 +1955,14 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:9}}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill={T.gold}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.85rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84</div><div style={{fontSize:"0.48rem",letterSpacing:"0.28em",color:T.silver,textTransform:"uppercase"}}>{L.clientArea}</div></div>
         </div>
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </header>
-      <main style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,padding:"20px 20px 80px"}}>
         {screen==="home"&&(<>
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
@@ -2034,7 +2052,7 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
     if(!jName.trim()){setJErr(L.writeYourName);return;}
     if(!/^\d{4,6}$/.test(jPin)){setJErr(L.codeLength);return;}
     if(jPin===shop.adminPin||barbers.find(b=>b.pin===jPin)){setJErr(L.codeInUse);return;}
-    const nb={id:mkId(),name:jName.trim(),role:"Barbeiro",pin:jPin,phone:jPhone||"",bio:"",avatar:jName.trim().split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00"},active:true};
+    const nb={id:mkId(),name:jName.trim(),role:"Barbeiro",pin:jPin,phone:jPhone||"",bio:"",avatar:jName.trim().split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true};
     setBarbers(p=>[...p,nb]);
     onBarberLogin(nb);
   };
@@ -2158,7 +2176,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack, lang}){
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"16px 20px 14px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div>
           <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.95rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"0.82rem"}}>barbervision</span></div>
           <div style={{fontSize:"0.55rem",letterSpacing:"0.25em",color:T.silver,textTransform:"uppercase",marginTop:2}}>{L.subscriptionLabel}</div>
@@ -2166,7 +2184,7 @@ function SubscriptionScreen({barbers, subscription, onSubscribe, onBack, lang}){
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 10px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </header>
 
-      <main style={{width:"100%",maxWidth:520,padding:"24px 20px 60px"}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,padding:"24px 20px 60px"}}>
 
         {/* Hero */}
         <div style={{textAlign:"center",marginBottom:28}}>
@@ -2344,7 +2362,7 @@ function OwnerPortal({lang,setLang}){
     const slug=await generateUniqueSlug(salonName);
     const initData={
       shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
-      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00"},active:true}],
+      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
       services:INIT_SERVICES,
       bookings:[],
       notifications:[],
@@ -2563,7 +2581,7 @@ const [notifications,setNotifications] = useState([]);
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
       <style>{GS}</style>
-      <header style={{width:"100%",maxWidth:520,borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
+      <header className="app-shell" style={{width:"100%",maxWidth:520,borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
         {/* MARCA — sempre visível */}
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 20px",borderBottom:`1px solid ${T.border}`}}>
           <span style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.05rem",fontWeight:700,letterSpacing:"0.08em",color:T.white}}>
@@ -2600,9 +2618,9 @@ const [notifications,setNotifications] = useState([]);
       </header>
 
       {/* Trial banner inside app */}
-      {!subscription&&<div style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
+      {!subscription&&<div className="app-shell" style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
 
-      <main style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}

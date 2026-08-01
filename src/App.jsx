@@ -107,7 +107,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
       deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.",
       navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", todaySuffix:"hoje", activeSubBadge:"ATIVO",
-      blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Início da pausa", breakEndLabel:"Fim da pausa", noBreakOption:"Sem pausa",
+      blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Início da pausa", breakEndLabel:"Fim da pausa", noBreakOption:"Sem pausa", deleteClientBtn:"Apagar cliente", deleteClientWarning:"Isto remove definitivamente o histórico, notas e cortes registados para {name}. Esta ação não pode ser desfeita.",
       notifTodayTitle:"Marcações de hoje", notifTodayBody:"Tens {n} marcações hoje. A primeira às 09:00.",
       notifCancelTitleDemo:"Marcação cancelada", notifCancelBodyDemo:"João Costa cancelou a marcação de hoje às 14:00.",
       notifNewDemoTitle:"Nova marcação", notifNewDemoBody:"Miguel Ferreira marcou Corte Clássico para amanhã às 10:00.",
@@ -203,7 +203,7 @@ const LANGS = {
       cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
       deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.",
       navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", todaySuffix:"today", activeSubBadge:"ACTIVE",
-      blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period", breakStartLabel:"Break start", breakEndLabel:"Break end", noBreakOption:"No break",
+      blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period", breakStartLabel:"Break start", breakEndLabel:"Break end", noBreakOption:"No break", deleteClientBtn:"Delete client", deleteClientWarning:"This permanently removes the history, notes, and recorded cuts for {name}. This action cannot be undone.",
       notifTodayTitle:"Today's bookings", notifTodayBody:"You have {n} bookings today. First at 09:00.",
       notifCancelTitleDemo:"Booking cancelled", notifCancelBodyDemo:"João Costa cancelled today's 14:00 booking.",
       notifNewDemoTitle:"New booking", notifNewDemoBody:"Miguel Ferreira booked a Classic Cut for tomorrow at 10:00.",
@@ -299,7 +299,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
       deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.",
       navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
-      blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Inicio de la pausa", breakEndLabel:"Fin de la pausa", noBreakOption:"Sin pausa",
+      blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Inicio de la pausa", breakEndLabel:"Fin de la pausa", noBreakOption:"Sin pausa", deleteClientBtn:"Eliminar cliente", deleteClientWarning:"Esto elimina definitivamente el historial, notas y cortes registrados de {name}. Esta acción no se puede deshacer.",
       notifTodayTitle:"Citas de hoy", notifTodayBody:"Tienes {n} citas hoy. La primera a las 09:00.",
       notifCancelTitleDemo:"Cita cancelada", notifCancelBodyDemo:"João Costa canceló la cita de hoy a las 14:00.",
       notifNewDemoTitle:"Nueva cita", notifNewDemoBody:"Miguel Ferreira reservó un Corte Clásico para mañana a las 10:00.",
@@ -395,7 +395,7 @@ const LANGS = {
       cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
       deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.",
       navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
-      blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée", breakStartLabel:"Début de la pause", breakEndLabel:"Fin de la pause", noBreakOption:"Sans pause",
+      blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée", breakStartLabel:"Début de la pause", breakEndLabel:"Fin de la pause", noBreakOption:"Sans pause", deleteClientBtn:"Supprimer le client", deleteClientWarning:"Cela supprime définitivement l'historique, les notes et les coupes enregistrées pour {name}. Cette action est irréversible.",
       notifTodayTitle:"Réservations du jour", notifTodayBody:"Tu as {n} réservations aujourd'hui. La première à 09:00.",
       notifCancelTitleDemo:"Réservation annulée", notifCancelBodyDemo:"João Costa a annulé la réservation de 14:00 aujourd'hui.",
       notifNewDemoTitle:"Nouvelle réservation", notifNewDemoBody:"Miguel Ferreira a réservé une Coupe Classique pour demain à 10:00.",
@@ -491,7 +491,7 @@ const LANGS = {
       cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
       deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.",
       navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", todaySuffix:"heute", activeSubBadge:"AKTIV",
-      blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum", breakStartLabel:"Pausenbeginn", breakEndLabel:"Pausenende", noBreakOption:"Keine Pause",
+      blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum", breakStartLabel:"Pausenbeginn", breakEndLabel:"Pausenende", noBreakOption:"Keine Pause", deleteClientBtn:"Kunde löschen", deleteClientWarning:"Dadurch werden Verlauf, Notizen und erfasste Schnitte für {name} dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       notifTodayTitle:"Heutige Termine", notifTodayBody:"Du hast heute {n} Termine. Der erste um 09:00.",
       notifCancelTitleDemo:"Termin storniert", notifCancelBodyDemo:"João Costa hat den heutigen 14:00-Termin storniert.",
       notifNewDemoTitle:"Neuer Termin", notifNewDemoBody:"Miguel Ferreira hat einen Klassischen Schnitt für morgen um 10:00 gebucht.",
@@ -766,7 +766,7 @@ function BNotifications({notifications,setNotifications,barber,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,shopId,lang}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,shopId,lang}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -778,6 +778,7 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
   const [cutBusy,setCutBusy]=useState(false);
   const [cutErr,setCutErr]=useState("");
   const [viewPhoto,setViewPhoto]=useState(null);
+  const [delClientOpen,setDelClientOpen]=useState(false);
   const svc=id=>services.find(s=>s.id===id);
 
   // Build client map from this barber's bookings
@@ -802,6 +803,15 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
     setNoteText(clientNotes[c.phone||c.name]||"");
     setEditNote(false);
     setAddingCut(false);setCutPhoto(null);setCutNotes("");setCutErr("");
+    setDelClientOpen(false);
+  };
+  const deleteClient=()=>{
+    const key=openClient.phone||openClient.name;
+    setBookings(p=>p.filter(b=>!(b.barberId===barber.id&&(b.phone||b.name)===key&&!b.blocked)));
+    setClientNotes(p=>{const n={...p};delete n[key];return n;});
+    setCutRecords(p=>{const n={...p};delete n[cutKey(openClient)];return n;});
+    setOpenClient(null);
+    setDelClientOpen(false);
   };
   const saveNote=()=>{
     const key=openClient.phone||openClient.name;
@@ -1005,6 +1015,22 @@ function BClients({bookings,services,barber,clientNotes,setClientNotes,cutRecord
                 </div>
               ))}
             </div>
+
+            <div style={{marginTop:24,paddingTop:16,borderTop:`1px solid ${T.border}`}}>
+              <Btn variant="danger" style={{width:"100%"}} onClick={()=>setDelClientOpen(true)}>{L.deleteClientBtn}</Btn>
+            </div>
+
+            {delClientOpen&&(
+              <Modal onClose={()=>setDelClientOpen(false)} title={L.deleteClientBtn}>
+                <div style={{fontSize:"0.8rem",color:T.silver,marginBottom:16,lineHeight:1.5}}>
+                  {L.deleteClientWarning.replace("{name}",c.name)}
+                </div>
+                <div style={{display:"flex",gap:8}}>
+                  <Btn variant="danger" style={{flex:1}} onClick={deleteClient}>{L.deletePermanently}</Btn>
+                  <Btn variant="ghost" onClick={()=>setDelClientOpen(false)}>{L.cancel}</Btn>
+                </div>
+              </Modal>
+            )}
 
             <Btn variant="ghost" style={{width:"100%",marginTop:16}} onClick={()=>setOpenClient(null)}>{L.close}</Btn>
           </Modal>
@@ -2624,7 +2650,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} shopId={shopId} lang={lang}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} shopId={shopId} lang={lang}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
