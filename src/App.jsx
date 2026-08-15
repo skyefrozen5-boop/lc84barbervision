@@ -1173,10 +1173,10 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
           const cnt=bookings.filter(b=>b.barberId===barber.id&&b.date===str&&!b.blocked).length;
           const works=barberWorksOnDate(barber,str),sel=str===selDate;
           const fullyBlocked=isDayFullyBlocked(str);
-          return(<div key={str} onClick={()=>setSelDate(str)} style={{minWidth:47,borderRadius:6,padding:"8px 4px",textAlign:"center",cursor:"pointer",flexShrink:0,background:sel?T.gold:fullyBlocked?T.redLo:T.card,border:`1px solid ${sel?T.gold:fullyBlocked?T.red:works?T.border:T.muted}`,opacity:works?1:0.4}}>
+          return(<div key={str} onClick={()=>setSelDate(str)} style={{minWidth:47,borderRadius:6,padding:"8px 4px",textAlign:"center",cursor:"pointer",flexShrink:0,background:sel?T.gold:fullyBlocked?T.redLo:T.card,border:`1px solid ${sel?T.gold:fullyBlocked?T.red:works?T.border:T.muted}`}}>
             <div style={{fontSize:"0.52rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",color:sel?"#000":fullyBlocked?T.red:T.silver,marginBottom:3}}>{WD[d.getDay()]}</div>
             <div style={{fontSize:"0.97rem",fontWeight:600,color:sel?"#000":fullyBlocked?T.red:T.white,lineHeight:1}}>{d.getDate()}</div>
-            {fullyBlocked?<div style={{fontSize:"0.45rem",color:sel?"#000":T.red,marginTop:3}}>🔒</div>:cnt>0&&<div style={{width:4,height:4,borderRadius:"50%",background:sel?"#000":T.gold,margin:"3px auto 0"}}/>}
+            {fullyBlocked?<div style={{fontSize:"0.45rem",color:sel?"#000":T.red,marginTop:3}}>🔒</div>:!works?<div style={{fontSize:"0.62rem",fontWeight:800,color:sel?"#000":T.red,marginTop:3}}>F</div>:cnt>0&&<div style={{width:4,height:4,borderRadius:"50%",background:sel?"#000":T.gold,margin:"3px auto 0"}}/>}
           </div>);
         })}
       </div>
