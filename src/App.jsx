@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import logoIcon from './assets/logo-icon.png';
+import logoIcon from './assets/logo-icon.jpg';
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
 const T = {
@@ -2172,8 +2172,7 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         {shop.photoUrl&&(
           <img src={shop.photoUrl} style={{width:"100%",maxWidth:290,height:140,objectFit:"contain",background:T.card,borderRadius:10,marginBottom:18,border:`1px solid ${T.border}`}}/>
         )}
-        <img src={logoIcon} style={{width:48,height:48,marginBottom:13,objectFit:"contain"}}/>
-        <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.9rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.4rem"}}>barbervision</span></div>
+        <img src={logoIcon} style={{width:220,marginBottom:8,display:"block",marginLeft:"auto",marginRight:"auto"}}/>
         <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
       </div>
       <div style={{width:"100%",maxWidth:290,display:"flex",flexDirection:"column",gap:9}}>
@@ -2446,7 +2445,7 @@ function OwnerPortal({lang,setLang}){
         ))}
       </div>
       <div style={{textAlign:"center",marginBottom:28}}>
-        <img src={logoIcon} style={{width:56,height:56,marginBottom:10,objectFit:"contain"}}/>
+        <img src={logoIcon} style={{width:130,marginBottom:10,display:"block",marginLeft:"auto",marginRight:"auto"}}/>
         <div style={{fontSize:"1.5rem",color:T.white,fontWeight:600,letterSpacing:"0.08em"}}>{L.portalTitle}</div>
         <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>{L.portalSubtitle}</div>
       </div>
