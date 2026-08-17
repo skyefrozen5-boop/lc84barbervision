@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { supabase } from "./supabaseClient";
 import logoIcon from './assets/logo-icon.jpg';
 
@@ -122,6 +122,9 @@ const LANGS = {
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
       wrongCredentials:"Email ou password incorretos.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para o Portal do Dono",
+      chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
+      chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
+      notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
       joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
       phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
       writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
@@ -218,6 +221,9 @@ const LANGS = {
       fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
       wrongCredentials:"Wrong email or password.", createShopFailed:"Could not create the barbershop. Try again.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal",
+      chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
+      chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
+      notifNewMsgTitle:"New message", notifNewMsgBody:"{name} sent you a message.",
       joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
       phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
       writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
@@ -314,6 +320,9 @@ const LANGS = {
       fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
       wrongCredentials:"Email o contraseña incorrectos.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño",
+      chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
+      chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
+      notifNewMsgTitle:"Nuevo mensaje", notifNewMsgBody:"{name} te envió un mensaje.",
       joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
       phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
       writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
@@ -410,6 +419,9 @@ const LANGS = {
       fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
       wrongCredentials:"Email ou mot de passe incorrect.", createShopFailed:"Impossible de créer le salon. Réessaie.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire",
+      chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
+      chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
+      notifNewMsgTitle:"Nouveau message", notifNewMsgBody:"{name} t'a envoyé un message.",
       joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
       phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
       writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
@@ -506,6 +518,9 @@ const LANGS = {
       fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
       wrongCredentials:"Falsche E-Mail oder Passwort.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal",
+      chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
+      chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
+      notifNewMsgTitle:"Neue Nachricht", notifNewMsgBody:"{name} hat dir eine Nachricht geschickt.",
       joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
       phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
       writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
@@ -649,6 +664,126 @@ function Modal({onClose,title,children}){
   );
 }
 
+// ─── CHAT (cliente ↔ barbeiro, tempo real via Supabase Realtime) ──────────────
+function useChatThread(shopId,barberId,clientKey,sender){
+  const [messages,setMessages]=useState([]);
+  const [loading,setLoading]=useState(true);
+  useEffect(()=>{
+    if(!shopId||!barberId||!clientKey)return;
+    let active=true;
+    setLoading(true);
+    (async()=>{
+      const{data}=await supabase.from("messages").select("*")
+        .eq("shop_id",shopId).eq("barber_id",barberId).eq("client_key",clientKey)
+        .order("created_at",{ascending:true});
+      if(active){setMessages(data||[]);setLoading(false);}
+    })();
+    const ch=supabase.channel(`chat-${shopId}-${barberId}-${clientKey}`)
+      .on("postgres_changes",{event:"INSERT",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},payload=>{
+        const m=payload.new;
+        if(m.barber_id!==barberId||m.client_key!==clientKey)return;
+        setMessages(p=>p.find(x=>x.id===m.id)?p:[...p,m]);
+      })
+      .subscribe();
+    return()=>{active=false;supabase.removeChannel(ch);};
+  },[shopId,barberId,clientKey]);
+  const send=async(text)=>{
+    const clean=text.trim();
+    if(!clean)return;
+    const{data,error}=await supabase.from("messages").insert({shop_id:shopId,barber_id:barberId,client_key:clientKey,sender,text:clean}).select().single();
+    if(!error&&data)setMessages(p=>p.find(x=>x.id===data.id)?p:[...p,data]);
+  };
+  const markRead=async()=>{
+    const field=sender==="barber"?"read_barber":"read_client";
+    const other=sender==="barber"?"client":"barber";
+    await supabase.from("messages").update({[field]:true})
+      .eq("shop_id",shopId).eq("barber_id",barberId).eq("client_key",clientKey).eq("sender",other).eq(field,false);
+  };
+  return{messages,loading,send,markRead};
+}
+
+function useBarberUnreadMap(shopId,barberId){
+  const [map,setMap]=useState({});
+  useEffect(()=>{
+    if(!shopId||!barberId)return;
+    let active=true;
+    const load=async()=>{
+      const{data}=await supabase.from("messages").select("client_key")
+        .eq("shop_id",shopId).eq("barber_id",barberId).eq("sender","client").eq("read_barber",false);
+      if(!active)return;
+      const m={};(data||[]).forEach(r=>{m[r.client_key]=(m[r.client_key]||0)+1;});
+      setMap(m);
+    };
+    load();
+    const ch=supabase.channel(`unread-b-${shopId}-${barberId}`)
+      .on("postgres_changes",{event:"*",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},load)
+      .subscribe();
+    return()=>{active=false;supabase.removeChannel(ch);};
+  },[shopId,barberId]);
+  return map;
+}
+
+function useClientUnreadMap(shopId,clientKey){
+  const [map,setMap]=useState({});
+  useEffect(()=>{
+    if(!shopId||!clientKey)return;
+    let active=true;
+    const load=async()=>{
+      const{data}=await supabase.from("messages").select("barber_id")
+        .eq("shop_id",shopId).eq("client_key",clientKey).eq("sender","barber").eq("read_client",false);
+      if(!active)return;
+      const m={};(data||[]).forEach(r=>{m[r.barber_id]=(m[r.barber_id]||0)+1;});
+      setMap(m);
+    };
+    load();
+    const ch=supabase.channel(`unread-c-${shopId}-${clientKey}`)
+      .on("postgres_changes",{event:"*",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},load)
+      .subscribe();
+    return()=>{active=false;supabase.removeChannel(ch);};
+  },[shopId,clientKey]);
+  return map;
+}
+
+function ChatThread({shopId,barberId,clientKey,sender,lang,onSent}){
+  const L=LANGS[lang].t;
+  const{messages,loading,send,markRead}=useChatThread(shopId,barberId,clientKey,sender);
+  const [text,setText]=useState("");
+  const endRef=useRef(null);
+  useEffect(()=>{endRef.current?.scrollIntoView({block:"end"});},[messages.length]);
+  useEffect(()=>{if(messages.length)markRead();},[messages.length]);
+  const onSend=()=>{
+    const clean=text.trim();
+    if(!clean)return;
+    send(clean);
+    setText("");
+    onSent&&onSent(clean);
+  };
+  return(
+    <div style={{display:"flex",flexDirection:"column",height:"55vh",minHeight:320}}>
+      <div style={{flex:1,overflowY:"auto",display:"flex",flexDirection:"column",gap:7,padding:"2px 2px 8px"}}>
+        {loading?(
+          <div style={{color:T.silver,fontSize:"0.78rem",textAlign:"center",padding:"24px 0"}}>{L.loadingText}</div>
+        ):messages.length===0?(
+          <div style={{color:T.silver,fontSize:"0.78rem",textAlign:"center",padding:"24px 0"}}>{L.chatEmpty}</div>
+        ):messages.map(m=>{
+          const mine=m.sender===sender;
+          return(
+            <div key={m.id} style={{alignSelf:mine?"flex-end":"flex-start",maxWidth:"78%",background:mine?T.goldLo:T.card,border:`1px solid ${mine?T.gold:T.border}`,borderRadius:mine?"11px 11px 2px 11px":"11px 11px 11px 2px",padding:"8px 11px"}}>
+              <div style={{fontSize:"0.85rem",color:T.white,whiteSpace:"pre-wrap",wordBreak:"break-word",lineHeight:1.4}}>{m.text}</div>
+              <div style={{fontSize:"0.55rem",color:T.silver,marginTop:4,textAlign:"right"}}>{new Date(m.created_at).toLocaleTimeString(lang==="pt"?"pt-PT":"en-GB",{hour:"2-digit",minute:"2-digit"})}</div>
+            </div>
+          );
+        })}
+        <div ref={endRef}/>
+      </div>
+      <div style={{display:"flex",gap:7,paddingTop:9,borderTop:`1px solid ${T.border}`}}>
+        <Inp value={text} onChange={e=>setText(e.target.value)} placeholder={L.chatPlaceholder} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();onSend();}}} style={{flex:1}}/>
+        <Btn variant="gold" style={{padding:"9px 15px"}} onClick={onSend}>➤</Btn>
+      </div>
+    </div>
+  );
+}
+
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 function getBarberHours(barber){
   const{startHour,endHour,breakStart,breakEnd}=barber.schedule;
@@ -783,6 +918,8 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
   const [newClientName,setNewClientName]=useState("");
   const [newClientPhone,setNewClientPhone]=useState("");
   const [newClientErr,setNewClientErr]=useState("");
+  const [chatClient,setChatClient]=useState(null);
+  const unreadMap=useBarberUnreadMap(shopId,barber.id);
   const svc=id=>services.find(s=>s.id===id);
 
   // Build client map from this barber's bookings
@@ -900,6 +1037,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                 <div style={{display:"flex",alignItems:"center",gap:8}}>
                   <div style={{fontSize:"1rem",color:T.white,fontWeight:500}}>{c.name}</div>
                   {upcoming.length>0&&<span style={{fontSize:"0.55rem",background:T.goldLo,color:T.gold,border:`1px solid ${T.gold}`,padding:"1px 6px",borderRadius:3,fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em"}}>{L.bookedBadge}</span>}
+                  {unreadMap[key]>0&&<span style={{fontSize:"0.55rem",background:T.red,color:"#fff",borderRadius:"50%",width:16,height:16,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Josefin Sans',sans-serif"}}>{unreadMap[key]>9?"9+":unreadMap[key]}</span>}
                 </div>
                 <div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{c.phone} · {c.visits.length} {L.visits}{c.visits.length!==1?"s":""}</div>
                 <div style={{fontSize:"0.66rem",color:T.silver,marginTop:1}}>{L.lastVisitLabel}: {dateLabel(c.lastVisit)} · {L.favorite}: {favService(c)}</div>
@@ -933,6 +1071,10 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                 <div style={{fontSize:"1.2rem",color:T.white,fontWeight:600}}>{c.name}</div>
                 <div style={{fontSize:"0.75rem",color:T.silver,marginTop:2}}>{c.phone}</div>
               </div>
+              <button onClick={()=>setChatClient(c)} style={{position:"relative",background:T.goldLo,border:`1px solid ${T.gold}`,color:T.gold,padding:"7px 11px",borderRadius:6,cursor:"pointer",fontSize:"0.68rem",fontFamily:"'Josefin Sans',sans-serif",flexShrink:0}}>
+                {L.chatBtn}
+                {unreadMap[key]>0&&<span style={{position:"absolute",top:-5,right:-5,background:T.red,color:"#fff",borderRadius:"50%",width:16,height:16,fontSize:"0.55rem",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Josefin Sans',sans-serif"}}>{unreadMap[key]>9?"9+":unreadMap[key]}</span>}
+              </button>
             </div>
 
             {/* Stats */}
@@ -1067,6 +1209,13 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
           </Modal>
         );
       })()}
+
+      {/* Chat com o cliente */}
+      {chatClient&&(
+        <Modal onClose={()=>setChatClient(null)} title={`${L.chatTitle} · ${chatClient.name}`}>
+          <ChatThread shopId={shopId} barberId={barber.id} clientKey={chatClient.phone||chatClient.name} sender="barber" lang={lang}/>
+        </Modal>
+      )}
 
       {/* Ver foto de corte ampliada */}
       {viewPhoto&&(
@@ -1980,7 +2129,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
     <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={onBack}>{L.back}</Btn>
   </>);
 }
-function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,lang,onBack}){
+function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotification,lang,onBack}){
   const L=LANGS[lang].t;
   const [screen,setScreen]=useState("home");
   const [step,setStep]=useState(1);
@@ -1988,6 +2137,16 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
   const [done,setDone]=useState(null);
   const [clientPhone,setClientPhone]=useState("");
   const [myBk,setMyBk]=useState([]);
+  const [chatPhone,setChatPhone]=useState("");
+  const [chatBarbers,setChatBarbers]=useState([]);
+  const [chatBarber,setChatBarber]=useState(null);
+  const clientUnread=useClientUnreadMap(shopId,chatPhone.trim());
+  const openChatList=()=>{
+    if(chatPhone.trim().length<5)return;
+    const ids=[...new Set(bookings.filter(b=>b.phone===chatPhone.trim()).map(b=>b.barberId))];
+    setChatBarbers(barbers.filter(b=>ids.includes(b.id)));
+    setScreen("chatlist");
+  };
   const svc=id=>services.find(s=>s.id===id);
   const barber=barbers.find(b=>b.id===sel.barberId);
   const selSvc=svc(sel.serviceId);
@@ -2023,6 +2182,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
         {screen==="home"&&(<>
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
+          <Btn variant="ghost" style={{width:"100%",marginBottom:16,padding:"12px"}} onClick={()=>setScreen("chat")}>{L.chatWithBarberCta}</Btn>
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>{L.myBookingsLabel}</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder={L.phonePlaceholder} value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>{L.show}</Btn></div></div>
           <Lbl style={{marginBottom:9}}>{L.ourTeam}</Lbl>
           {barbers.filter(b=>b.active).map(b=>(
@@ -2076,6 +2236,23 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
           <Btn variant="gold" style={{width:"100%",marginBottom:9}} onClick={reset}>{L.newBookingBtn}</Btn>
           <Btn variant="ghost" style={{width:"100%"}} onClick={()=>setScreen("mybookings")}>{L.myBookings}</Btn>
         </div>)}
+        {screen==="chat"&&(<>
+          <Lbl style={{marginBottom:10}}>{L.myBookingsLabel}</Lbl>
+          <div style={{display:"flex",gap:8,marginBottom:16}}><Inp placeholder={L.phonePlaceholder} value={chatPhone} onChange={e=>setChatPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={openChatList}>{L.show}</Btn></div>
+          <Btn variant="ghost" style={{width:"100%"}} onClick={()=>setScreen("home")}>{L.back}</Btn>
+        </>)}
+        {screen==="chatlist"&&(<>
+          <Lbl style={{marginBottom:10}}>{L.chatPickBarber}</Lbl>
+          {chatBarbers.length===0?<div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.chatNoBarbers}</div>
+          :chatBarbers.map(b=>(
+            <div key={b.id} onClick={()=>setChatBarber(b)} style={{display:"flex",alignItems:"center",gap:11,padding:"12px 14px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,cursor:"pointer"}}>
+              <Avatar barber={b} size={40}/>
+              <div style={{flex:1}}><div style={{fontSize:"0.95rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div></div>
+              {clientUnread[b.id]>0&&<span style={{fontSize:"0.6rem",background:T.red,color:"#fff",borderRadius:"50%",width:18,height:18,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Josefin Sans',sans-serif"}}>{clientUnread[b.id]>9?"9+":clientUnread[b.id]}</span>}
+            </div>
+          ))}
+          <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setScreen("chat")}>{L.back}</Btn>
+        </>)}
         {screen==="mybookings"&&(<>
           <Lbl style={{marginBottom:10}}>{myBk.length} {L.bookings}</Lbl>
           {myBk.length===0?<div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.noBookingsFound}</div>
@@ -2091,6 +2268,12 @@ function ClientArea({bookings,setBookings,services,barbers,shop,addNotification,
           <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setScreen("home")}>{L.back}</Btn>
         </>)}
       </main>
+      {chatBarber&&(
+        <Modal onClose={()=>setChatBarber(null)} title={`${L.chatTitle} · ${chatBarber.name}`}>
+          <ChatThread shopId={shopId} barberId={chatBarber.id} clientKey={chatPhone.trim()} sender="client" lang={lang}
+            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()))}/>
+        </Modal>
+      )}
     </div>
   );
 }
@@ -2625,7 +2808,7 @@ const [notifications,setNotifications] = useState([]);
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>;
 
   // Trial expired — block barber access
