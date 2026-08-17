@@ -1885,8 +1885,22 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const svc=id=>services.find(s=>s.id===id);
   const totalRev=bookings.filter(b=>b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const todayAll=bookings.filter(b=>b.date===TODAY&&!b.blocked);
-  const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00",breakStart:"",breakEnd:""},active:true});setModal("barber");};
+  const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,photoUrl:"",schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00",breakStart:"",breakEnd:""},active:true});setModal("barber");};
   const saveBarber=()=>{if(!bf.name.trim()||!bf.pin.trim())return;if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?bf:b));else setBarbers(p=>[...p,{...bf,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);setModal(null);};
+  const [barberPhotoBusy,setBarberPhotoBusy]=useState(false);
+  const [barberPhotoErr,setBarberPhotoErr]=useState("");
+  const uploadBarberPhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){setBarberPhotoErr(L.photoTooLarge);return;}
+    setBarberPhotoBusy(true);setBarberPhotoErr("");
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/barbeiro-${bf.id||"novo"}-${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(error){setBarberPhotoBusy(false);setBarberPhotoErr(L.uploadFailed);return;}
+    const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+    setBf(p=>({...p,photoUrl:data.publicUrl}));
+    setBarberPhotoBusy(false);
+  };
   const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop}];
   const [photoBusy,setPhotoBusy]=useState(false);
   const [photoErr,setPhotoErr]=useState("");
@@ -1903,6 +1917,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     setPhotoBusy(false);
   };
   const [delOpen,setDelOpen]=useState(false);
+  const [shopSaved,setShopSaved]=useState(false);
   const [delName,setDelName]=useState("");
   const [delPass,setDelPass]=useState("");
   const [delErr,setDelErr]=useState("");
@@ -1957,6 +1972,16 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             </div>
           ))}
           {modal==="barber"&&<Modal onClose={()=>setModal(null)} title={bf.id?L.editBarberTitle:L.newBarberTitle}>
+            <div style={{textAlign:"center",marginBottom:16}}>
+              <Avatar barber={bf} size={64}/>
+              <label style={{display:"inline-block",marginTop:9}}>
+                <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadBarberPhoto(e.target.files?.[0])}/>
+                <div style={{padding:"6px 14px",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+                  {barberPhotoBusy?L.uploading:bf.photoUrl?L.changePhoto:L.choosePhoto}
+                </div>
+              </label>
+              {barberPhotoErr&&<div style={{color:T.red,fontSize:"0.7rem",marginTop:6}}>{barberPhotoErr}</div>}
+            </div>
             {[[L.nameLabel,"name","text"],[L.role,"role","text"],[L.phone,"phone","tel"],[L.pinLabel,"pin","text"]].map(([l,k,t])=>(
               <div key={k} style={{marginBottom:10}}><Lbl>{l}</Lbl><Inp type={t} value={bf[k]||""} onChange={e=>setBf(p=>({...p,[k]:e.target.value}))}/></div>
             ))}
@@ -1997,7 +2022,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             <div key={k} style={{marginBottom:11}}><Lbl>{l}</Lbl><Inp type={t} value={shop[k]||""} onChange={e=>setShop(p=>({...p,[k]:e.target.value}))}/></div>
           ))}
           <div style={{marginBottom:14}}><Lbl>{L.bio}</Lbl><Txta rows={3} value={shop.bio||""} onChange={e=>setShop(p=>({...p,bio:e.target.value}))}/></div>
-          <Btn variant="gold" style={{width:"100%"}}>{L.save}</Btn>
+          <Btn variant="gold" style={{width:"100%"}} onClick={()=>{setShopSaved(true);setTimeout(()=>setShopSaved(false),2000);}}>{shopSaved?`✓ ${L.save}`:L.save}</Btn>
 
           <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
             <Lbl style={{marginBottom:8,color:T.red}}>{L.dangerZone}</Lbl>
