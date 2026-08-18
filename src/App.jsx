@@ -106,7 +106,7 @@ const LANGS = {
       cutHistoryTitle:"Histórico de cortes", addCutBtn:"+ Adicionar corte", tapCamera:"📷 Ligar câmara", tapGallery:"🖼️ Carregar ficheiro",
       cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
       deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.", addClientBtn:"+ Adicionar cliente", nameRequiredErr:"O nome é obrigatório.",
-      navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", todaySuffix:"hoje", activeSubBadge:"ATIVO",
+      navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", navShop:"Loja", todaySuffix:"hoje", activeSubBadge:"ATIVO",
       blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Início da pausa", breakEndLabel:"Fim da pausa", noBreakOption:"Sem pausa", deleteClientBtn:"Apagar cliente", deleteClientWarning:"Isto remove definitivamente o histórico, notas e cortes registados para {name}. Esta ação não pode ser desfeita.",
       notifTodayTitle:"Marcações de hoje", notifTodayBody:"Tens {n} marcações hoje. A primeira às 09:00.",
       notifCancelTitleDemo:"Marcação cancelada", notifCancelBodyDemo:"João Costa cancelou a marcação de hoje às 14:00.",
@@ -205,7 +205,7 @@ const LANGS = {
       cutHistoryTitle:"Cut history", addCutBtn:"+ Add cut", tapCamera:"📷 Open camera", tapGallery:"🖼️ Upload file",
       cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
       deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.", addClientBtn:"+ Add client", nameRequiredErr:"Name is required.",
-      navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", todaySuffix:"today", activeSubBadge:"ACTIVE",
+      navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", navShop:"Shop", todaySuffix:"today", activeSubBadge:"ACTIVE",
       blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period", breakStartLabel:"Break start", breakEndLabel:"Break end", noBreakOption:"No break", deleteClientBtn:"Delete client", deleteClientWarning:"This permanently removes the history, notes, and recorded cuts for {name}. This action cannot be undone.",
       notifTodayTitle:"Today's bookings", notifTodayBody:"You have {n} bookings today. First at 09:00.",
       notifCancelTitleDemo:"Booking cancelled", notifCancelBodyDemo:"João Costa cancelled today's 14:00 booking.",
@@ -304,7 +304,7 @@ const LANGS = {
       cutHistoryTitle:"Historial de cortes", addCutBtn:"+ Añadir corte", tapCamera:"📷 Abrir cámara", tapGallery:"🖼️ Subir archivo",
       cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
       deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.", addClientBtn:"+ Añadir cliente", nameRequiredErr:"El nombre es obligatorio.",
-      navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
+      navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", navShop:"Tienda", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
       blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Inicio de la pausa", breakEndLabel:"Fin de la pausa", noBreakOption:"Sin pausa", deleteClientBtn:"Eliminar cliente", deleteClientWarning:"Esto elimina definitivamente el historial, notas y cortes registrados de {name}. Esta acción no se puede deshacer.",
       notifTodayTitle:"Citas de hoy", notifTodayBody:"Tienes {n} citas hoy. La primera a las 09:00.",
       notifCancelTitleDemo:"Cita cancelada", notifCancelBodyDemo:"João Costa canceló la cita de hoy a las 14:00.",
@@ -403,7 +403,7 @@ const LANGS = {
       cutHistoryTitle:"Historique des coupes", addCutBtn:"+ Ajouter une coupe", tapCamera:"📷 Ouvrir la caméra", tapGallery:"🖼️ Importer un fichier",
       cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
       deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.", addClientBtn:"+ Ajouter un client", nameRequiredErr:"Le nom est obligatoire.",
-      navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
+      navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", navShop:"Salon", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
       blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée", breakStartLabel:"Début de la pause", breakEndLabel:"Fin de la pause", noBreakOption:"Sans pause", deleteClientBtn:"Supprimer le client", deleteClientWarning:"Cela supprime définitivement l'historique, les notes et les coupes enregistrées pour {name}. Cette action est irréversible.",
       notifTodayTitle:"Réservations du jour", notifTodayBody:"Tu as {n} réservations aujourd'hui. La première à 09:00.",
       notifCancelTitleDemo:"Réservation annulée", notifCancelBodyDemo:"João Costa a annulé la réservation de 14:00 aujourd'hui.",
@@ -502,7 +502,7 @@ const LANGS = {
       cutHistoryTitle:"Schnitt-Verlauf", addCutBtn:"+ Schnitt hinzufügen", tapCamera:"📷 Kamera öffnen", tapGallery:"🖼️ Datei hochladen",
       cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
       deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.", addClientBtn:"+ Kunde hinzufügen", nameRequiredErr:"Der Name ist erforderlich.",
-      navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", todaySuffix:"heute", activeSubBadge:"AKTIV",
+      navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", navShop:"Salon", todaySuffix:"heute", activeSubBadge:"AKTIV",
       blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum", breakStartLabel:"Pausenbeginn", breakEndLabel:"Pausenende", noBreakOption:"Keine Pause", deleteClientBtn:"Kunde löschen", deleteClientWarning:"Dadurch werden Verlauf, Notizen und erfasste Schnitte für {name} dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       notifTodayTitle:"Heutige Termine", notifTodayBody:"Du hast heute {n} Termine. Der erste um 09:00.",
       notifCancelTitleDemo:"Termin storniert", notifCancelBodyDemo:"João Costa hat den heutigen 14:00-Termin storniert.",
@@ -541,6 +541,14 @@ const WDAYS_F = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado
 const PAY     = ["Dinheiro","MB Way","Multibanco","Transferência","Outro"];
 
 const mkId  = () => Math.random().toString(36).slice(2,9);
+const normName=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+const ensureOwner=list=>{
+  if(!list||list.length===0)return list;
+  if(list.some(b=>b.isOwner))return list;
+  const idx=list.findIndex(b=>normName(b.name)==="luis correia");
+  const ownerIdx=idx>=0?idx:0;
+  return list.map((b,i)=>i===ownerIdx?{...b,isOwner:true}:b);
+};
 const fmt   = d  => d.toISOString().split("T")[0];
 const TODAY = fmt(new Date());
 const NOW   = new Date();
@@ -1877,7 +1885,7 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout,lang}){
+function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout,lang,embedded}){
   const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
@@ -1935,16 +1943,16 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     window.location.href=url.toString();
   };
   return(
-    <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
-      <style>{GS}</style>
-      <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+    <div style={embedded?{width:"100%"}:{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
+      {!embedded&&<style>{GS}</style>}
+      <header className="app-shell" style={embedded?{width:"100%"}:{width:"100%",maxWidth:520,padding:"14px 20px 0",borderBottom:`1px solid ${T.border}`,background:T.surface,position:"sticky",top:0,zIndex:10}}>
+        {!embedded&&(<div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.88rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84 <span style={{color:T.silver,fontSize:"0.68rem"}}>Admin</span></div></div>
           <Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.56rem"}} onClick={onLogout}>{L.logout}</Btn>
-        </div>
+        </div>)}
         <div style={{display:"flex",overflowX:"auto",scrollbarWidth:"none"}}>{TABS.map(t=><button key={t.id} onClick={()=>setTab(t.id)} style={{padding:"8px 14px",background:"none",border:"none",borderBottom:`2px solid ${tab===t.id?T.gold:"transparent"}`,cursor:"pointer",color:tab===t.id?T.gold:T.silver,fontSize:"0.6rem",letterSpacing:"0.16em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:tab===t.id?700:400,whiteSpace:"nowrap"}}>{t.l}</button>)}</div>
       </header>
-      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
+      <main className="app-shell" style={embedded?{width:"100%",padding:"14px 0 0"}:{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
         {tab==="overview"&&(<>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
             {[{l:L.totalBilled,v:`€${totalRev}`,c:T.gold},{l:L.barbersLabel,v:barbers.filter(b=>b.active).length,c:T.white},{l:L.todayAllLabel,v:todayAll.length,c:T.mid},{l:L.totalBookingsLabel,v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
@@ -2626,7 +2634,7 @@ function OwnerPortal({lang,setLang}){
     const slug=await generateUniqueSlug(salonName);
     const initData={
       shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
-      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
+      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",isOwner:true,schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
       services:INIT_SERVICES,
       bookings:[],
       notifications:[],
@@ -2754,11 +2762,11 @@ const [notifications,setNotifications] = useState([]);
       const d=data.data||{};
       setShopId(data.id);
       if(!d||Object.keys(d).length===0){
-        setBarbers(INIT_BARBERS);setServices(INIT_SERVICES);setShop(INIT_SHOP);
+        setBarbers(ensureOwner(INIT_BARBERS));setServices(INIT_SERVICES);setShop(INIT_SHOP);
         setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS,lang));
         setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});
       } else {
-        setBarbers(d.barbers||INIT_BARBERS);
+        setBarbers(ensureOwner(d.barbers||INIT_BARBERS));
         setServices(d.services||INIT_SERVICES);
         setShop(d.shop||INIT_SHOP);
         setBookings(d.bookings||[]);
@@ -2842,7 +2850,7 @@ const [notifications,setNotifications] = useState([]);
   // BARBER APP
   const barber=barbers.find(b=>b.id===activeBarber?.id)||activeBarber;
   const myUnread=notifications.filter(n=>n.barberId===barber.id&&!n.read).length;
-  const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile}];
+  const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile},...(barber.isOwner?[{id:"shop",l:LANGS[lang].t.navShop}]:[])];
 
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
@@ -2894,6 +2902,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang} embedded/>}
       </main>
     </div>
   );
