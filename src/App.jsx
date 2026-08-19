@@ -125,7 +125,7 @@ const LANGS = {
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
       notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
-      ordersTabLabel:"Encomendas", ordersAddPlaceholder:"Ex: shampoo, lâminas...", ordersAddBtn:"Adicionar", ordersEmpty:"Nenhum produto na lista.",
+      ordersTabLabel:"Encomendas", ordersAddPlaceholder:"Ex: shampoo, lâminas...", ordersAddBtn:"Adicionar", ordersEmpty:"Nenhum produto na lista.", ordersPhotoAttached:"Foto anexada",
       joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
       phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
       writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
@@ -225,7 +225,7 @@ const LANGS = {
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
       notifNewMsgTitle:"New message", notifNewMsgBody:"{name} sent you a message.",
-      ordersTabLabel:"Restock", ordersAddPlaceholder:"e.g. shampoo, razors...", ordersAddBtn:"Add", ordersEmpty:"No products on the list.",
+      ordersTabLabel:"Restock", ordersAddPlaceholder:"e.g. shampoo, razors...", ordersAddBtn:"Add", ordersEmpty:"No products on the list.", ordersPhotoAttached:"Photo attached",
       joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
       phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
       writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
@@ -325,7 +325,7 @@ const LANGS = {
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
       notifNewMsgTitle:"Nuevo mensaje", notifNewMsgBody:"{name} te envió un mensaje.",
-      ordersTabLabel:"Pedidos", ordersAddPlaceholder:"Ej: champú, cuchillas...", ordersAddBtn:"Añadir", ordersEmpty:"Ningún producto en la lista.",
+      ordersTabLabel:"Pedidos", ordersAddPlaceholder:"Ej: champú, cuchillas...", ordersAddBtn:"Añadir", ordersEmpty:"Ningún producto en la lista.", ordersPhotoAttached:"Foto adjunta",
       joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
       phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
       writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
@@ -425,7 +425,7 @@ const LANGS = {
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
       notifNewMsgTitle:"Nouveau message", notifNewMsgBody:"{name} t'a envoyé un message.",
-      ordersTabLabel:"Commandes", ordersAddPlaceholder:"Ex : shampoing, lames...", ordersAddBtn:"Ajouter", ordersEmpty:"Aucun produit dans la liste.",
+      ordersTabLabel:"Commandes", ordersAddPlaceholder:"Ex : shampoing, lames...", ordersAddBtn:"Ajouter", ordersEmpty:"Aucun produit dans la liste.", ordersPhotoAttached:"Photo jointe",
       joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
       phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
       writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
@@ -525,7 +525,7 @@ const LANGS = {
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
       notifNewMsgTitle:"Neue Nachricht", notifNewMsgBody:"{name} hat dir eine Nachricht geschickt.",
-      ordersTabLabel:"Bestellungen", ordersAddPlaceholder:"z.B. Shampoo, Klingen...", ordersAddBtn:"Hinzufügen", ordersEmpty:"Keine Produkte in der Liste.",
+      ordersTabLabel:"Bestellungen", ordersAddPlaceholder:"z.B. Shampoo, Klingen...", ordersAddBtn:"Hinzufügen", ordersEmpty:"Keine Produkte in der Liste.", ordersPhotoAttached:"Foto angehängt",
       joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
       phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
       writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
@@ -1918,7 +1918,10 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const [orders,setOrders]=useState([]);
   const [ordersLoading,setOrdersLoading]=useState(true);
   const [orderText,setOrderText]=useState("");
+  const [orderPhotoFile,setOrderPhotoFile]=useState(null);
+  const [orderPhotoPreview,setOrderPhotoPreview]=useState("");
   const [orderPhotoBusy,setOrderPhotoBusy]=useState(false);
+  const [orderErr,setOrderErr]=useState("");
   useEffect(()=>{
     if(!shopId)return;
     let active=true;
@@ -1928,24 +1931,31 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     })();
     return()=>{active=false;};
   },[shopId]);
-  const addOrder=async(extra={})=>{
-    const clean=orderText.trim();
-    if(!clean&&!extra.photo_url)return;
-    const{data,error}=await supabase.from("product_orders").insert({shop_id:shopId,text:clean||null,...extra}).select().single();
-    if(!error&&data){setOrders(p=>[data,...p]);setOrderText("");}
+  const stageOrderPhoto=file=>{
+    if(!file)return;
+    if(file.size>5*1024*1024){setOrderErr(L.photoTooLarge);return;}
+    setOrderErr("");
+    setOrderPhotoFile(file);
+    setOrderPhotoPreview(URL.createObjectURL(file));
   };
-  const uploadOrderPhoto=async(file)=>{
-    if(!file||!shopId)return;
-    if(file.size>5*1024*1024){return;}
-    setOrderPhotoBusy(true);
-    const ext=file.name.split(".").pop();
-    const path=`${shopId}/encomenda-${Date.now()}.${ext}`;
-    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
-    if(!error){
-      const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
-      await addOrder({photo_url:data.publicUrl});
+  const addOrder=async()=>{
+    const clean=orderText.trim();
+    if(!clean&&!orderPhotoFile)return;
+    setOrderErr("");
+    let photo_url=null;
+    if(orderPhotoFile){
+      setOrderPhotoBusy(true);
+      const ext=orderPhotoFile.name.split(".").pop();
+      const path=`${shopId}/encomenda-${Date.now()}.${ext}`;
+      const{error:upErr}=await supabase.storage.from("salon-photos").upload(path,orderPhotoFile,{upsert:true});
+      if(upErr){setOrderErr(L.uploadFailed);setOrderPhotoBusy(false);return;}
+      photo_url=supabase.storage.from("salon-photos").getPublicUrl(path).data.publicUrl;
+      setOrderPhotoBusy(false);
     }
-    setOrderPhotoBusy(false);
+    const{data,error}=await supabase.from("product_orders").insert({shop_id:shopId,text:clean||null,photo_url}).select().single();
+    if(!error&&data){
+      setOrders(p=>[data,...p]);setOrderText("");setOrderPhotoFile(null);setOrderPhotoPreview("");
+    } else if(error){setOrderErr(L.uploadFailed);}
   };
   const toggleOrderDone=async(o)=>{
     const{error}=await supabase.from("product_orders").update({done:!o.done}).eq("id",o.id);
@@ -2101,14 +2111,22 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
           )}
         </>)}
         {tab==="orders"&&(<>
-          <div style={{display:"flex",gap:8,marginBottom:16}}>
+          {orderPhotoPreview&&(
+            <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:9,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:"7px 10px"}}>
+              <img src={orderPhotoPreview} style={{width:34,height:34,objectFit:"cover",borderRadius:5}}/>
+              <div style={{flex:1,fontSize:"0.72rem",color:T.silver}}>{L.ordersPhotoAttached}</div>
+              <button onClick={()=>{setOrderPhotoFile(null);setOrderPhotoPreview("");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"1rem"}}>×</button>
+            </div>
+          )}
+          <div style={{display:"flex",gap:8,marginBottom:9}}>
             <Inp value={orderText} onChange={e=>setOrderText(e.target.value)} placeholder={L.ordersAddPlaceholder} style={{flex:1}} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();addOrder();}}}/>
             <label>
-              <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>uploadOrderPhoto(e.target.files?.[0])}/>
-              <div style={{padding:"9px 12px",background:T.card,border:`1px solid ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.9rem",cursor:"pointer"}}>{orderPhotoBusy?"…":"📷"}</div>
+              <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>stageOrderPhoto(e.target.files?.[0])}/>
+              <div style={{padding:"9px 12px",background:orderPhotoPreview?T.goldLo:T.card,border:`1px solid ${orderPhotoPreview?T.gold:T.border}`,borderRadius:6,color:orderPhotoPreview?T.gold:T.silver,fontSize:"0.9rem",cursor:"pointer"}}>📷</div>
             </label>
-            <Btn variant="gold" style={{padding:"9px 14px"}} onClick={()=>addOrder()}>{L.ordersAddBtn}</Btn>
           </div>
+          {orderErr&&<div style={{color:T.red,fontSize:"0.72rem",marginBottom:9}}>{orderErr}</div>}
+          <Btn variant="gold" style={{width:"100%",marginBottom:16}} onClick={addOrder} disabled={orderPhotoBusy}>{orderPhotoBusy?L.uploading:L.ordersAddBtn}</Btn>
           {ordersLoading?(
             <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.loadingText}</div>
           ):orders.length===0?(
