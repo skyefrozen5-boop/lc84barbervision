@@ -125,6 +125,7 @@ const LANGS = {
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
       notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
+      ordersTabLabel:"Encomendas", ordersAddPlaceholder:"Ex: shampoo, lâminas...", ordersAddBtn:"Adicionar", ordersEmpty:"Nenhum produto na lista.",
       joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
       phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
       writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
@@ -224,6 +225,7 @@ const LANGS = {
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
       notifNewMsgTitle:"New message", notifNewMsgBody:"{name} sent you a message.",
+      ordersTabLabel:"Restock", ordersAddPlaceholder:"e.g. shampoo, razors...", ordersAddBtn:"Add", ordersEmpty:"No products on the list.",
       joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
       phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
       writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
@@ -323,6 +325,7 @@ const LANGS = {
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
       notifNewMsgTitle:"Nuevo mensaje", notifNewMsgBody:"{name} te envió un mensaje.",
+      ordersTabLabel:"Pedidos", ordersAddPlaceholder:"Ej: champú, cuchillas...", ordersAddBtn:"Añadir", ordersEmpty:"Ningún producto en la lista.",
       joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
       phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
       writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
@@ -422,6 +425,7 @@ const LANGS = {
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
       notifNewMsgTitle:"Nouveau message", notifNewMsgBody:"{name} t'a envoyé un message.",
+      ordersTabLabel:"Commandes", ordersAddPlaceholder:"Ex : shampoing, lames...", ordersAddBtn:"Ajouter", ordersEmpty:"Aucun produit dans la liste.",
       joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
       phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
       writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
@@ -521,6 +525,7 @@ const LANGS = {
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
       notifNewMsgTitle:"Neue Nachricht", notifNewMsgBody:"{name} hat dir eine Nachricht geschickt.",
+      ordersTabLabel:"Bestellungen", ordersAddPlaceholder:"z.B. Shampoo, Klingen...", ordersAddBtn:"Hinzufügen", ordersEmpty:"Keine Produkte in der Liste.",
       joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
       phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
       writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
@@ -1909,7 +1914,47 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     setBf(p=>({...p,photoUrl:data.publicUrl}));
     setBarberPhotoBusy(false);
   };
-  const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop}];
+  const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop},{id:"orders",l:L.ordersTabLabel}];
+  const [orders,setOrders]=useState([]);
+  const [ordersLoading,setOrdersLoading]=useState(true);
+  const [orderText,setOrderText]=useState("");
+  const [orderPhotoBusy,setOrderPhotoBusy]=useState(false);
+  useEffect(()=>{
+    if(!shopId)return;
+    let active=true;
+    (async()=>{
+      const{data}=await supabase.from("product_orders").select("*").eq("shop_id",shopId).order("created_at",{ascending:false});
+      if(active){setOrders(data||[]);setOrdersLoading(false);}
+    })();
+    return()=>{active=false;};
+  },[shopId]);
+  const addOrder=async(extra={})=>{
+    const clean=orderText.trim();
+    if(!clean&&!extra.photo_url)return;
+    const{data,error}=await supabase.from("product_orders").insert({shop_id:shopId,text:clean||null,...extra}).select().single();
+    if(!error&&data){setOrders(p=>[data,...p]);setOrderText("");}
+  };
+  const uploadOrderPhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){return;}
+    setOrderPhotoBusy(true);
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/encomenda-${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(!error){
+      const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+      await addOrder({photo_url:data.publicUrl});
+    }
+    setOrderPhotoBusy(false);
+  };
+  const toggleOrderDone=async(o)=>{
+    const{error}=await supabase.from("product_orders").update({done:!o.done}).eq("id",o.id);
+    if(!error)setOrders(p=>p.map(x=>x.id===o.id?{...x,done:!o.done}:x));
+  };
+  const deleteOrder=async(id)=>{
+    const{error}=await supabase.from("product_orders").delete().eq("id",id);
+    if(!error)setOrders(p=>p.filter(x=>x.id!==id));
+  };
   const [photoBusy,setPhotoBusy]=useState(false);
   const [photoErr,setPhotoErr]=useState("");
   const uploadPhoto=async(file)=>{
@@ -2054,6 +2099,28 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
               </div>
             </Modal>
           )}
+        </>)}
+        {tab==="orders"&&(<>
+          <div style={{display:"flex",gap:8,marginBottom:16}}>
+            <Inp value={orderText} onChange={e=>setOrderText(e.target.value)} placeholder={L.ordersAddPlaceholder} style={{flex:1}} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();addOrder();}}}/>
+            <label>
+              <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>uploadOrderPhoto(e.target.files?.[0])}/>
+              <div style={{padding:"9px 12px",background:T.card,border:`1px solid ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.9rem",cursor:"pointer"}}>{orderPhotoBusy?"…":"📷"}</div>
+            </label>
+            <Btn variant="gold" style={{padding:"9px 14px"}} onClick={()=>addOrder()}>{L.ordersAddBtn}</Btn>
+          </div>
+          {ordersLoading?(
+            <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.loadingText}</div>
+          ):orders.length===0?(
+            <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.ordersEmpty}</div>
+          ):orders.map(o=>(
+            <div key={o.id} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:o.done?0.5:1}}>
+              <button onClick={()=>toggleOrderDone(o)} style={{width:20,height:20,flexShrink:0,borderRadius:4,border:`1px solid ${o.done?T.green:T.border}`,background:o.done?T.greenLo:"transparent",color:T.green,cursor:"pointer",fontSize:"0.7rem",lineHeight:1}}>{o.done?"✓":""}</button>
+              {o.photo_url&&<img src={o.photo_url} style={{width:38,height:38,objectFit:"cover",borderRadius:5,flexShrink:0}}/>}
+              {o.text&&<div style={{flex:1,fontSize:"0.85rem",color:T.white,textDecoration:o.done?"line-through":"none"}}>{o.text}</div>}
+              <button onClick={()=>deleteOrder(o.id)} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"1rem",flexShrink:0}}>×</button>
+            </div>
+          ))}
         </>)}
       </main>
     </div>
