@@ -2385,9 +2385,6 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         ))}
       </div>
       <div style={{textAlign:"center",marginBottom:40}}>
-        {shop.photoUrl&&(
-          <img src={shop.photoUrl} style={{width:"100%",maxWidth:290,height:140,objectFit:"contain",background:T.card,borderRadius:10,marginBottom:18,border:`1px solid ${T.border}`}}/>
-        )}
         <img src={logoIcon} style={{width:220,marginBottom:8,display:"block",marginLeft:"auto",marginRight:"auto"}}/>
         <div style={{fontSize:"0.6rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5,marginBottom:5}}>{L.platform}</div>
       </div>
