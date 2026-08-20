@@ -1922,6 +1922,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
   const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop},{id:"orders",l:L.ordersTabLabel},{id:"catalog",l:L.catalogTabLabel}];
   const [products,setProducts]=useState([]);
   const [productsLoading,setProductsLoading]=useState(true);
+  const [viewProduct,setViewProduct]=useState(null);
   const [prodName,setProdName]=useState("");
   const [prodPrice,setProdPrice]=useState("");
   const [prodPhotoFile,setProdPhotoFile]=useState(null);
@@ -2226,7 +2227,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.catalogEmpty}</div>
           ):products.map(p=>(
             <div key={p.id} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:p.available?1:0.5}}>
-              {p.photo_url&&<img src={p.photo_url} style={{width:44,height:44,objectFit:"cover",borderRadius:5,flexShrink:0}}/>}
+              {p.photo_url&&<img src={p.photo_url} onClick={()=>setViewProduct(p)} style={{width:44,height:44,objectFit:"cover",borderRadius:5,flexShrink:0,cursor:"pointer"}}/>}
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontSize:"0.88rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.name}</div>
                 {!p.available&&<div style={{fontSize:"0.6rem",color:T.red,letterSpacing:"0.08em",textTransform:"uppercase"}}>{L.catalogUnavailable}</div>}
@@ -2240,6 +2241,13 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             </div>
           ))}
         </>)}
+        {viewProduct&&(
+          <Modal onClose={()=>setViewProduct(null)} title={viewProduct.name}>
+            <img src={viewProduct.photo_url} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>
+            {!viewProduct.available&&<div style={{fontSize:"0.65rem",color:T.red,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:8}}>{L.catalogUnavailable}</div>}
+            {viewProduct.price!=null&&<div style={{color:T.gold,fontWeight:600,fontSize:"1.2rem"}}>€{Number(viewProduct.price).toFixed(2)}</div>}
+          </Modal>
+        )}
       </main>
     </div>
   );
