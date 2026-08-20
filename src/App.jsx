@@ -126,6 +126,7 @@ const LANGS = {
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
       notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
       ordersTabLabel:"Encomendas", ordersAddPlaceholder:"Ex: shampoo, lâminas...", ordersAddBtn:"Adicionar", ordersEmpty:"Nenhum produto na lista.", ordersPhotoAttached:"Foto anexada",
+      catalogTabLabel:"Catálogo", catalogNamePlaceholder:"Nome do produto", catalogPricePlaceholder:"Preço", catalogAddBtn:"Adicionar produto", catalogEmpty:"Ainda não há produtos no catálogo.", catalogUnavailable:"Indisponível", catalogMarkAvailable:"Marcar disponível", catalogMarkUnavailable:"Marcar indisponível", catalogClientCta:"Ver produtos",
       joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
       phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
       writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
@@ -226,6 +227,7 @@ const LANGS = {
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
       notifNewMsgTitle:"New message", notifNewMsgBody:"{name} sent you a message.",
       ordersTabLabel:"Restock", ordersAddPlaceholder:"e.g. shampoo, razors...", ordersAddBtn:"Add", ordersEmpty:"No products on the list.", ordersPhotoAttached:"Photo attached",
+      catalogTabLabel:"Catalog", catalogNamePlaceholder:"Product name", catalogPricePlaceholder:"Price", catalogAddBtn:"Add product", catalogEmpty:"No products in the catalog yet.", catalogUnavailable:"Unavailable", catalogMarkAvailable:"Mark available", catalogMarkUnavailable:"Mark unavailable", catalogClientCta:"View products",
       joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
       phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
       writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
@@ -326,6 +328,7 @@ const LANGS = {
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
       notifNewMsgTitle:"Nuevo mensaje", notifNewMsgBody:"{name} te envió un mensaje.",
       ordersTabLabel:"Pedidos", ordersAddPlaceholder:"Ej: champú, cuchillas...", ordersAddBtn:"Añadir", ordersEmpty:"Ningún producto en la lista.", ordersPhotoAttached:"Foto adjunta",
+      catalogTabLabel:"Catálogo", catalogNamePlaceholder:"Nombre del producto", catalogPricePlaceholder:"Precio", catalogAddBtn:"Añadir producto", catalogEmpty:"Aún no hay productos en el catálogo.", catalogUnavailable:"No disponible", catalogMarkAvailable:"Marcar disponible", catalogMarkUnavailable:"Marcar no disponible", catalogClientCta:"Ver productos",
       joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
       phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
       writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
@@ -426,6 +429,7 @@ const LANGS = {
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
       notifNewMsgTitle:"Nouveau message", notifNewMsgBody:"{name} t'a envoyé un message.",
       ordersTabLabel:"Commandes", ordersAddPlaceholder:"Ex : shampoing, lames...", ordersAddBtn:"Ajouter", ordersEmpty:"Aucun produit dans la liste.", ordersPhotoAttached:"Photo jointe",
+      catalogTabLabel:"Catalogue", catalogNamePlaceholder:"Nom du produit", catalogPricePlaceholder:"Prix", catalogAddBtn:"Ajouter un produit", catalogEmpty:"Aucun produit dans le catalogue.", catalogUnavailable:"Indisponible", catalogMarkAvailable:"Marquer disponible", catalogMarkUnavailable:"Marquer indisponible", catalogClientCta:"Voir les produits",
       joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
       phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
       writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
@@ -526,6 +530,7 @@ const LANGS = {
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
       notifNewMsgTitle:"Neue Nachricht", notifNewMsgBody:"{name} hat dir eine Nachricht geschickt.",
       ordersTabLabel:"Bestellungen", ordersAddPlaceholder:"z.B. Shampoo, Klingen...", ordersAddBtn:"Hinzufügen", ordersEmpty:"Keine Produkte in der Liste.", ordersPhotoAttached:"Foto angehängt",
+      catalogTabLabel:"Katalog", catalogNamePlaceholder:"Produktname", catalogPricePlaceholder:"Preis", catalogAddBtn:"Produkt hinzufügen", catalogEmpty:"Noch keine Produkte im Katalog.", catalogUnavailable:"Nicht verfügbar", catalogMarkAvailable:"Als verfügbar markieren", catalogMarkUnavailable:"Als nicht verfügbar markieren", catalogClientCta:"Produkte ansehen",
       joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
       phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
       writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
@@ -1914,7 +1919,64 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     setBf(p=>({...p,photoUrl:data.publicUrl}));
     setBarberPhotoBusy(false);
   };
-  const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop},{id:"orders",l:L.ordersTabLabel}];
+  const TABS=[{id:"overview",l:L.adminOverview},{id:"barbers",l:L.adminBarbersTab},{id:"services",l:L.services},{id:"shop",l:L.barbershop},{id:"orders",l:L.ordersTabLabel},{id:"catalog",l:L.catalogTabLabel}];
+  const [products,setProducts]=useState([]);
+  const [productsLoading,setProductsLoading]=useState(true);
+  const [prodName,setProdName]=useState("");
+  const [prodPrice,setProdPrice]=useState("");
+  const [prodPhotoFile,setProdPhotoFile]=useState(null);
+  const [prodPhotoPreview,setProdPhotoPreview]=useState("");
+  const [prodBusy,setProdBusy]=useState(false);
+  const [prodErr,setProdErr]=useState("");
+  useEffect(()=>{
+    if(!shopId)return;
+    let active=true;
+    (async()=>{
+      const{data}=await supabase.from("products").select("*").eq("shop_id",shopId).order("created_at",{ascending:false});
+      if(active){setProducts(data||[]);setProductsLoading(false);}
+    })();
+    return()=>{active=false;};
+  },[shopId]);
+  const stageProdPhoto=file=>{
+    if(!file)return;
+    if(file.size>5*1024*1024){setProdErr(L.photoTooLarge);return;}
+    setProdErr("");
+    setProdPhotoFile(file);
+    setProdPhotoPreview(URL.createObjectURL(file));
+  };
+  const addProduct=async()=>{
+    const cleanName=prodName.trim();
+    if(!cleanName)return;
+    setProdErr("");
+    let photo_url=null;
+    if(prodPhotoFile){
+      setProdBusy(true);
+      const ext=prodPhotoFile.name.split(".").pop();
+      const path=`${shopId}/produto-${Date.now()}.${ext}`;
+      const{error:upErr}=await supabase.storage.from("salon-photos").upload(path,prodPhotoFile,{upsert:true});
+      if(upErr){setProdErr(L.uploadFailed);setProdBusy(false);return;}
+      photo_url=supabase.storage.from("salon-photos").getPublicUrl(path).data.publicUrl;
+      setProdBusy(false);
+    }
+    const priceNum=prodPrice.trim()?parseFloat(prodPrice.replace(",","."))||null:null;
+    const{data,error}=await supabase.from("products").insert({shop_id:shopId,name:cleanName,price:priceNum,photo_url}).select().single();
+    if(!error&&data){
+      setProducts(p=>[data,...p]);setProdName("");setProdPrice("");setProdPhotoFile(null);setProdPhotoPreview("");
+    } else if(error){setProdErr(L.uploadFailed);}
+  };
+  const updateProductPrice=async(id,val)=>{
+    setProducts(p=>p.map(x=>x.id===id?{...x,price:val}:x));
+    const priceNum=String(val).trim()?parseFloat(String(val).replace(",","."))||null:null;
+    await supabase.from("products").update({price:priceNum}).eq("id",id);
+  };
+  const toggleProductAvailable=async(prod)=>{
+    const{error}=await supabase.from("products").update({available:!prod.available}).eq("id",prod.id);
+    if(!error)setProducts(p=>p.map(x=>x.id===prod.id?{...x,available:!prod.available}:x));
+  };
+  const deleteProduct=async(id)=>{
+    const{error}=await supabase.from("products").delete().eq("id",id);
+    if(!error)setProducts(p=>p.filter(x=>x.id!==id));
+  };
   const [orders,setOrders]=useState([]);
   const [ordersLoading,setOrdersLoading]=useState(true);
   const [orderText,setOrderText]=useState("");
@@ -2140,6 +2202,44 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
             </div>
           ))}
         </>)}
+        {tab==="catalog"&&(<>
+          {prodPhotoPreview&&(
+            <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:9,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:"7px 10px"}}>
+              <img src={prodPhotoPreview} style={{width:34,height:34,objectFit:"cover",borderRadius:5}}/>
+              <div style={{flex:1,fontSize:"0.72rem",color:T.silver}}>{L.ordersPhotoAttached}</div>
+              <button onClick={()=>{setProdPhotoFile(null);setProdPhotoPreview("");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"1rem"}}>×</button>
+            </div>
+          )}
+          <div style={{display:"flex",gap:8,marginBottom:9}}>
+            <Inp value={prodName} onChange={e=>setProdName(e.target.value)} placeholder={L.catalogNamePlaceholder} style={{flex:1}}/>
+            <Inp value={prodPrice} onChange={e=>setProdPrice(e.target.value)} placeholder={L.catalogPricePlaceholder} style={{width:90}}/>
+            <label>
+              <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>stageProdPhoto(e.target.files?.[0])}/>
+              <div style={{padding:"9px 12px",background:prodPhotoPreview?T.goldLo:T.card,border:`1px solid ${prodPhotoPreview?T.gold:T.border}`,borderRadius:6,color:prodPhotoPreview?T.gold:T.silver,fontSize:"0.9rem",cursor:"pointer"}}>📷</div>
+            </label>
+          </div>
+          {prodErr&&<div style={{color:T.red,fontSize:"0.72rem",marginBottom:9}}>{prodErr}</div>}
+          <Btn variant="gold" style={{width:"100%",marginBottom:16}} onClick={addProduct} disabled={prodBusy}>{prodBusy?L.uploading:L.catalogAddBtn}</Btn>
+          {productsLoading?(
+            <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.loadingText}</div>
+          ):products.length===0?(
+            <div style={{textAlign:"center",padding:"24px 0",color:T.silver,fontSize:"0.78rem"}}>{L.catalogEmpty}</div>
+          ):products.map(p=>(
+            <div key={p.id} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 12px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:p.available?1:0.5}}>
+              {p.photo_url&&<img src={p.photo_url} style={{width:44,height:44,objectFit:"cover",borderRadius:5,flexShrink:0}}/>}
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:"0.88rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.name}</div>
+                {!p.available&&<div style={{fontSize:"0.6rem",color:T.red,letterSpacing:"0.08em",textTransform:"uppercase"}}>{L.catalogUnavailable}</div>}
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:2,flexShrink:0}}>
+                <span style={{color:T.gold,fontSize:"0.82rem"}}>€</span>
+                <input value={p.price??""} onChange={e=>updateProductPrice(p.id,e.target.value)} style={{width:52,background:"transparent",border:"none",borderBottom:`1px solid ${T.border}`,color:T.gold,fontSize:"0.82rem",padding:"2px 3px",fontFamily:"inherit"}}/>
+              </div>
+              <button onClick={()=>toggleProductAvailable(p)} style={{padding:"5px 9px",background:p.available?T.greenLo:T.redLo,border:`1px solid ${p.available?T.green:T.red}`,borderRadius:5,color:p.available?T.green:T.red,fontSize:"0.58rem",cursor:"pointer",flexShrink:0,whiteSpace:"nowrap"}}>{p.available?L.catalogMarkUnavailable:L.catalogMarkAvailable}</button>
+              <button onClick={()=>deleteProduct(p.id)} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"1rem",flexShrink:0}}>×</button>
+            </div>
+          ))}
+        </>)}
       </main>
     </div>
   );
@@ -2259,6 +2359,17 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const [chatBarbers,setChatBarbers]=useState([]);
   const [chatBarber,setChatBarber]=useState(null);
   const clientUnread=useClientUnreadMap(shopId,chatPhone.trim());
+  const [catalogProds,setCatalogProds]=useState([]);
+  const [catalogLoading,setCatalogLoading]=useState(true);
+  useEffect(()=>{
+    if(!shopId)return;
+    let active=true;
+    (async()=>{
+      const{data}=await supabase.from("products").select("*").eq("shop_id",shopId).order("created_at",{ascending:false});
+      if(active){setCatalogProds(data||[]);setCatalogLoading(false);}
+    })();
+    return()=>{active=false;};
+  },[shopId]);
   const openChatList=()=>{
     if(chatPhone.trim().length<5)return;
     const ids=[...new Set(bookings.filter(b=>b.phone===chatPhone.trim()).map(b=>b.barberId))];
@@ -2301,6 +2412,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
           <Btn variant="ghost" style={{width:"100%",marginBottom:16,padding:"12px"}} onClick={()=>setScreen("chat")}>{L.chatWithBarberCta}</Btn>
+          <Btn variant="ghost" style={{width:"100%",marginBottom:16,padding:"12px"}} onClick={()=>setScreen("catalog")}>🛍️ {L.catalogClientCta}</Btn>
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>{L.myBookingsLabel}</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder={L.phonePlaceholder} value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>{L.show}</Btn></div></div>
           <Lbl style={{marginBottom:9}}>{L.ourTeam}</Lbl>
           {barbers.filter(b=>b.active).map(b=>(
@@ -2370,6 +2482,24 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
             </div>
           ))}
           <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setScreen("chat")}>{L.back}</Btn>
+        </>)}
+        {screen==="catalog"&&(<>
+          <Lbl style={{marginBottom:10}}>{L.catalogClientCta}</Lbl>
+          {catalogLoading?(
+            <div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.loadingText}</div>
+          ):catalogProds.length===0?(
+            <div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.catalogEmpty}</div>
+          ):catalogProds.map(p=>(
+            <div key={p.id} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:p.available?1:0.55}}>
+              {p.photo_url&&<img src={p.photo_url} style={{width:48,height:48,objectFit:"cover",borderRadius:6,flexShrink:0}}/>}
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:"0.9rem",color:T.white,fontWeight:500}}>{p.name}</div>
+                {!p.available&&<div style={{fontSize:"0.6rem",color:T.red,letterSpacing:"0.08em",textTransform:"uppercase",marginTop:2}}>{L.catalogUnavailable}</div>}
+              </div>
+              {p.price!=null&&<div style={{color:T.gold,fontWeight:600,fontSize:"0.95rem",flexShrink:0}}>€{Number(p.price).toFixed(2)}</div>}
+            </div>
+          ))}
+          <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setScreen("home")}>{L.back}</Btn>
         </>)}
         {screen==="mybookings"&&(<>
           <Lbl style={{marginBottom:10}}>{myBk.length} {L.bookings}</Lbl>
