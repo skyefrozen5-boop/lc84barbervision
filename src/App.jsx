@@ -2361,6 +2361,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const clientUnread=useClientUnreadMap(shopId,chatPhone.trim());
   const [catalogProds,setCatalogProds]=useState([]);
   const [catalogLoading,setCatalogLoading]=useState(true);
+  const [viewProduct,setViewProduct]=useState(null);
   useEffect(()=>{
     if(!shopId)return;
     let active=true;
@@ -2490,7 +2491,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
           ):catalogProds.length===0?(
             <div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.catalogEmpty}</div>
           ):catalogProds.map(p=>(
-            <div key={p.id} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:p.available?1:0.55}}>
+            <div key={p.id} onClick={()=>p.photo_url&&setViewProduct(p)} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:p.available?1:0.55,cursor:p.photo_url?"pointer":"default"}}>
               {p.photo_url&&<img src={p.photo_url} style={{width:48,height:48,objectFit:"cover",borderRadius:6,flexShrink:0}}/>}
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontSize:"0.9rem",color:T.white,fontWeight:500}}>{p.name}</div>
@@ -2501,6 +2502,13 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
           ))}
           <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setScreen("home")}>{L.back}</Btn>
         </>)}
+        {viewProduct&&(
+          <Modal onClose={()=>setViewProduct(null)} title={viewProduct.name}>
+            <img src={viewProduct.photo_url} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>
+            {!viewProduct.available&&<div style={{fontSize:"0.65rem",color:T.red,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:8}}>{L.catalogUnavailable}</div>}
+            {viewProduct.price!=null&&<div style={{color:T.gold,fontWeight:600,fontSize:"1.2rem"}}>€{Number(viewProduct.price).toFixed(2)}</div>}
+          </Modal>
+        )}
         {screen==="mybookings"&&(<>
           <Lbl style={{marginBottom:10}}>{myBk.length} {L.bookings}</Lbl>
           {myBk.length===0?<div style={{textAlign:"center",padding:"32px 0",color:T.silver}}>{L.noBookingsFound}</div>
