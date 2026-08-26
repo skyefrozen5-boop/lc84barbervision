@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { supabase } from "./supabaseClient";
+import { registerPushForBarber, listenForegroundPush } from "./firebaseMessaging";
 import logoIcon from './assets/logo-icon.jpg';
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
@@ -919,7 +920,7 @@ function BNotifications({notifications,setNotifications,barber,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,manualClients,setManualClients,shopId,lang}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -961,6 +962,16 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
 
   const clients=Object.values(clientMap).sort((a,b)=>b.visits.length-a.visits.length);
   const filtered=search.trim().length>1?clients.filter(c=>c.name.toLowerCase().includes(search.toLowerCase())||c.phone.includes(search)):clients;
+
+  // Chegou aqui a partir de uma notificação push -> abre já a conversa certa
+  useEffect(()=>{
+    if(!autoOpenChatKey)return;
+    const match=clientMap[autoOpenChatKey]||Object.values(clientMap).find(c=>c.phone===autoOpenChatKey);
+    if(match){
+      setChatClient(match);
+      onAutoOpenChatDone?.();
+    }
+  },[autoOpenChatKey,clientMap]);
 
   const openProfile=c=>{
     setOpenClient(c);
@@ -2964,6 +2975,12 @@ const [notifications,setNotifications] = useState([]);
   const [shopId,setShopId]               = useState(null);
   const [ownerMode,setOwnerMode]         = useState(false);
   const [shopNotFound,setShopNotFound]   = useState(false);
+  const [pendingChat,setPendingChat]     = useState(()=>{
+    const raw=new URLSearchParams(window.location.search).get("openChat");
+    if(!raw)return null;
+    const[barberId,clientKey]=raw.split("__");
+    return barberId?{barberId,clientKey:clientKey||""}:null;
+  });
 
   useEffect(()=>{
     (async()=>{
@@ -3005,6 +3022,18 @@ const [notifications,setNotifications] = useState([]);
       }
       setDataLoaded(true);
     })();
+  },[]);
+
+  // Com a app aberta, o Firebase não mostra sozinho a notificação do sistema —
+  // agarramos aqui e metemos no sino de notificações da app.
+  useEffect(()=>{
+    const unsub=listenForegroundPush((payload)=>{
+      const data=payload?.data||{};
+      if(data.type==="chat"&&data.barberId){
+        setNotifications(p=>[{id:mkId(),barberId:data.barberId,type:"message",title:payload?.notification?.title||"Nova mensagem",body:payload?.notification?.body||"",ts:Date.now(),read:false},...p]);
+      }
+    });
+    return()=>unsub&&unsub();
   },[]);
 
   useEffect(()=>{
@@ -3050,7 +3079,13 @@ const [notifications,setNotifications] = useState([]);
   };
 
   const onBarberLogin=(b)=>{
-    setActiveBarber(b);setBScreen("dashboard");setRole("barber");
+    setActiveBarber(b);setRole("barber");
+    registerPushForBarber(shopId,b.id);
+    if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
+      setBScreen("clients");
+    }else{
+      setBScreen("dashboard");
+    }
     const todayCount=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
     if(todayCount>0){
 
@@ -3126,7 +3161,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
