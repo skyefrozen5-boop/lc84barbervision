@@ -2377,6 +2377,11 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const [chatPhone,setChatPhone]=useState("");
   const [chatBarbers,setChatBarbers]=useState([]);
   const [chatBarber,setChatBarber]=useState(null);
+  const [clientProfile,setClientProfile]=useState(()=>{
+    try{return JSON.parse(localStorage.getItem(`lc84_client_${shopId}`)||"null");}catch{return null;}
+  });
+  const [profilePromptBarber,setProfilePromptBarber]=useState(null);
+  const [profileForm,setProfileForm]=useState({name:"",phone:""});
   const clientUnread=useClientUnreadMap(shopId,chatPhone.trim());
   const [catalogProds,setCatalogProds]=useState([]);
   const [catalogLoading,setCatalogLoading]=useState(true);
@@ -2395,6 +2400,25 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
     const ids=[...new Set(bookings.filter(b=>b.phone===chatPhone.trim()).map(b=>b.barberId))];
     setChatBarbers(barbers.filter(b=>ids.includes(b.id)));
     setScreen("chatlist");
+  };
+  const openChatWithBarber=b=>{
+    if(clientProfile&&clientProfile.phone){
+      setChatPhone(clientProfile.phone);
+      setChatBarber(b);
+    }else{
+      setProfileForm({name:"",phone:""});
+      setProfilePromptBarber(b);
+    }
+  };
+  const saveProfileAndOpenChat=()=>{
+    const name=profileForm.name.trim(),phone=profileForm.phone.trim();
+    if(!name||phone.length<5)return;
+    const profile={name,phone};
+    try{localStorage.setItem(`lc84_client_${shopId}`,JSON.stringify(profile));}catch{}
+    setClientProfile(profile);
+    setChatPhone(phone);
+    setChatBarber(profilePromptBarber);
+    setProfilePromptBarber(null);
   };
   const svc=id=>services.find(s=>s.id===id);
   const barber=barbers.find(b=>b.id===sel.barberId);
@@ -2436,9 +2460,10 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>{L.myBookingsLabel}</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder={L.phonePlaceholder} value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>{L.show}</Btn></div></div>
           <Lbl style={{marginBottom:9}}>{L.ourTeam}</Lbl>
           {barbers.filter(b=>b.active).map(b=>(
-            <div key={b.id} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
+            <div key={b.id} onClick={()=>openChatWithBarber(b)} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 13px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,cursor:"pointer"}}>
               <Avatar barber={b} size={38}/>
               <div style={{flex:1}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div><div style={{fontSize:"0.6rem",color:b.color,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{LANGS[lang].wdaysF.filter((_,i)=>b.schedule.workDays.includes(i)).map(d=>d.slice(0,3)).join(" · ")} · {b.schedule.startHour}–{b.schedule.endHour}</div></div>
+              <span style={{fontSize:"1.1rem",color:T.gold}}>💬</span>
             </div>
           ))}
         </>)}
@@ -2546,7 +2571,14 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
       {chatBarber&&(
         <Modal onClose={()=>setChatBarber(null)} title={`${L.chatTitle} · ${chatBarber.name}`}>
           <ChatThread shopId={shopId} barberId={chatBarber.id} clientKey={chatPhone.trim()} sender="client" lang={lang}
-            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()))}/>
+            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",clientProfile?.name||bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()))}/>
+        </Modal>
+      )}
+      {profilePromptBarber&&(
+        <Modal onClose={()=>setProfilePromptBarber(null)} title={`${L.chatTitle} · ${profilePromptBarber.name}`}>
+          <div style={{marginBottom:10}}><Lbl>{L.nameLabel}</Lbl><Inp placeholder={L.namePlaceholder} value={profileForm.name} onChange={e=>setProfileForm(p=>({...p,name:e.target.value}))}/></div>
+          <div style={{marginBottom:16}}><Lbl>{L.phone}</Lbl><Inp placeholder="+351 9XX XXX XXX" value={profileForm.phone} onChange={e=>setProfileForm(p=>({...p,phone:e.target.value}))}/></div>
+          <Btn variant="gold" style={{width:"100%"}} onClick={saveProfileAndOpenChat}>{L.chatWithBarberCta}</Btn>
         </Modal>
       )}
     </div>
