@@ -5,7 +5,7 @@ import logoIcon from './assets/logo-icon.jpg';
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
 const T = {
-  bg:"#080808", surface:"#101010", card:"#161616", border:"#222", muted:"#2a2a2a",
+  bg:"#000000", surface:"#0c0c0c", card:"#141414", border:"#222", muted:"#2a2a2a",
   silver:"#8a8a8a", mid:"#b3b3b3", light:"#ddd", white:"#f3f3f3",
   gold:"#b8955a", goldLo:"rgba(184,149,90,0.12)", goldMid:"rgba(184,149,90,0.25)",
   red:"#9e4040", redLo:"rgba(158,64,64,0.12)",
