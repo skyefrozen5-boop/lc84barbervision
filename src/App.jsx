@@ -870,7 +870,7 @@ function BookingForm({initial,services,barbers,onSave,onDelete,onClose,fixedBarb
 // ══════════════════════════════════════════════════════════════════════════════
 // 🔔 NOTIFICATIONS SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BNotifications({notifications,setNotifications,barber,lang}){
+function BNotifications({notifications,setNotifications,barber,lang,onOpenLink}){
   const L=LANGS[lang].t;
   const myNotifs=notifications.filter(n=>n.barberId===barber.id).sort((a,b)=>b.ts-a.ts);
   const unread=myNotifs.filter(n=>!n.read).length;
@@ -880,8 +880,8 @@ function BNotifications({notifications,setNotifications,barber,lang}){
   const delOne=id=>setNotifications(p=>p.filter(n=>n.id!==id));
   const clearAll=()=>setNotifications(p=>p.filter(n=>n.barberId!==barber.id));
 
-  const typeIcon={reminder:"🔔",new:"✂",cancel:"✕",info:"ℹ"};
-  const typeColor={reminder:T.gold,new:T.green,cancel:T.red,info:T.blue};
+  const typeIcon={reminder:"🔔",new:"✂",cancel:"✕",info:"ℹ",message:"💬"};
+  const typeColor={reminder:T.gold,new:T.green,cancel:T.red,info:T.blue,message:T.blue};
 
   return(
     <div style={{padding:"0 20px"}}>
@@ -902,7 +902,7 @@ function BNotifications({notifications,setNotifications,barber,lang}){
           {L.noNotifications}
         </div>
       ):myNotifs.map(n=>(
-        <div key={n.id} className="row-h" onClick={()=>markOne(n.id)} style={{display:"flex",gap:12,padding:"13px 14px",marginBottom:7,background:n.read?T.card:`${typeColor[n.type]}0a`,border:`1px solid ${n.read?T.border:typeColor[n.type]+"44"}`,borderRadius:7,cursor:"pointer",position:"relative"}}>
+        <div key={n.id} className="row-h" onClick={()=>{markOne(n.id);if(n.link)onOpenLink?.(n.link);}} style={{display:"flex",gap:12,padding:"13px 14px",marginBottom:7,background:n.read?T.card:`${typeColor[n.type]}0a`,border:`1px solid ${n.read?T.border:typeColor[n.type]+"44"}`,borderRadius:7,cursor:"pointer",position:"relative"}}>
           {!n.read&&<div style={{position:"absolute",top:12,right:12,width:7,height:7,borderRadius:"50%",background:typeColor[n.type]}}/>}
           <div style={{fontSize:"1.1rem",flexShrink:0,marginTop:2}}>{typeIcon[n.type]||"🔔"}</div>
           <div style={{flex:1,minWidth:0}}>
@@ -920,7 +920,7 @@ function BNotifications({notifications,setNotifications,barber,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -980,6 +980,17 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
     setAddingCut(false);setCutPhoto(null);setCutNotes("");setCutErr("");
     setDelClientOpen(false);
   };
+
+  // Chegou aqui a partir de uma notificação de marcação -> abre já o perfil do cliente
+  useEffect(()=>{
+    if(!autoOpenProfileKey)return;
+    const match=clientMap[autoOpenProfileKey]||Object.values(clientMap).find(c=>c.phone===autoOpenProfileKey);
+    if(match){
+      openProfile(match);
+      onAutoOpenProfileDone?.();
+    }
+  },[autoOpenProfileKey,clientMap]);
+
   const deleteClient=()=>{
     const key=openClient.phone||openClient.name;
     setBookings(p=>p.filter(b=>!(b.barberId===barber.id&&(b.phone||b.name)===key&&!b.blocked)));
@@ -1358,18 +1369,18 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
     if(f.id){setBookings(p=>p.map(b=>b.id===f.id?f:b));}
     else{
       setBookings(p=>[...p,{...f,id:mkId()}]);
-      addNotification(barber.id,"new",L.notifNewBookingTitle,`${f.name} — ${svcName(svc(f.serviceId),lang)} — ${f.date} às ${f.time}h`);
+      addNotification(barber.id,"new",L.notifNewBookingTitle,`${f.name} — ${svcName(svc(f.serviceId),lang)} — ${f.date} às ${f.time}h`,{type:"client",key:f.phone||f.name});
     }
     setModal(null);
   };
   const del=id=>{
     const b=bookings.find(b=>b.id===id);
-    if(b)addNotification(barber.id,"cancel",L.notifBookingDeletedTitle,L.notifBookingDeletedBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));
+    if(b)addNotification(barber.id,"cancel",L.notifBookingDeletedTitle,L.notifBookingDeletedBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
     setBookings(p=>p.filter(b=>b.id!==id));setModal(null);
   };
   const qStatus=(id,st)=>{
     setBookings(p=>p.map(b=>b.id===id?{...b,status:st}:b));
-    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));}
+    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});}
   };
   const qPaid=id=>setBookings(p=>p.map(b=>b.id===id?{...b,paid:!b.paid}:b));
   const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.blockedSlotLabel,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
@@ -2430,14 +2441,14 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const confirm=()=>{
     const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone,status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
     setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
-    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`);
+    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`,{type:"client",key:sel.phone||sel.name});
     setScreen("success");
   };
   const cancel=id=>{
     const b=bookings.find(b=>b.id===id);
     setBookings(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
     setMyBk(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
-    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time));
+    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
   };
   const lookup=()=>{if(clientPhone.trim().length<5)return;setMyBk(bookings.filter(b=>b.phone===clientPhone.trim()));setScreen("mybookings");};
   const reset=()=>{setSel({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});setStep(1);setDone(null);setScreen("home");};
@@ -2571,7 +2582,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
       {chatBarber&&(
         <Modal onClose={()=>setChatBarber(null)} title={`${L.chatTitle} · ${chatBarber.name}`}>
           <ChatThread shopId={shopId} barberId={chatBarber.id} clientKey={chatPhone.trim()} sender="client" lang={lang}
-            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",clientProfile?.name||bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()))}/>
+            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",clientProfile?.name||bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()),{type:"chat",key:chatPhone.trim()})}/>
         </Modal>
       )}
       {profilePromptBarber&&(
@@ -3106,8 +3117,8 @@ const [notifications,setNotifications] = useState([]);
     );
   }
 
-  const addNotification=(barberId,type,title,body)=>{
-    setNotifications(p=>[{id:mkId(),barberId,type,title,body,ts:Date.now(),read:false},...p]);
+  const addNotification=(barberId,type,title,body,link=null)=>{
+    setNotifications(p=>[{id:mkId(),barberId,type,title,body,link,ts:Date.now(),read:false},...p]);
   };
 
   const onBarberLogin=(b)=>{
@@ -3192,8 +3203,8 @@ const [notifications,setNotifications] = useState([]);
       <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
-        {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)}/>}
+        {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
