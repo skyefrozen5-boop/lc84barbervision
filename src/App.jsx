@@ -2442,7 +2442,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
     const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone,status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
     setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
     addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`,{type:"client",key:sel.phone||sel.name});
-    setScreen("success");
+    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
   };
   const cancel=id=>{
     const b=bookings.find(b=>b.id===id);
