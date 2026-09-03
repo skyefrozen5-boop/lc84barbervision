@@ -2466,7 +2466,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
         {screen==="home"&&(<>
           <div style={{textAlign:"center",marginBottom:24}}><div style={{fontSize:"1.4rem",color:T.white,fontWeight:600,marginBottom:4}}>{shop.name}</div><div style={{fontSize:"0.78rem",color:T.gold}}>{shop.phone}</div></div>
           <Btn variant="gold" style={{width:"100%",marginBottom:10,padding:"14px"}} onClick={()=>setScreen("book")}>⚔ {L.bookCta}</Btn>
-          <Btn variant="ghost" style={{width:"100%",marginBottom:16,padding:"12px"}} onClick={()=>setScreen("chat")}>{L.chatWithBarberCta}</Btn>
+          
           <Btn variant="ghost" style={{width:"100%",marginBottom:16,padding:"12px"}} onClick={()=>setScreen("catalog")}>🛍️ {L.catalogClientCta}</Btn>
           <div style={{marginBottom:16}}><Lbl style={{marginBottom:7}}>{L.myBookingsLabel}</Lbl><div style={{display:"flex",gap:8}}><Inp placeholder={L.phonePlaceholder} value={clientPhone} onChange={e=>setClientPhone(e.target.value)} style={{flex:1}}/><Btn variant="ghost" style={{padding:"10px 13px"}} onClick={lookup}>{L.show}</Btn></div></div>
           <Lbl style={{marginBottom:9}}>{L.ourTeam}</Lbl>
