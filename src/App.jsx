@@ -2381,7 +2381,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const L=LANGS[lang].t;
   const [screen,setScreen]=useState("home");
   const [step,setStep]=useState(1);
-  const [sel,setSel]=useState({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});
+  const [sel,setSel]=useState(()=>{let p={name:"",phone:""};try{p=JSON.parse(localStorage.getItem(`lc84_client_${shopId}`))||p;}catch{}return {barberId:"",serviceId:"",date:"",time:"",name:p.name||"",phone:p.phone||""};});
   const [done,setDone]=useState(null);
   const [clientPhone,setClientPhone]=useState("");
   const [myBk,setMyBk]=useState([]);
