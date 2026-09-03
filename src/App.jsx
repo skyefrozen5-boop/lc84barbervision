@@ -3016,6 +3016,7 @@ const [notifications,setNotifications] = useState([]);
   const [bScreen,setBScreen]             = useState("dashboard");
   const [dataLoaded,setDataLoaded]       = useState(false);
   const [shopId,setShopId]               = useState(null);
+  const [mySlug,setMySlug] = useState("");
   const [ownerMode,setOwnerMode]         = useState(false);
   const [shopNotFound,setShopNotFound]   = useState(false);
   const [pendingChat,setPendingChat]     = useState(()=>{
@@ -3029,6 +3030,7 @@ const [notifications,setNotifications] = useState([]);
     (async()=>{
       const params=new URLSearchParams(window.location.search);
       let slug=params.get("loja");
+      setMySlug(slug||"");
       if(!slug){
         const lastShop=localStorage.getItem("lc84_last_shop");
         if(lastShop){
@@ -3095,7 +3097,7 @@ const [notifications,setNotifications] = useState([]);
   const [subscription,setSubscription]   = useState(null); // null=trial, {plan,date}=active
   const [showSub,setShowSub]             = useState(false);
   const trialDays = daysLeft(TRIAL_START);
-  const trialExpired = trialDays === 0 && !subscription;
+  const trialExpired = mySlug!=="lc84" && trialDays === 0 && !subscription;
   if(!dataLoaded){
     return(
       <div style={{minHeight:"100vh",background:T.bg,display:"flex",alignItems:"center",justifyContent:"center",color:T.gold,fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.8rem",letterSpacing:"0.2em"}}>
