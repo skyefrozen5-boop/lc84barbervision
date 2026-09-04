@@ -3170,10 +3170,10 @@ const [notifications,setNotifications] = useState([]);
             LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold}}>barbervision</span>
           </span>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
-            {subscription
+            {mySlug!=="lc84" && (subscription
               ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ {LANGS[lang].t.activeSubBadge}</span>
               :<button onClick={()=>setShowSub(true)} style={{fontSize:"0.54rem",background:trialDays<=3?T.redLo:T.goldLo,color:trialDays<=3?T.red:T.gold,border:`1px solid ${trialDays<=3?T.red:T.gold}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",cursor:"pointer"}}>⏳ {trialDays}d</button>
-            }
+            )}
             <button onClick={()=>setRole("entry")} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
           </div>
         </div>
