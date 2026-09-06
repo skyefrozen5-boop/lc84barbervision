@@ -106,7 +106,9 @@ const LANGS = {
       photoTooLarge:"A imagem é demasiado grande (máx. 5MB).", uploadFailed:"Não foi possível enviar a imagem.", changeProfilePhoto:"Trocar foto de perfil",
       cutHistoryTitle:"Histórico de cortes", addCutBtn:"+ Adicionar corte", tapCamera:"📷 Ligar câmara", tapGallery:"🖼️ Carregar ficheiro",
       cutNotesPlaceholder:"Notas técnicas (ex: máquina nº2 nas laterais, tesoura em cima)", saveCutBtn:"Guardar corte", noCutsYet:"Ainda não há cortes registados por ti para este cliente.",
-      deleteCutBtn:"Apagar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.", addClientBtn:"+ Adicionar cliente", nameRequiredErr:"O nome é obrigatório.",
+      deleteCutBtn:"Apagar corte",
+      purchaseHistoryTitle:"Histórico de compras", addPurchaseBtn:"+ Adicionar compra", purchaseTextPlaceholder:"Descrição do produto (ex: Pomada matte)", savePurchaseBtn:"Guardar compra", noPurchasesYet:"Ainda não há compras registadas para este cliente.", deletePurchaseBtn:"Apagar compra", purchaseRecordTitle:"Compra", addPurchaseErr:"Escreve uma descrição ou adiciona uma foto.",
+      cutRecordTitle:"Corte", addCutPhotoErr:"Adiciona uma foto do corte.", addClientBtn:"+ Adicionar cliente", nameRequiredErr:"O nome é obrigatório.",
       navHome:"Início", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Receita", navSchedule:"Horário", navProfile:"Perfil", navShop:"Loja", todaySuffix:"hoje", activeSubBadge:"ATIVO",
       blockedDayName:"Dia Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Início da pausa", breakEndLabel:"Fim da pausa", noBreakOption:"Sem pausa", deleteClientBtn:"Apagar cliente", deleteClientWarning:"Isto remove definitivamente o histórico, notas e cortes registados para {name}. Esta ação não pode ser desfeita.",
       notifTodayTitle:"Marcações de hoje", notifTodayBody:"Tens {n} marcações hoje. A primeira às 09:00.",
@@ -207,7 +209,9 @@ const LANGS = {
       photoTooLarge:"The image is too large (max 5MB).", uploadFailed:"Could not upload the image.", changeProfilePhoto:"Change profile photo",
       cutHistoryTitle:"Cut history", addCutBtn:"+ Add cut", tapCamera:"📷 Open camera", tapGallery:"🖼️ Upload file",
       cutNotesPlaceholder:"Technical notes (e.g. clipper guard #2 on the sides, scissors on top)", saveCutBtn:"Save cut", noCutsYet:"You haven't recorded any cuts for this client yet.",
-      deleteCutBtn:"Delete cut", cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.", addClientBtn:"+ Add client", nameRequiredErr:"Name is required.",
+      deleteCutBtn:"Delete cut",
+      purchaseHistoryTitle:"Purchase history", addPurchaseBtn:"+ Add purchase", purchaseTextPlaceholder:"Product description (e.g. Matte pomade)", savePurchaseBtn:"Save purchase", noPurchasesYet:"No purchases recorded for this client yet.", deletePurchaseBtn:"Delete purchase", purchaseRecordTitle:"Purchase", addPurchaseErr:"Write a description or add a photo.",
+      cutRecordTitle:"Cut", addCutPhotoErr:"Add a photo of the cut.", addClientBtn:"+ Add client", nameRequiredErr:"Name is required.",
       navHome:"Home", navAgenda:"Agenda", navAlerts:"Alerts", navClients:"Clients", navReports:"Revenue", navSchedule:"Schedule", navProfile:"Profile", navShop:"Shop", todaySuffix:"today", activeSubBadge:"ACTIVE",
       blockedDayName:"Blocked Day", blockedPeriodName:"Blocked Period", breakStartLabel:"Break start", breakEndLabel:"Break end", noBreakOption:"No break", deleteClientBtn:"Delete client", deleteClientWarning:"This permanently removes the history, notes, and recorded cuts for {name}. This action cannot be undone.",
       notifTodayTitle:"Today's bookings", notifTodayBody:"You have {n} bookings today. First at 09:00.",
@@ -308,7 +312,9 @@ const LANGS = {
       photoTooLarge:"La imagen es demasiado grande (máx. 5MB).", uploadFailed:"No se pudo subir la imagen.", changeProfilePhoto:"Cambiar foto de perfil",
       cutHistoryTitle:"Historial de cortes", addCutBtn:"+ Añadir corte", tapCamera:"📷 Abrir cámara", tapGallery:"🖼️ Subir archivo",
       cutNotesPlaceholder:"Notas técnicas (ej: cuchilla nº2 en los laterales, tijera arriba)", saveCutBtn:"Guardar corte", noCutsYet:"Aún no has registrado cortes para este cliente.",
-      deleteCutBtn:"Eliminar corte", cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.", addClientBtn:"+ Añadir cliente", nameRequiredErr:"El nombre es obligatorio.",
+      deleteCutBtn:"Eliminar corte",
+      purchaseHistoryTitle:"Historial de compras", addPurchaseBtn:"+ Añadir compra", purchaseTextPlaceholder:"Descripción del producto (ej: Pomada mate)", savePurchaseBtn:"Guardar compra", noPurchasesYet:"Aún no hay compras registradas para este cliente.", deletePurchaseBtn:"Eliminar compra", purchaseRecordTitle:"Compra", addPurchaseErr:"Escribe una descripción o añade una foto.",
+      cutRecordTitle:"Corte", addCutPhotoErr:"Añade una foto del corte.", addClientBtn:"+ Añadir cliente", nameRequiredErr:"El nombre es obligatorio.",
       navHome:"Inicio", navAgenda:"Agenda", navAlerts:"Alertas", navClients:"Clientes", navReports:"Ingresos", navSchedule:"Horario", navProfile:"Perfil", navShop:"Tienda", todaySuffix:"hoy", activeSubBadge:"ACTIVO",
       blockedDayName:"Día Bloqueado", blockedPeriodName:"Período Bloqueado", breakStartLabel:"Inicio de la pausa", breakEndLabel:"Fin de la pausa", noBreakOption:"Sin pausa", deleteClientBtn:"Eliminar cliente", deleteClientWarning:"Esto elimina definitivamente el historial, notas y cortes registrados de {name}. Esta acción no se puede deshacer.",
       notifTodayTitle:"Citas de hoy", notifTodayBody:"Tienes {n} citas hoy. La primera a las 09:00.",
@@ -409,7 +415,9 @@ const LANGS = {
       photoTooLarge:"L'image est trop grande (max 5 Mo).", uploadFailed:"Impossible d'envoyer l'image.", changeProfilePhoto:"Changer la photo de profil",
       cutHistoryTitle:"Historique des coupes", addCutBtn:"+ Ajouter une coupe", tapCamera:"📷 Ouvrir la caméra", tapGallery:"🖼️ Importer un fichier",
       cutNotesPlaceholder:"Notes techniques (ex : tondeuse n°2 sur les côtés, ciseaux dessus)", saveCutBtn:"Enregistrer la coupe", noCutsYet:"Tu n'as pas encore enregistré de coupe pour ce client.",
-      deleteCutBtn:"Supprimer la coupe", cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.", addClientBtn:"+ Ajouter un client", nameRequiredErr:"Le nom est obligatoire.",
+      deleteCutBtn:"Supprimer la coupe",
+      purchaseHistoryTitle:"Historique des achats", addPurchaseBtn:"+ Ajouter un achat", purchaseTextPlaceholder:"Description du produit (ex: Pommade mate)", savePurchaseBtn:"Enregistrer l'achat", noPurchasesYet:"Aucun achat enregistré pour ce client pour l'instant.", deletePurchaseBtn:"Supprimer l'achat", purchaseRecordTitle:"Achat", addPurchaseErr:"Écris une description ou ajoute une photo.",
+      cutRecordTitle:"Coupe", addCutPhotoErr:"Ajoute une photo de la coupe.", addClientBtn:"+ Ajouter un client", nameRequiredErr:"Le nom est obligatoire.",
       navHome:"Accueil", navAgenda:"Agenda", navAlerts:"Alertes", navClients:"Clients", navReports:"Revenus", navSchedule:"Horaire", navProfile:"Profil", navShop:"Salon", todaySuffix:"aujourd'hui", activeSubBadge:"ACTIF",
       blockedDayName:"Jour Bloqué", blockedPeriodName:"Période Bloquée", breakStartLabel:"Début de la pause", breakEndLabel:"Fin de la pause", noBreakOption:"Sans pause", deleteClientBtn:"Supprimer le client", deleteClientWarning:"Cela supprime définitivement l'historique, les notes et les coupes enregistrées pour {name}. Cette action est irréversible.",
       notifTodayTitle:"Réservations du jour", notifTodayBody:"Tu as {n} réservations aujourd'hui. La première à 09:00.",
@@ -510,7 +518,9 @@ const LANGS = {
       photoTooLarge:"Das Bild ist zu groß (max. 5MB).", uploadFailed:"Das Bild konnte nicht hochgeladen werden.", changeProfilePhoto:"Profilfoto ändern",
       cutHistoryTitle:"Schnitt-Verlauf", addCutBtn:"+ Schnitt hinzufügen", tapCamera:"📷 Kamera öffnen", tapGallery:"🖼️ Datei hochladen",
       cutNotesPlaceholder:"Technische Notizen (z. B. Aufsatz Nr. 2 an den Seiten, Schere oben)", saveCutBtn:"Schnitt speichern", noCutsYet:"Du hast noch keine Schnitte für diesen Kunden erfasst.",
-      deleteCutBtn:"Schnitt löschen", cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.", addClientBtn:"+ Kunde hinzufügen", nameRequiredErr:"Der Name ist erforderlich.",
+      deleteCutBtn:"Schnitt löschen",
+      purchaseHistoryTitle:"Kaufverlauf", addPurchaseBtn:"+ Kauf hinzufügen", purchaseTextPlaceholder:"Produktbeschreibung (z.B. Matte Pomade)", savePurchaseBtn:"Kauf speichern", noPurchasesYet:"Für diesen Kunden wurden noch keine Käufe erfasst.", deletePurchaseBtn:"Kauf löschen", purchaseRecordTitle:"Kauf", addPurchaseErr:"Schreibe eine Beschreibung oder füge ein Foto hinzu.",
+      cutRecordTitle:"Schnitt", addCutPhotoErr:"Füge ein Foto des Schnitts hinzu.", addClientBtn:"+ Kunde hinzufügen", nameRequiredErr:"Der Name ist erforderlich.",
       navHome:"Start", navAgenda:"Kalender", navAlerts:"Hinweise", navClients:"Kunden", navReports:"Umsatz", navSchedule:"Zeitplan", navProfile:"Profil", navShop:"Salon", todaySuffix:"heute", activeSubBadge:"AKTIV",
       blockedDayName:"Gesperrter Tag", blockedPeriodName:"Gesperrter Zeitraum", breakStartLabel:"Pausenbeginn", breakEndLabel:"Pausenende", noBreakOption:"Keine Pause", deleteClientBtn:"Kunde löschen", deleteClientWarning:"Dadurch werden Verlauf, Notizen und erfasste Schnitte für {name} dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
       notifTodayTitle:"Heutige Termine", notifTodayBody:"Du hast heute {n} Termine. Der erste um 09:00.",
@@ -920,7 +930,7 @@ function BNotifications({notifications,setNotifications,barber,lang,onOpenLink})
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -932,6 +942,12 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
   const [cutBusy,setCutBusy]=useState(false);
   const [cutErr,setCutErr]=useState("");
   const [viewPhoto,setViewPhoto]=useState(null);
+  const [addingPurchase,setAddingPurchase]=useState(false);
+  const [purchasePhoto,setPurchasePhoto]=useState(null);
+  const [purchaseText,setPurchaseText]=useState("");
+  const [purchaseBusy,setPurchaseBusy]=useState(false);
+  const [purchaseErr,setPurchaseErr]=useState("");
+  const [viewPurchase,setViewPurchase]=useState(null);
   const [delClientOpen,setDelClientOpen]=useState(false);
   const [addClientOpen,setAddClientOpen]=useState(false);
   const [newClientName,setNewClientName]=useState("");
@@ -978,6 +994,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
     setNoteText(clientNotes[c.phone||c.name]||"");
     setEditNote(false);
     setAddingCut(false);setCutPhoto(null);setCutNotes("");setCutErr("");
+    setAddingPurchase(false);setPurchasePhoto(null);setPurchaseText("");setPurchaseErr("");
     setDelClientOpen(false);
   };
 
@@ -996,6 +1013,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
     setBookings(p=>p.filter(b=>!(b.barberId===barber.id&&(b.phone||b.name)===key&&!b.blocked)));
     setClientNotes(p=>{const n={...p};delete n[key];return n;});
     setCutRecords(p=>{const n={...p};delete n[cutKey(openClient)];return n;});
+    setPurchaseHistory(p=>{const n={...p};delete n[purchaseKey(openClient)];return n;});
     setManualClients(p=>{const n={...p};delete n[`${barber.id}::${key}`];return n;});
     setOpenClient(null);
     setDelClientOpen(false);
@@ -1037,6 +1055,33 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
   const deleteCutRecord=recId=>{
     const key=cutKey(openClient);
     setCutRecords(p=>({...p,[key]:(p[key]||[]).filter(r=>r.id!==recId)}));
+  };
+
+  // Histórico de compras — não isolado por barbeiro: todos os barbeiros da loja veem as mesmas compras
+  const purchaseKey=c=>c.phone||c.name;
+  const myPurchases=c=>(purchaseHistory[purchaseKey(c)]||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+  const uploadPurchasePhoto=async(file)=>{
+    if(!file||!shopId)return;
+    if(file.size>5*1024*1024){setPurchaseErr(L.photoTooLarge);return;}
+    setPurchaseBusy(true);setPurchaseErr("");
+    const ext=file.name.split(".").pop();
+    const path=`${shopId}/compras/${Date.now()}.${ext}`;
+    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    if(error){setPurchaseBusy(false);setPurchaseErr(L.uploadFailed);return;}
+    const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+    setPurchasePhoto(data.publicUrl);
+    setPurchaseBusy(false);
+  };
+  const savePurchaseRecord=()=>{
+    if(!purchaseText.trim()&&!purchasePhoto){setPurchaseErr(L.addPurchaseErr);return;}
+    const key=purchaseKey(openClient);
+    const rec={id:Date.now().toString(36),date:TODAY,text:purchaseText.trim(),photoUrl:purchasePhoto};
+    setPurchaseHistory(p=>({...p,[key]:[...(p[key]||[]),rec]}));
+    setAddingPurchase(false);setPurchasePhoto(null);setPurchaseText("");setPurchaseErr("");
+  };
+  const deletePurchaseRecord=recId=>{
+    const key=purchaseKey(openClient);
+    setPurchaseHistory(p=>({...p,[key]:(p[key]||[]).filter(r=>r.id!==recId)}));
   };
 
   // fav service
@@ -1195,6 +1240,54 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
               )}
             </div>
 
+            {/* Histórico de compras — visível para todos os barbeiros */}
+            <div style={{marginBottom:18}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                <Lbl style={{margin:0}}>{L.purchaseHistoryTitle}</Lbl>
+                {!addingPurchase&&<button onClick={()=>{setAddingPurchase(true);setPurchasePhoto(null);setPurchaseText("");setPurchaseErr("");}} style={{background:"none",border:"none",color:T.gold,cursor:"pointer",fontSize:"0.7rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.1em"}}>{L.addPurchaseBtn}</button>}
+              </div>
+              {addingPurchase&&(
+                <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:12,marginBottom:10}}>
+                  {purchasePhoto&&<img src={purchasePhoto} alt="" style={{width:"100%",maxHeight:160,objectFit:"cover",borderRadius:5,marginBottom:8}}/>}
+                  {!purchasePhoto&&(
+                    <div style={{display:"flex",gap:8,marginBottom:8}}>
+                      <label style={{flex:1}}>
+                        <input type="file" accept="image/*" capture="environment" style={{display:"none"}} onChange={e=>uploadPurchasePhoto(e.target.files?.[0])}/>
+                        <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+                          {purchaseBusy?L.uploading:L.tapCamera}
+                        </div>
+                      </label>
+                      <label style={{flex:1}}>
+                        <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>uploadPurchasePhoto(e.target.files?.[0])}/>
+                        <div style={{padding:"14px 8px",textAlign:"center",background:T.surface,border:`1px dashed ${T.border}`,borderRadius:5,color:T.silver,fontSize:"0.72rem",cursor:"pointer"}}>
+                          {purchaseBusy?L.uploading:L.tapGallery}
+                        </div>
+                      </label>
+                    </div>
+                  )}
+                  <Txta rows={2} placeholder={L.purchaseTextPlaceholder} value={purchaseText} onChange={e=>setPurchaseText(e.target.value)} style={{marginBottom:8}}/>
+                  {purchaseErr&&<div style={{color:T.red,fontSize:"0.7rem",marginBottom:8}}>{purchaseErr}</div>}
+                  <div style={{display:"flex",gap:8}}>
+                    <Btn variant="gold" style={{flex:1,padding:"8px"}} onClick={savePurchaseRecord}>{L.savePurchaseBtn}</Btn>
+                    <Btn variant="ghost" style={{padding:"8px"}} onClick={()=>setAddingPurchase(false)}>{L.cancel}</Btn>
+                  </div>
+                </div>
+              )}
+              {myPurchases(c).length===0&&!addingPurchase?(
+                <div style={{color:T.silver,fontSize:"0.78rem",padding:"6px 0"}}>{L.noPurchasesYet}</div>
+              ):(
+                myPurchases(c).map(r=>(
+                  <div key={r.id} onClick={()=>setViewPurchase(r)} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:`1px solid ${T.border}`,cursor:"pointer"}}>
+                    {r.photoUrl&&<img src={r.photoUrl} alt="" style={{width:40,height:40,objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`,flexShrink:0}}/>}
+                    <div style={{flex:1,minWidth:0}}>
+                      <div style={{fontSize:"0.82rem",color:T.light,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.text||L.purchaseRecordTitle}</div>
+                      <div style={{fontSize:"0.62rem",color:T.silver}}>{dateLabel(r.date)}</div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
             {/* Upcoming */}
             {upcoming.length>0&&(
               <div style={{marginBottom:16}}>
@@ -1266,6 +1359,19 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
           <div style={{display:"flex",gap:8}}>
             <Btn variant="danger" style={{flex:1}} onClick={()=>{deleteCutRecord(viewPhoto.id);setViewPhoto(null);}}>{L.deleteCutBtn}</Btn>
             <Btn variant="ghost" onClick={()=>setViewPhoto(null)}>{L.close}</Btn>
+          </div>
+        </Modal>
+      )}
+
+      {/* Ver / apagar compra */}
+      {viewPurchase&&(
+        <Modal onClose={()=>setViewPurchase(null)} title={L.purchaseRecordTitle}>
+          {viewPurchase.photoUrl&&<img src={viewPurchase.photoUrl} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>}
+          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPurchase.date)}</div>
+          {viewPurchase.text&&<div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:5,padding:"10px 12px",fontSize:"0.82rem",color:T.mid,marginBottom:12}}>{viewPurchase.text}</div>}
+          <div style={{display:"flex",gap:8}}>
+            <Btn variant="danger" style={{flex:1}} onClick={()=>{deletePurchaseRecord(viewPurchase.id);setViewPurchase(null);}}>{L.deletePurchaseBtn}</Btn>
+            <Btn variant="ghost" onClick={()=>setViewPurchase(null)}>{L.close}</Btn>
           </div>
         </Modal>
       )}
@@ -3010,6 +3116,7 @@ export default function App(){
 const [notifications,setNotifications] = useState([]);
   const [clientNotes,setClientNotes]     = useState(INIT_CLIENT_NOTES);
   const [cutRecords,setCutRecords]       = useState({});
+  const [purchaseHistory,setPurchaseHistory] = useState({});
   const [manualClients,setManualClients] = useState({});
   const [role,setRole]                   = useState("entry");
   const [activeBarber,setActiveBarber]   = useState(null);
@@ -3054,7 +3161,7 @@ const [notifications,setNotifications] = useState([]);
       if(!d||Object.keys(d).length===0){
         setBarbers(ensureOwner(INIT_BARBERS));setServices(INIT_SERVICES);setShop(INIT_SHOP);
         setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS,lang));
-        setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});
+        setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});setPurchaseHistory({});
       } else {
         setBarbers(ensureOwner(d.barbers||INIT_BARBERS));
         setServices(d.services||INIT_SERVICES);
@@ -3063,6 +3170,7 @@ const [notifications,setNotifications] = useState([]);
         setNotifications(d.notifications||[]);
         setClientNotes(d.clientNotes||{});
         setCutRecords(d.cutRecords||{});
+        setPurchaseHistory(d.purchaseHistory||{});
         setManualClients(d.manualClients||{});
       }
       setDataLoaded(true);
@@ -3085,12 +3193,12 @@ const [notifications,setNotifications] = useState([]);
     if(!dataLoaded||!shopId)return;
     const t=setTimeout(()=>{
       supabase.from("shops").update({
-        data:{barbers,services,shop,bookings,notifications,clientNotes,cutRecords,manualClients},
+        data:{barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients},
         updated_at:new Date().toISOString(),
       }).eq("id",shopId).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
     },800);
     return()=>clearTimeout(t);
-  },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,manualClients,dataLoaded,shopId]);
+  },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients,dataLoaded,shopId]);
  
 
   // Subscription state
@@ -3206,7 +3314,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
