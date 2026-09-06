@@ -10,6 +10,7 @@ const T = {
   gold:"#b8955a", goldLo:"rgba(184,149,90,0.12)", goldMid:"rgba(184,149,90,0.25)",
   red:"#9e4040", redLo:"rgba(158,64,64,0.12)",
   green:"#4a8a5f", greenLo:"rgba(74,138,95,0.12)",
+  orange:"#c07830", orangeLo:"rgba(192,120,48,0.12)",
   blue:"#4a6a9e", blueLo:"rgba(74,106,158,0.12)",
 };
 
@@ -55,7 +56,7 @@ const LANGS = {
       clientName:"Nome do Cliente", fullName:"Nome completo", phone:"Telemóvel",
       date:"Data", time:"Hora", service:"Serviço", payment:"Pago", payMethod:"— método —",
       notes:"Notas", observations:"Observações…", back:"← Voltar", next:"Continuar →",
-      confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Selecionado",
+      confirmed:"Confirmado", done:"Concluído", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Selecionado", noShow:"Falta",
       freeSlots:"Horários livres", dayBlocked:"Dia inteiro bloqueado", unblock:"Desbloquear",
       blockSlot:"Horário", blockDay:"Dia inteiro", blockPeriod:"Período", blockHours:"Ausência",
       blockSlotTitle:"Escolhe o horário a bloquear", blockDayTitle:"Bloquear dia inteiro",blockHoursTitle:"Bloquear horas de ausência",
@@ -87,7 +88,7 @@ const LANGS = {
       pendingOpen:"em aberto",
       clientWord:"cliente", bookedBadge:"MARCADO", lastVisitLabel:"Última",
       notePlaceholder:"Notas sobre o cliente (preferências, alergias, etc.)…", saveNoteBtn:"Guardar Nota",
-      statVisitsLabel:"Visitas", statSpentLabel:"Gasto",
+      statVisitsLabel:"Visitas", statSpentLabel:"Gasto", statNoShowsLabel:"Faltas", noShowWarning:"⚠ Já faltou {n}x sem avisar", markNoShowBtn:"Falta",
       noBookingCanBeMade:"Nenhum cliente poderá marcar neste dia.", fromDate:"De", toDate:"Até",
       noBookingsShort:"Sem marcações", blockedSlotLabel:"Horário bloqueado",
       all:"Tudo", servicesUnconfirmed:"sem pagamento confirmado", paidConfirmedCount:"pagos e confirmados",
@@ -158,7 +159,7 @@ const LANGS = {
       clientName:"Client Name", fullName:"Full name", phone:"Phone",
       date:"Date", time:"Time", service:"Service", payment:"Paid", payMethod:"— method —",
       notes:"Notes", observations:"Observations…", back:"← Back", next:"Continue →",
-      confirmed:"Confirmed", done:"Completed", cancelled:"Cancelled", blocked:"Blocked", selected:"Selected",
+      confirmed:"Confirmed", done:"Completed", cancelled:"Cancelled", blocked:"Blocked", selected:"Selected", noShow:"No-show",
       freeSlots:"Available slots", dayBlocked:"Full day blocked", unblock:"Unblock",
       blockSlot:"Time slot", blockDay:"Full day", blockPeriod:"Period", blockHours:"Absence",
       blockSlotTitle:"Choose slot to block", blockDayTitle:"Block full day", blockHoursTitle:"Block absence hours",
@@ -190,7 +191,7 @@ const LANGS = {
       pendingOpen:"pending",
       clientWord:"client", bookedBadge:"BOOKED", lastVisitLabel:"Last",
       notePlaceholder:"Notes about the client (preferences, allergies, etc.)…", saveNoteBtn:"Save Note",
-      statVisitsLabel:"Visits", statSpentLabel:"Spent",
+      statVisitsLabel:"Visits", statSpentLabel:"Spent", statNoShowsLabel:"No-shows", noShowWarning:"⚠ No-showed {n}x before", markNoShowBtn:"No-show",
       noBookingCanBeMade:"No client will be able to book on this day.", fromDate:"From", toDate:"To",
       noBookingsShort:"No bookings", blockedSlotLabel:"Blocked time slot",
       all:"All", servicesUnconfirmed:"unconfirmed payment", paidConfirmedCount:"paid and confirmed",
@@ -261,7 +262,7 @@ const LANGS = {
       clientName:"Nombre del Cliente", fullName:"Nombre completo", phone:"Teléfono",
       date:"Fecha", time:"Hora", service:"Servicio", payment:"Pagado", payMethod:"— método —",
       notes:"Notas", observations:"Observaciones…", back:"← Volver", next:"Continuar →",
-      confirmed:"Confirmado", done:"Completado", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Seleccionado",
+      confirmed:"Confirmado", done:"Completado", cancelled:"Cancelado", blocked:"Bloqueado", selected:"Seleccionado", noShow:"Falta",
       freeSlots:"Horarios libres", dayBlocked:"Día completo bloqueado", unblock:"Desbloquear",
       blockSlot:"Horario", blockDay:"Día completo", blockPeriod:"Período", blockHours:"Ausencia",
       blockSlotTitle:"Elige el horario a bloquear", blockDayTitle:"Bloquear día completo", blockHoursTitle:"Bloquear horas de ausencia",
@@ -293,7 +294,7 @@ const LANGS = {
       pendingOpen:"pendiente",
       clientWord:"cliente", bookedBadge:"RESERVADO", lastVisitLabel:"Última",
       notePlaceholder:"Notas sobre el cliente (preferencias, alergias, etc.)…", saveNoteBtn:"Guardar Nota",
-      statVisitsLabel:"Visitas", statSpentLabel:"Gastado",
+      statVisitsLabel:"Visitas", statSpentLabel:"Gastado", statNoShowsLabel:"Faltas", noShowWarning:"⚠ Ya faltó {n}x sin avisar", markNoShowBtn:"Falta",
       noBookingCanBeMade:"Ningún cliente podrá reservar este día.", fromDate:"Desde", toDate:"Hasta",
       noBookingsShort:"Sin reservas", blockedSlotLabel:"Horario bloqueado",
       all:"Todo", servicesUnconfirmed:"sin pago confirmado", paidConfirmedCount:"pagados y confirmados",
@@ -364,7 +365,7 @@ const LANGS = {
       clientName:"Nom du Client", fullName:"Nom complet", phone:"Téléphone",
       date:"Date", time:"Heure", service:"Service", payment:"Payé", payMethod:"— méthode —",
       notes:"Notes", observations:"Observations…", back:"← Retour", next:"Continuer →",
-      confirmed:"Confirmé", done:"Terminé", cancelled:"Annulé", blocked:"Bloqué", selected:"Sélectionné",
+      confirmed:"Confirmé", done:"Terminé", cancelled:"Annulé", blocked:"Bloqué", selected:"Sélectionné", noShow:"Absence",
       freeSlots:"Créneaux disponibles", dayBlocked:"Journée entière bloquée", unblock:"Débloquer",
       blockSlot:"Créneau", blockDay:"Journée entière", blockPeriod:"Période", blockHours:"Absence",
       blockSlotTitle:"Choisir le créneau à bloquer", blockDayTitle:"Bloquer la journée entière", blockHoursTitle:"Bloquer les heures d'absence",
@@ -396,7 +397,7 @@ const LANGS = {
       pendingOpen:"en attente",
       clientWord:"client", bookedBadge:"RÉSERVÉ", lastVisitLabel:"Dernière",
       notePlaceholder:"Notes sur le client (préférences, allergies, etc.)…", saveNoteBtn:"Enregistrer la Note",
-      statVisitsLabel:"Visites", statSpentLabel:"Dépensé",
+      statVisitsLabel:"Visites", statSpentLabel:"Dépensé", statNoShowsLabel:"Absences", noShowWarning:"⚠ Déjà absent {n}x sans prévenir", markNoShowBtn:"Absence",
       noBookingCanBeMade:"Aucun client ne pourra réserver ce jour.", fromDate:"Du", toDate:"Au",
       noBookingsShort:"Aucune réservation", blockedSlotLabel:"Créneau bloqué",
       all:"Tout", servicesUnconfirmed:"paiement non confirmé", paidConfirmedCount:"payés et confirmés",
@@ -467,7 +468,7 @@ const LANGS = {
       clientName:"Kundenname", fullName:"Vollständiger Name", phone:"Telefon",
       date:"Datum", time:"Uhrzeit", service:"Leistung", payment:"Bezahlt", payMethod:"— Methode —",
       notes:"Notizen", observations:"Anmerkungen…", back:"← Zurück", next:"Weiter →",
-      confirmed:"Bestätigt", done:"Abgeschlossen", cancelled:"Storniert", blocked:"Gesperrt", selected:"Ausgewählt",
+      confirmed:"Bestätigt", done:"Abgeschlossen", cancelled:"Storniert", blocked:"Gesperrt", selected:"Ausgewählt", noShow:"Nicht erschienen",
       freeSlots:"Freie Slots", dayBlocked:"Ganzer Tag gesperrt", unblock:"Entsperren",
       blockSlot:"Zeitslot", blockDay:"Ganzer Tag", blockPeriod:"Zeitraum", blockHours:"Abwesenheit",
       blockSlotTitle:"Zeitslot zum Sperren wählen", blockDayTitle:"Ganzen Tag sperren", blockHoursTitle:"Abwesenheitsstunden sperren",
@@ -499,7 +500,7 @@ const LANGS = {
       pendingOpen:"ausstehend",
       clientWord:"Kunde", bookedBadge:"GEBUCHT", lastVisitLabel:"Letzter",
       notePlaceholder:"Notizen zum Kunden (Vorlieben, Allergien usw.)…", saveNoteBtn:"Notiz Speichern",
-      statVisitsLabel:"Besuche", statSpentLabel:"Ausgegeben",
+      statVisitsLabel:"Besuche", statSpentLabel:"Ausgegeben", statNoShowsLabel:"Nichterscheinen", noShowWarning:"⚠ Schon {n}x unentschuldigt gefehlt", markNoShowBtn:"Nicht erschienen",
       noBookingCanBeMade:"An diesem Tag kann kein Kunde buchen.", fromDate:"Von", toDate:"Bis",
       noBookingsShort:"Keine Termine", blockedSlotLabel:"Blockierter Termin",
       all:"Alle", servicesUnconfirmed:"unbestätigte Zahlung", paidConfirmedCount:"bezahlt und bestätigt",
@@ -674,7 +675,7 @@ const Btn = ({children,variant="gold",style,...p}) => {
   return <button className="tap" {...p} style={{padding:"11px 18px",borderRadius:4,cursor:"pointer",fontSize:"0.68rem",letterSpacing:"0.2em",textTransform:"uppercase",fontWeight:700,fontFamily:"'Josefin Sans',sans-serif",...V[variant],...style}}>{children}</button>;
 };
 const Tag = ({status}) => {
-  const C={confirmado:{bg:T.goldLo,c:T.gold,l:"Confirmado"},concluído:{bg:T.greenLo,c:T.green,l:"Concluído"},cancelado:{bg:T.redLo,c:T.red,l:"Cancelado"},bloqueado:{bg:T.muted,c:T.silver,l:"Bloqueado"}};
+  const C={confirmado:{bg:T.goldLo,c:T.gold,l:"Confirmado"},concluído:{bg:T.greenLo,c:T.green,l:"Concluído"},cancelado:{bg:T.redLo,c:T.red,l:"Cancelado"},falta:{bg:T.orangeLo,c:T.orange,l:"Falta"},bloqueado:{bg:T.muted,c:T.silver,l:"Bloqueado"}};
   const cfg=C[status]||C.confirmado;
   return <span style={{fontSize:"0.55rem",letterSpacing:"0.12em",textTransform:"uppercase",padding:"2px 7px",borderRadius:3,background:cfg.bg,color:cfg.c,border:`1px solid ${cfg.c}`,fontFamily:"'Josefin Sans',sans-serif",whiteSpace:"nowrap"}}>{cfg.l}</span>;
 };
@@ -839,18 +840,23 @@ function svcName(s,lang){
 function barberWorksOnDate(barber,dateStr){return barber.schedule.workDays.includes(new Date(dateStr+"T12:00:00").getDay());}
 
 // ─── BOOKING FORM ─────────────────────────────────────────────────────────────
-function BookingForm({initial,services,barbers,onSave,onDelete,onClose,fixedBarberId,lang}){
+function BookingForm({initial,services,barbers,bookings,onSave,onDelete,onClose,fixedBarberId,lang}){
   const L=LANGS[lang].t;
   const [f,setF]=useState(initial);
   const u=k=>v=>setF(p=>({...p,[k]:v}));
   const ok=f.name.trim()&&f.time&&f.date;
   const hrs=f.barberId?getBarberHours(barbers.find(b=>b.id===f.barberId)||barbers[0]):ALL_HOURS;
-  const statusLabel={confirmado:L.confirmed,concluído:L.done,cancelado:L.cancelled};
+  const statusLabel={confirmado:L.confirmed,concluído:L.done,cancelado:L.cancelled,falta:L.noShow};
+  const noShowCount=useMemo(()=>{
+    if(!bookings||!(f.phone||f.name))return 0;
+    return bookings.filter(b=>b.status==="falta"&&(f.phone?b.phone===f.phone:b.name===f.name)).length;
+  },[bookings,f.phone,f.name]);
   return(
     <>
+      {noShowCount>0&&<div style={{background:T.orangeLo,border:`1px solid ${T.orange}`,borderRadius:6,padding:"9px 12px",marginBottom:14,color:T.orange,fontSize:"0.74rem"}}>{L.noShowWarning.replace("{n}",noShowCount)}</div>}
       <div style={{display:"flex",gap:6,marginBottom:16}}>
-        {["confirmado","concluído","cancelado"].map(st=>(
-          <button key={st} onClick={()=>u("status")(st)} style={{flex:1,padding:"7px 4px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:f.status===st?(st==="concluído"?T.greenLo:st==="cancelado"?T.redLo:T.goldLo):"transparent",color:f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:T.gold):T.silver,border:`1px solid ${f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:T.gold):T.border}`}}>{statusLabel[st]}</button>
+        {["confirmado","concluído","cancelado","falta"].map(st=>(
+          <button key={st} onClick={()=>u("status")(st)} style={{flex:1,padding:"7px 4px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:f.status===st?(st==="concluído"?T.greenLo:st==="cancelado"?T.redLo:st==="falta"?T.orangeLo:T.goldLo):"transparent",color:f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:st==="falta"?T.orange:T.gold):T.silver,border:`1px solid ${f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:st==="falta"?T.orange:T.gold):T.border}`}}>{statusLabel[st]}</button>
         ))}
       </div>
       {!fixedBarberId&&<div style={{marginBottom:11}}><Lbl>{L.barberLabel}</Lbl><Sel value={f.barberId} onChange={e=>u("barberId")(e.target.value)}>{barbers.filter(b=>b.active).map(b=><option key={b.id} value={b.id}>{b.name}</option>)}</Sel></div>}
@@ -1163,14 +1169,19 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
             </div>
 
             {/* Stats */}
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:7,marginBottom:18}}>
-              {[{l:L.statVisitsLabel,v:c.visits.length},{l:L.statSpentLabel,v:`€${c.totalSpent}`},{l:L.favorite,v:favService(c).split(" ")[0]}].map(s=>(
-                <div key={s.l} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:6,padding:"10px 10px",textAlign:"center"}}>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:7,marginBottom:18}}>
+              {[{l:L.statVisitsLabel,v:c.visits.length},{l:L.statSpentLabel,v:`€${c.totalSpent}`},{l:L.statNoShowsLabel,v:c.visits.filter(v=>v.status==="falta").length,warn:c.visits.filter(v=>v.status==="falta").length>0},{l:L.favorite,v:favService(c).split(" ")[0]}].map(s=>(
+                <div key={s.l} style={{background:T.card,border:`1px solid ${s.warn?T.orange:T.border}`,borderRadius:6,padding:"10px 10px",textAlign:"center"}}>
                   <Lbl style={{marginBottom:4,textAlign:"center"}}>{s.l}</Lbl>
-                  <div style={{fontSize:"1rem",color:T.gold,fontWeight:600,lineHeight:1}}>{s.v}</div>
+                  <div style={{fontSize:"0.92rem",color:s.warn?T.orange:T.white,fontWeight:600}}>{s.v}</div>
                 </div>
               ))}
             </div>
+            {c.visits.filter(v=>v.status==="falta").length>0&&(
+              <div style={{background:T.orangeLo,border:`1px solid ${T.orange}`,borderRadius:6,padding:"9px 12px",marginBottom:16,color:T.orange,fontSize:"0.74rem"}}>
+                {L.noShowWarning.replace("{n}",c.visits.filter(v=>v.status==="falta").length)}
+              </div>
+            )}
 
             {/* Notes */}
             <div style={{marginBottom:18}}>
@@ -1592,6 +1603,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
                     <div style={{fontSize:"0.92rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div>
                     <div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{s?.name}</div>
                     {b.phone&&<div style={{fontSize:"0.64rem",color:T.silver,marginTop:1}}>{b.phone}</div>}
+                    {(()=>{const n=bookings.filter(x=>x.status==="falta"&&x.barberId===barber.id&&(b.phone?x.phone===b.phone:x.name===b.name)).length;return n>0?<div style={{fontSize:"0.6rem",color:T.orange,marginTop:3}}>{L.noShowWarning.replace("{n}",n)}</div>:null;})()}
                   </div>
                   <div style={{textAlign:"right",flexShrink:0}}>
                     <div style={{fontSize:"0.88rem",color:T.gold,fontWeight:600,marginBottom:3}}>€{s?.price}</div>
@@ -1601,7 +1613,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
                 </div>
               </div>
               <div onClick={e=>e.stopPropagation()} style={{display:"flex",flexDirection:"column",background:T.card,borderLeft:`1px solid ${T.border}`,flexShrink:0}}>
-                {[{icon:"✓",k:"concluído",c:T.green,a:b.status==="concluído"},{icon:"€",k:"paid",c:T.gold,a:b.paid},{icon:"✕",k:"cancelado",c:T.red,a:b.status==="cancelado"}].map(({icon,k,c,a})=>(
+                {[{icon:"✓",k:"concluído",c:T.green,a:b.status==="concluído"},{icon:"€",k:"paid",c:T.gold,a:b.paid},{icon:"⊘",k:"falta",c:T.orange,a:b.status==="falta"},{icon:"✕",k:"cancelado",c:T.red,a:b.status==="cancelado"}].map(({icon,k,c,a})=>(
                   <button key={k} onClick={()=>k==="paid"?qPaid(b.id):qStatus(b.id,k)} style={{flex:1,width:29,border:"none",cursor:"pointer",fontSize:"0.74rem",borderBottom:`1px solid ${T.border}`,background:a?`${c}22`:"transparent",color:a?c:T.muted}}>{icon}</button>
                 ))}
               </div>
@@ -1610,7 +1622,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
           {(()=>{const free=hours.filter(h=>!dayBk.find(b=>b.time===h));if(!free.length)return null;return(<div style={{marginTop:14}}><Lbl style={{marginBottom:7}}>{L.freeSlots}</Lbl><div style={{display:"flex",flexWrap:"wrap",gap:6}}>{free.map(h=><button key={h} className="slot-h" onClick={()=>openAdd(h)} style={{padding:"4px 9px",background:"transparent",border:`1px solid ${T.border}`,borderRadius:4,color:T.silver,fontSize:"0.73rem",cursor:"pointer",transition:"all .15s",fontFamily:"'Josefin Sans',sans-serif"}}>{h}</button>)}</div></div>);})()}
         </>
       )}
-      {modal&&<Modal onClose={()=>setModal(null)} title={modal.mode==="add"?L.addBooking:L.editBooking}><BookingForm initial={modal.data} services={services} barbers={barbers} onSave={save} onDelete={modal.mode==="edit"?()=>del(modal.data.id):null} onClose={()=>setModal(null)} fixedBarberId={barber.id} lang={lang}/></Modal>}
+      {modal&&<Modal onClose={()=>setModal(null)} title={modal.mode==="add"?L.addBooking:L.editBooking}><BookingForm initial={modal.data} services={services} barbers={barbers} bookings={bookings} onSave={save} onDelete={modal.mode==="edit"?()=>del(modal.data.id):null} onClose={()=>setModal(null)} fixedBarberId={barber.id} lang={lang}/></Modal>}
     </div>
   );
 }
