@@ -2218,7 +2218,7 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
           {barbers.map(b=>(
             <div key={b.id} style={{display:"flex",alignItems:"center",gap:11,padding:"12px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:b.active?1:0.45}}>
               <Avatar barber={b} size={36}/>
-              <div style={{flex:1,minWidth:0}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role} · PIN: {b.pin}</div></div>
+              <div style={{flex:1,minWidth:0}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div></div>
               <div style={{display:"flex",flexDirection:"column",gap:4,alignItems:"flex-end"}}>
                 <button onClick={()=>setBarbers(p=>p.map(bb=>bb.id===b.id?{...bb,active:!bb.active}:bb))} style={{background:b.active?T.greenLo:T.muted,border:`1px solid ${b.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:b.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{b.active?L.activeLabel:L.offLabel}</button>
                 <button onClick={()=>{setBf({...b});setModal("barber");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.82rem"}}>✏</button>
