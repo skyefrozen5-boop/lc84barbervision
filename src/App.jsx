@@ -67,7 +67,7 @@ const LANGS = {
       noHistory:"Sem histórico", favorite:"Favorito",
       confirmedRev:"✓ Receita Confirmada", pendingPayment:"⚠ Por Receber", scheduled:"Agendado",
       payConfirm:"Confirmar Pagamento", confirmReceipt:"✓ Confirmar Recebimento de",
-      printToday:"🖨 Relatório Hoje", printMonth:"🖨 Relatório Mês",
+      printToday:"Relatório Hoje", printMonth:"Relatório Mês",
       byMethod:"Por método de pagamento", byService:"Por serviço", last7:"Receita confirmada — 7 dias",
       records:"Registos", total:"total", services:"Serviços",
       workDays:"Dias de trabalho", startHour:"Início", endHour:"Fim", generatedSlots:"Horários gerados",
@@ -170,7 +170,7 @@ const LANGS = {
       noHistory:"No history", favorite:"Favourite",
       confirmedRev:"✓ Confirmed Revenue", pendingPayment:"⚠ Pending Payment", scheduled:"Scheduled",
       payConfirm:"Confirm Payment", confirmReceipt:"✓ Confirm Receipt of",
-      printToday:"🖨 Today's Report", printMonth:"🖨 Monthly Report",
+      printToday:"Today's Report", printMonth:"Monthly Report",
       byMethod:"By payment method", byService:"By service", last7:"Confirmed revenue — 7 days",
       records:"Records", total:"total", services:"Services",
       workDays:"Work days", startHour:"Start", endHour:"End", generatedSlots:"Generated slots",
@@ -273,7 +273,7 @@ const LANGS = {
       noHistory:"Sin historial", favorite:"Favorito",
       confirmedRev:"✓ Ingresos Confirmados", pendingPayment:"⚠ Por Cobrar", scheduled:"Programado",
       payConfirm:"Confirmar Pago", confirmReceipt:"✓ Confirmar Cobro de",
-      printToday:"🖨 Informe Hoy", printMonth:"🖨 Informe Mes",
+      printToday:"Informe Hoy", printMonth:"Informe Mes",
       byMethod:"Por método de pago", byService:"Por servicio", last7:"Ingresos confirmados — 7 días",
       records:"Registros", total:"total", services:"Servicios",
       workDays:"Días de trabajo", startHour:"Inicio", endHour:"Fin", generatedSlots:"Horarios generados",
@@ -376,7 +376,7 @@ const LANGS = {
       noHistory:"Aucun historique", favorite:"Favori",
       confirmedRev:"✓ Revenus Confirmés", pendingPayment:"⚠ À Encaisser", scheduled:"Planifié",
       payConfirm:"Confirmer le Paiement", confirmReceipt:"✓ Confirmer l'encaissement de",
-      printToday:"🖨 Rapport Aujourd'hui", printMonth:"🖨 Rapport Mensuel",
+      printToday:"Rapport Aujourd'hui", printMonth:"Rapport Mensuel",
       byMethod:"Par méthode de paiement", byService:"Par service", last7:"Revenus confirmés — 7 jours",
       records:"Registres", total:"total", services:"Services",
       workDays:"Jours de travail", startHour:"Début", endHour:"Fin", generatedSlots:"Créneaux générés",
@@ -479,7 +479,7 @@ const LANGS = {
       noHistory:"Keine Historie", favorite:"Favorit",
       confirmedRev:"✓ Bestätigter Umsatz", pendingPayment:"⚠ Ausstehend", scheduled:"Geplant",
       payConfirm:"Zahlung bestätigen", confirmReceipt:"✓ Eingang bestätigen von",
-      printToday:"🖨 Tagesbericht", printMonth:"🖨 Monatsbericht",
+      printToday:"Tagesbericht", printMonth:"Monatsbericht",
       byMethod:"Nach Zahlungsmethode", byService:"Nach Leistung", last7:"Bestätigter Umsatz — 7 Tage",
       records:"Aufzeichnungen", total:"gesamt", services:"Leistungen",
       workDays:"Arbeitstage", startHour:"Beginn", endHour:"Ende", generatedSlots:"Generierte Slots",
@@ -1831,8 +1831,8 @@ function BReports({bookings,setBookings,services,barber,lang}){
 
       {/* Print buttons */}
       <div style={{display:"flex",gap:8,marginBottom:16}}>
-        <Btn variant="ghost" style={{flex:1,padding:"8px 6px",fontSize:"0.58rem"}} onClick={()=>setPrintModal("today")}>🖨 {L.printToday}</Btn>
-        <Btn variant="ghost" style={{flex:1,padding:"8px 6px",fontSize:"0.58rem"}} onClick={()=>setPrintModal("month")}>🖨 {L.printMonth}</Btn>
+        <Btn variant="ghost" style={{flex:1,padding:"8px 6px",fontSize:"0.58rem"}} onClick={()=>setPrintModal("today")}>🖨 {L.printToday} 🖨</Btn>
+        <Btn variant="ghost" style={{flex:1,padding:"8px 6px",fontSize:"0.58rem"}} onClick={()=>setPrintModal("month")}>🖨 {L.printMonth} 🖨</Btn>
       </div>
 
       {/* Payment method breakdown */}
