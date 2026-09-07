@@ -1443,10 +1443,57 @@ function BDashboard({bookings,services,barber,lang}){
   );
 }
 
+function MiniCalendar({lang,value,bookings,barber,onSelect,onClose}){
+  const L=LANGS[lang].t;
+  const WD=LANGS[lang].wdays;
+  const initial=value?new Date(value+"T12:00:00"):new Date();
+  const [viewY,setViewY]=useState(initial.getFullYear());
+  const [viewM,setViewM]=useState(initial.getMonth());
+  const first=new Date(viewY,viewM,1);
+  const startWeekday=first.getDay();
+  const daysInMonth=new Date(viewY,viewM+1,0).getDate();
+  const prevMonthDays=new Date(viewY,viewM,0).getDate();
+  const cells=[];
+  for(let i=0;i<startWeekday;i++)cells.push({d:prevMonthDays-startWeekday+1+i,cur:false,dateObj:new Date(viewY,viewM-1,prevMonthDays-startWeekday+1+i)});
+  for(let d=1;d<=daysInMonth;d++)cells.push({d,cur:true,dateObj:new Date(viewY,viewM,d)});
+  while(cells.length%7!==0){const idx=cells.length-startWeekday-daysInMonth+1;cells.push({d:idx,cur:false,dateObj:new Date(viewY,viewM+1,idx)});}
+  const changeMonth=delta=>{let m=viewM+delta,y=viewY;if(m<0){m=11;y--;}if(m>11){m=0;y++;}setViewM(m);setViewY(y);};
+  const todayStr=fmt(new Date());
+  return(<>
+    <div onClick={onClose} style={{position:"fixed",inset:0,zIndex:49}}/>
+    <div style={{position:"absolute",top:"calc(100% + 6px)",right:0,zIndex:50,background:T.card,border:`1px solid ${T.border}`,borderRadius:8,padding:14,boxShadow:"0 8px 24px rgba(0,0,0,0.5)",width:266}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+        <button onClick={()=>changeMonth(-1)} style={{background:"none",border:`1px solid ${T.border}`,borderRadius:5,color:T.silver,cursor:"pointer",padding:"3px 9px",fontSize:"0.72rem"}}>‹</button>
+        <div style={{fontSize:"0.76rem",color:T.white,fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.05em"}}>{LANGS[lang].months[viewM]} {viewY}</div>
+        <button onClick={()=>changeMonth(1)} style={{background:"none",border:`1px solid ${T.border}`,borderRadius:5,color:T.silver,cursor:"pointer",padding:"3px 9px",fontSize:"0.72rem"}}>›</button>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2,marginBottom:4}}>
+        {WD.map((w,i)=><div key={i} style={{textAlign:"center",fontSize:"0.48rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif",textTransform:"uppercase"}}>{w}</div>)}
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
+        {cells.map((cell,i)=>{
+          const iso=fmt(cell.dateObj);
+          const sel=iso===value;
+          const isToday=iso===todayStr;
+          const cnt=cell.cur?bookings.filter(b=>b.barberId===barber.id&&b.date===iso&&!b.blocked).length:0;
+          return(
+            <button key={i} onClick={()=>cell.cur&&onSelect(iso)} disabled={!cell.cur} style={{aspectRatio:"1",border:isToday&&!sel?`1px solid ${T.gold}`:"1px solid transparent",borderRadius:5,background:sel?T.gold:"transparent",color:!cell.cur?T.muted:sel?"#000":T.white,fontSize:"0.72rem",cursor:cell.cur?"pointer":"default",position:"relative",opacity:cell.cur?1:0.28}}>
+              {cell.d}
+              {cnt>0&&!sel&&<span style={{position:"absolute",bottom:2,left:"50%",transform:"translateX(-50%)",width:3,height:3,borderRadius:"50%",background:T.gold}}/>}
+            </button>
+          );
+        })}
+      </div>
+      <button onClick={()=>onSelect(todayStr)} style={{marginTop:10,width:"100%",padding:"7px",background:"none",border:`1px solid ${T.gold}`,borderRadius:5,color:T.gold,cursor:"pointer",fontSize:"0.62rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.08em"}}>{L.today.toUpperCase()}</button>
+    </div>
+  </>);
+}
+
 function BAgenda({bookings,setBookings,services,barbers,barber,addNotification,lang}){
   const L=LANGS[lang].t;
   const WD=LANGS[lang].wdays;
   const [selDate,setSelDate]=useState(TODAY);
+  const [dayOffset,setDayOffset]=useState(0);
   const [modal,setModal]=useState(null);
   const [blocking,setBlocking]=useState(false);
   const [blockMode,setBlockMode]=useState("slot"); // slot | day | period
@@ -1479,7 +1526,14 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
   const svc=id=>services.find(s=>s.id===id);
   const hours=getBarberHours(barber);
   const dayBk=useMemo(()=>bookings.filter(b=>b.barberId===barber.id&&b.date===selDate).sort((a,b)=>a.time.localeCompare(b.time)),[bookings,selDate,barber]);
-  const strip=Array.from({length:7}).map((_,i)=>{const d=new Date(Date.now()+i*86400000);return{str:fmt(d),d};});
+  const strip=Array.from({length:7}).map((_,i)=>{const d=new Date(Date.now()+(dayOffset+i)*86400000);return{str:fmt(d),d};});
+  const jumpToDate=iso=>{
+    if(!iso)return;
+    const picked=new Date(iso+"T00:00:00");
+    const diffDays=Math.round((picked-new Date(new Date().toDateString()))/86400000);
+    setDayOffset(diffDays);
+    setSelDate(fmt(picked));
+  };
   const openAdd=(time="")=>setModal({mode:"add",data:{id:null,barberId:barber.id,date:selDate,time,serviceId:"s1",name:"",phone:"",status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false}});
   const openEdit=b=>setModal({mode:"edit",data:{...b}});
   const save=f=>{
@@ -1501,9 +1555,25 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
   };
   const qPaid=id=>setBookings(p=>p.map(b=>b.id===id?{...b,paid:!b.paid}:b));
   const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.blockedSlotLabel,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
+  const [showCal,setShowCal]=useState(false);
   const worksToday=barberWorksOnDate(barber,selDate);
   return(
     <div style={{padding:"0 20px"}}>
+      {/* navegação por semana */}
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+        <button onClick={()=>setDayOffset(o=>o-7)} style={{background:"none",border:`1px solid ${T.border}`,borderRadius:5,color:T.silver,cursor:"pointer",padding:"5px 10px",fontSize:"0.8rem"}}>‹</button>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <span style={{fontSize:"0.72rem",color:T.silver,fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.05em"}}>
+            {LANGS[lang].months[strip[0].d.getMonth()]} {strip[0].d.getFullYear()}
+          </span>
+          <div style={{position:"relative"}}>
+            <button onClick={()=>setShowCal(s=>!s)} style={{background:"none",border:"none",cursor:"pointer",fontSize:"0.9rem",padding:0,lineHeight:1}}>📅</button>
+            {showCal&&<MiniCalendar lang={lang} value={selDate} bookings={bookings} barber={barber} onClose={()=>setShowCal(false)} onSelect={iso=>{jumpToDate(iso);setShowCal(false);}}/>}
+          </div>
+          {dayOffset!==0&&<button onClick={()=>{setDayOffset(0);setSelDate(TODAY);}} style={{background:"none",border:`1px solid ${T.gold}`,borderRadius:5,color:T.gold,cursor:"pointer",padding:"3px 9px",fontSize:"0.62rem",fontFamily:"'Josefin Sans',sans-serif",letterSpacing:"0.08em"}}>{L.today.toUpperCase()}</button>}
+        </div>
+        <button onClick={()=>setDayOffset(o=>o+7)} style={{background:"none",border:`1px solid ${T.border}`,borderRadius:5,color:T.silver,cursor:"pointer",padding:"5px 10px",fontSize:"0.8rem"}}>›</button>
+      </div>
       {/* strip */}
       <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:10,marginBottom:14,scrollbarWidth:"none"}}>
         {strip.map(({str,d})=>{
