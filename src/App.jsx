@@ -1131,7 +1131,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                   {unreadMap[key]>0&&<span style={{fontSize:"0.55rem",background:T.red,color:"#fff",borderRadius:"50%",width:16,height:16,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Josefin Sans',sans-serif"}}>{unreadMap[key]>9?"9+":unreadMap[key]}</span>}
                 </div>
                 <div style={{fontSize:"0.7rem",color:T.silver,marginTop:2}}>{c.phone} · {c.visits.length} {L.visits}{c.visits.length!==1?"s":""}</div>
-                <div style={{fontSize:"0.66rem",color:T.silver,marginTop:1}}>{L.lastVisitLabel}: {dateLabel(c.lastVisit)} · {L.favorite}: {favService(c)}</div>
+                <div style={{fontSize:"0.66rem",color:T.silver,marginTop:1}}>{L.lastVisitLabel}: {dateLabel(c.lastVisit,lang)} · {L.favorite}: {favService(c)}</div>
                 {note&&<div style={{fontSize:"0.68rem",color:T.mid,marginTop:4,fontStyle:"italic",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>📝 {note}</div>}
               </div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:12}}>
@@ -1244,7 +1244,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                   {myCuts(c).map(r=>(
                     <div key={r.id} onClick={()=>setViewPhoto(r)} style={{cursor:"pointer",position:"relative"}}>
                       <img src={r.photoUrl} alt="" style={{width:"100%",aspectRatio:"1",objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`}}/>
-                      <div style={{fontSize:"0.6rem",color:T.silver,marginTop:3,textAlign:"center"}}>{dateLabel(r.date)}</div>
+                      <div style={{fontSize:"0.6rem",color:T.silver,marginTop:3,textAlign:"center"}}>{dateLabel(r.date,lang)}</div>
                     </div>
                   ))}
                 </div>
@@ -1292,7 +1292,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                     {r.photoUrl&&<img src={r.photoUrl} alt="" style={{width:40,height:40,objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`,flexShrink:0}}/>}
                     <div style={{flex:1,minWidth:0}}>
                       <div style={{fontSize:"0.82rem",color:T.light,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.text||L.purchaseRecordTitle}</div>
-                      <div style={{fontSize:"0.62rem",color:T.silver}}>{dateLabel(r.date)}</div>
+                      <div style={{fontSize:"0.62rem",color:T.silver}}>{dateLabel(r.date,lang)}</div>
                     </div>
                   </div>
                 ))
@@ -1307,7 +1307,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                   <div key={v.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"8px 12px",marginBottom:5,background:T.goldLo,border:`1px solid ${T.gold}44`,borderRadius:5}}>
                     <div>
                       <div style={{fontSize:"0.85rem",color:T.white}}>{svcName(svc(v.serviceId),lang)}</div>
-                      <div style={{fontSize:"0.66rem",color:T.silver}}>{dateLabel(v.date)} · {v.time}h</div>
+                      <div style={{fontSize:"0.66rem",color:T.silver}}>{dateLabel(v.date,lang)} · {v.time}h</div>
                     </div>
                     <div style={{fontSize:"0.82rem",color:T.gold}}>€{svc(v.serviceId)?.price}</div>
                   </div>
@@ -1323,7 +1323,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                 <div key={v.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:`1px solid ${T.border}`}}>
                   <div>
                     <div style={{fontSize:"0.85rem",color:T.light}}>{svcName(svc(v.serviceId),lang)}</div>
-                    <div style={{fontSize:"0.65rem",color:T.silver,marginTop:2}}>{dateLabel(v.date)} · {v.time}h {v.paid?`· ${v.payMethod}`:""}</div>
+                    <div style={{fontSize:"0.65rem",color:T.silver,marginTop:2}}>{dateLabel(v.date,lang)} · {v.time}h {v.paid?`· ${v.payMethod}`:""}</div>
                   </div>
                   <div style={{textAlign:"right"}}>
                     <div style={{fontSize:"0.82rem",color:v.paid?T.green:T.silver}}>€{svc(v.serviceId)?.price}</div>
@@ -1365,7 +1365,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
       {viewPhoto&&(
         <Modal onClose={()=>setViewPhoto(null)} title={L.cutRecordTitle}>
           <img src={viewPhoto.photoUrl} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>
-          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPhoto.date)}</div>
+          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPhoto.date,lang)}</div>
           {viewPhoto.notes&&<div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:5,padding:"10px 12px",fontSize:"0.82rem",color:T.mid,fontStyle:"italic",marginBottom:12}}>{viewPhoto.notes}</div>}
           <div style={{display:"flex",gap:8}}>
             <Btn variant="danger" style={{flex:1}} onClick={()=>{deleteCutRecord(viewPhoto.id);setViewPhoto(null);}}>{L.deleteCutBtn}</Btn>
@@ -1378,7 +1378,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
       {viewPurchase&&(
         <Modal onClose={()=>setViewPurchase(null)} title={L.purchaseRecordTitle}>
           {viewPurchase.photoUrl&&<img src={viewPurchase.photoUrl} alt="" style={{width:"100%",borderRadius:6,marginBottom:10}}/>}
-          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPurchase.date)}</div>
+          <div style={{fontSize:"0.7rem",color:T.silver,marginBottom:8}}>{dateLabel(viewPurchase.date,lang)}</div>
           {viewPurchase.text&&<div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:5,padding:"10px 12px",fontSize:"0.82rem",color:T.mid,marginBottom:12}}>{viewPurchase.text}</div>}
           <div style={{display:"flex",gap:8}}>
             <Btn variant="danger" style={{flex:1}} onClick={()=>{deletePurchaseRecord(viewPurchase.id);setViewPurchase(null);}}>{L.deletePurchaseBtn}</Btn>
@@ -1429,7 +1429,7 @@ function BDashboard({bookings,services,barber,lang}){
         <div key={b.id} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 12px",marginBottom:6,background:T.card,border:`1px solid ${T.border}`,borderRadius:6}}>
           <div style={{textAlign:"center",minWidth:44}}>
             <div style={{fontSize:"0.85rem",color:T.gold,fontFamily:"'Josefin Sans',sans-serif",fontWeight:600}}>{b.time}</div>
-            <div style={{fontSize:"0.56rem",color:T.silver}}>{dateLabel(b.date)}</div>
+            <div style={{fontSize:"0.56rem",color:T.silver}}>{dateLabel(b.date,lang)}</div>
           </div>
           <Hr style={{width:1,height:26,alignSelf:"center"}}/>
           <div style={{flex:1,minWidth:0}}>
@@ -1546,12 +1546,12 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
   };
   const del=id=>{
     const b=bookings.find(b=>b.id===id);
-    if(b)addNotification(barber.id,"cancel",L.notifBookingDeletedTitle,L.notifBookingDeletedBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
+    if(b)addNotification(barber.id,"cancel",L.notifBookingDeletedTitle,L.notifBookingDeletedBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
     setBookings(p=>p.filter(b=>b.id!==id));setModal(null);
   };
   const qStatus=(id,st)=>{
     setBookings(p=>p.map(b=>b.id===id?{...b,status:st}:b));
-    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});}
+    if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});}
   };
   const qPaid=id=>setBookings(p=>p.map(b=>b.id===id?{...b,paid:!b.paid}:b));
   const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.blockedSlotLabel,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
@@ -1590,7 +1590,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
       {!worksToday?<div style={{textAlign:"center",padding:"40px 0",color:T.silver}}><div style={{fontSize:"1.5rem",opacity:.18,marginBottom:8}}>🔒</div>{L.holiday}</div>:(
         <>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-            <div><span style={{fontSize:"1.08rem",color:T.white,fontWeight:600}}>{dateLabel(selDate)}</span><span style={{fontSize:"0.68rem",color:T.silver,marginLeft:8}}>{dayBk.filter(b=>!b.blocked).length} {L.bookings}</span></div>
+            <div><span style={{fontSize:"1.08rem",color:T.white,fontWeight:600}}>{dateLabel(selDate,lang)}</span><span style={{fontSize:"0.68rem",color:T.silver,marginLeft:8}}>{dayBk.filter(b=>!b.blocked).length} {L.bookings}</span></div>
             <div style={{display:"flex",gap:6}}>
               <Btn variant="ghost" style={{padding:"5px 9px",fontSize:"0.56rem"}} onClick={()=>setBlocking(b=>!b)}>🔒</Btn>
               <Btn variant="gold" style={{padding:"5px 11px"}} onClick={()=>openAdd()}>{L.newBooking}</Btn>
@@ -1632,7 +1632,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
 </>)}
 
               {blockMode==="day"&&(<>
-                <Lbl style={{marginBottom:8}}>{L.blockDayTitle} — {dateLabel(selDate)}</Lbl>
+                <Lbl style={{marginBottom:8}}>{L.blockDayTitle} — {dateLabel(selDate,lang)}</Lbl>
                 <div style={{fontSize:"0.8rem",color:T.silver,marginBottom:12}}>{L.noBookingCanBeMade}</div>
                 <Btn variant="danger" style={{width:"100%"}} onClick={addBlockDay}>🔒 {L.blockDayTitle}</Btn>
               </>)}
@@ -1706,7 +1706,7 @@ function ConfirmPayModal({booking,svc,onConfirm,onClose,lang}){
     <Modal onClose={onClose} title={L.payConfirm}>
       <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"14px",marginBottom:18}}>
         <div style={{fontSize:"1rem",color:T.white,fontWeight:500,marginBottom:4}}>{booking.name}</div>
-        <div style={{fontSize:"0.8rem",color:T.silver,marginBottom:2}}>{s?.name} · {booking.time}h · {dateLabel(booking.date)}</div>
+        <div style={{fontSize:"0.8rem",color:T.silver,marginBottom:2}}>{s?.name} · {booking.time}h · {dateLabel(booking.date,lang)}</div>
         <div style={{fontSize:"1.3rem",color:T.gold,fontWeight:700,marginTop:10}}>€{s?.price}</div>
       </div>
       <Lbl style={{marginBottom:8}}>{L.paymentMethod}</Lbl>
@@ -1872,7 +1872,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
                 <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${T.red}22`}}>
                   <div>
                     <div style={{fontSize:"0.88rem",color:T.light,fontWeight:500}}>{b.name}</div>
-                    <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div>
+                    <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div>
                   </div>
                   <div style={{textAlign:"right",flexShrink:0,marginLeft:12}}>
                     <div style={{fontSize:"0.9rem",color:T.red,fontWeight:700,marginBottom:4}}>€{svc(b.serviceId)?.price}</div>
@@ -1968,7 +1968,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.green}}/><Lbl style={{margin:0,color:T.green}}>{L.paidAndConfirmed} ({confirmed.length})</Lbl></div>
           {confirmed.sort((a,b)=>b.date.localeCompare(a.date)).map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.green}33`,borderRadius:5}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div></div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:10}}><div style={{fontSize:"0.88rem",color:T.green,fontWeight:700}}>€{svc(b.serviceId)?.price}</div><div style={{fontSize:"0.58rem",color:T.silver,marginTop:2,fontFamily:"'Josefin Sans',sans-serif"}}>{b.payMethod}</div></div>
             </div>
           ))}
@@ -1978,7 +1978,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.red}}/><Lbl style={{margin:0,color:T.red}}>{L.serviceDonePaymentPending} ({pending.length})</Lbl></div>
           {pending.map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 12px",marginBottom:5,background:T.redLo,border:`1px solid ${T.red}44`,borderRadius:5}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.86rem",color:T.white,fontWeight:500,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.66rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div></div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:10}}><div style={{fontSize:"0.88rem",color:T.red,fontWeight:700}}>€{svc(b.serviceId)?.price}</div><button onClick={()=>setConfirmModal(b)} style={{marginTop:4,padding:"3px 9px",background:T.gold,color:"#000",border:"none",borderRadius:3,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",fontWeight:700}}>{L.toConfirm}</button></div>
             </div>
           ))}
@@ -1988,7 +1988,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.gold}}/><Lbl style={{margin:0}}>{L.scheduledCount} ({scheduled.length})</Lbl></div>
           {scheduled.sort((a,b)=>a.date.localeCompare(b.date)).map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"8px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.border}`,borderRadius:5,opacity:0.7}}>
-              <div style={{minWidth:0}}><div style={{fontSize:"0.84rem",color:T.white,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div style={{minWidth:0}}><div style={{fontSize:"0.84rem",color:T.white,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div></div>
               <div style={{fontSize:"0.86rem",color:T.gold,flexShrink:0,marginLeft:10}}>€{svc(b.serviceId)?.price}</div>
             </div>
           ))}
@@ -1998,7 +1998,7 @@ function BReports({bookings,setBookings,services,barber,lang}){
           <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:8}}><div style={{width:7,height:7,borderRadius:"50%",background:T.silver}}/><Lbl style={{margin:0}}>{L.cancelled} ({cancelled.length})</Lbl></div>
           {cancelled.map(b=>(
             <div key={b.id} style={{display:"flex",justifyContent:"space-between",padding:"7px 12px",marginBottom:5,background:T.card,border:`1px solid ${T.border}`,borderRadius:5,opacity:0.45}}>
-              <div><div style={{fontSize:"0.82rem",color:T.mid,textDecoration:"line-through"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date)} {b.time}h</div></div>
+              <div><div style={{fontSize:"0.82rem",color:T.mid,textDecoration:"line-through"}}>{b.name}</div><div style={{fontSize:"0.64rem",color:T.silver}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div></div>
               <div style={{fontSize:"0.8rem",color:T.silver,textDecoration:"line-through",flexShrink:0,marginLeft:10}}>€{svc(b.serviceId)?.price}</div>
             </div>
           ))}
@@ -2629,14 +2629,14 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const confirm=()=>{
     const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone,status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
     setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
-    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`,{type:"client",key:sel.phone||sel.name});
-    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
+    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,{type:"client",key:sel.phone||sel.name});
+    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
   };
   const cancel=id=>{
     const b=bookings.find(b=>b.id===id);
     setBookings(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
     setMyBk(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
-    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
+    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
   };
   const lookup=()=>{if(clientPhone.trim().length<5)return;setMyBk(bookings.filter(b=>b.phone===clientPhone.trim()));setScreen("mybookings");};
   const reset=()=>{setSel({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});setStep(1);setDone(null);setScreen("home");};
