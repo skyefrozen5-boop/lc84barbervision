@@ -26,6 +26,7 @@ const GS = `
   .tap:active{opacity:0.7;}
   .slot-h:hover{border-color:${T.gold}!important;color:${T.gold}!important;}
   .row-h:hover{background:rgba(255,255,255,0.02)!important;}
+  .row-h{user-select:none;-webkit-user-select:none;}
   @media print{body{background:white!important;color:black!important;}.no-print{display:none!important;}}
   @media (min-width:900px){.app-shell{max-width:900px!important;}}
   @media (min-width:1300px){.app-shell{max-width:1100px!important;}}
@@ -576,6 +577,7 @@ const TODAY = fmt(new Date());
 const NOW   = new Date();
 
 function dateLabel(str,lang='pt') {
+  if(!str)return LANGS[lang].t.noHistory;
   const d=new Date(str+"T12:00:00"), diff=Math.round((d-new Date(TODAY+"T12:00:00"))/86400000);
   const L=LANGS[lang].t;
   if(diff===0)return L.today; if(diff===1)return L.tomorrow; if(diff===-1)return L.yesterday;
@@ -936,7 +938,7 @@ function BNotifications({notifications,setNotifications,barber,lang,onOpenLink})
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,f,onAutoOpenProfileDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -2627,10 +2629,10 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const freeSlots=hours.filter(h=>!dayBk.find(b=>b.time===h));
   const worksOnDate=barber&&sel.date?barberWorksOnDate(barber,sel.date):true;
   const confirm=()=>{
-    const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone,status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
+    const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone.trim(),status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
     setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
-    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,{type:"client",key:sel.phone||sel.name});
-    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
+    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,{type:"client",key:sel.phone.trim()||sel.name});
+    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone.trim()||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
   };
   const cancel=id=>{
     const b=bookings.find(b=>b.id===id);
@@ -3265,7 +3267,7 @@ const [notifications,setNotifications] = useState([]);
     const unsub=listenForegroundPush((payload)=>{
       const data=payload?.data||{};
       if(data.type==="chat"&&data.barberId){
-        setNotifications(p=>[{id:mkId(),barberId:data.barberId,type:"message",title:payload?.notification?.title||"Nova mensagem",body:payload?.notification?.body||"",ts:Date.now(),read:false},...p]);
+        setNotifications(p=>[{id:mkId(),barberId:data.barberId,type:"message",title:payload?.notification?.title||"Nova mensagem",body:payload?.notification?.body||"",ts:Date.now(),read:false,link:{type:"chat",key:data.clientKey||""}},...p]);
       }
     });
     return()=>unsub&&unsub();
