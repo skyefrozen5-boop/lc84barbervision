@@ -938,7 +938,7 @@ function BNotifications({notifications,setNotifications,barber,lang,onOpenLink})
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,f,onAutoOpenProfileDone}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
