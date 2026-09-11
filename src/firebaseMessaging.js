@@ -46,11 +46,6 @@ export async function registerPushForBarber(shopId, barberId) {
     });
     if (!token) return;
 
-    // Só um aparelho de cada vez por barbeiro — evita notificações duplicadas
-    // em vários dispositivos ao mesmo tempo. Apaga primeiro os tokens antigos
-    // deste barbeiro (de qualquer aparelho), e guarda só o mais recente.
-    await supabase.from("device_tokens").delete()
-      .eq("shop_id", shopId).eq("barber_id", String(barberId)).neq("token", token);
 
     await supabase.from("device_tokens").upsert(
       {
