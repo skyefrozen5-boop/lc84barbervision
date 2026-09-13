@@ -75,3 +75,38 @@ export function listenForegroundPush(onPush) {
     return () => {};
   }
 }
+
+// Pede permissão de notificações ao cliente e guarda o "token" deste
+// telemóvel na tabela device_tokens, associado à loja e ao telefone
+// que o cliente usa no chat (client_key).
+// Falha em silêncio (não interrompe o chat) se algo correr mal.
+export async function registerPushForClient(shopId, clientKey) {
+  try {
+    if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
+    if (!shopId || !clientKey) return;
+    if (!(window.isSecureContext)) return; // push só funciona em HTTPS
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") return;
+
+    const registration = await navigator.serviceWorker.ready;
+    const messaging = getMessaging(getFirebaseApp());
+    const token = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    });
+    if (!token) return;
+
+    await supabase.from("device_tokens").upsert(
+      {
+        shop_id: shopId,
+        client_key: String(clientKey),
+        token,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "token" },
+    );
+  } catch (e) {
+    console.log("Falha ao registar notificações push (cliente):", e);
+  }
+}

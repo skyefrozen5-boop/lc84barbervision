@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { supabase } from "./supabaseClient";
-import { registerPushForBarber, listenForegroundPush } from "./firebaseMessaging";
+import { registerPushForBarber, listenForegroundPush, registerPushForClient } from "./firebaseMessaging";
 import logoIcon from './assets/logo-icon.jpg';
 
 // ─── THEME ───────────────────────────────────────────────────────────────────
@@ -2606,6 +2606,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
     if(clientProfile&&clientProfile.phone){
       setChatPhone(clientProfile.phone);
       setChatBarber(b);
+            registerPushForClient(shopId,clientProfile.phone);
     }else{
       setProfileForm({name:"",phone:""});
       setProfilePromptBarber(b);
@@ -2620,6 +2621,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
     setChatPhone(phone);
     setChatBarber(profilePromptBarber);
     setProfilePromptBarber(null);
+        registerPushForClient(shopId,phone);
   };
   const svc=id=>services.find(s=>s.id===id);
   const barber=barbers.find(b=>b.id===sel.barberId);
