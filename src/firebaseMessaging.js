@@ -108,5 +108,6 @@ export async function registerPushForClient(shopId, clientKey) {
     );
   } catch (e) {
     console.log("Falha ao registar notificações push (cliente):", e);
+     alert("Erro notificações cliente: " + (e?.message || e));
   }
 }
