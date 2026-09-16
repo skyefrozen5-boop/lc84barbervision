@@ -107,11 +107,11 @@ export async function registerPushForClient(shopId, clientKey) {
       { onConflict: "token" },
     );
         if (upsertError) {
-      alert("Erro ao guardar token: " + upsertError.message);
+      
       return;
     }
   } catch (e) {
     console.log("Falha ao registar notificações push (cliente):", e);
-     alert("Erro notificações cliente: " + (e?.message || e));
+     
   }
 }
