@@ -825,6 +825,16 @@ function getBarberHours(barber){
     return true;
   });
 }
+// Converte "HH:MM" em minutos desde a meia-noite, para comparar durações.
+function timeToMin(t){const[h,m]=String(t).split(":").map(Number);return h*60+(m||0);}
+// Verifica se dois intervalos [inicio, inicio+duração) se sobrepõem —
+// usado para detetar conflitos de marcação tendo em conta a duração
+// real de cada serviço (que pode ser editada pelo barbeiro).
+function slotsOverlap(startA,durA,startB,durB){
+  const sA=timeToMin(startA),eA=sA+(durA||30);
+  const sB=timeToMin(startB),eB=sB+(durB||30);
+  return sA<eB&&sB<eA;
+}
 const SERVICE_NAME_TRANSLATIONS = {
   "Corte Clássico":    {pt:"Corte Clássico",en:"Classic Cut",es:"Corte Clásico",fr:"Coupe Classique",de:"Klassischer Schnitt"},
   "Corte + Barba":     {pt:"Corte + Barba",en:"Cut + Beard",es:"Corte + Barba",fr:"Coupe + Barbe",de:"Schnitt + Bart"},
@@ -853,9 +863,18 @@ function BookingForm({initial,services,barbers,bookings,onSave,onDelete,onClose,
     if(!bookings||!(f.phone||f.name))return 0;
     return bookings.filter(b=>b.status==="falta"&&(f.phone?b.phone===f.phone:b.name===f.name)).length;
   },[bookings,f.phone,f.name]);
+  // Aviso (não bloqueio) de sobreposição com outra marcação do mesmo barbeiro,
+  // tendo em conta a duração real de cada serviço — o barbeiro pode decidir
+  // avançar mesmo assim (ex: encaixe manual de um cliente).
+  const conflictBooking=useMemo(()=>{
+    if(!f.date||!f.time||!f.barberId)return null;
+    const thisDur=services.find(s=>s.id===f.serviceId)?.duration||30;
+    return (bookings||[]).find(b=>b.id!==f.id&&b.barberId===f.barberId&&b.date===f.date&&!b.blocked&&b.status!=="cancelado"&&slotsOverlap(f.time,thisDur,b.time,services.find(s=>s.id===b.serviceId)?.duration||30));
+  },[bookings,f.date,f.time,f.barberId,f.serviceId,f.id,services]);
   return(
     <>
       {noShowCount>0&&<div style={{background:T.orangeLo,border:`1px solid ${T.orange}`,borderRadius:6,padding:"9px 12px",marginBottom:14,color:T.orange,fontSize:"0.74rem"}}>{L.noShowWarning.replace("{n}",noShowCount)}</div>}
+      {conflictBooking&&<div style={{background:T.orangeLo,border:`1px solid ${T.orange}`,borderRadius:6,padding:"9px 12px",marginBottom:14,color:T.orange,fontSize:"0.74rem"}}>⚠ Sobrepõe-se à marcação de {conflictBooking.name} às {conflictBooking.time}.</div>}
       <div style={{display:"flex",gap:6,marginBottom:16}}>
         {["confirmado","concluído","cancelado","falta"].map(st=>(
           <button key={st} onClick={()=>u("status")(st)} style={{flex:1,padding:"7px 4px",borderRadius:4,cursor:"pointer",fontSize:"0.58rem",letterSpacing:"0.1em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif",background:f.status===st?(st==="concluído"?T.greenLo:st==="cancelado"?T.redLo:st==="falta"?T.orangeLo:T.goldLo):"transparent",color:f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:st==="falta"?T.orange:T.gold):T.silver,border:`1px solid ${f.status===st?(st==="concluído"?T.green:st==="cancelado"?T.red:st==="falta"?T.orange:T.gold):T.border}`}}>{statusLabel[st]}</button>
@@ -2492,18 +2511,19 @@ function ServicesAdmin({services,setServices,lang}){
   </>);
 }
 
-function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,onNext,onBack,lang}){
+function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,onNext,onBack,lang,serviceDuration,services}){
   const L=LANGS[lang].t;
   const [calY,setCalY]=useState(NOW.getFullYear());
   const [calM,setCalM]=useState(NOW.getMonth());
   const dim=new Date(calY,calM+1,0).getDate();
   const fd=new Date(calY,calM,1).getDay();
+  const durOf=id=>services?.find(s=>s.id===id)?.duration||30;
   const prevM=()=>{if(calM===0){setCalM(11);setCalY(y=>y-1);}else setCalM(m=>m-1);};
   const nextM=()=>{if(calM===11){setCalM(0);setCalY(y=>y+1);}else setCalM(m=>m+1);};
   const isDayBlocked=ds=>{
     const hours=barber?getBarberHours(barber):[];
     const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
-    const free=hours.filter(h=>!dayBks.find(b=>b.time===h));
+    const free=hours.filter(h=>!dayBks.find(b=>slotsOverlap(h,serviceDuration||30,b.time,durOf(b.serviceId))));
     return free.length===0&&hours.length>0;
   };
   return(<>
@@ -2538,7 +2558,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
             {!isPast&&!isFolga&&!isFullyBooked&&!isSelected&&(()=>{
               const hours=barber?getBarberHours(barber):[];
               const dayBks=bookings.filter(b=>b.barberId===sel.barberId&&b.date===ds&&!b.blocked);
-              const free=hours.filter(h=>!dayBks.find(b=>b.time===h)).length;
+              const free=hours.filter(h=>!dayBks.find(b=>slotsOverlap(h,serviceDuration||30,b.time,durOf(b.serviceId)))).length;
               if(free>0)return<div style={{width:4,height:4,borderRadius:"50%",background:T.green,position:"absolute",bottom:3}}/>;
             })()}
           </div>
@@ -2628,7 +2648,8 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const selSvc=svc(sel.serviceId);
   const hours=barber?getBarberHours(barber):[];
   const dayBk=sel.date&&sel.barberId?bookings.filter(b=>b.barberId===sel.barberId&&b.date===sel.date):[];
-  const freeSlots=hours.filter(h=>!dayBk.find(b=>b.time===h));
+  const selDuration=selSvc?.duration||30;
+  const freeSlots=hours.filter(h=>!dayBk.find(b=>slotsOverlap(h,selDuration,b.time,svc(b.serviceId)?.duration||30)));
   const worksOnDate=barber&&sel.date?barberWorksOnDate(barber,sel.date):true;
   const confirm=()=>{
     const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone.trim(),status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
@@ -2693,7 +2714,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
             <Btn variant="gold" style={{width:"100%",marginTop:7}} onClick={()=>sel.serviceId&&setStep(3)}>{L.next}</Btn>
             <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={()=>setStep(1)}>{L.back}</Btn>
           </>)}
-    {step===3&&<BookingCalendarStep sel={sel} setSel={setSel} barber={barber} lang={lang} bookings={bookings} freeSlots={freeSlots} worksOnDate={worksOnDate} onNext={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)} onBack={()=>setStep(2)}/>}
+    {step===3&&<BookingCalendarStep sel={sel} setSel={setSel} barber={barber} lang={lang} bookings={bookings} freeSlots={freeSlots} worksOnDate={worksOnDate} serviceDuration={selDuration} services={services} onNext={()=>sel.date&&sel.time&&worksOnDate&&setStep(4)} onBack={()=>setStep(2)}/>}
           {step===4&&(<>
             <Lbl style={{marginBottom:10}}>{L.yourData}</Lbl>
             <div style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"13px",marginBottom:14}}>
