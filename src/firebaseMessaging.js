@@ -46,6 +46,15 @@ export async function registerPushForBarber(shopId, barberId) {
     });
     if (!token) return;
 
+    // Se este mesmo aparelho já tinha um token guardado e o Firebase gerou
+    // um novo (ex: depois de uma atualização), apaga o token antigo para não
+    // ficarem os dois a receber a mesma notificação (afeta só este aparelho —
+    // os tokens de outros aparelhos, guardados no localStorage deles, não são tocados).
+    const lsKeyBarber = `lc84_push_token_barber_${barberId}`;
+    const prevTokenBarber = localStorage.getItem(lsKeyBarber);
+    if (prevTokenBarber && prevTokenBarber !== token) {
+      await supabase.from("device_tokens").delete().eq("token", prevTokenBarber);
+    }
 
     await supabase.from("device_tokens").upsert(
       {
@@ -56,6 +65,7 @@ export async function registerPushForBarber(shopId, barberId) {
       },
       { onConflict: "token" },
     );
+    localStorage.setItem(lsKeyBarber, token);
   } catch (e) {
     console.log("Falha ao registar notificações push:", e);
   }
@@ -97,6 +107,14 @@ export async function registerPushForClient(shopId, clientKey) {
     });
     if (!token) return;
 
+    // Mesma lógica do lado do barbeiro: apaga o token antigo deste aparelho
+    // antes de gravar o novo, para não duplicar notificações.
+    const lsKeyClient = `lc84_push_token_client_${clientKey}`;
+    const prevTokenClient = localStorage.getItem(lsKeyClient);
+    if (prevTokenClient && prevTokenClient !== token) {
+      await supabase.from("device_tokens").delete().eq("token", prevTokenClient);
+    }
+
     const { error: upsertError } = await supabase.from("device_tokens").upsert(
       {
         shop_id: shopId,
@@ -110,6 +128,7 @@ export async function registerPushForClient(shopId, clientKey) {
       
       return;
     }
+    localStorage.setItem(lsKeyClient, token);
   } catch (e) {
     console.log("Falha ao registar notificações push (cliente):", e);
      
