@@ -3290,7 +3290,7 @@ const [notifications,setNotifications] = useState([]);
     const unsub=listenForegroundPush((payload)=>{
       const data=payload?.data||{};
       if(data.type==="chat"&&data.barberId){
-        setNotifications(p=>[{id:mkId(),barberId:data.barberId,type:"message",title:payload?.notification?.title||"Nova mensagem",body:payload?.notification?.body||"",ts:Date.now(),read:false,link:{type:"chat",key:data.clientKey||""}},...p]);
+        setNotifications(p=>[{id:mkId(),barberId:data.barberId,type:"message",title:data.title||"Nova mensagem",body:data.body||"",ts:Date.now(),read:false,link:{type:"chat",key:data.clientKey||""}},...p]);
       }
     });
     return()=>unsub&&unsub();

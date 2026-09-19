@@ -15,9 +15,9 @@ const messaging = firebase.messaging();
 
 // Mensagem recebida com a app fechada/em segundo plano
 messaging.onBackgroundMessage((payload) => {
-  const title = payload.notification?.title || "LC.84 Barber Vision";
-  const body = payload.notification?.body || "";
   const data = payload.data || {};
+  const title = data.title || "LC.84 Barber Vision";
+  const body = data.body || "";
   self.registration.showNotification(title, {
     body,
     icon: "/favicon-192.png",
