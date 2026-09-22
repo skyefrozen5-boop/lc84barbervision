@@ -3306,6 +3306,36 @@ const [notifications,setNotifications] = useState([]);
     },800);
     return()=>clearTimeout(t);
   },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients,dataLoaded,shopId]);
+
+  const onBarberLogin=(b)=>{
+    setActiveBarber(b);setRole("barber");
+    if(shopId)localStorage.setItem(`lc84_barber_session_${shopId}`,b.id);
+    registerPushForBarber(shopId,b.id);
+    if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
+      setBScreen("clients");
+    }else{
+      setBScreen("dashboard");
+    }
+    const todayCount=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
+    if(todayCount>0){
+      const first=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
+      setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:LANGS[lang].t.notifGoodMorning.replace("{name}",b.name.split(" ")[0]),body:LANGS[lang].t.notifTodaySummary.replace("{n}",todayCount).replace("{time}",first?.time),ts:Date.now(),read:false},...p]);
+    }
+  };
+
+  // Sessão persistente: se este aparelho já tinha um barbeiro autenticado
+  // nesta loja, entra direto ao abrir a app, sem pedir o PIN outra vez.
+  // (Tem de ficar aqui, antes de qualquer "return" condicional da função,
+  // para não violar a ordem fixa dos hooks do React.)
+  useEffect(()=>{
+    if(!dataLoaded||!shopId||role!=="entry")return;
+    const savedId=localStorage.getItem(`lc84_barber_session_${shopId}`);
+    if(!savedId)return;
+    const b=barbers.find(bb=>String(bb.id)===String(savedId)&&bb.active);
+    if(!b)return;
+    const t=setTimeout(()=>onBarberLogin(b),0);
+    return()=>clearTimeout(t);
+  },[dataLoaded,shopId,barbers,role]);
  
 
   // Subscription state
@@ -3336,22 +3366,6 @@ const [notifications,setNotifications] = useState([]);
 
   const addNotification=(barberId,type,title,body,link=null)=>{
     setNotifications(p=>[{id:mkId(),barberId,type,title,body,link,ts:Date.now(),read:false},...p]);
-  };
-
-  const onBarberLogin=(b)=>{
-    setActiveBarber(b);setRole("barber");
-    registerPushForBarber(shopId,b.id);
-    if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
-      setBScreen("clients");
-    }else{
-      setBScreen("dashboard");
-    }
-    const todayCount=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
-    if(todayCount>0){
-
-      const first=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
-      setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:LANGS[lang].t.notifGoodMorning.replace("{name}",b.name.split(" ")[0]),body:LANGS[lang].t.notifTodaySummary.replace("{n}",todayCount).replace("{time}",first?.time),ts:Date.now(),read:false},...p]);
-    }
   };
 
   const handleSubscribe=(plan)=>{
@@ -3389,7 +3403,7 @@ const [notifications,setNotifications] = useState([]);
               ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ {LANGS[lang].t.activeSubBadge}</span>
               :<button onClick={()=>setShowSub(true)} style={{fontSize:"0.54rem",background:trialDays<=3?T.redLo:T.goldLo,color:trialDays<=3?T.red:T.gold,border:`1px solid ${trialDays<=3?T.red:T.gold}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",cursor:"pointer"}}>⏳ {trialDays}d</button>
             )}
-            <button onClick={()=>setRole("entry")} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
+            <button onClick={()=>{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);setActiveBarber(null);setRole("entry");}} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
           </div>
         </div>
         {/* Barbeiro + data */}
