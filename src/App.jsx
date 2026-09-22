@@ -3211,6 +3211,57 @@ function OwnerPortal({lang,setLang}){
   );
 }
 
+// ── Biometria (WebAuthn) ────────────────────────────────────────────────────
+// Usa o que o telemóvel tiver (dedo, cara, etc.) para confirmar a sessão
+// persistente do barbeiro em vez de pedir sempre o PIN. Guardado só neste
+// aparelho (localStorage) — não depende de servidor, é só um "portão" local.
+function b64uToBuf(b64u){
+  const b64=b64u.replace(/-/g,"+").replace(/_/g,"/");
+  const pad=b64.length%4===0?"":"=".repeat(4-(b64.length%4));
+  const str=atob(b64+pad);
+  const buf=new Uint8Array(str.length);
+  for(let i=0;i<str.length;i++)buf[i]=str.charCodeAt(i);
+  return buf;
+}
+function bufToB64u(buf){
+  const bytes=new Uint8Array(buf);
+  let str="";
+  for(let i=0;i<bytes.length;i++)str+=String.fromCharCode(bytes[i]);
+  return btoa(str).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+async function registerBiometric(shopId,barberId){
+  if(!shopId||!window.PublicKeyCredential)return;
+  const key=`lc84_biometric_${shopId}_${barberId}`;
+  if(localStorage.getItem(key))return; // já registado neste aparelho
+  try{
+    const available=await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable?.();
+    if(!available)return; // este telemóvel não tem biometria
+    const cred=await navigator.credentials.create({publicKey:{
+      challenge:crypto.getRandomValues(new Uint8Array(32)),
+      rp:{name:"LC.84 Barber Vision"},
+      user:{id:new TextEncoder().encode(String(barberId)),name:`barbeiro-${barberId}`,displayName:`barbeiro-${barberId}`},
+      pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+      authenticatorSelection:{authenticatorAttachment:"platform",userVerification:"required"},
+      timeout:60000,
+    }});
+    if(cred)localStorage.setItem(key,bufToB64u(cred.rawId));
+  }catch(e){console.log("Biometria: registo não disponível/cancelado",e);}
+}
+async function verifyBiometric(shopId,barberId){
+  const key=`lc84_biometric_${shopId}_${barberId}`;
+  const credId=localStorage.getItem(key);
+  if(!credId)return false;
+  try{
+    const assertion=await navigator.credentials.get({publicKey:{
+      challenge:crypto.getRandomValues(new Uint8Array(32)),
+      allowCredentials:[{type:"public-key",id:b64uToBuf(credId)}],
+      userVerification:"required",
+      timeout:60000,
+    }});
+    return!!assertion;
+  }catch(e){console.log("Biometria: verificação falhou/cancelada",e);return false;}
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // ROOT
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3310,6 +3361,7 @@ const [notifications,setNotifications] = useState([]);
   const onBarberLogin=(b)=>{
     setActiveBarber(b);setRole("barber");
     if(shopId)localStorage.setItem(`lc84_barber_session_${shopId}`,b.id);
+    registerBiometric(shopId,b.id);
     registerPushForBarber(shopId,b.id);
     if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
       setBScreen("clients");
@@ -3333,8 +3385,17 @@ const [notifications,setNotifications] = useState([]);
     if(!savedId)return;
     const b=barbers.find(bb=>String(bb.id)===String(savedId)&&bb.active);
     if(!b)return;
-    const t=setTimeout(()=>onBarberLogin(b),0);
-    return()=>clearTimeout(t);
+    let cancelled=false;
+    (async()=>{
+      const hasBiometric=!!localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`);
+      if(hasBiometric){
+        const ok=await verifyBiometric(shopId,b.id);
+        if(cancelled)return;
+        if(!ok)return; // cancelou/falhou a biometria -> fica no ecrã de PIN (reserva)
+      }
+      if(!cancelled)onBarberLogin(b);
+    })();
+    return()=>{cancelled=true;};
   },[dataLoaded,shopId,barbers,role]);
  
 
