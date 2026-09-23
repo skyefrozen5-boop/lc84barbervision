@@ -2126,11 +2126,18 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,onLogout,lang,embedded}){
+function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded}){
   const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
   const [bf,setBf]=useState({});
+  const shopLink=mySlug?`${window.location.origin}${window.location.pathname}?loja=${mySlug}`:"";
+  const [linkCopied,setLinkCopied]=useState(false);
+  const copyShopLink=async()=>{
+    if(!shopLink)return;
+    try{await navigator.clipboard.writeText(shopLink);}catch(e){/* alguns browsers antigos podem bloquear, o link já fica visível para copiar à mão */}
+    setLinkCopied(true);setTimeout(()=>setLinkCopied(false),2000);
+  };
   const svc=id=>services.find(s=>s.id===id);
   const totalRev=bookings.filter(b=>b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const todayAll=bookings.filter(b=>b.date===TODAY&&!b.blocked);
@@ -2380,6 +2387,28 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
           ))}
           <div style={{marginBottom:14}}><Lbl>{L.bio}</Lbl><Txta rows={3} value={shop.bio||""} onChange={e=>setShop(p=>({...p,bio:e.target.value}))}/></div>
           <Btn variant="gold" style={{width:"100%"}} onClick={()=>{setShopSaved(true);setTimeout(()=>setShopSaved(false),2000);}}>{shopSaved?`✓ ${L.save}`:L.save}</Btn>
+
+          {shopLink&&(
+            <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
+              <Lbl style={{marginBottom:8}}>Partilhar a loja</Lbl>
+              <div style={{fontSize:"0.72rem",color:T.silver,marginBottom:12,lineHeight:1.5}}>
+                Dá este link ou este código QR aos teus clientes para eles chegarem diretamente à tua loja.
+              </div>
+              <div style={{display:"flex",gap:8,marginBottom:14}}>
+                <Inp value={shopLink} readOnly style={{flex:1,fontSize:"0.7rem"}}/>
+                <Btn variant="ghost" style={{padding:"10px 13px",whiteSpace:"nowrap"}} onClick={copyShopLink}>{linkCopied?"✓ Copiado":"Copiar"}</Btn>
+              </div>
+              <div style={{display:"flex",justifyContent:"center",background:"#fff",padding:12,borderRadius:6,width:"fit-content",margin:"0 auto"}}>
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(shopLink)}`}
+                  alt="QR code da loja"
+                  width={220}
+                  height={220}
+                  style={{display:"block"}}
+                />
+              </div>
+            </div>
+          )}
 
           <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
             <Lbl style={{marginBottom:8,color:T.red}}>{L.dangerZone}</Lbl>
@@ -3490,7 +3519,7 @@ const [notifications,setNotifications] = useState([]);
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>;
+  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang}/>;
 
   // Trial expired — block barber access
   if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)} lang={lang}/>;
@@ -3550,7 +3579,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
-        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang} embedded/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang} embedded/>}
       </main>
     </div>
   );
