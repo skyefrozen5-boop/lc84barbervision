@@ -3569,9 +3569,9 @@ const [notifications,setNotifications] = useState([]);
       </header>
 
       {/* Trial banner inside app */}
-      {!subscription&&<div className="app-shell" style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
+      {mySlug!=="lc84"&&!subscription&&<div className="app-shell" style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
 
-      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
+      <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:mySlug!=="lc84"&&!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
