@@ -3458,8 +3458,31 @@ const [notifications,setNotifications] = useState([]);
 
   if(biometricPending){
     return (
-      <div onClick={unlockWithBiometric} className="tap" style={{minHeight:"100vh",width:"100%",display:"flex",alignItems:"center",justifyContent:"center",background:T.bg,cursor:"pointer"}}>
-        <div style={{width:92,height:92,borderRadius:"50%",border:`2px solid ${T.gold}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"2.6rem"}}>👆</div>
+      <div onClick={unlockWithBiometric} style={{minHeight:"100vh",width:"100%",display:"flex",alignItems:"center",justifyContent:"center",background:T.bg,cursor:"pointer"}}>
+        <style>{`
+          @keyframes lc84BioPulse{
+            0%{transform:scale(1);opacity:.5;}
+            70%{transform:scale(1.6);opacity:0;}
+            100%{transform:scale(1.6);opacity:0;}
+          }
+        `}</style>
+        <div style={{position:"relative",width:96,height:96,display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <div style={{position:"absolute",inset:0,borderRadius:"50%",border:`2px solid ${T.gold}`,animation:"lc84BioPulse 1.8s ease-out infinite"}}/>
+          <div style={{position:"absolute",inset:0,borderRadius:"50%",border:`2px solid ${T.gold}`,animation:"lc84BioPulse 1.8s ease-out .9s infinite"}}/>
+          <div style={{position:"relative",width:88,height:88,borderRadius:"50%",border:`2px solid ${T.gold}`,background:T.bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke={T.gold} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+              <path d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+              <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/>
+              <path d="M2 12a10 10 0 0 1 18-6"/>
+              <path d="M2 16h.01"/>
+              <path d="M21.8 16c.2-2 .131-5.354 0-6"/>
+              <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+              <path d="M8.65 22c.21-.66.45-1.32.57-2"/>
+              <path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+            </svg>
+          </div>
+        </div>
       </div>
     );
   }
