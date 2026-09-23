@@ -3284,6 +3284,7 @@ const [notifications,setNotifications] = useState([]);
   const [mySlug,setMySlug] = useState("");
   const [ownerMode,setOwnerMode]         = useState(false);
   const [shopNotFound,setShopNotFound]   = useState(false);
+  const [biometricPending,setBiometricPending] = useState(null); // barbeiro à espera de toque para pedir biometria
   const [pendingChat,setPendingChat]     = useState(()=>{
     const raw=new URLSearchParams(window.location.search).get("openChat");
     if(!raw)return null;
@@ -3299,7 +3300,12 @@ const [notifications,setNotifications] = useState([]);
       if(!slug){
         const lastShop=localStorage.getItem("lc84_last_shop");
         if(lastShop){
-          window.location.replace(`${window.location.pathname}?loja=${lastShop}`);
+          // Mantém quaisquer outros parâmetros já no link (ex: openChat=
+          // vindo de uma notificação) e só acrescenta o loja= — antes isto
+          // substituía o link inteiro e perdia o openChat.
+          const newParams=new URLSearchParams(window.location.search);
+          newParams.set("loja",lastShop);
+          window.location.replace(`${window.location.pathname}?${newParams.toString()}`);
           return;
         }
         setOwnerMode(true);
@@ -3385,18 +3391,31 @@ const [notifications,setNotifications] = useState([]);
     if(!savedId)return;
     const b=barbers.find(bb=>String(bb.id)===String(savedId)&&bb.active);
     if(!b)return;
-    let cancelled=false;
-    (async()=>{
-      const hasBiometric=!!localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`);
-      if(hasBiometric){
-        const ok=await verifyBiometric(shopId,b.id);
-        if(cancelled)return;
-        if(!ok)return; // cancelou/falhou a biometria -> fica no ecrã de PIN (reserva)
-      }
-      if(!cancelled)onBarberLogin(b);
-    })();
-    return()=>{cancelled=true;};
+    const hasBiometric=!!localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`);
+    if(hasBiometric){
+      // O browser exige um toque real para poder pedir biometria — não dá
+      // para chamar sozinho aqui. Mostra o ecrã de toque (ver biometricPending).
+      setBiometricPending(b);
+      return;
+    }
+    const t=setTimeout(()=>onBarberLogin(b),0);
+    return()=>clearTimeout(t);
   },[dataLoaded,shopId,barbers,role]);
+
+  // Chamado pelo toque no ecrã de biometria — este clique é que dá ao
+  // browser a "autorização" para mostrar o popup nativo.
+  const unlockWithBiometric=async()=>{
+    const b=biometricPending;
+    if(!b)return;
+    const ok=await verifyBiometric(shopId,b.id);
+    if(ok){
+      setBiometricPending(null);
+      onBarberLogin(b);
+    }else{
+      setBiometricPending(null);
+      setRole("login"); // falhou/cancelou -> ecrã de PIN normal, como reserva
+    }
+  };
  
 
   // Subscription state
@@ -3436,6 +3455,14 @@ const [notifications,setNotifications] = useState([]);
   };
 
   if(showSub) return <SubscriptionScreen barbers={barbers} subscription={subscription} onSubscribe={handleSubscribe} onBack={()=>setShowSub(false)} lang={lang}/>;
+
+  if(biometricPending){
+    return (
+      <div onClick={unlockWithBiometric} className="tap" style={{minHeight:"100vh",width:"100%",display:"flex",alignItems:"center",justifyContent:"center",background:T.bg,cursor:"pointer"}}>
+        <div style={{width:92,height:92,borderRadius:"50%",border:`2px solid ${T.gold}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"2.6rem"}}>👆</div>
+      </div>
+    );
+  }
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
