@@ -2126,7 +2126,7 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded}){
+function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded,barber}){
   const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
@@ -2407,6 +2407,19 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
                   style={{display:"block"}}
                 />
               </div>
+            </div>
+          )}
+
+          {barber?.id&&(
+            <div style={{marginTop:32,paddingTop:18,borderTop:`1px solid ${T.border}`}}>
+              <Lbl style={{marginBottom:8}}>Suporte LC.84</Lbl>
+              <div style={{fontSize:"0.72rem",color:T.silver,marginBottom:12,lineHeight:1.5}}>
+                Tens um problema ou uma dúvida sobre a app? Escreve aqui diretamente.
+              </div>
+              <Btn variant="ghost" style={{width:"100%"}} onClick={()=>setModal("support")}>💬 Falar com o Suporte</Btn>
+              {modal==="support"&&<Modal onClose={()=>setModal(null)} title="Suporte LC.84">
+                <ChatThread shopId={shopId} barberId={barber.id} clientKey="SUPORTE_LC84" sender="barber" lang={lang}/>
+              </Modal>}
             </div>
           )}
 
@@ -3579,7 +3592,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
-        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang} embedded/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang} embedded barber={barber}/>}
       </main>
     </div>
   );
