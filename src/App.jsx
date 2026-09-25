@@ -2712,7 +2712,6 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
       <style>{GS}</style>
       <header className="app-shell" style={{width:"100%",maxWidth:520,padding:"14px 20px",borderBottom:`1px solid ${T.border}`,background:T.surface,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:9}}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill={T.gold}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
           <div><div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"0.85rem",letterSpacing:"0.15em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>.</span>84</div><div style={{fontSize:"0.48rem",letterSpacing:"0.28em",color:T.silver,textTransform:"uppercase"}}>{L.clientArea}</div></div>
         </div>
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
@@ -2876,7 +2875,6 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
         <button onClick={onBack} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,padding:"5px 9px",borderRadius:4,cursor:"pointer",fontSize:"0.56rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.back}</button>
       </div>
       <div style={{textAlign:"center",marginBottom:40}}>
-        <svg width="42" height="42" viewBox="0 0 24 24" fill={T.gold} style={{marginBottom:13}}><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM21 4.5 19.5 3 9.5 9.5 7.4 11A3 3 0 1 0 9 12.72L11.1 11.4 14 13l.5-1.1L12 10.4 20 4.5zm-15 11a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
         <div style={{fontFamily:"'Josefin Sans',sans-serif",fontSize:"1.7rem",letterSpacing:"0.12em",fontWeight:700,color:T.white}}>LC<span style={{color:T.gold}}>_</span>84<span style={{color:T.gold,fontSize:"1.25rem"}}>barbervision</span></div>
         <div style={{fontSize:"0.58rem",letterSpacing:"0.38em",color:T.silver,textTransform:"uppercase",marginTop:5}}>{L.barberArea}</div>
       </div>
@@ -3339,6 +3337,14 @@ const [notifications,setNotifications] = useState([]);
       const params=new URLSearchParams(window.location.search);
       let slug=params.get("loja");
       setMySlug(slug||"");
+      // Atalho: ?dono=1 força sempre a Área do Dono (criar/entrar em loja),
+      // ignorando "a última loja visitada" — útil para testar várias lojas
+      // no mesmo telemóvel sem ter de limpar dados do site cada vez.
+      if(!slug&&params.get("dono")==="1"){
+        setOwnerMode(true);
+        setDataLoaded(true);
+        return;
+      }
       if(!slug){
         const lastShop=localStorage.getItem("lc84_last_shop");
         if(lastShop){
