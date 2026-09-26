@@ -564,6 +564,38 @@ const WDAYS_F = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado
 const PAY     = ["Dinheiro","MB Way","Multibanco","Transferência","Outro"];
 
 const mkId  = () => Math.random().toString(36).slice(2,9);
+
+// Reduz o tamanho/qualidade de uma foto (tirada pela câmara, normalmente
+// muito grande) antes de a enviar — evita fotos de vários MB que depois
+// deixam a app lenta/"a tremer" ao carregar galerias com muitas fotos
+// acumuladas (histórico de cortes, compras, etc.). Se algo correr mal,
+// devolve o ficheiro original sem alterações, para nunca bloquear o envio.
+async function resizeImageFile(file,maxDim=1280,quality=0.8){
+  try{
+    if(!file||!file.type?.startsWith("image/"))return file;
+    const bitmap=await new Promise((resolve,reject)=>{
+      const img=new Image();
+      const url=URL.createObjectURL(file);
+      img.onload=()=>{URL.revokeObjectURL(url);resolve(img);};
+      img.onerror=e=>{URL.revokeObjectURL(url);reject(e);};
+      img.src=url;
+    });
+    let{width,height}=bitmap;
+    if(width>maxDim||height>maxDim){
+      if(width>height){height=Math.round(height*maxDim/width);width=maxDim;}
+      else{width=Math.round(width*maxDim/height);height=maxDim;}
+    }
+    const canvas=document.createElement("canvas");
+    canvas.width=width;canvas.height=height;
+    canvas.getContext("2d").drawImage(bitmap,0,0,width,height);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",quality));
+    if(!blob)return file;
+    return new File([blob],(file.name||"foto").replace(/\.\w+$/,"")+".jpg",{type:"image/jpeg"});
+  }catch{
+    return file;
+  }
+}
+
 const normName=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 const ensureOwner=list=>{
   if(!list||list.length===0)return list;
@@ -1064,9 +1096,10 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
     if(!file||!shopId)return;
     if(file.size>5*1024*1024){setCutErr(L.photoTooLarge);return;}
     setCutBusy(true);setCutErr("");
-    const ext=file.name.split(".").pop();
+    const resized=await resizeImageFile(file);
+    const ext=resized.name.split(".").pop();
     const path=`${shopId}/cortes/${barber.id}-${Date.now()}.${ext}`;
-    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    const{error}=await supabase.storage.from("salon-photos").upload(path,resized,{upsert:true});
     if(error){setCutBusy(false);setCutErr(L.uploadFailed);return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setCutPhoto(data.publicUrl);
@@ -1091,9 +1124,10 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
     if(!file||!shopId)return;
     if(file.size>5*1024*1024){setPurchaseErr(L.photoTooLarge);return;}
     setPurchaseBusy(true);setPurchaseErr("");
-    const ext=file.name.split(".").pop();
+    const resized=await resizeImageFile(file);
+    const ext=resized.name.split(".").pop();
     const path=`${shopId}/compras/${Date.now()}.${ext}`;
-    const{error}=await supabase.storage.from("salon-photos").upload(path,file,{upsert:true});
+    const{error}=await supabase.storage.from("salon-photos").upload(path,resized,{upsert:true});
     if(error){setPurchaseBusy(false);setPurchaseErr(L.uploadFailed);return;}
     const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
     setPurchasePhoto(data.publicUrl);
@@ -1264,7 +1298,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
                 <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:8}}>
                   {myCuts(c).map(r=>(
                     <div key={r.id} onClick={()=>setViewPhoto(r)} style={{cursor:"pointer",position:"relative"}}>
-                      <img src={r.photoUrl} alt="" style={{width:"100%",aspectRatio:"1",objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`}}/>
+                      <img src={r.photoUrl} alt="" loading="lazy" style={{width:"100%",aspectRatio:"1",objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`}}/>
                       <div style={{fontSize:"0.6rem",color:T.silver,marginTop:3,textAlign:"center"}}>{dateLabel(r.date,lang)}</div>
                     </div>
                   ))}
@@ -1310,7 +1344,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
               ):(
                 myPurchases(c).map(r=>(
                   <div key={r.id} onClick={()=>setViewPurchase(r)} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:`1px solid ${T.border}`,cursor:"pointer"}}>
-                    {r.photoUrl&&<img src={r.photoUrl} alt="" style={{width:40,height:40,objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`,flexShrink:0}}/>}
+                    {r.photoUrl&&<img src={r.photoUrl} alt="" loading="lazy" style={{width:40,height:40,objectFit:"cover",borderRadius:5,border:`1px solid ${T.border}`,flexShrink:0}}/>}
                     <div style={{flex:1,minWidth:0}}>
                       <div style={{fontSize:"0.82rem",color:T.light,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.text||L.purchaseRecordTitle}</div>
                       <div style={{fontSize:"0.62rem",color:T.silver}}>{dateLabel(r.date,lang)}</div>
