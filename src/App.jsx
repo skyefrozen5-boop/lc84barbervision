@@ -120,13 +120,13 @@ const LANGS = {
       notifNewBookingTitle:"Nova marcação adicionada", notifBookingDeletedTitle:"Marcação eliminada", notifBookingDeletedBody:"{name} — {date} às {time}h foi removida.",
       notifCancelTitle:"Marcação cancelada", notifCancelBody:"{name} cancelou — {date} às {time}h.",
       notifSubActivatedTitle:"Subscrição ativada", notifSubActivatedBody:"Plano {plan} ativo. Obrigado, {owner}!", absenceName:"Ausência", yesterdaySummaryTitle:"Resumo de ontem", yesterdaySummaryBody:"Concluíste {n} serviços. Receita: €{amount}.",
-      portalTitle:"Área do Dono", portalSubtitle:"Entra ou cria a tua barbearia", haveAccountTab:"Já tenho conta", createShopTab:"Criar barbearia",
+      portalTitle:"Área do Proprietário", portalSubtitle:"Entra ou cria a tua barbearia", haveAccountTab:"Já tenho conta", createShopTab:"Criar barbearia",
       emailLabel:"Email", placeholderEmail:"o-teu-email@exemplo.com", placeholderPass:"••••••••", loginBtn:"Entrar", loggingIn:"A entrar...",
       yourNameLabel:"O teu nome", placeholderFullName:"Nome completo", placeholderShopName:"Ex: Barbearia do Zé", phoneOptionalLabel:"Telefone (opcional)",
       placeholderPhone:"+351 9xx xxx xxx", placeholderCreatePass:"Cria uma password", createShopBtn:"Criar a minha barbearia", creatingBtn:"A criar...",
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
       wrongCredentials:"Email ou password incorretos.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
-      loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Dono",
+      loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
       notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
@@ -2924,6 +2924,9 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
           <div style={{textAlign:"center"}}>
             <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>{L.joinAsNew}</button>
           </div>
+          <div style={{textAlign:"center",marginTop:18}}>
+            <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{background:"none",border:"none",color:T.silver,fontSize:"0.68rem",cursor:"pointer",textDecoration:"underline",opacity:0.7}}>{L.goToOwnerPortal}</button>
+          </div>
         </div>
       ):(
         <div style={{width:"100%",maxWidth:290}}>
@@ -2968,6 +2971,7 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
           <div style={{fontSize:"1.3rem",marginBottom:5}}>◉</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.barber}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.barberSub}</div>
         </button>
       </div>
+      <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{marginTop:22,background:"none",border:"none",cursor:"pointer",color:T.silver,fontSize:"0.72rem",textDecoration:"underline",fontFamily:"'Cormorant Garamond',Georgia,serif"}}>{L.goToOwnerPortal}</button>
     </div>
   );
 }
@@ -3203,7 +3207,7 @@ function OwnerPortal({lang,setLang}){
     const slug=await generateUniqueSlug(salonName);
     const initData={
       shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
-      barbers:[{id:mkId(),name:ownerName,role:"Dono",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",isOwner:true,schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
+      barbers:[{id:mkId(),name:ownerName,role:"Proprietário",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",isOwner:true,schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
       services:INIT_SERVICES,
       bookings:[],
       notifications:[],
