@@ -40,8 +40,8 @@ const LANGS = {
     wdaysF:["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"],
     pay:["Dinheiro","MB Way","Multibanco","Transferência","Outro"],
     t:{
-      client:"Sou Cliente", bookCta:"Marcar Corte", clientSub:"Marcar corte, ver marcações", myBookingsLabel:"Ver as minhas marcações", phonePlaceholder:"O teu telemóvel", ourTeam:"A nossa equipa", barberLabel:"Barbeiro", priceLabel:"Valor", nameLabel:"Nome", namePlaceholder:"O teu nome", noBookingsFound:"Sem marcações encontradas",
-      barber:"Sou Barbeiro / Admin", barberSub:"Gerir agenda e marcações",
+      client:"Sou Cliente", bookCta:"Marcar Corte", clientSub:"Marcar serviços, consultar marcações e ver produtos", myBookingsLabel:"Ver as minhas marcações", phonePlaceholder:"O teu telemóvel", ourTeam:"A nossa equipa", barberLabel:"Barbeiro", priceLabel:"Valor", nameLabel:"Nome", namePlaceholder:"O teu nome", noBookingsFound:"Sem marcações encontradas",
+      barber:"Sou Barbeiro", barberSub:"Gerir agenda, atendimentos e clientes autorizados", ownerBtnSub:"Registar e gerir a minha barbearia",
       platform:"A tua plataforma de barbearia",
       accessCode:"Código de Acesso", enter:"Entrar", wrongPin:"Código incorreto",
       hide:"Ocultar", show:"Ver",
@@ -143,8 +143,8 @@ const LANGS = {
     wdaysF:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     pay:["Cash","MB Way","Debit Card","Transfer","Other"],
     t:{
-      client:"I'm a Client", bookCta:"Book Appointment", clientSub:"Book a haircut, see appointments", myBookingsLabel:"View My Bookings", phonePlaceholder:"Your phone number", ourTeam:"Our Team", barberLabel:"Barber", priceLabel:"Price", nameLabel:"Name", namePlaceholder:"Your name", noBookingsFound:"No bookings found",
-      barber:"I'm a Barber / Admin", barberSub:"Manage schedule and bookings",
+      client:"I'm a Client", bookCta:"Book Appointment", clientSub:"Book services, view appointments and browse products", myBookingsLabel:"View My Bookings", phonePlaceholder:"Your phone number", ourTeam:"Our Team", barberLabel:"Barber", priceLabel:"Price", nameLabel:"Name", namePlaceholder:"Your name", noBookingsFound:"No bookings found",
+      barber:"I'm a Barber", barberSub:"Manage schedule, appointments and authorised clients", ownerBtnSub:"Register and manage my barbershop",
       platform:"Your barbershop platform",
       accessCode:"Access Code", enter:"Enter", wrongPin:"Incorrect code",
       hide:"Hide", show:"Show",
@@ -246,8 +246,8 @@ const LANGS = {
     wdaysF:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
     pay:["Efectivo","MB Way","Tarjeta","Transferencia","Otro"],
     t:{
-      client:"Soy Cliente", bookCta:"Reservar Cita", clientSub:"Reservar corte, ver citas", myBookingsLabel:"Ver Mis Citas", phonePlaceholder:"Su teléfono", ourTeam:"Nuestro Equipo", barberLabel:"Barbero", priceLabel:"Precio", nameLabel:"Nombre", namePlaceholder:"Su nombre", noBookingsFound:"No se encontraron citas",
-      barber:"Soy Barbero / Admin", barberSub:"Gestionar agenda y reservas",
+      client:"Soy Cliente", bookCta:"Reservar Cita", clientSub:"Reservar servicios, consultar citas y ver productos", myBookingsLabel:"Ver Mis Citas", phonePlaceholder:"Su teléfono", ourTeam:"Nuestro Equipo", barberLabel:"Barbero", priceLabel:"Precio", nameLabel:"Nombre", namePlaceholder:"Su nombre", noBookingsFound:"No se encontraron citas",
+      barber:"Soy Barbero", barberSub:"Gestionar agenda, atenciones y clientes autorizados", ownerBtnSub:"Registrar y gestionar mi barbería",
       platform:"Tu plataforma de barbería",
       accessCode:"Código de Acceso", enter:"Entrar", wrongPin:"Código incorrecto",
       hide:"Ocultar", show:"Ver",
@@ -349,8 +349,8 @@ const LANGS = {
     wdaysF:["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],
     pay:["Espèces","MB Way","Carte","Virement","Autre"],
     t:{
-      client:"Je suis Client", bookCta:"Prendre RDV", clientSub:"Réserver une coupe, voir mes rendez-vous", myBookingsLabel:"Voir Mes Rendez-vous", phonePlaceholder:"Votre téléphone", ourTeam:"Notre Équipe", barberLabel:"Coiffeur", priceLabel:"Prix", nameLabel:"Nom", namePlaceholder:"Votre nom", noBookingsFound:"Aucun rendez-vous trouvé",
-      barber:"Je suis Barbier / Admin", barberSub:"Gérer l'agenda et les réservations",
+      client:"Je suis Client", bookCta:"Prendre RDV", clientSub:"Réserver des services, consulter mes rendez-vous et voir les produits", myBookingsLabel:"Voir Mes Rendez-vous", phonePlaceholder:"Votre téléphone", ourTeam:"Notre Équipe", barberLabel:"Coiffeur", priceLabel:"Prix", nameLabel:"Nom", namePlaceholder:"Votre nom", noBookingsFound:"Aucun rendez-vous trouvé",
+      barber:"Je suis Barbier", barberSub:"Gérer l'agenda, les prestations et les clients autorisés", ownerBtnSub:"Enregistrer et gérer mon salon",
       platform:"Votre plateforme de barbier",
       accessCode:"Code d'Accès", enter:"Entrer", wrongPin:"Code incorrect",
       hide:"Masquer", show:"Voir",
@@ -452,8 +452,8 @@ const LANGS = {
     wdaysF:["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"],
     pay:["Bargeld","MB Way","Karte","Überweisung","Sonstiges"],
     t:{
-      client:"Ich bin Kunde", bookCta:"Termin buchen", clientSub:"Haarschnitt buchen, Termine sehen", myBookingsLabel:"Meine Termine ansehen", phonePlaceholder:"Ihre Telefonnummer", ourTeam:"Unser Team", barberLabel:"Friseur", priceLabel:"Preis", nameLabel:"Name", namePlaceholder:"Ihr Name", noBookingsFound:"Keine Termine gefunden",
-      barber:"Ich bin Friseur / Admin", barberSub:"Termine und Kalender verwalten",
+      client:"Ich bin Kunde", bookCta:"Termin buchen", clientSub:"Leistungen buchen, Termine ansehen und Produkte entdecken", myBookingsLabel:"Meine Termine ansehen", phonePlaceholder:"Ihre Telefonnummer", ourTeam:"Unser Team", barberLabel:"Friseur", priceLabel:"Preis", nameLabel:"Name", namePlaceholder:"Ihr Name", noBookingsFound:"Keine Termine gefunden",
+      barber:"Ich bin Friseur", barberSub:"Kalender, Termine und autorisierte Kunden verwalten", ownerBtnSub:"Meinen Salon registrieren und verwalten",
       platform:"Ihre Barbershop-Plattform",
       accessCode:"Zugangscode", enter:"Einloggen", wrongPin:"Falscher Code",
       hide:"Verbergen", show:"Anzeigen",
@@ -2970,8 +2970,10 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
         <button onClick={onBarber} style={{padding:"17px",background:T.surface,border:`1px solid ${T.border}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
           <div style={{fontSize:"1.3rem",marginBottom:5}}>◉</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.barber}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.barberSub}</div>
         </button>
+        <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{padding:"17px",background:T.surface,border:`1px solid ${T.border}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
+          <div style={{fontSize:"1.3rem",marginBottom:5}}>♛</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.portalTitle}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.ownerBtnSub}</div>
+        </button>
       </div>
-      <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{marginTop:22,background:"none",border:"none",cursor:"pointer",color:T.silver,fontSize:"0.72rem",textDecoration:"underline",fontFamily:"'Cormorant Garamond',Georgia,serif"}}>{L.goToOwnerPortal}</button>
     </div>
   );
 }
