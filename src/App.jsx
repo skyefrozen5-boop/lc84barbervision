@@ -125,7 +125,7 @@ const LANGS = {
       yourNameLabel:"O teu nome", placeholderFullName:"Nome completo", placeholderShopName:"Ex: Barbearia do Zé", phoneOptionalLabel:"Telefone (opcional)",
       placeholderPhone:"+351 9xx xxx xxx", placeholderCreatePass:"Cria uma password", createShopBtn:"Criar a minha barbearia", creatingBtn:"A criar...",
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
-      wrongCredentials:"Email ou password incorretos.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
+      wrongCredentials:"Email ou password incorretos.", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
@@ -228,7 +228,7 @@ const LANGS = {
       yourNameLabel:"Your name", placeholderFullName:"Full name", placeholderShopName:"E.g.: Joe's Barbershop", phoneOptionalLabel:"Phone (optional)",
       placeholderPhone:"+1 xxx xxx xxxx", placeholderCreatePass:"Create a password", createShopBtn:"Create my barbershop", creatingBtn:"Creating...",
       fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
-      wrongCredentials:"Wrong email or password.", createShopFailed:"Could not create the barbershop. Try again.",
+      wrongCredentials:"Wrong email or password.", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
@@ -331,7 +331,7 @@ const LANGS = {
       yourNameLabel:"Tu nombre", placeholderFullName:"Nombre completo", placeholderShopName:"Ej: Barbería de José", phoneOptionalLabel:"Teléfono (opcional)",
       placeholderPhone:"+34 6xx xxx xxx", placeholderCreatePass:"Crea una contraseña", createShopBtn:"Crear mi barbería", creatingBtn:"Creando...",
       fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
-      wrongCredentials:"Email o contraseña incorrectos.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
+      wrongCredentials:"Email o contraseña incorrectos.", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
@@ -434,7 +434,7 @@ const LANGS = {
       yourNameLabel:"Ton nom", placeholderFullName:"Nom complet", placeholderShopName:"Ex : Salon de Jean", phoneOptionalLabel:"Téléphone (optionnel)",
       placeholderPhone:"+33 6 xx xx xx xx", placeholderCreatePass:"Crée un mot de passe", createShopBtn:"Créer mon salon", creatingBtn:"Création...",
       fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
-      wrongCredentials:"Email ou mot de passe incorrect.", createShopFailed:"Impossible de créer le salon. Réessaie.",
+      wrongCredentials:"Email ou mot de passe incorrect.", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
@@ -537,7 +537,7 @@ const LANGS = {
       yourNameLabel:"Dein Name", placeholderFullName:"Vollständiger Name", placeholderShopName:"Z. B.: Salon Müller", phoneOptionalLabel:"Telefon (optional)",
       placeholderPhone:"+49 1xx xxxxxxx", placeholderCreatePass:"Erstelle ein Passwort", createShopBtn:"Meinen Salon erstellen", creatingBtn:"Wird erstellt...",
       fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
-      wrongCredentials:"Falsche E-Mail oder Passwort.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
+      wrongCredentials:"Falsche E-Mail oder Passwort.", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
@@ -2360,12 +2360,12 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
         {tab==="barbers"&&(<>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}><Lbl style={{margin:0}}>{barbers.length} {L.barbersCountSuffix}</Lbl><Btn variant="gold" style={{padding:"6px 13px"}} onClick={openAddBarber}>{L.addNew}</Btn></div>
           {barbers.map(b=>(
-            <div key={b.id} style={{display:"flex",alignItems:"center",gap:11,padding:"12px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:b.active?1:0.45}}>
+            <div key={b.id} onClick={()=>{setBf({...b});setModal("barber");}} style={{display:"flex",alignItems:"center",gap:11,padding:"12px 13px",marginBottom:7,background:T.card,border:`1px solid ${T.border}`,borderRadius:6,opacity:b.active?1:0.45,cursor:"pointer"}}>
               <Avatar barber={b} size={36}/>
               <div style={{flex:1,minWidth:0}}><div style={{fontSize:"0.92rem",color:T.white,fontWeight:500}}>{b.name}</div><div style={{fontSize:"0.68rem",color:T.silver}}>{b.role}</div></div>
               <div style={{display:"flex",flexDirection:"column",gap:4,alignItems:"flex-end"}}>
-                <button onClick={()=>setBarbers(p=>p.map(bb=>bb.id===b.id?{...bb,active:!bb.active}:bb))} style={{background:b.active?T.greenLo:T.muted,border:`1px solid ${b.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:b.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{b.active?L.activeLabel:L.offLabel}</button>
-                <button onClick={()=>{setBf({...b});setModal("barber");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.82rem"}}>✏</button>
+                <button onClick={e=>{e.stopPropagation();setBarbers(p=>p.map(bb=>bb.id===b.id?{...bb,active:!bb.active}:bb));}} style={{background:b.active?T.greenLo:T.muted,border:`1px solid ${b.active?T.green:T.border}`,borderRadius:10,padding:"2px 8px",color:b.active?T.green:T.silver,fontSize:"0.54rem",cursor:"pointer",fontFamily:"'Josefin Sans',sans-serif"}}>{b.active?L.activeLabel:L.offLabel}</button>
+                <button onClick={e=>{e.stopPropagation();setBf({...b});setModal("barber");}} style={{background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.82rem"}}>✏</button>
               </div>
             </div>
           ))}
@@ -2396,7 +2396,11 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
               <div style={{flex:1}}><Lbl>{L.breakStartLabel}</Lbl><Sel value={bf.schedule?.breakStart||""} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,breakStart:e.target.value}}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
               <div style={{flex:1}}><Lbl>{L.breakEndLabel}</Lbl><Sel value={bf.schedule?.breakEnd||""} onChange={e=>setBf(p=>({...p,schedule:{...p.schedule,breakEnd:e.target.value}}))}><option value="">{L.noBreakOption}</option>{ALL_HOURS.map(h=><option key={h} value={h}>{h}</option>)}</Sel></div>
             </div>
-            <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={saveBarber}>{L.save}</Btn>{bf.id&&<Btn variant="danger" onClick={()=>{setBarbers(p=>p.filter(b=>b.id!==bf.id));setModal(null);}}>{L.delete}</Btn>}<Btn variant="ghost" onClick={()=>setModal(null)}>{L.close}</Btn></div>
+            <div style={{display:"flex",gap:8}}><Btn variant="gold" style={{flex:1}} onClick={saveBarber}>{L.save}</Btn>{bf.id&&<Btn variant="danger" onClick={()=>{
+              const isLastOwner=bf.isOwner&&barbers.filter(b=>b.isOwner&&b.active!==false).length<=1;
+              if(isLastOwner){setBf(p=>({...p,__lastOwnerErr:true}));return;}
+              setBarbers(p=>p.filter(b=>b.id!==bf.id));setModal(null);
+            }}>{L.delete}</Btn>}<Btn variant="ghost" onClick={()=>setModal(null)}>{L.close}</Btn></div>
           </Modal>}
         </>)}
         {tab==="services"&&(<>
@@ -2892,7 +2896,7 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const [joinMode,setJoinMode]=useState(false);
   const [jName,setJName]=useState(""),[jPin,setJPin]=useState(""),[jPhone,setJPhone]=useState(""),[jErr,setJErr]=useState("");
-  const attempt=()=>{if(pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
+  const attempt=()=>{if(shop.adminPin&&pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   const join=()=>{
     setJErr("");
     if(!jName.trim()){setJErr(L.writeYourName);return;}
@@ -3181,6 +3185,7 @@ function OwnerPortal({lang,setLang}){
   const [salonName,setSalonName] = useState("");
   const [suEmail,setSuEmail]     = useState("");
   const [suPass,setSuPass]       = useState("");
+  const [suPin,setSuPin]         = useState("");
   const [phone,setPhone]         = useState("");
 
   const goToShop=(slug)=>{
@@ -3194,35 +3199,44 @@ function OwnerPortal({lang,setLang}){
     if(!email||!pass){setErr(L.fillEmailPass);return;}
     setBusy(true);
     const{data,error}=await supabase.rpc("verify_owner_login",{p_email:email.trim(),p_password:pass});
-    setBusy(false);
     const row=Array.isArray(data)?data[0]:data;
-    if(error||!row){setErr(L.wrongCredentials);return;}
+    if(error||!row){setBusy(false);setErr(L.wrongCredentials);return;}
+    // A password já prova quem é o proprietário: deixa a sessão dele
+    // guardada neste aparelho para entrar direto na loja, sem PIN.
+    const{data:sd}=await supabase.from("shops").select("data").eq("id",row.id).maybeSingle();
+    const list=sd?.data?.barbers||[];
+    const ownerB=list.find(b=>b.isOwner&&b.active!==false);
+    if(ownerB)localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));
+    setBusy(false);
     goToShop(row.slug);
   };
 
   const doSignup=async()=>{
     setErr("");
-    if(!ownerName||!salonName||!suEmail||!suPass){setErr(L.fillAllFields);return;}
+    if(!ownerName||!salonName||!suEmail||!suPass||!suPin){setErr(L.fillAllFields);return;}
+    if(!/^\d{4,6}$/.test(suPin)){setErr(L.codeLength);return;}
     setBusy(true);
     const{data:existing}=await supabase.from("shops").select("id").eq("owner_email",suEmail.trim().toLowerCase()).maybeSingle();
     if(existing){setBusy(false);setErr(L.shopAlreadyExists);return;}
     const slug=await generateUniqueSlug(salonName);
+    const ownerBarberId=mkId();
     const initData={
-      shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:"admin"},
-      barbers:[{id:mkId(),name:ownerName,role:"Proprietário",pin:"1111",phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",isOwner:true,schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
+      shop:{name:salonName,address:"",phone:phone||"",bio:"",adminPin:""},
+      barbers:[{id:ownerBarberId,name:ownerName,role:"Proprietário",pin:suPin,phone:phone||"",bio:"",avatar:ownerName.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",isOwner:true,schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true}],
       services:INIT_SERVICES,
       bookings:[],
       notifications:[],
       clientNotes:{},
     };
-    const{error}=await supabase.from("shops").insert({
+    const{data:created,error}=await supabase.from("shops").insert({
       owner_email:suEmail.trim().toLowerCase(),
       owner_password:suPass,
       slug,
       data:initData,
-    });
+    }).select("id").single();
     setBusy(false);
     if(error){setErr(L.createShopFailed);return;}
+    if(created?.id)localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);
     goToShop(slug);
   };
 
@@ -3281,6 +3295,10 @@ function OwnerPortal({lang,setLang}){
             <div style={{marginBottom:16}}>
               <Lbl style={{marginBottom:6}}>{L.passwordLabel}</Lbl>
               <Inp type="password" value={suPass} onChange={e=>setSuPass(e.target.value)} placeholder={L.placeholderCreatePass}/>
+            </div>
+            <div style={{marginBottom:16}}>
+              <Lbl style={{marginBottom:6}}>{L.createAccessCode}</Lbl>
+              <Inp value={suPin} onChange={e=>setSuPin(e.target.value.replace(/\D/g,"").slice(0,6))} placeholder="••••" style={{textAlign:"center",letterSpacing:"0.3em"}}/>
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
             <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doSignup} disabled={busy}>{busy?L.creatingBtn:L.createShopBtn}</Btn>
