@@ -134,7 +134,7 @@ const LANGS = {
       catalogTabLabel:"Catálogo", catalogNamePlaceholder:"Nome do produto", catalogPricePlaceholder:"Preço", catalogAddBtn:"Adicionar produto", catalogEmpty:"Ainda não há produtos no catálogo.", catalogUnavailable:"Indisponível", catalogMarkAvailable:"Marcar disponível", catalogMarkUnavailable:"Marcar indisponível", catalogClientCta:"Ver produtos",
       joinAsNew:"Sou novo colaborador, quero juntar-me →", yourNameShort:"O teu nome", fullNamePlaceholder:"Nome completo", createAccessCode:"Cria o teu código de acesso (4-6 números)",
       phoneOptional:"Telefone (opcional)", joinTeamBtn:"Juntar-me à equipa", alreadyHaveCode:"← Já tenho código de acesso",
-      writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.",
+      writeYourName:"Escreve o teu nome.", codeLength:"O código deve ter entre 4 e 6 números.", codeInUse:"Esse código já está a ser usado. Escolhe outro.", ownerUsePortal:"Este código pertence ao Proprietário — entra pela Área do Proprietário.",
     }
   },
   en:{ flag:"🇬🇧", name:"English",
@@ -237,7 +237,7 @@ const LANGS = {
       catalogTabLabel:"Catalog", catalogNamePlaceholder:"Product name", catalogPricePlaceholder:"Price", catalogAddBtn:"Add product", catalogEmpty:"No products in the catalog yet.", catalogUnavailable:"Unavailable", catalogMarkAvailable:"Mark available", catalogMarkUnavailable:"Mark unavailable", catalogClientCta:"View products",
       joinAsNew:"I'm a new collaborator, I want to join →", yourNameShort:"Your name", fullNamePlaceholder:"Full name", createAccessCode:"Create your access code (4-6 digits)",
       phoneOptional:"Phone (optional)", joinTeamBtn:"Join the team", alreadyHaveCode:"← I already have an access code",
-      writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.",
+      writeYourName:"Write your name.", codeLength:"The code must be 4 to 6 digits.", codeInUse:"That code is already in use. Choose another.", ownerUsePortal:"This code belongs to the Owner — sign in through the Owner Portal.",
     }
   },
   es:{ flag:"🇪🇸", name:"Español",
@@ -340,7 +340,7 @@ const LANGS = {
       catalogTabLabel:"Catálogo", catalogNamePlaceholder:"Nombre del producto", catalogPricePlaceholder:"Precio", catalogAddBtn:"Añadir producto", catalogEmpty:"Aún no hay productos en el catálogo.", catalogUnavailable:"No disponible", catalogMarkAvailable:"Marcar disponible", catalogMarkUnavailable:"Marcar no disponible", catalogClientCta:"Ver productos",
       joinAsNew:"Soy nuevo colaborador, quiero unirme →", yourNameShort:"Tu nombre", fullNamePlaceholder:"Nombre completo", createAccessCode:"Crea tu código de acceso (4-6 números)",
       phoneOptional:"Teléfono (opcional)", joinTeamBtn:"Unirme al equipo", alreadyHaveCode:"← Ya tengo código de acceso",
-      writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.",
+      writeYourName:"Escribe tu nombre.", codeLength:"El código debe tener entre 4 y 6 números.", codeInUse:"Ese código ya está en uso. Elige otro.", ownerUsePortal:"Este código pertenece al Dueño — entra por el Portal del Dueño.",
     }
   },
   fr:{ flag:"🇫🇷", name:"Français",
@@ -443,7 +443,7 @@ const LANGS = {
       catalogTabLabel:"Catalogue", catalogNamePlaceholder:"Nom du produit", catalogPricePlaceholder:"Prix", catalogAddBtn:"Ajouter un produit", catalogEmpty:"Aucun produit dans le catalogue.", catalogUnavailable:"Indisponible", catalogMarkAvailable:"Marquer disponible", catalogMarkUnavailable:"Marquer indisponible", catalogClientCta:"Voir les produits",
       joinAsNew:"Je suis un nouveau collaborateur, je veux rejoindre →", yourNameShort:"Ton nom", fullNamePlaceholder:"Nom complet", createAccessCode:"Crée ton code d'accès (4-6 chiffres)",
       phoneOptional:"Téléphone (optionnel)", joinTeamBtn:"Rejoindre l'équipe", alreadyHaveCode:"← J'ai déjà un code d'accès",
-      writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.",
+      writeYourName:"Écris ton nom.", codeLength:"Le code doit comporter entre 4 et 6 chiffres.", codeInUse:"Ce code est déjà utilisé. Choisis-en un autre.", ownerUsePortal:"Ce code appartient au Propriétaire — connecte-toi par le Portail Propriétaire.",
     }
   },
   de:{ flag:"🇩🇪", name:"Deutsch",
@@ -546,7 +546,7 @@ const LANGS = {
       catalogTabLabel:"Katalog", catalogNamePlaceholder:"Produktname", catalogPricePlaceholder:"Preis", catalogAddBtn:"Produkt hinzufügen", catalogEmpty:"Noch keine Produkte im Katalog.", catalogUnavailable:"Nicht verfügbar", catalogMarkAvailable:"Als verfügbar markieren", catalogMarkUnavailable:"Als nicht verfügbar markieren", catalogClientCta:"Produkte ansehen",
       joinAsNew:"Ich bin neuer Mitarbeiter, ich möchte beitreten →", yourNameShort:"Dein Name", fullNamePlaceholder:"Vollständiger Name", createAccessCode:"Erstelle deinen Zugangscode (4-6 Ziffern)",
       phoneOptional:"Telefon (optional)", joinTeamBtn:"Dem Team beitreten", alreadyHaveCode:"← Ich habe bereits einen Zugangscode",
-      writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.",
+      writeYourName:"Gib deinen Namen ein.", codeLength:"Der Code muss 4 bis 6 Ziffern haben.", codeInUse:"Dieser Code wird bereits verwendet. Wähle einen anderen.", ownerUsePortal:"Dieser Code gehört dem Inhaber — melde dich über das Inhaber-Portal an.",
     }
   },
 };
@@ -2891,12 +2891,19 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGIN + ENTRY
 // ══════════════════════════════════════════════════════════════════════════════
-function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,lang}){
+function LoginScreen({barbers,setBarbers,shop,shopId,onBarberLogin,onAdminLogin,onBack,lang}){
   const L=LANGS[lang].t;
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const [joinMode,setJoinMode]=useState(false);
+  const [ownerErr,setOwnerErr]=useState(false);
   const [jName,setJName]=useState(""),[jPin,setJPin]=useState(""),[jPhone,setJPhone]=useState(""),[jErr,setJErr]=useState("");
-  const attempt=()=>{if(shop.adminPin&&pin===shop.adminPin){onAdminLogin();return;}const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
+  const attempt=()=>{
+    // O PIN de um Proprietário só vale num aparelho onde ele já entrou pela Área do Proprietário (email+password).
+    const trusted=(ownerId)=>{try{return shopId&&(String(localStorage.getItem(`lc84_owner_device_${shopId}`))===String(ownerId)||String(localStorage.getItem(`lc84_barber_session_${shopId}`))===String(ownerId));}catch(e){return false;}};
+    const ownerB=barbers.find(b=>b.isOwner&&b.active!==false&&b.pin===pin);
+    if(ownerB){if(trusted(ownerB.id)){onBarberLogin(ownerB);return;}setPin("");setOwnerErr(true);return;}
+    if(shop.adminPin&&pin===shop.adminPin){const ownerAny=barbers.find(b=>b.isOwner&&b.active!==false);if(ownerAny&&trusted(ownerAny.id)){onAdminLogin();return;}setPin("");setOwnerErr(true);return;}
+    const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
   const join=()=>{
     setJErr("");
     if(!jName.trim()){setJErr(L.writeYourName);return;}
@@ -2920,10 +2927,11 @@ function LoginScreen({barbers,setBarbers,shop,onBarberLogin,onAdminLogin,onBack,
         <div style={{width:"100%",maxWidth:290}}>
           <Lbl style={{textAlign:"center",marginBottom:12}}>{L.accessCode}</Lbl>
           <div style={{position:"relative",marginBottom:12}}>
-            <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>setPin(e.target.value)} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
+            <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>{setPin(e.target.value);setOwnerErr(false);}} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
             <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?L.hide:L.show}</button>
           </div>
           {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
+          {ownerErr&&<div style={{color:T.red,fontSize:"0.72rem",textAlign:"center",marginBottom:12,lineHeight:1.5}}>{L.ownerUsePortal}</div>}
           <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
           <div style={{textAlign:"center"}}>
             <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>{L.joinAsNew}</button>
@@ -3206,7 +3214,7 @@ function OwnerPortal({lang,setLang}){
     const{data:sd}=await supabase.from("shops").select("data").eq("id",row.id).maybeSingle();
     const list=sd?.data?.barbers||[];
     const ownerB=list.find(b=>b.isOwner&&b.active!==false);
-    if(ownerB)localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));
+    if(ownerB){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerB.id));}
     setBusy(false);
     goToShop(row.slug);
   };
@@ -3236,7 +3244,7 @@ function OwnerPortal({lang,setLang}){
     }).select("id").single();
     setBusy(false);
     if(error){setErr(L.createShopFailed);return;}
-    if(created?.id)localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);
+    if(created?.id){localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);localStorage.setItem(`lc84_owner_device_${created.id}`,ownerBarberId);}
     goToShop(slug);
   };
 
@@ -3594,7 +3602,7 @@ const [notifications,setNotifications] = useState([]);
   }
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
-  if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} shopId={shopId} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang}/>;
 
