@@ -3517,6 +3517,12 @@ const [notifications,setNotifications] = useState([]);
   const onBarberLogin=(b)=>{
     setActiveBarber(b);setRole("barber");
     if(shopId)localStorage.setItem(`lc84_barber_session_${shopId}`,b.id);
+    // Proprietário: marca este aparelho como autorizado (para o botão "Entrar com biometria ou PIN" da Área do Proprietário).
+    if(shopId&&b.isOwner){try{
+      localStorage.setItem(`lc84_owner_device_${shopId}`,String(b.id));
+      const sl=localStorage.getItem("lc84_last_shop");
+      if(sl)localStorage.setItem("lc84_owner_slug",sl);
+    }catch(e){}}
     registerBiometric(shopId,b.id);
     registerPushForBarber(shopId,b.id);
     if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
