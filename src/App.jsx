@@ -126,7 +126,7 @@ const LANGS = {
       placeholderPhone:"+351 9xx xxx xxx", placeholderCreatePass:"Cria uma password", createShopBtn:"Criar a minha barbearia", creatingBtn:"A criar...",
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
       wrongCredentials:"Email ou password incorretos.", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
-      loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário",
+      loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário", ownerQuickEnter:"Entrar com biometria ou PIN", ownerQuickEnterPin:"Entrar com PIN",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
       notifNewMsgTitle:"Nova mensagem", notifNewMsgBody:"{name} enviou-te uma mensagem.",
@@ -229,7 +229,7 @@ const LANGS = {
       placeholderPhone:"+1 xxx xxx xxxx", placeholderCreatePass:"Create a password", createShopBtn:"Create my barbershop", creatingBtn:"Creating...",
       fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
       wrongCredentials:"Wrong email or password.", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
-      loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal",
+      loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal", ownerQuickEnter:"Sign in with biometrics or PIN", ownerQuickEnterPin:"Sign in with PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
       notifNewMsgTitle:"New message", notifNewMsgBody:"{name} sent you a message.",
@@ -332,7 +332,7 @@ const LANGS = {
       placeholderPhone:"+34 6xx xxx xxx", placeholderCreatePass:"Crea una contraseña", createShopBtn:"Crear mi barbería", creatingBtn:"Creando...",
       fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
       wrongCredentials:"Email o contraseña incorrectos.", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
-      loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño",
+      loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño", ownerQuickEnter:"Entrar con biometría o PIN", ownerQuickEnterPin:"Entrar con PIN",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
       notifNewMsgTitle:"Nuevo mensaje", notifNewMsgBody:"{name} te envió un mensaje.",
@@ -435,7 +435,7 @@ const LANGS = {
       placeholderPhone:"+33 6 xx xx xx xx", placeholderCreatePass:"Crée un mot de passe", createShopBtn:"Créer mon salon", creatingBtn:"Création...",
       fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
       wrongCredentials:"Email ou mot de passe incorrect.", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
-      loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire",
+      loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire", ownerQuickEnter:"Se connecter avec biométrie ou PIN", ownerQuickEnterPin:"Se connecter avec PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
       notifNewMsgTitle:"Nouveau message", notifNewMsgBody:"{name} t'a envoyé un message.",
@@ -538,7 +538,7 @@ const LANGS = {
       placeholderPhone:"+49 1xx xxxxxxx", placeholderCreatePass:"Erstelle ein Passwort", createShopBtn:"Meinen Salon erstellen", creatingBtn:"Wird erstellt...",
       fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
       wrongCredentials:"Falsche E-Mail oder Passwort.", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
-      loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal",
+      loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal", ownerQuickEnter:"Mit Biometrie oder PIN anmelden", ownerQuickEnterPin:"Mit PIN anmelden",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
       notifNewMsgTitle:"Neue Nachricht", notifNewMsgBody:"{name} hat dir eine Nachricht geschickt.",
@@ -3196,6 +3196,22 @@ function OwnerPortal({lang,setLang}){
   const [suPin,setSuPin]         = useState("");
   const [phone,setPhone]         = useState("");
 
+  const quickSlug=(()=>{try{return localStorage.getItem("lc84_owner_slug")||"";}catch(e){return "";}})();
+  const quickHasBio=(()=>{try{
+    if(!quickSlug||!window.PublicKeyCredential)return false;
+    const dk=Object.keys(localStorage).find(k=>k.startsWith("lc84_owner_device_"));
+    if(!dk)return false;
+    const sid=dk.slice("lc84_owner_device_".length);
+    const oid=localStorage.getItem(dk);
+    return !!localStorage.getItem(`lc84_biometric_${sid}_${oid}`);
+  }catch(e){return false;}})();
+  const quickEnter=()=>{
+    const url=new URL(window.location.href);
+    url.searchParams.delete("dono");
+    url.searchParams.set("loja",quickSlug);
+    url.searchParams.set("entrar","pin");
+    window.location.href=url.toString();
+  };
   const goToShop=(slug)=>{
     const url=new URL(window.location.href);
     url.searchParams.set("loja",slug);
@@ -3214,7 +3230,7 @@ function OwnerPortal({lang,setLang}){
     const{data:sd}=await supabase.from("shops").select("data").eq("id",row.id).maybeSingle();
     const list=sd?.data?.barbers||[];
     const ownerB=list.find(b=>b.isOwner&&b.active!==false);
-    if(ownerB){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerB.id));}
+    if(ownerB){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerB.id));localStorage.setItem("lc84_owner_slug",row.slug);}
     setBusy(false);
     goToShop(row.slug);
   };
@@ -3244,7 +3260,7 @@ function OwnerPortal({lang,setLang}){
     }).select("id").single();
     setBusy(false);
     if(error){setErr(L.createShopFailed);return;}
-    if(created?.id){localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);localStorage.setItem(`lc84_owner_device_${created.id}`,ownerBarberId);}
+    if(created?.id){localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);localStorage.setItem(`lc84_owner_device_${created.id}`,ownerBarberId);localStorage.setItem("lc84_owner_slug",slug);}
     goToShop(slug);
   };
 
@@ -3281,6 +3297,10 @@ function OwnerPortal({lang,setLang}){
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
             <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doLogin} disabled={busy}>{busy?L.loggingIn:L.loginBtn}</Btn>
+            {quickSlug&&<Btn variant="ghost" style={{width:"100%",padding:13,marginTop:12,display:"flex",alignItems:"center",justifyContent:"center",gap:8}} onClick={quickEnter}>
+              {quickHasBio&&<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 11v3.5c0 2-.6 3.6-1.6 5"/><path d="M8.5 20c1.2-1.4 1.9-3.4 1.9-5.5V11a1.6 1.6 0 0 1 3.2 0v3.5c0 1.4-.2 2.7-.6 3.9"/><path d="M6 17.5c.4-1 .6-2 .6-3.2V11a5.4 5.4 0 0 1 10.8 0v3.3c0 1-.1 1.9-.3 2.7"/><path d="M4.5 9.5A7.9 7.9 0 0 1 12 3a7.9 7.9 0 0 1 7.5 6.5"/></svg>}
+              <span>{quickHasBio?L.ownerQuickEnter:L.ownerQuickEnterPin}</span>
+            </Btn>}
           </>
         ):(
           <>
@@ -3514,6 +3534,21 @@ const [notifications,setNotifications] = useState([]);
     }
     const t=setTimeout(()=>onBarberLogin(b),0);
     return()=>clearTimeout(t);
+  },[dataLoaded,shopId,barbers,role]);
+
+  // Vindo do botão "Entrar com biometria ou PIN" da Área do Proprietário:
+  // pede a biometria (se estiver registada neste aparelho) ou mostra o ecrã de PIN.
+  useEffect(()=>{
+    if(!dataLoaded||!shopId||role!=="entry")return;
+    let p=null;
+    try{p=new URLSearchParams(window.location.search).get("entrar");}catch(e){return;}
+    if(p!=="pin")return;
+    try{const u=new URL(window.location.href);u.searchParams.delete("entrar");window.history.replaceState({},"",u.toString());}catch(e){}
+    let ownerId=null;
+    try{ownerId=localStorage.getItem(`lc84_owner_device_${shopId}`);}catch(e){}
+    const b=ownerId?barbers.find(bb=>String(bb.id)===String(ownerId)&&bb.active!==false):null;
+    if(b&&localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`)){setBiometricPending(b);return;}
+    setRole("login");
   },[dataLoaded,shopId,barbers,role]);
 
   // Chamado pelo toque no ecrã de biometria — este clique é que dá ao
