@@ -2959,6 +2959,22 @@ function LoginScreen({barbers,setBarbers,shop,shopId,onBarberLogin,onAdminLogin,
   );
 }
 
+// Ícones dourados do ecrã inicial (linha fina). A tesoura vem da imagem de referência do Luís.
+const ENTRY_SCISSORS_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAP1BMVEXJqW7JqW7JqW7JqW7JqW7JqW7JqW7JqW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1c07QAAAAEHRSTlMA+NUps0tukQAAAAAAAAAAaZKlRQAABD9JREFUeNrtWtl2pDoMbGv9/z8eLbYx0MxpsJmXe3lJJyEqo6VUEvl8/r9WX6z4qn2kQq8CCJTy6iNoKYXf9dA/AJA3ASwE5c08+gEApzzIUOjvAEyAU1kKVgjXFlAnY6RAUoj/msUzWYYEhAB8eX4AKDMushjrh0Au/QNCUx5CdzCBXtUIKNMUkwSAfgdwGmQHmcrSYv7Xr3zqptFumCMSdiPyLYwWHY+9x2gOgLzYzgBe4RZcmaUR8QPyOU/dPxIPON0NNKzJOT85fk2LAPTkfwkeoVmezRo7ABgBRuog0XSngADQHQBXcsDLCr/DFOmKEaDmpwNNOygLeQ/gDQJrIs33akxn85Ys0slziV7CtMalFQJ3+3pN4ncLOXBk73/7RCvETPMNJJ8iNGpDWqNluEY3O4JrJG4UAp/lAJV/aqhlKYB6ylOXD1vQp6V1A7Cza/cPwzIx2TjCXA7bqWmdlmwA1hg3+wKwTKu2dm/5SZt9WifnaQOQzkWwUM13gF5Xp+Yz2w60BUO6lFw5HXRR0gBkrX3spSX5YUUT+w6QJY2w1n7rN/FJM1nxNQAKwlg8DfI2HRnbKay27/ORbPxjs8ALW4QNYPn5vaZKVw66fKHg8wsa82MDWKCy/Br0m1vsonFW5yKy0bxdJNj0W80jXQHgetlaCuQXZWnO77uWKYBYByi7h1gpQBr1lDZn80QSuRwcUpwNoup+n2NqA7CceppFUhkG2a98pJ773DXKYy0tyZAcW40y7D3aHPbJHqMPAXLTwWpuIrUAQOsoG/XkoKHPtJCZkTEK7MWLVf7zeIaHANkCx5WTZObLQA2UI/EjgHgA3TVaDeE8ioe4CR8NNOimeU8z1mUOSSMJ8ESvhLg95gf492PaS4gXesKnfjYroYPaOgFk3VEpt0Wje5eJjgDmMRpsaYKh78lvQiTAgWWgRHBwo5J2A6oPOXjLReqlgIfR1QG2EWAntix977AeexbJPniUKyI+Svgjg/zad0O14XhEO+HwVHVriqJEKowxgv9ecxoBHfyR8yP30qtq1AIFFEwlcQ/fKASM/sjYWo/sNG4OxBZnOz2zUJSb/B6HNOUUZwckqJusYc8Rh+VtNZscdWPMzMNYqwTqLX84YG79xtVvNGf+nZiwrU9MVkitpyFNKNeaI1kFb9+IQiz4hr9nGh0cI47s8jKU/NU6+0LClZ5GOKjFHgLZhzR8RDfIGz03PAAR5f0iMZvZHoCSIW+pGG/GoblI8Uzdcgb4PFjq4/cxU84A/jNd9P4xuinvqSFaBS2aFtD1O9KuCzimMdSqZUIGQfcUv1/VLth5DS2BY2FNy+ad3LP4yyhudSjrdoJbw3Rtaf1A696IVr6greO3wCaOdelb+L7ttfEkZ7gF7yVO85Xs56HVE7O5XiuXe1Oj9W/IPQDWNFWICrzzftymQ4ox9+V/4/hPXH8AQA8UHlauqvIAAAAASUVORK5CYII=";
+const EntryIcon = ({kind}) => {
+  const box = {width:46,height:46,flexShrink:0,display:"block"};
+  if(kind==="scissors") return (
+    <span aria-hidden="true" style={{...box,background:T.gold,WebkitMaskImage:`url(${ENTRY_SCISSORS_IMG})`,maskImage:`url(${ENTRY_SCISSORS_IMG})`,WebkitMaskSize:"contain",maskSize:"contain",WebkitMaskRepeat:"no-repeat",maskRepeat:"no-repeat",WebkitMaskPosition:"center",maskPosition:"center"}}/>
+  );
+  return (
+    <svg aria-hidden="true" width="46" height="46" viewBox="0 0 48 48" fill="none" stroke={T.gold} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={box}>
+      {kind==="user"
+        ? <><circle cx="24" cy="14" r="8"/><path d="M8 41c0-9 7-14 16-14s16 5 16 14z"/></>
+        : <><path d="M9 15 L12 6 H36 L39 15"/><path d="M9 15q3.75 6 7.5 0q3.75 6 7.5 0q3.75 6 7.5 0q3.75 6 7.5 0"/><path d="M11 22v20M37 22v20"/><rect x="19" y="28" width="10" height="14"/><path d="M6 42H42"/></>}
+    </svg>
+  );
+};
+
 function EntryScreen({shop,onBarber,onClient,lang,setLang}){
   const L=LANGS[lang].t;
   return(
@@ -2977,13 +2993,13 @@ function EntryScreen({shop,onBarber,onClient,lang,setLang}){
       </div>
       <div style={{width:"100%",maxWidth:290,display:"flex",flexDirection:"column",gap:9}}>
         <button onClick={onClient} style={{padding:"17px",background:T.goldLo,border:`1px solid ${T.gold}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
-          <div style={{fontSize:"1.3rem",marginBottom:5}}>✂</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.client}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.clientSub}</div>
+          <div style={{display:"flex",alignItems:"center",gap:14}}><EntryIcon kind="user"/><div style={{textAlign:"left"}}><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.client}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.clientSub}</div></div></div>
         </button>
         <button onClick={onBarber} style={{padding:"17px",background:T.surface,border:`1px solid ${T.border}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
-          <div style={{fontSize:"1.3rem",marginBottom:5}}>◉</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.barber}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.barberSub}</div>
+          <div style={{display:"flex",alignItems:"center",gap:14}}><EntryIcon kind="scissors"/><div style={{textAlign:"left"}}><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.barber}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.barberSub}</div></div></div>
         </button>
         <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{padding:"17px",background:T.surface,border:`1px solid ${T.border}`,borderRadius:8,cursor:"pointer",color:T.white,fontFamily:"'Cormorant Garamond',Georgia,serif",textAlign:"center"}}>
-          <div style={{fontSize:"1.3rem",marginBottom:5}}>♛</div><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.portalTitle}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.ownerBtnSub}</div>
+          <div style={{display:"flex",alignItems:"center",gap:14}}><EntryIcon kind="store"/><div style={{textAlign:"left"}}><div style={{fontSize:"1rem",fontWeight:600,marginBottom:3}}>{L.portalTitle}</div><div style={{fontSize:"0.73rem",color:T.silver}}>{L.ownerBtnSub}</div></div></div>
         </button>
       </div>
     </div>
