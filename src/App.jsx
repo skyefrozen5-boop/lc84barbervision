@@ -3212,12 +3212,20 @@ function OwnerPortal({lang,setLang}){
   const [suPin,setSuPin]         = useState("");
   const [phone,setPhone]         = useState("");
 
-  const quickSlug=(()=>{try{return localStorage.getItem("lc84_owner_slug")||"";}catch(e){return "";}})();
+  const quickSlug=(()=>{try{
+    const s=localStorage.getItem("lc84_owner_slug");
+    if(s)return s;
+    // Aparelho já usado numa loja (sessão ou biometria guardadas) mas ainda não marcado como de Proprietário
+    const last=localStorage.getItem("lc84_last_shop")||"";
+    if(!last)return "";
+    const used=Object.keys(localStorage).some(k=>k.startsWith("lc84_barber_session_")||k.startsWith("lc84_biometric_"));
+    return used?last:"";
+  }catch(e){return "";}})();
   const quickHasBio=(()=>{try{
     if(!quickSlug||!window.PublicKeyCredential)return false;
-    const dk=Object.keys(localStorage).find(k=>k.startsWith("lc84_owner_device_"));
+    const dk=Object.keys(localStorage).find(k=>k.startsWith("lc84_owner_device_"))||Object.keys(localStorage).find(k=>k.startsWith("lc84_barber_session_"));
     if(!dk)return false;
-    const sid=dk.slice("lc84_owner_device_".length);
+    const sid=dk.replace("lc84_owner_device_","").replace("lc84_barber_session_","");
     const oid=localStorage.getItem(dk);
     return !!localStorage.getItem(`lc84_biometric_${sid}_${oid}`);
   }catch(e){return false;}})();
@@ -3567,8 +3575,9 @@ const [notifications,setNotifications] = useState([]);
     if(p!=="pin")return;
     try{const u=new URL(window.location.href);u.searchParams.delete("entrar");window.history.replaceState({},"",u.toString());}catch(e){}
     let ownerId=null;
-    try{ownerId=localStorage.getItem(`lc84_owner_device_${shopId}`);}catch(e){}
-    const b=ownerId?barbers.find(bb=>String(bb.id)===String(ownerId)&&bb.active!==false):null;
+    try{ownerId=localStorage.getItem(`lc84_owner_device_${shopId}`)||localStorage.getItem(`lc84_barber_session_${shopId}`);}catch(e){}
+    const b=ownerId?barbers.find(bb=>String(bb.id)===String(ownerId)&&bb.active!==false&&bb.isOwner):null;
+    if(b){try{localStorage.setItem(`lc84_owner_device_${shopId}`,String(b.id));const sl=localStorage.getItem("lc84_last_shop");if(sl)localStorage.setItem("lc84_owner_slug",sl);}catch(e){}}
     if(b&&localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`)){setBiometricPending(b);return;}
     setRole("login");
   },[dataLoaded,shopId,barbers,role]);
