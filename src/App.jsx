@@ -125,7 +125,7 @@ const LANGS = {
       yourNameLabel:"O teu nome", placeholderFullName:"Nome completo", placeholderShopName:"Ex: Barbearia do Zé", phoneOptionalLabel:"Telefone (opcional)",
       placeholderPhone:"+351 9xx xxx xxx", placeholderCreatePass:"Cria uma password", createShopBtn:"Criar a minha barbearia", creatingBtn:"A criar...",
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
-      wrongCredentials:"Email ou password incorretos.", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
+      wrongCredentials:"Email ou password incorretos.", forgotLink:"Esqueci-me da password", forgotTitle:"Recuperar password", forgotIntro:"Escreve o email da tua conta. Enviamos-te um link para criares uma password nova.", forgotSendBtn:"Enviar link", forgotSending:"A enviar...", forgotSent:"Se este email estiver registado, vais receber um link dentro de alguns minutos. Verifica também o spam.", forgotBack:"Voltar ao login", forgotFail:"Não foi possível enviar. Tenta outra vez.", forgotBadEmail:"Escreve um email válido.", resetTitle:"Nova password", resetIntro:"Escolhe a password nova para a tua conta.", resetNewLabel:"Password nova", resetRepeatLabel:"Repetir password nova", resetBtn:"Guardar password", resetSaving:"A guardar...", resetShort:"A password tem de ter pelo menos 6 caracteres.", resetMismatch:"As passwords não coincidem.", resetBadLink:"Este link já não é válido. Pede um novo.", resetDone:"Password alterada! Já podes entrar.", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário", ownerQuickEnter:"Entrar com biometria ou PIN", ownerQuickEnterPin:"Entrar com PIN",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
@@ -228,7 +228,7 @@ const LANGS = {
       yourNameLabel:"Your name", placeholderFullName:"Full name", placeholderShopName:"E.g.: Joe's Barbershop", phoneOptionalLabel:"Phone (optional)",
       placeholderPhone:"+1 xxx xxx xxxx", placeholderCreatePass:"Create a password", createShopBtn:"Create my barbershop", creatingBtn:"Creating...",
       fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
-      wrongCredentials:"Wrong email or password.", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
+      wrongCredentials:"Wrong email or password.", forgotLink:"Forgot my password", forgotTitle:"Recover password", forgotIntro:"Enter your account email. We will send you a link to create a new password.", forgotSendBtn:"Send link", forgotSending:"Sending...", forgotSent:"If this email is registered, you will receive a link within a few minutes. Check your spam folder too.", forgotBack:"Back to login", forgotFail:"Could not send. Please try again.", forgotBadEmail:"Enter a valid email.", resetTitle:"New password", resetIntro:"Choose the new password for your account.", resetNewLabel:"New password", resetRepeatLabel:"Repeat new password", resetBtn:"Save password", resetSaving:"Saving...", resetShort:"The password must be at least 6 characters long.", resetMismatch:"The passwords do not match.", resetBadLink:"This link is no longer valid. Request a new one.", resetDone:"Password changed! You can now log in.", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal", ownerQuickEnter:"Sign in with biometrics or PIN", ownerQuickEnterPin:"Sign in with PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
@@ -331,7 +331,7 @@ const LANGS = {
       yourNameLabel:"Tu nombre", placeholderFullName:"Nombre completo", placeholderShopName:"Ej: Barbería de José", phoneOptionalLabel:"Teléfono (opcional)",
       placeholderPhone:"+34 6xx xxx xxx", placeholderCreatePass:"Crea una contraseña", createShopBtn:"Crear mi barbería", creatingBtn:"Creando...",
       fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
-      wrongCredentials:"Email o contraseña incorrectos.", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
+      wrongCredentials:"Email o contraseña incorrectos.", forgotLink:"Olvidé mi contraseña", forgotTitle:"Recuperar contraseña", forgotIntro:"Escribe el email de tu cuenta. Te enviaremos un enlace para crear una contraseña nueva.", forgotSendBtn:"Enviar enlace", forgotSending:"Enviando...", forgotSent:"Si este email está registrado, recibirás un enlace en unos minutos. Revisa también el spam.", forgotBack:"Volver al inicio de sesión", forgotFail:"No se pudo enviar. Inténtalo de nuevo.", forgotBadEmail:"Escribe un email válido.", resetTitle:"Contraseña nueva", resetIntro:"Elige la contraseña nueva para tu cuenta.", resetNewLabel:"Contraseña nueva", resetRepeatLabel:"Repetir contraseña nueva", resetBtn:"Guardar contraseña", resetSaving:"Guardando...", resetShort:"La contraseña debe tener al menos 6 caracteres.", resetMismatch:"Las contraseñas no coinciden.", resetBadLink:"Este enlace ya no es válido. Solicita uno nuevo.", resetDone:"¡Contraseña cambiada! Ya puedes entrar.", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño", ownerQuickEnter:"Entrar con biometría o PIN", ownerQuickEnterPin:"Entrar con PIN",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
@@ -434,7 +434,7 @@ const LANGS = {
       yourNameLabel:"Ton nom", placeholderFullName:"Nom complet", placeholderShopName:"Ex : Salon de Jean", phoneOptionalLabel:"Téléphone (optionnel)",
       placeholderPhone:"+33 6 xx xx xx xx", placeholderCreatePass:"Crée un mot de passe", createShopBtn:"Créer mon salon", creatingBtn:"Création...",
       fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
-      wrongCredentials:"Email ou mot de passe incorrect.", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
+      wrongCredentials:"Email ou mot de passe incorrect.", forgotLink:"J'ai oublié mon mot de passe", forgotTitle:"Récupérer le mot de passe", forgotIntro:"Écris l'email de ton compte. Nous t'enverrons un lien pour créer un nouveau mot de passe.", forgotSendBtn:"Envoyer le lien", forgotSending:"Envoi...", forgotSent:"Si cet email est enregistré, tu recevras un lien dans quelques minutes. Vérifie aussi tes spams.", forgotBack:"Retour à la connexion", forgotFail:"Envoi impossible. Réessaie.", forgotBadEmail:"Écris un email valide.", resetTitle:"Nouveau mot de passe", resetIntro:"Choisis le nouveau mot de passe de ton compte.", resetNewLabel:"Nouveau mot de passe", resetRepeatLabel:"Répéter le nouveau mot de passe", resetBtn:"Enregistrer le mot de passe", resetSaving:"Enregistrement...", resetShort:"Le mot de passe doit contenir au moins 6 caractères.", resetMismatch:"Les mots de passe ne correspondent pas.", resetBadLink:"Ce lien n'est plus valide. Demande-en un nouveau.", resetDone:"Mot de passe modifié ! Tu peux maintenant te connecter.", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire", ownerQuickEnter:"Se connecter avec biométrie ou PIN", ownerQuickEnterPin:"Se connecter avec PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
@@ -537,7 +537,7 @@ const LANGS = {
       yourNameLabel:"Dein Name", placeholderFullName:"Vollständiger Name", placeholderShopName:"Z. B.: Salon Müller", phoneOptionalLabel:"Telefon (optional)",
       placeholderPhone:"+49 1xx xxxxxxx", placeholderCreatePass:"Erstelle ein Passwort", createShopBtn:"Meinen Salon erstellen", creatingBtn:"Wird erstellt...",
       fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
-      wrongCredentials:"Falsche E-Mail oder Passwort.", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
+      wrongCredentials:"Falsche E-Mail oder Passwort.", forgotLink:"Passwort vergessen", forgotTitle:"Passwort zurücksetzen", forgotIntro:"Gib die E-Mail deines Kontos ein. Wir senden dir einen Link, um ein neues Passwort zu erstellen.", forgotSendBtn:"Link senden", forgotSending:"Wird gesendet...", forgotSent:"Wenn diese E-Mail registriert ist, erhältst du in wenigen Minuten einen Link. Prüfe auch deinen Spam-Ordner.", forgotBack:"Zurück zum Login", forgotFail:"Senden nicht möglich. Versuche es noch einmal.", forgotBadEmail:"Gib eine gültige E-Mail ein.", resetTitle:"Neues Passwort", resetIntro:"Wähle das neue Passwort für dein Konto.", resetNewLabel:"Neues Passwort", resetRepeatLabel:"Neues Passwort wiederholen", resetBtn:"Passwort speichern", resetSaving:"Wird gespeichert...", resetShort:"Das Passwort muss mindestens 6 Zeichen lang sein.", resetMismatch:"Die Passwörter stimmen nicht überein.", resetBadLink:"Dieser Link ist nicht mehr gültig. Fordere einen neuen an.", resetDone:"Passwort geändert! Du kannst dich jetzt anmelden.", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal", ownerQuickEnter:"Mit Biometrie oder PIN anmelden", ownerQuickEnterPin:"Mit PIN anmelden",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
@@ -3196,13 +3196,21 @@ function ExpiredScreen({onSubscribe, lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 function OwnerPortal({lang,setLang}){
   const L=LANGS[lang].t;
-  const [mode,setMode]     = useState("login"); // login | signup
+  const resetToken=(()=>{try{const m=window.location.hash.match(/^#reset=([a-f0-9]{64})$/i);return m?m[1]:"";}catch(e){return "";}})();
+  const [mode,setMode]     = useState(resetToken?"reset":"login"); // login | signup | forgot | reset
   const [busy,setBusy]     = useState(false);
   const [err,setErr]       = useState("");
 
   // login fields
   const [email,setEmail]   = useState("");
   const [pass,setPass]     = useState("");
+  const [okMsg,setOkMsg]   = useState("");
+
+  // recuperar password
+  const [fgEmail,setFgEmail]   = useState("");
+  const [fgSent,setFgSent]     = useState(false);
+  const [newPass,setNewPass]   = useState("");
+  const [newPass2,setNewPass2] = useState("");
 
   // signup fields
   const [ownerName,setOwnerName] = useState("");
@@ -3259,6 +3267,31 @@ function OwnerPortal({lang,setLang}){
     goToShop(row.slug);
   };
 
+  const doForgot=async()=>{
+    setErr("");
+    const em=fgEmail.trim().toLowerCase();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){setErr(L.forgotBadEmail);return;}
+    setBusy(true);
+    const{error}=await supabase.functions.invoke("send-password-reset",{body:{email:em,lang}});
+    setBusy(false);
+    if(error){setErr(L.forgotFail);return;}
+    setFgSent(true);
+  };
+
+  const doReset=async()=>{
+    setErr("");
+    if(newPass.length<6){setErr(L.resetShort);return;}
+    if(newPass!==newPass2){setErr(L.resetMismatch);return;}
+    setBusy(true);
+    const{data,error}=await supabase.rpc("reset_owner_password",{p_token:resetToken,p_password:newPass});
+    setBusy(false);
+    if(error||data!==true){setErr(L.resetBadLink);return;}
+    try{window.history.replaceState(null,"",window.location.pathname+"?dono=1");}catch(e){}
+    setNewPass("");setNewPass2("");
+    setOkMsg(L.resetDone);
+    setMode("login");
+  };
+
   const doSignup=async()=>{
     setErr("");
     if(!ownerName||!salonName||!suEmail||!suPass||!suPin){setErr(L.fillAllFields);return;}
@@ -3303,21 +3336,62 @@ function OwnerPortal({lang,setLang}){
         <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>{L.portalSubtitle}</div>
       </div>
 
+      {(mode==="login"||mode==="signup")&&(
       <div style={{display:"flex",gap:6,marginBottom:20,background:T.card,borderRadius:6,padding:4}}>
         <button onClick={()=>{setMode("login");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="login"?T.gold:"transparent",color:mode==="login"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>{L.haveAccountTab}</button>
         <button onClick={()=>{setMode("signup");setErr("");}} style={{padding:"8px 18px",borderRadius:4,border:"none",cursor:"pointer",background:mode==="signup"?T.gold:"transparent",color:mode==="signup"?"#0a0a0a":T.silver,fontWeight:600,fontSize:"0.8rem"}}>{L.createShopTab}</button>
       </div>
+      )}
 
       <div style={{width:"100%",maxWidth:340,background:T.card,border:`1px solid ${T.border}`,borderRadius:8,padding:22}}>
-        {mode==="login"?(
+        {mode==="forgot"?(
           <>
+            <div style={{fontSize:"1rem",color:T.white,fontWeight:600,marginBottom:8,textAlign:"center"}}>{L.forgotTitle}</div>
+            {fgSent?(
+              <div style={{color:T.green,fontSize:"0.8rem",lineHeight:1.5,marginBottom:16,textAlign:"center"}}>{L.forgotSent}</div>
+            ):(
+              <>
+                <div style={{color:T.silver,fontSize:"0.76rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{L.forgotIntro}</div>
+                <div style={{marginBottom:16}}>
+                  <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
+                  <Inp value={fgEmail} onChange={e=>setFgEmail(e.target.value)} placeholder={L.placeholderEmail}/>
+                </div>
+                {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
+                <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doForgot} disabled={busy}>{busy?L.forgotSending:L.forgotSendBtn}</Btn>
+              </>
+            )}
+            <div style={{textAlign:"center",marginTop:14}}>
+              <span onClick={()=>{setMode("login");setErr("");setFgSent(false);}} style={{color:T.gold,fontSize:"0.76rem",cursor:"pointer",textDecoration:"underline"}}>{L.forgotBack}</span>
+            </div>
+          </>
+        ):mode==="reset"?(
+          <>
+            <div style={{fontSize:"1rem",color:T.white,fontWeight:600,marginBottom:8,textAlign:"center"}}>{L.resetTitle}</div>
+            <div style={{color:T.silver,fontSize:"0.76rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{L.resetIntro}</div>
+            <div style={{marginBottom:12}}>
+              <Lbl style={{marginBottom:6}}>{L.resetNewLabel}</Lbl>
+              <Inp type="password" value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder={L.placeholderPass}/>
+            </div>
+            <div style={{marginBottom:16}}>
+              <Lbl style={{marginBottom:6}}>{L.resetRepeatLabel}</Lbl>
+              <Inp type="password" value={newPass2} onChange={e=>setNewPass2(e.target.value)} placeholder={L.placeholderPass}/>
+            </div>
+            {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
+            <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doReset} disabled={busy}>{busy?L.resetSaving:L.resetBtn}</Btn>
+          </>
+        ):mode==="login"?(
+          <>
+            {okMsg&&<div style={{color:T.green,fontSize:"0.78rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{okMsg}</div>}
             <div style={{marginBottom:12}}>
               <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
               <Inp value={email} onChange={e=>setEmail(e.target.value)} placeholder={L.placeholderEmail}/>
             </div>
-            <div style={{marginBottom:16}}>
+            <div style={{marginBottom:8}}>
               <Lbl style={{marginBottom:6}}>{L.passwordLabel}</Lbl>
               <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder={L.placeholderPass}/>
+            </div>
+            <div style={{textAlign:"right",marginBottom:14}}>
+              <span onClick={()=>{setMode("forgot");setErr("");setOkMsg("");setFgSent(false);setFgEmail(email);}} style={{color:T.gold,fontSize:"0.74rem",cursor:"pointer",textDecoration:"underline"}}>{L.forgotLink}</span>
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
             <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doLogin} disabled={busy}>{busy?L.loggingIn:L.loginBtn}</Btn>
