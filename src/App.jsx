@@ -3362,7 +3362,7 @@ function OwnerPortal({lang,setLang}){
                 <div style={{color:T.silver,fontSize:"0.76rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{L.forgotIntro}</div>
                 <div style={{marginBottom:16}}>
                   <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
-                  <Inp value={fgEmail} onChange={e=>setFgEmail(e.target.value)} placeholder={L.placeholderEmail}/>
+                  <Inp value={fgEmail} onChange={e=>setFgEmail(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!busy)doForgot();}} placeholder={L.placeholderEmail}/>
                 </div>
                 {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
                 <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doForgot} disabled={busy}>{busy?L.forgotSending:L.forgotSendBtn}</Btn>
@@ -3378,11 +3378,11 @@ function OwnerPortal({lang,setLang}){
             <div style={{color:T.silver,fontSize:"0.76rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{L.resetIntro}</div>
             <div style={{marginBottom:12}}>
               <Lbl style={{marginBottom:6}}>{L.resetNewLabel}</Lbl>
-              <Inp type="password" value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder={L.placeholderPass}/>
+              <Inp type="password" value={newPass} onChange={e=>setNewPass(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!busy)doReset();}} placeholder={L.placeholderPass}/>
             </div>
             <div style={{marginBottom:16}}>
               <Lbl style={{marginBottom:6}}>{L.resetRepeatLabel}</Lbl>
-              <Inp type="password" value={newPass2} onChange={e=>setNewPass2(e.target.value)} placeholder={L.placeholderPass}/>
+              <Inp type="password" value={newPass2} onChange={e=>setNewPass2(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!busy)doReset();}} placeholder={L.placeholderPass}/>
             </div>
             {err&&<div style={{color:T.red,fontSize:"0.76rem",marginBottom:12,textAlign:"center"}}>{err}</div>}
             <Btn variant="gold" style={{width:"100%",padding:13}} onClick={doReset} disabled={busy}>{busy?L.resetSaving:L.resetBtn}</Btn>
@@ -3392,11 +3392,11 @@ function OwnerPortal({lang,setLang}){
             {okMsg&&<div style={{color:T.green,fontSize:"0.78rem",lineHeight:1.5,marginBottom:14,textAlign:"center"}}>{okMsg}</div>}
             <div style={{marginBottom:12}}>
               <Lbl style={{marginBottom:6}}>{L.emailLabel}</Lbl>
-              <Inp value={email} onChange={e=>setEmail(e.target.value)} placeholder={L.placeholderEmail}/>
+              <Inp value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!busy)doLogin();}} placeholder={L.placeholderEmail}/>
             </div>
             <div style={{marginBottom:8}}>
               <Lbl style={{marginBottom:6}}>{L.passwordLabel}</Lbl>
-              <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder={L.placeholderPass}/>
+              <Inp type="password" value={pass} onChange={e=>setPass(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"&&!busy)doLogin();}} placeholder={L.placeholderPass}/>
             </div>
             <div style={{textAlign:"right",marginBottom:14}}>
               <span onClick={()=>{setMode("forgot");setErr("");setOkMsg("");setFgSent(false);setFgEmail(email);}} style={{color:T.gold,fontSize:"0.74rem",cursor:"pointer",textDecoration:"underline"}}>{L.forgotLink}</span>
