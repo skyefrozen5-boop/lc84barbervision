@@ -3656,25 +3656,47 @@ const [notifications,setNotifications] = useState([]);
     }
   };
 
-  // Sessão persistente: se este aparelho já tinha um barbeiro autenticado
-  // nesta loja, entra direto ao abrir a app, sem pedir o PIN outra vez.
+  // Terminar sessão (um só sítio, usado por todos os botões "Terminar sessão"):
+  // apaga a sessão guardada, para a app não voltar a entrar sozinha.
+  const logoutBarber=()=>{
+    try{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);}catch(e){}
+    setActiveBarber(null);
+    setRole("entry");
+  };
+
+  // Toque em "Sou Barbeiro": se este aparelho tem biometria registada de um
+  // único barbeiro, pede a impressão digital logo (o toque dá a autorização ao
+  // browser). Se não houver, se falhar ou se houver vários, mostra o ecrã do PIN.
+  const startBarberEntry=async()=>{
+    if(!shopId){setRole("login");return;}
+    let ids=[];
+    try{
+      const pre=`lc84_biometric_${shopId}_`;
+      ids=Object.keys(localStorage).filter(k=>k.startsWith(pre)).map(k=>k.slice(pre.length));
+    }catch(e){}
+    const cands=barbers.filter(bb=>bb.active!==false&&ids.includes(String(bb.id)));
+    if(cands.length!==1){setRole("login");return;}
+    const ok=await verifyBiometric(shopId,cands[0].id);
+    if(ok)onBarberLogin(cands[0]); else setRole("login");
+  };
+
+  // Sessão persistente: se este aparelho já tinha um barbeiro com sessão aberta
+  // nesta loja (e ninguém terminou sessão), entra direto ao abrir a app, sem
+  // pedir PIN nem impressão digital. Só corre UMA vez, ao abrir a app —
+  // voltar ao ecrã inicial depois disso mostra sempre o ecrã inicial.
   // (Tem de ficar aqui, antes de qualquer "return" condicional da função,
   // para não violar a ordem fixa dos hooks do React.)
+  const autoEntryDone=useRef(false);
   useEffect(()=>{
-    if(!dataLoaded||!shopId||role!=="entry")return;
+    if(!dataLoaded||!shopId||role!=="entry"||autoEntryDone.current)return;
+    autoEntryDone.current=true;
+    // Vindo do botão "Entrar com biometria ou PIN" da Área do Proprietário: esse caminho trata de tudo.
+    try{if(new URLSearchParams(window.location.search).get("entrar")==="pin")return;}catch(e){}
     const savedId=localStorage.getItem(`lc84_barber_session_${shopId}`);
     if(!savedId)return;
     const b=barbers.find(bb=>String(bb.id)===String(savedId)&&bb.active);
     if(!b)return;
-    const hasBiometric=!!localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`);
-    if(hasBiometric){
-      // O browser exige um toque real para poder pedir biometria — não dá
-      // para chamar sozinho aqui. Mostra o ecrã de toque (ver biometricPending).
-      setBiometricPending(b);
-      return;
-    }
-    const t=setTimeout(()=>onBarberLogin(b),0);
-    return()=>clearTimeout(t);
+    setTimeout(()=>onBarberLogin(b),0);
   },[dataLoaded,shopId,barbers,role]);
 
   // Vindo do botão "Entrar com biometria ou PIN" da Área do Proprietário:
@@ -3778,10 +3800,10 @@ const [notifications,setNotifications] = useState([]);
     );
   }
 
-  if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={()=>setRole("login")} lang={lang} setLang={setLang}/>;
+  if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={startBarberEntry} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} shopId={shopId} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang}/>;
+  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
 
   // Trial expired — block barber access
   if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)} lang={lang}/>;
@@ -3805,7 +3827,7 @@ const [notifications,setNotifications] = useState([]);
               ?<span style={{fontSize:"0.54rem",background:T.greenLo,color:T.green,border:`1px solid ${T.green}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif"}}>✓ {LANGS[lang].t.activeSubBadge}</span>
               :<button onClick={()=>setShowSub(true)} style={{fontSize:"0.54rem",background:trialDays<=3?T.redLo:T.goldLo,color:trialDays<=3?T.red:T.gold,border:`1px solid ${trialDays<=3?T.red:T.gold}`,padding:"2px 8px",borderRadius:10,fontFamily:"'Josefin Sans',sans-serif",cursor:"pointer"}}>⏳ {trialDays}d</button>
             )}
-            <button onClick={()=>{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);setActiveBarber(null);setRole("entry");}} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
+            <button onClick={logoutBarber} title={LANGS[lang].t.logout} style={{background:"none",border:`1px solid ${T.border}`,color:T.silver,width:24,height:24,borderRadius:4,cursor:"pointer",fontSize:"0.7rem",display:"flex",alignItems:"center",justifyContent:"center"}}>⏻</button>
           </div>
         </div>
         {/* Barbeiro + data */}
@@ -3840,8 +3862,8 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
-        {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={()=>setRole("entry")} lang={lang}/>}
-        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={()=>setRole("entry")} lang={lang} embedded barber={barber}/>}
+        {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={logoutBarber} lang={lang}/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
       </main>
     </div>
   );
