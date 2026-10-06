@@ -1073,6 +1073,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
   },[autoOpenProfileKey,clientMap]);
 
   const deleteClient=()=>{
+    if(!barber.isOwner)return; // só o Proprietário pode apagar clientes
     const key=openClient.phone||openClient.name;
     setBookings(p=>p.filter(b=>!(b.barberId===barber.id&&(b.phone||b.name)===key&&!b.blocked)));
     setClientNotes(p=>{const n={...p};delete n[key];return n;});
@@ -1393,9 +1394,11 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
               ))}
             </div>
 
-            <div style={{marginTop:24,paddingTop:16,borderTop:`1px solid ${T.border}`}}>
-              <Btn variant="danger" style={{width:"100%"}} onClick={()=>setDelClientOpen(true)}>{L.deleteClientBtn}</Btn>
-            </div>
+            {barber.isOwner&&(
+              <div style={{marginTop:24,paddingTop:16,borderTop:`1px solid ${T.border}`}}>
+                <Btn variant="danger" style={{width:"100%"}} onClick={()=>setDelClientOpen(true)}>{L.deleteClientBtn}</Btn>
+              </div>
+            )}
 
             {delClientOpen&&(
               <Modal onClose={()=>setDelClientOpen(false)} title={L.deleteClientBtn}>
