@@ -127,6 +127,7 @@ const LANGS = {
       fillEmailPass:"Preenche o email e a password.", fillAllFields:"Preenche todos os campos.", shopAlreadyExists:"Já existe uma barbearia registada com esse email.",
       wrongCredentials:"Email ou password incorretos.", forgotLink:"Esqueci-me da password", forgotTitle:"Recuperar password", forgotIntro:"Escreve o email da tua conta. Enviamos-te um link para criares uma password nova.", forgotSendBtn:"Enviar link", forgotSending:"A enviar...", forgotSent:"Se este email estiver registado, vais receber um link dentro de alguns minutos. Verifica também o spam.", forgotBack:"Voltar ao login", forgotFail:"Não foi possível enviar. Tenta outra vez.", forgotBadEmail:"Escreve um email válido.", resetTitle:"Nova password", resetIntro:"Escolhe a password nova para a tua conta.", resetNewLabel:"Password nova", resetRepeatLabel:"Repetir password nova", resetBtn:"Guardar password", resetSaving:"A guardar...", resetShort:"A password tem de ter pelo menos 6 caracteres.", resetMismatch:"As passwords não coincidem.", resetBadLink:"Este link já não é válido. Pede um novo.", resetDone:"Password alterada! Já podes entrar.", backHome:"← Voltar ao início", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
       helpLink:"Ajuda", helpTitle:"Ajuda", helpQ1:"Não recebi o email de recuperação", helpA1:"Vê também a pasta de spam ou lixo. Se não chegar em poucos minutos, toca em «Esqueci-me da password» e confirma que escreveste o email da conta.", helpQ2:"O link do email já não é válido", helpA2:"Pede um link novo: no login, toca em «Esqueci-me da password» e escreve o teu email outra vez.", helpQ3:"Esqueci-me da password", helpA3:"1. Toca em «Esqueci-me da password».\n2. Escreve o email da conta e toca em «Enviar link».\n3. Abre o email e escolhe a password nova (mínimo 6 caracteres).\n4. Entra com a password nova.", helpQ4:"Como entro sem escrever email e password?", helpA4:"Depois de entrares uma vez com email e password neste aparelho, aparece o botão «Entrar com biometria ou PIN». Se o aparelho não tiver biometria guardada, aparece «Entrar com PIN».",
+      logoLabel:"Logótipo da barbearia", chooseLogo:"Escolher logótipo", changeLogo:"Trocar logótipo", removeLogo:"Remover logótipo", logoHint:"Aparece na Área do Proprietário, nos aparelhos onde já entraste.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário", ownerQuickEnter:"Entrar com biometria ou PIN", ownerQuickEnterPin:"Entrar com PIN",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
@@ -231,6 +232,7 @@ const LANGS = {
       fillEmailPass:"Fill in the email and password.", fillAllFields:"Fill in all fields.", shopAlreadyExists:"A barbershop is already registered with that email.",
       wrongCredentials:"Wrong email or password.", forgotLink:"Forgot my password", forgotTitle:"Recover password", forgotIntro:"Enter your account email. We will send you a link to create a new password.", forgotSendBtn:"Send link", forgotSending:"Sending...", forgotSent:"If this email is registered, you will receive a link within a few minutes. Check your spam folder too.", forgotBack:"Back to login", forgotFail:"Could not send. Please try again.", forgotBadEmail:"Enter a valid email.", resetTitle:"New password", resetIntro:"Choose the new password for your account.", resetNewLabel:"New password", resetRepeatLabel:"Repeat new password", resetBtn:"Save password", resetSaving:"Saving...", resetShort:"The password must be at least 6 characters long.", resetMismatch:"The passwords do not match.", resetBadLink:"This link is no longer valid. Request a new one.", resetDone:"Password changed! You can now log in.", backHome:"← Back to start", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
       helpLink:"Help", helpTitle:"Help", helpQ1:"I did not receive the recovery email", helpA1:"Also check your spam or junk folder. If it does not arrive within a few minutes, tap “Forgot my password” and make sure you typed your account email.", helpQ2:"The email link is no longer valid", helpA2:"Request a new link: on the login screen, tap “Forgot my password” and enter your email again.", helpQ3:"Forgot my password", helpA3:"1. Tap “Forgot my password”.\n2. Enter your account email and tap “Send link”.\n3. Open the email and choose a new password (at least 6 characters).\n4. Sign in with the new password.", helpQ4:"How do I sign in without typing my email and password?", helpA4:"After you sign in once with email and password on this device, the “Sign in with biometrics or PIN” button appears. If the device has no biometrics saved, “Sign in with PIN” appears instead.",
+      logoLabel:"Barbershop logo", chooseLogo:"Choose logo", changeLogo:"Change logo", removeLogo:"Remove logo", logoHint:"Shown in the Owner Portal on devices where you have already signed in.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal", ownerQuickEnter:"Sign in with biometrics or PIN", ownerQuickEnterPin:"Sign in with PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
@@ -335,6 +337,7 @@ const LANGS = {
       fillEmailPass:"Rellena el email y la contraseña.", fillAllFields:"Rellena todos los campos.", shopAlreadyExists:"Ya existe una barbería registrada con ese email.",
       wrongCredentials:"Email o contraseña incorrectos.", forgotLink:"Olvidé mi contraseña", forgotTitle:"Recuperar contraseña", forgotIntro:"Escribe el email de tu cuenta. Te enviaremos un enlace para crear una contraseña nueva.", forgotSendBtn:"Enviar enlace", forgotSending:"Enviando...", forgotSent:"Si este email está registrado, recibirás un enlace en unos minutos. Revisa también el spam.", forgotBack:"Volver al inicio de sesión", forgotFail:"No se pudo enviar. Inténtalo de nuevo.", forgotBadEmail:"Escribe un email válido.", resetTitle:"Contraseña nueva", resetIntro:"Elige la contraseña nueva para tu cuenta.", resetNewLabel:"Contraseña nueva", resetRepeatLabel:"Repetir contraseña nueva", resetBtn:"Guardar contraseña", resetSaving:"Guardando...", resetShort:"La contraseña debe tener al menos 6 caracteres.", resetMismatch:"Las contraseñas no coinciden.", resetBadLink:"Este enlace ya no es válido. Solicita uno nuevo.", resetDone:"¡Contraseña cambiada! Ya puedes entrar.", backHome:"← Volver al inicio", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
       helpLink:"Ayuda", helpTitle:"Ayuda", helpQ1:"No recibí el email de recuperación", helpA1:"Revisa también la carpeta de spam o correo no deseado. Si no llega en unos minutos, toca «Olvidé mi contraseña» y comprueba que escribiste el email de la cuenta.", helpQ2:"El enlace del email ya no es válido", helpA2:"Solicita un enlace nuevo: en el inicio de sesión, toca «Olvidé mi contraseña» y escribe tu email otra vez.", helpQ3:"Olvidé mi contraseña", helpA3:"1. Toca «Olvidé mi contraseña».\n2. Escribe el email de la cuenta y toca «Enviar enlace».\n3. Abre el email y elige la contraseña nueva (mínimo 6 caracteres).\n4. Entra con la contraseña nueva.", helpQ4:"¿Cómo entro sin escribir el email y la contraseña?", helpA4:"Después de entrar una vez con email y contraseña en este dispositivo, aparece el botón «Entrar con biometría o PIN». Si el dispositivo no tiene biometría guardada, aparece «Entrar con PIN».",
+      logoLabel:"Logotipo de la barbería", chooseLogo:"Elegir logotipo", changeLogo:"Cambiar logotipo", removeLogo:"Quitar logotipo", logoHint:"Aparece en el Portal del Dueño, en los dispositivos donde ya has entrado.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño", ownerQuickEnter:"Entrar con biometría o PIN", ownerQuickEnterPin:"Entrar con PIN",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
@@ -439,6 +442,7 @@ const LANGS = {
       fillEmailPass:"Remplis l'email et le mot de passe.", fillAllFields:"Remplis tous les champs.", shopAlreadyExists:"Un salon est déjà enregistré avec cet email.",
       wrongCredentials:"Email ou mot de passe incorrect.", forgotLink:"J'ai oublié mon mot de passe", forgotTitle:"Récupérer le mot de passe", forgotIntro:"Écris l'email de ton compte. Nous t'enverrons un lien pour créer un nouveau mot de passe.", forgotSendBtn:"Envoyer le lien", forgotSending:"Envoi...", forgotSent:"Si cet email est enregistré, tu recevras un lien dans quelques minutes. Vérifie aussi tes spams.", forgotBack:"Retour à la connexion", forgotFail:"Envoi impossible. Réessaie.", forgotBadEmail:"Écris un email valide.", resetTitle:"Nouveau mot de passe", resetIntro:"Choisis le nouveau mot de passe de ton compte.", resetNewLabel:"Nouveau mot de passe", resetRepeatLabel:"Répéter le nouveau mot de passe", resetBtn:"Enregistrer le mot de passe", resetSaving:"Enregistrement...", resetShort:"Le mot de passe doit contenir au moins 6 caractères.", resetMismatch:"Les mots de passe ne correspondent pas.", resetBadLink:"Ce lien n'est plus valide. Demande-en un nouveau.", resetDone:"Mot de passe modifié ! Tu peux maintenant te connecter.", backHome:"← Retour à l'accueil", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
       helpLink:"Aide", helpTitle:"Aide", helpQ1:"Je n'ai pas reçu l'email de récupération", helpA1:"Vérifie aussi ton dossier spam ou courrier indésirable. S'il n'arrive pas en quelques minutes, touche « J'ai oublié mon mot de passe » et vérifie que tu as bien écrit l'email du compte.", helpQ2:"Le lien de l'email n'est plus valide", helpA2:"Demande un nouveau lien : sur l'écran de connexion, touche « J'ai oublié mon mot de passe » et écris à nouveau ton email.", helpQ3:"J'ai oublié mon mot de passe", helpA3:"1. Touche « J'ai oublié mon mot de passe ».\n2. Écris l'email du compte et touche « Envoyer le lien ».\n3. Ouvre l'email et choisis le nouveau mot de passe (6 caractères minimum).\n4. Connecte-toi avec le nouveau mot de passe.", helpQ4:"Comment me connecter sans écrire l'email et le mot de passe ?", helpA4:"Après t'être connecté une fois avec email et mot de passe sur cet appareil, le bouton « Se connecter avec biométrie ou PIN » apparaît. Si l'appareil n'a pas de biométrie enregistrée, « Se connecter avec PIN » apparaît à la place.",
+      logoLabel:"Logo du salon", chooseLogo:"Choisir un logo", changeLogo:"Changer le logo", removeLogo:"Retirer le logo", logoHint:"Apparaît dans le Portail Propriétaire, sur les appareils où tu t'es déjà connecté.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire", ownerQuickEnter:"Se connecter avec biométrie ou PIN", ownerQuickEnterPin:"Se connecter avec PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
@@ -543,6 +547,7 @@ const LANGS = {
       fillEmailPass:"Fülle E-Mail und Passwort aus.", fillAllFields:"Fülle alle Felder aus.", shopAlreadyExists:"Ein Salon mit dieser E-Mail ist bereits registriert.",
       wrongCredentials:"Falsche E-Mail oder Passwort.", forgotLink:"Passwort vergessen", forgotTitle:"Passwort zurücksetzen", forgotIntro:"Gib die E-Mail deines Kontos ein. Wir senden dir einen Link, um ein neues Passwort zu erstellen.", forgotSendBtn:"Link senden", forgotSending:"Wird gesendet...", forgotSent:"Wenn diese E-Mail registriert ist, erhältst du in wenigen Minuten einen Link. Prüfe auch deinen Spam-Ordner.", forgotBack:"Zurück zum Login", forgotFail:"Senden nicht möglich. Versuche es noch einmal.", forgotBadEmail:"Gib eine gültige E-Mail ein.", resetTitle:"Neues Passwort", resetIntro:"Wähle das neue Passwort für dein Konto.", resetNewLabel:"Neues Passwort", resetRepeatLabel:"Neues Passwort wiederholen", resetBtn:"Passwort speichern", resetSaving:"Wird gespeichert...", resetShort:"Das Passwort muss mindestens 6 Zeichen lang sein.", resetMismatch:"Die Passwörter stimmen nicht überein.", resetBadLink:"Dieser Link ist nicht mehr gültig. Fordere einen neuen an.", resetDone:"Passwort geändert! Du kannst dich jetzt anmelden.", backHome:"← Zurück zum Start", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
       helpLink:"Hilfe", helpTitle:"Hilfe", helpQ1:"Ich habe die Wiederherstellungs-E-Mail nicht erhalten", helpA1:"Prüfe auch deinen Spam- oder Junk-Ordner. Wenn sie nach einigen Minuten nicht ankommt, tippe auf „Passwort vergessen“ und prüfe, ob du die E-Mail-Adresse des Kontos richtig eingegeben hast.", helpQ2:"Der Link in der E-Mail ist nicht mehr gültig", helpA2:"Fordere einen neuen Link an: Tippe im Login auf „Passwort vergessen“ und gib deine E-Mail noch einmal ein.", helpQ3:"Passwort vergessen", helpA3:"1. Tippe auf „Passwort vergessen“.\n2. Gib die E-Mail des Kontos ein und tippe auf „Link senden“.\n3. Öffne die E-Mail und wähle das neue Passwort (mindestens 6 Zeichen).\n4. Melde dich mit dem neuen Passwort an.", helpQ4:"Wie melde ich mich an, ohne E-Mail und Passwort einzutippen?", helpA4:"Nachdem du dich auf diesem Gerät einmal mit E-Mail und Passwort angemeldet hast, erscheint die Schaltfläche „Mit Biometrie oder PIN anmelden“. Wenn auf dem Gerät keine Biometrie gespeichert ist, erscheint stattdessen „Mit PIN anmelden“.",
+      logoLabel:"Logo des Salons", chooseLogo:"Logo wählen", changeLogo:"Logo ändern", removeLogo:"Logo entfernen", logoHint:"Wird im Inhaber-Portal auf Geräten angezeigt, auf denen du dich bereits angemeldet hast.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal", ownerQuickEnter:"Mit Biometrie oder PIN anmelden", ownerQuickEnterPin:"Mit PIN anmelden",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
@@ -2322,6 +2327,36 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
     setShop(p=>({...p,photoUrl:data.publicUrl}));
     setPhotoBusy(false);
   };
+  // Logótipo da barbearia: reduz para no máximo 512 px (mantém as proporções e a
+  // transparência), envia para o mesmo armazenamento das fotos e guarda o endereço em shop.logoUrl.
+  const [logoBusy,setLogoBusy]=useState(false);
+  const [logoErr,setLogoErr]=useState("");
+  const uploadLogo=async(file)=>{
+    if(!file||!shopId)return;
+    if(!file.type.startsWith("image/")){setLogoErr(L.uploadFailed);return;}
+    if(file.size>5*1024*1024){setLogoErr(L.photoTooLarge);return;}
+    setLogoBusy(true);setLogoErr("");
+    try{
+      const url=URL.createObjectURL(file);
+      const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=url;});
+      URL.revokeObjectURL(url);
+      const w0=img.naturalWidth||img.width, h0=img.naturalHeight||img.height;
+      if(!w0||!h0)throw new Error("sem tamanho");
+      const k=Math.min(1,512/Math.max(w0,h0));
+      const cv=document.createElement("canvas");
+      cv.width=Math.max(1,Math.round(w0*k));
+      cv.height=Math.max(1,Math.round(h0*k));
+      cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+      const blob=await new Promise(res=>cv.toBlob(res,"image/png"));
+      if(!blob)throw new Error("sem imagem");
+      const path=`${shopId}/logo-${Date.now()}.png`;
+      const{error}=await supabase.storage.from("salon-photos").upload(path,blob,{upsert:true,contentType:"image/png"});
+      if(error)throw error;
+      const{data}=supabase.storage.from("salon-photos").getPublicUrl(path);
+      setShop(p=>({...p,logoUrl:data.publicUrl}));
+    }catch{setLogoErr(L.uploadFailed);}
+    setLogoBusy(false);
+  };
   const [delOpen,setDelOpen]=useState(false);
   const [shopSaved,setShopSaved]=useState(false);
   const [delName,setDelName]=useState("");
@@ -2427,6 +2462,23 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
               </div>
             </label>
             {photoErr&&<div style={{color:T.red,fontSize:"0.74rem",marginTop:6}}>{photoErr}</div>}
+          </div>
+          <div style={{marginBottom:18}}>
+            <Lbl style={{marginBottom:8}}>{L.logoLabel}</Lbl>
+            {shop.logoUrl&&(
+              <img src={shop.logoUrl} alt="" style={{width:"100%",height:110,objectFit:"contain",background:T.card,borderRadius:6,marginBottom:10,border:`1px solid ${T.border}`}}/>
+            )}
+            <div style={{display:"flex",gap:8,alignItems:"stretch"}}>
+              <label style={{display:"block",flex:1}}>
+                <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>{uploadLogo(e.target.files?.[0]);e.target.value="";}}/>
+                <div style={{padding:"10px",textAlign:"center",background:T.card,border:`1px dashed ${T.border}`,borderRadius:6,color:T.silver,fontSize:"0.78rem",cursor:"pointer",height:"100%",boxSizing:"border-box"}}>
+                  {logoBusy?L.uploading:shop.logoUrl?L.changeLogo:L.chooseLogo}
+                </div>
+              </label>
+              {shop.logoUrl&&<Btn variant="danger" style={{flex:1}} onClick={()=>setShop(p=>({...p,logoUrl:""}))}>{L.removeLogo}</Btn>}
+            </div>
+            <div style={{fontSize:"0.7rem",color:T.silver,marginTop:8,lineHeight:1.5}}>{L.logoHint}</div>
+            {logoErr&&<div style={{color:T.red,fontSize:"0.74rem",marginTop:6}}>{logoErr}</div>}
           </div>
           {[[L.nameLabel,"name","text"],[L.address,"address","text"],[L.phone,"phone","tel"],[L.adminPinLabel,"adminPin","text"]].map(([l,k,t])=>(
             <div key={k} style={{marginBottom:11}}><Lbl>{l}</Lbl><Inp type={t} value={shop[k]||""} onChange={e=>setShop(p=>({...p,[k]:e.target.value}))}/></div>
@@ -3208,6 +3260,8 @@ function OwnerPortal({lang,setLang}){
   const [mode,setMode]     = useState(resetToken?"reset":"login"); // login | signup | forgot | reset
   const [busy,setBusy]     = useState(false);
   const [err,setErr]       = useState("");
+  // Logótipo da barbearia guardado neste aparelho (quando um Proprietário já entrou aqui)
+  const [ownerLogo,setOwnerLogo] = useState(()=>{try{return localStorage.getItem("lc84_owner_logo")||"";}catch{return "";}});
 
   // login fields
   const [email,setEmail]   = useState("");
@@ -3348,7 +3402,7 @@ function OwnerPortal({lang,setLang}){
         <button onClick={goHome} style={{position:"absolute",top:16,left:16,padding:"6px 12px",borderRadius:4,cursor:"pointer",background:"transparent",border:`1px solid ${T.border}`,color:T.silver,fontSize:"0.74rem",fontFamily:"inherit"}}>{L.backHome}</button>
       )}
       <div style={{textAlign:"center",marginBottom:28}}>
-        <img src={logoIcon} style={{width:130,marginBottom:10,display:"block",marginLeft:"auto",marginRight:"auto"}}/>
+        <img src={ownerLogo||logoIcon} onError={()=>setOwnerLogo("")} style={ownerLogo?{maxWidth:200,maxHeight:110,width:"auto",height:"auto",objectFit:"contain",marginBottom:10,display:"block",marginLeft:"auto",marginRight:"auto"}:{width:130,marginBottom:10,display:"block",marginLeft:"auto",marginRight:"auto"}}/>
         <div style={{fontSize:"1.5rem",color:T.white,fontWeight:600,letterSpacing:"0.08em"}}>{L.portalTitle}</div>
         <div style={{fontSize:"0.75rem",color:T.silver,marginTop:4}}>{L.portalSubtitle}</div>
       </div>
@@ -3698,6 +3752,17 @@ const [notifications,setNotifications] = useState([]);
     if(!b)return;
     setTimeout(()=>onBarberLogin(b),0);
   },[dataLoaded,shopId,barbers,role]);
+
+  // Quando é um Proprietário a usar a app, guarda neste aparelho o logótipo da barbearia,
+  // para a Área do Proprietário o mostrar logo à entrada (antes de fazer login).
+  useEffect(()=>{
+    if(!dataLoaded||!shopId)return;
+    if(!(role==="admin"||(activeBarber&&activeBarber.isOwner)))return;
+    try{
+      if(shop.logoUrl)localStorage.setItem("lc84_owner_logo",shop.logoUrl);
+      else localStorage.removeItem("lc84_owner_logo");
+    }catch{/* sem acesso ao armazenamento do aparelho: ignora */}
+  },[dataLoaded,shopId,role,activeBarber,shop.logoUrl]);
 
   // Vindo do botão "Entrar com biometria ou PIN" da Área do Proprietário:
   // pede a biometria (se estiver registada neste aparelho) ou mostra o ecrã de PIN.
