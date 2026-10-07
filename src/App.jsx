@@ -128,6 +128,7 @@ const LANGS = {
       wrongCredentials:"Email ou password incorretos.", forgotLink:"Esqueci-me da password", forgotTitle:"Recuperar password", forgotIntro:"Escreve o email da tua conta. Enviamos-te um link para criares uma password nova.", forgotSendBtn:"Enviar link", forgotSending:"A enviar...", forgotSent:"Se este email estiver registado, vais receber um link dentro de alguns minutos. Verifica também o spam.", forgotBack:"Voltar ao login", forgotFail:"Não foi possível enviar. Tenta outra vez.", forgotBadEmail:"Escreve um email válido.", resetTitle:"Nova password", resetIntro:"Escolhe a password nova para a tua conta.", resetNewLabel:"Password nova", resetRepeatLabel:"Repetir password nova", resetBtn:"Guardar password", resetSaving:"A guardar...", resetShort:"A password tem de ter pelo menos 6 caracteres.", resetMismatch:"As passwords não coincidem.", resetBadLink:"Este link já não é válido. Pede um novo.", resetDone:"Password alterada! Já podes entrar.", backHome:"← Voltar ao início", lastOwnerErr:"Não é possível apagar o único Proprietário da loja. Torna outro colaborador Proprietário primeiro, ou edita este perfil em vez de o apagar.", createShopFailed:"Não foi possível criar a barbearia. Tenta outra vez.",
       helpLink:"Ajuda", helpTitle:"Ajuda", helpQ1:"Não recebi o email de recuperação", helpA1:"Vê também a pasta de spam ou lixo. Se não chegar em poucos minutos, toca em «Esqueci-me da password» e confirma que escreveste o email da conta.", helpQ2:"O link do email já não é válido", helpA2:"Pede um link novo: no login, toca em «Esqueci-me da password» e escreve o teu email outra vez.", helpQ3:"Esqueci-me da password", helpA3:"1. Toca em «Esqueci-me da password».\n2. Escreve o email da conta e toca em «Enviar link».\n3. Abre o email e escolhe a password nova (mínimo 6 caracteres).\n4. Entra com a password nova.", helpQ4:"Como entro sem escrever email e password?", helpA4:"Depois de entrares uma vez com email e password neste aparelho, aparece o botão «Entrar com biometria ou PIN». Se o aparelho não tiver biometria guardada, aparece «Entrar com PIN».",
       logoLabel:"Logótipo da barbearia", chooseLogo:"Escolher logótipo", changeLogo:"Trocar logótipo", removeLogo:"Remover logótipo", logoHint:"Aparece na Área do Proprietário, nos aparelhos onde já entraste.",
+      skipPayBtn:"Concluir sem pagamento", serviceToConfirm:"serviço por confirmar", servicesToConfirm:"serviços por confirmar", overdueHint:"Confirma o pagamento ou marca falta.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário", ownerQuickEnter:"Entrar com biometria ou PIN", ownerQuickEnterPin:"Entrar com PIN",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
@@ -233,6 +234,7 @@ const LANGS = {
       wrongCredentials:"Wrong email or password.", forgotLink:"Forgot my password", forgotTitle:"Recover password", forgotIntro:"Enter your account email. We will send you a link to create a new password.", forgotSendBtn:"Send link", forgotSending:"Sending...", forgotSent:"If this email is registered, you will receive a link within a few minutes. Check your spam folder too.", forgotBack:"Back to login", forgotFail:"Could not send. Please try again.", forgotBadEmail:"Enter a valid email.", resetTitle:"New password", resetIntro:"Choose the new password for your account.", resetNewLabel:"New password", resetRepeatLabel:"Repeat new password", resetBtn:"Save password", resetSaving:"Saving...", resetShort:"The password must be at least 6 characters long.", resetMismatch:"The passwords do not match.", resetBadLink:"This link is no longer valid. Request a new one.", resetDone:"Password changed! You can now log in.", backHome:"← Back to start", lastOwnerErr:"You cannot delete the shop's only Owner. Make another staff member Owner first, or edit this profile instead of deleting it.", createShopFailed:"Could not create the barbershop. Try again.",
       helpLink:"Help", helpTitle:"Help", helpQ1:"I did not receive the recovery email", helpA1:"Also check your spam or junk folder. If it does not arrive within a few minutes, tap “Forgot my password” and make sure you typed your account email.", helpQ2:"The email link is no longer valid", helpA2:"Request a new link: on the login screen, tap “Forgot my password” and enter your email again.", helpQ3:"Forgot my password", helpA3:"1. Tap “Forgot my password”.\n2. Enter your account email and tap “Send link”.\n3. Open the email and choose a new password (at least 6 characters).\n4. Sign in with the new password.", helpQ4:"How do I sign in without typing my email and password?", helpA4:"After you sign in once with email and password on this device, the “Sign in with biometrics or PIN” button appears. If the device has no biometrics saved, “Sign in with PIN” appears instead.",
       logoLabel:"Barbershop logo", chooseLogo:"Choose logo", changeLogo:"Change logo", removeLogo:"Remove logo", logoHint:"Shown in the Owner Portal on devices where you have already signed in.",
+      skipPayBtn:"Complete without payment", serviceToConfirm:"service to confirm", servicesToConfirm:"services to confirm", overdueHint:"Confirm the payment or mark as no-show.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal", ownerQuickEnter:"Sign in with biometrics or PIN", ownerQuickEnterPin:"Sign in with PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
@@ -338,6 +340,7 @@ const LANGS = {
       wrongCredentials:"Email o contraseña incorrectos.", forgotLink:"Olvidé mi contraseña", forgotTitle:"Recuperar contraseña", forgotIntro:"Escribe el email de tu cuenta. Te enviaremos un enlace para crear una contraseña nueva.", forgotSendBtn:"Enviar enlace", forgotSending:"Enviando...", forgotSent:"Si este email está registrado, recibirás un enlace en unos minutos. Revisa también el spam.", forgotBack:"Volver al inicio de sesión", forgotFail:"No se pudo enviar. Inténtalo de nuevo.", forgotBadEmail:"Escribe un email válido.", resetTitle:"Contraseña nueva", resetIntro:"Elige la contraseña nueva para tu cuenta.", resetNewLabel:"Contraseña nueva", resetRepeatLabel:"Repetir contraseña nueva", resetBtn:"Guardar contraseña", resetSaving:"Guardando...", resetShort:"La contraseña debe tener al menos 6 caracteres.", resetMismatch:"Las contraseñas no coinciden.", resetBadLink:"Este enlace ya no es válido. Solicita uno nuevo.", resetDone:"¡Contraseña cambiada! Ya puedes entrar.", backHome:"← Volver al inicio", lastOwnerErr:"No puedes eliminar al único Propietario de la barbería. Haz Propietario a otro colaborador primero, o edita este perfil en vez de eliminarlo.", createShopFailed:"No se pudo crear la barbería. Inténtalo de nuevo.",
       helpLink:"Ayuda", helpTitle:"Ayuda", helpQ1:"No recibí el email de recuperación", helpA1:"Revisa también la carpeta de spam o correo no deseado. Si no llega en unos minutos, toca «Olvidé mi contraseña» y comprueba que escribiste el email de la cuenta.", helpQ2:"El enlace del email ya no es válido", helpA2:"Solicita un enlace nuevo: en el inicio de sesión, toca «Olvidé mi contraseña» y escribe tu email otra vez.", helpQ3:"Olvidé mi contraseña", helpA3:"1. Toca «Olvidé mi contraseña».\n2. Escribe el email de la cuenta y toca «Enviar enlace».\n3. Abre el email y elige la contraseña nueva (mínimo 6 caracteres).\n4. Entra con la contraseña nueva.", helpQ4:"¿Cómo entro sin escribir el email y la contraseña?", helpA4:"Después de entrar una vez con email y contraseña en este dispositivo, aparece el botón «Entrar con biometría o PIN». Si el dispositivo no tiene biometría guardada, aparece «Entrar con PIN».",
       logoLabel:"Logotipo de la barbería", chooseLogo:"Elegir logotipo", changeLogo:"Cambiar logotipo", removeLogo:"Quitar logotipo", logoHint:"Aparece en el Portal del Dueño, en los dispositivos donde ya has entrado.",
+      skipPayBtn:"Concluir sin pago", serviceToConfirm:"servicio por confirmar", servicesToConfirm:"servicios por confirmar", overdueHint:"Confirma el pago o marca la falta.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño", ownerQuickEnter:"Entrar con biometría o PIN", ownerQuickEnterPin:"Entrar con PIN",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
@@ -443,6 +446,7 @@ const LANGS = {
       wrongCredentials:"Email ou mot de passe incorrect.", forgotLink:"J'ai oublié mon mot de passe", forgotTitle:"Récupérer le mot de passe", forgotIntro:"Écris l'email de ton compte. Nous t'enverrons un lien pour créer un nouveau mot de passe.", forgotSendBtn:"Envoyer le lien", forgotSending:"Envoi...", forgotSent:"Si cet email est enregistré, tu recevras un lien dans quelques minutes. Vérifie aussi tes spams.", forgotBack:"Retour à la connexion", forgotFail:"Envoi impossible. Réessaie.", forgotBadEmail:"Écris un email valide.", resetTitle:"Nouveau mot de passe", resetIntro:"Choisis le nouveau mot de passe de ton compte.", resetNewLabel:"Nouveau mot de passe", resetRepeatLabel:"Répéter le nouveau mot de passe", resetBtn:"Enregistrer le mot de passe", resetSaving:"Enregistrement...", resetShort:"Le mot de passe doit contenir au moins 6 caractères.", resetMismatch:"Les mots de passe ne correspondent pas.", resetBadLink:"Ce lien n'est plus valide. Demande-en un nouveau.", resetDone:"Mot de passe modifié ! Tu peux maintenant te connecter.", backHome:"← Retour à l'accueil", lastOwnerErr:"Impossible de supprimer l'unique Propriétaire du salon. Fais d'abord d'un autre collaborateur le Propriétaire, ou modifie ce profil au lieu de le supprimer.", createShopFailed:"Impossible de créer le salon. Réessaie.",
       helpLink:"Aide", helpTitle:"Aide", helpQ1:"Je n'ai pas reçu l'email de récupération", helpA1:"Vérifie aussi ton dossier spam ou courrier indésirable. S'il n'arrive pas en quelques minutes, touche « J'ai oublié mon mot de passe » et vérifie que tu as bien écrit l'email du compte.", helpQ2:"Le lien de l'email n'est plus valide", helpA2:"Demande un nouveau lien : sur l'écran de connexion, touche « J'ai oublié mon mot de passe » et écris à nouveau ton email.", helpQ3:"J'ai oublié mon mot de passe", helpA3:"1. Touche « J'ai oublié mon mot de passe ».\n2. Écris l'email du compte et touche « Envoyer le lien ».\n3. Ouvre l'email et choisis le nouveau mot de passe (6 caractères minimum).\n4. Connecte-toi avec le nouveau mot de passe.", helpQ4:"Comment me connecter sans écrire l'email et le mot de passe ?", helpA4:"Après t'être connecté une fois avec email et mot de passe sur cet appareil, le bouton « Se connecter avec biométrie ou PIN » apparaît. Si l'appareil n'a pas de biométrie enregistrée, « Se connecter avec PIN » apparaît à la place.",
       logoLabel:"Logo du salon", chooseLogo:"Choisir un logo", changeLogo:"Changer le logo", removeLogo:"Retirer le logo", logoHint:"Apparaît dans le Portail Propriétaire, sur les appareils où tu t'es déjà connecté.",
+      skipPayBtn:"Terminer sans paiement", serviceToConfirm:"service à confirmer", servicesToConfirm:"services à confirmer", overdueHint:"Confirme le paiement ou marque l'absence.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire", ownerQuickEnter:"Se connecter avec biométrie ou PIN", ownerQuickEnterPin:"Se connecter avec PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
@@ -548,6 +552,7 @@ const LANGS = {
       wrongCredentials:"Falsche E-Mail oder Passwort.", forgotLink:"Passwort vergessen", forgotTitle:"Passwort zurücksetzen", forgotIntro:"Gib die E-Mail deines Kontos ein. Wir senden dir einen Link, um ein neues Passwort zu erstellen.", forgotSendBtn:"Link senden", forgotSending:"Wird gesendet...", forgotSent:"Wenn diese E-Mail registriert ist, erhältst du in wenigen Minuten einen Link. Prüfe auch deinen Spam-Ordner.", forgotBack:"Zurück zum Login", forgotFail:"Senden nicht möglich. Versuche es noch einmal.", forgotBadEmail:"Gib eine gültige E-Mail ein.", resetTitle:"Neues Passwort", resetIntro:"Wähle das neue Passwort für dein Konto.", resetNewLabel:"Neues Passwort", resetRepeatLabel:"Neues Passwort wiederholen", resetBtn:"Passwort speichern", resetSaving:"Wird gespeichert...", resetShort:"Das Passwort muss mindestens 6 Zeichen lang sein.", resetMismatch:"Die Passwörter stimmen nicht überein.", resetBadLink:"Dieser Link ist nicht mehr gültig. Fordere einen neuen an.", resetDone:"Passwort geändert! Du kannst dich jetzt anmelden.", backHome:"← Zurück zum Start", lastOwnerErr:"Der einzige Inhaber des Salons kann nicht gelöscht werden. Mache zuerst ein anderes Teammitglied zum Inhaber, oder bearbeite dieses Profil, statt es zu löschen.", createShopFailed:"Der Salon konnte nicht erstellt werden. Versuche es erneut.",
       helpLink:"Hilfe", helpTitle:"Hilfe", helpQ1:"Ich habe die Wiederherstellungs-E-Mail nicht erhalten", helpA1:"Prüfe auch deinen Spam- oder Junk-Ordner. Wenn sie nach einigen Minuten nicht ankommt, tippe auf „Passwort vergessen“ und prüfe, ob du die E-Mail-Adresse des Kontos richtig eingegeben hast.", helpQ2:"Der Link in der E-Mail ist nicht mehr gültig", helpA2:"Fordere einen neuen Link an: Tippe im Login auf „Passwort vergessen“ und gib deine E-Mail noch einmal ein.", helpQ3:"Passwort vergessen", helpA3:"1. Tippe auf „Passwort vergessen“.\n2. Gib die E-Mail des Kontos ein und tippe auf „Link senden“.\n3. Öffne die E-Mail und wähle das neue Passwort (mindestens 6 Zeichen).\n4. Melde dich mit dem neuen Passwort an.", helpQ4:"Wie melde ich mich an, ohne E-Mail und Passwort einzutippen?", helpA4:"Nachdem du dich auf diesem Gerät einmal mit E-Mail und Passwort angemeldet hast, erscheint die Schaltfläche „Mit Biometrie oder PIN anmelden“. Wenn auf dem Gerät keine Biometrie gespeichert ist, erscheint stattdessen „Mit PIN anmelden“.",
       logoLabel:"Logo des Salons", chooseLogo:"Logo wählen", changeLogo:"Logo ändern", removeLogo:"Logo entfernen", logoHint:"Wird im Inhaber-Portal auf Geräten angezeigt, auf denen du dich bereits angemeldet hast.",
+      skipPayBtn:"Ohne Zahlung abschließen", serviceToConfirm:"Leistung zu bestätigen", servicesToConfirm:"Leistungen zu bestätigen", overdueHint:"Zahlung bestätigen oder als nicht erschienen markieren.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal", ownerQuickEnter:"Mit Biometrie oder PIN anmelden", ownerQuickEnterPin:"Mit PIN anmelden",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
@@ -884,6 +889,17 @@ const SERVICE_NAME_TRANSLATIONS = {
   "Degradê":           {pt:"Degradê",en:"Fade",es:"Degradado",fr:"Dégradé",de:"Fade Cut"},
   "Tratamento Capilar":{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"},
 };
+// Serviço "esquecido": marcação ainda como "confirmado" (nem concluída, nem falta, nem cancelada),
+// sem pagamento, cuja hora de fim (início + duração do serviço) já passou.
+function isOverdueBooking(b,svc){
+  if(!b||b.blocked||b.status!=="confirmado"||b.paid)return false;
+  const [y,m,d]=String(b.date||"").split("-").map(Number);
+  const [h,mi]=String(b.time||"").split(":").map(Number);
+  if(!y||!m||!d||isNaN(h)||isNaN(mi))return false;
+  const end=new Date(y,m-1,d,h,mi).getTime()+((svc&&svc.duration)||30)*60000;
+  return end<Date.now();
+}
+
 function svcName(s,lang){
   if(!s)return"";
   if(s.names?.[lang])return s.names[lang];
@@ -1461,11 +1477,15 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
 // ══════════════════════════════════════════════════════════════════════════════
 // BARBER SCREENS (Dashboard, Agenda, Reports, Schedule, Profile)
 // ══════════════════════════════════════════════════════════════════════════════
-function BDashboard({bookings,services,barber,lang}){
+function BDashboard({bookings,setBookings,services,barber,lang}){
   const L=LANGS[lang].t;
   const svc=id=>services.find(s=>s.id===id);
   const myBk=bookings.filter(b=>b.barberId===barber.id&&!b.blocked);
   const todayBk=myBk.filter(b=>b.date===TODAY);
+  // Serviços esquecidos: já passaram da hora e ninguém os confirmou
+  const overdue=myBk.filter(b=>isOverdueBooking(b,svc(b.serviceId))).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+  const [alertOpen,setAlertOpen]=useState(true);
+  const [payFor,setPayFor]=useState(null);
   const revenue=todayBk.filter(b=>b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const pending=todayBk.filter(b=>b.status==="confirmado"&&!b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const upcoming=myBk.filter(b=>b.date>=TODAY&&b.status==="confirmado").sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time)).slice(0,6);
@@ -1482,6 +1502,37 @@ function BDashboard({bookings,services,barber,lang}){
           </div>
         </div>
       </div>
+      {overdue.length>0&&(
+        <div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:8,marginBottom:16,overflow:"hidden"}}>
+          <div onClick={()=>setAlertOpen(a=>!a)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 14px",cursor:"pointer"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <span>⚠</span>
+              <div>
+                <div style={{fontSize:"0.85rem",color:T.red,fontWeight:600}}>{overdue.length} {overdue.length===1?L.serviceToConfirm:L.servicesToConfirm}</div>
+                <div style={{fontSize:"0.68rem",color:T.red,opacity:0.8,marginTop:1}}>{L.overdueHint}</div>
+              </div>
+            </div>
+            <span style={{color:T.red,fontSize:"0.8rem"}}>{alertOpen?"▲":"▼"}</span>
+          </div>
+          {alertOpen&&(
+            <div style={{borderTop:`1px solid ${T.red}44`}}>
+              {overdue.map(b=>(
+                <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${T.red}22`}}>
+                  <div>
+                    <div style={{fontSize:"0.88rem",color:T.light,fontWeight:500}}>{b.name}</div>
+                    <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div>
+                  </div>
+                  <div style={{display:"flex",gap:6,flexShrink:0,marginLeft:12}}>
+                    <button onClick={()=>setPayFor(b)} style={{padding:"5px 10px",background:T.gold,color:"#000",border:"none",borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.toConfirm}</button>
+                    <button onClick={()=>setBookings(p=>p.map(x=>x.id===b.id?{...x,status:"falta"}:x))} style={{padding:"5px 10px",background:"transparent",color:T.silver,border:`1px solid ${T.border}`,borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.noShow}</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {payFor&&<ConfirmPayModal booking={payFor} svc={svc} onConfirm={(id,method)=>{setBookings(p=>p.map(x=>x.id===id?{...x,status:"concluído",paid:true,payMethod:method}:x));setPayFor(null);}} onSkip={()=>{setBookings(p=>p.map(x=>x.id===payFor.id?{...x,status:"concluído"}:x));setPayFor(null);}} onClose={()=>setPayFor(null)} lang={lang}/>}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
         {[{l:L.revenue,v:`€${revenue}`,s:`€${pending} ${L.pendingRev}`,c:T.gold},{l:L.today,v:todayBk.length,s:`${todayBk.filter(b=>b.status==="concluído").length} ${L.concluded}`,c:T.white},{l:L.toConfirm,v:todayBk.filter(b=>b.status==="confirmado").length,s:L.pendingOpen,c:T.mid},{l:L.week,v:weekBk.length,s:L.bookings,c:T.mid}].map(s=>(
           <div key={s.l} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"12px 13px"}}>
@@ -1622,6 +1673,14 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
     if(st==="cancelado"){const b=bookings.find(b=>b.id===id);if(b)addNotification(barber.id,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});}
   };
   const qPaid=id=>setBookings(p=>p.map(b=>b.id===id?{...b,paid:!b.paid}:b));
+  // ✓ (concluir) e € (pago) abrem a janela de pagamento: método + confirmar.
+  // Ao confirmar, o serviço fica concluído e pago e entra logo na receita.
+  const [payFor,setPayFor]=useState(null); // {b, skip}
+  const confirmPay=(id,method)=>{
+    setBookings(p=>p.map(b=>b.id===id?{...b,status:b.status==="confirmado"?"concluído":b.status,paid:true,payMethod:method}:b));
+    setPayFor(null);
+  };
+  const skipPay=id=>{qStatus(id,"concluído");setPayFor(null);};
   const addBlock=time=>setBookings(p=>[...p,{id:mkId(),barberId:barber.id,date:selDate,time,blocked:true,name:L.blockedSlotLabel,status:"bloqueado",serviceId:"s1",phone:"",paid:false,payMethod:"",notes:""}]);
   const [showCal,setShowCal]=useState(false);
   const worksToday=barberWorksOnDate(barber,selDate);
@@ -1752,7 +1811,7 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
               </div>
               <div onClick={e=>e.stopPropagation()} style={{display:"flex",flexDirection:"column",background:T.card,borderLeft:`1px solid ${T.border}`,flexShrink:0}}>
                 {[{icon:"✓",k:"concluído",c:T.green,a:b.status==="concluído"},{icon:"€",k:"paid",c:T.gold,a:b.paid},{icon:"⊘",k:"falta",c:T.orange,a:b.status==="falta"},{icon:"✕",k:"cancelado",c:T.red,a:b.status==="cancelado"}].map(({icon,k,c,a})=>(
-                  <button key={k} onClick={()=>k==="paid"?qPaid(b.id):qStatus(b.id,k)} style={{flex:1,width:29,border:"none",cursor:"pointer",fontSize:"0.74rem",borderBottom:`1px solid ${T.border}`,background:a?`${c}22`:"transparent",color:a?c:T.muted}}>{icon}</button>
+                  <button key={k} onClick={()=>{if(k==="paid"){if(b.paid)qPaid(b.id);else setPayFor({b,skip:false});}else if(k==="concluído"&&b.status!=="concluído"){setPayFor({b,skip:true});}else qStatus(b.id,k);}} style={{flex:1,width:29,border:"none",cursor:"pointer",fontSize:"0.74rem",borderBottom:`1px solid ${T.border}`,background:a?`${c}22`:"transparent",color:a?c:T.muted}}>{icon}</button>
                 ))}
               </div>
             </div>);
@@ -1760,13 +1819,14 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
           {(()=>{const free=hours.filter(h=>!dayBk.find(b=>b.time===h));if(!free.length)return null;return(<div style={{marginTop:14}}><Lbl style={{marginBottom:7}}>{L.freeSlots}</Lbl><div style={{display:"flex",flexWrap:"wrap",gap:6}}>{free.map(h=><button key={h} className="slot-h" onClick={()=>openAdd(h)} style={{padding:"4px 9px",background:"transparent",border:`1px solid ${T.border}`,borderRadius:4,color:T.silver,fontSize:"0.73rem",cursor:"pointer",transition:"all .15s",fontFamily:"'Josefin Sans',sans-serif"}}>{h}</button>)}</div></div>);})()}
         </>
       )}
+      {payFor&&<ConfirmPayModal booking={payFor.b} svc={svc} onConfirm={confirmPay} onSkip={payFor.skip?()=>skipPay(payFor.b.id):undefined} onClose={()=>setPayFor(null)} lang={lang}/>}
       {modal&&<Modal onClose={()=>setModal(null)} title={modal.mode==="add"?L.addBooking:L.editBooking}><BookingForm initial={modal.data} services={services} barbers={barbers} bookings={bookings} onSave={save} onDelete={modal.mode==="edit"?()=>del(modal.data.id):null} onClose={()=>setModal(null)} fixedBarberId={barber.id} lang={lang}/></Modal>}
     </div>
   );
 }
 
 // ─── CONFIRM PAYMENT MODAL ───────────────────────────────────────────────────
-function ConfirmPayModal({booking,svc,onConfirm,onClose,lang}){
+function ConfirmPayModal({booking,svc,onConfirm,onSkip,onClose,lang}){
   const L=LANGS[lang].t;
   const [method,setMethod]=useState(booking.payMethod||"");
   const s=svc(booking.serviceId);
@@ -1784,6 +1844,7 @@ function ConfirmPayModal({booking,svc,onConfirm,onClose,lang}){
         ))}
       </div>
       <Btn variant="gold" style={{width:"100%"}} onClick={()=>method&&onConfirm(booking.id,method)}>{L.confirmAmountBtn} €{s?.price}</Btn>
+      {onSkip&&<Btn variant="ghost" style={{width:"100%",marginTop:8}} onClick={onSkip}>{L.skipPayBtn}</Btn>}
       <Btn variant="ghost" style={{width:"100%",marginTop:8}} onClick={onClose}>{L.cancel}</Btn>
     </Modal>
   );
@@ -3921,7 +3982,7 @@ const [notifications,setNotifications] = useState([]);
       {mySlug!=="lc84"&&!subscription&&<div className="app-shell" style={{width:"100%",maxWidth:520,paddingTop:14}}><TrialBanner days={trialDays} onSubscribe={()=>setShowSub(true)} lang={lang}/></div>}
 
       <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:mySlug!=="lc84"&&!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
-        {bScreen==="dashboard"&&<BDashboard bookings={bookings} services={services} barber={barber} lang={lang}/>}
+        {bScreen==="dashboard"&&<BDashboard bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
         {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
