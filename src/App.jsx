@@ -2234,11 +2234,14 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded,barber}){
+function AdminPanel({bookings,setBookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded,barber}){
   const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
   const [bf,setBf]=useState({});
+  // Serviços esquecidos de TODA a equipa (já passaram da hora e ninguém os confirmou)
+  const [teamAlertOpen,setTeamAlertOpen]=useState(true);
+  const [teamPayFor,setTeamPayFor]=useState(null);
   const shopLink=mySlug?`${window.location.origin}${window.location.pathname}?loja=${mySlug}`:"";
   const [linkCopied,setLinkCopied]=useState(false);
   const copyShopLink=async()=>{
@@ -2448,6 +2451,42 @@ function AdminPanel({bookings,barbers,setBarbers,services,setServices,shop,setSh
       </header>
       <main className="app-shell" style={embedded?{width:"100%",padding:"14px 0 0"}:{width:"100%",maxWidth:520,flex:1,padding:"18px 20px 60px"}}>
         {tab==="overview"&&(<>
+          {(()=>{
+            const teamOverdue=bookings.filter(b=>isOverdueBooking(b,svc(b.serviceId))).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
+            if(!teamOverdue.length)return null;
+            const bName=id=>barbers.find(x=>String(x.id)===String(id))?.name||"";
+            return(
+              <div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:8,marginBottom:16,overflow:"hidden"}}>
+                <div onClick={()=>setTeamAlertOpen(a=>!a)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 14px",cursor:"pointer"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <span>⚠</span>
+                    <div>
+                      <div style={{fontSize:"0.85rem",color:T.red,fontWeight:600}}>{teamOverdue.length} {teamOverdue.length===1?L.serviceToConfirm:L.servicesToConfirm}</div>
+                      <div style={{fontSize:"0.68rem",color:T.red,opacity:0.8,marginTop:1}}>{L.overdueHint}</div>
+                    </div>
+                  </div>
+                  <span style={{color:T.red,fontSize:"0.8rem"}}>{teamAlertOpen?"▲":"▼"}</span>
+                </div>
+                {teamAlertOpen&&(
+                  <div style={{borderTop:`1px solid ${T.red}44`}}>
+                    {teamOverdue.map(b=>(
+                      <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${T.red}22`}}>
+                        <div>
+                          <div style={{fontSize:"0.88rem",color:T.light,fontWeight:500}}>{b.name}</div>
+                          <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{bName(b.barberId)} · {svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div>
+                        </div>
+                        <div style={{display:"flex",gap:6,flexShrink:0,marginLeft:12}}>
+                          <button onClick={()=>setTeamPayFor(b)} style={{padding:"5px 10px",background:T.gold,color:"#000",border:"none",borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.toConfirm}</button>
+                          <button onClick={()=>setBookings(p=>p.map(x=>x.id===b.id?{...x,status:"falta"}:x))} style={{padding:"5px 10px",background:"transparent",color:T.silver,border:`1px solid ${T.border}`,borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.noShow}</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+          {teamPayFor&&<ConfirmPayModal booking={teamPayFor} svc={svc} onConfirm={(id,method)=>{setBookings(p=>p.map(x=>x.id===id?{...x,status:"concluído",paid:true,payMethod:method}:x));setTeamPayFor(null);}} onSkip={()=>{setBookings(p=>p.map(x=>x.id===teamPayFor.id?{...x,status:"concluído"}:x));setTeamPayFor(null);}} onClose={()=>setTeamPayFor(null)} lang={lang}/>}
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:18}}>
             {[{l:L.totalBilled,v:`€${totalRev}`,c:T.gold},{l:L.barbersLabel,v:barbers.filter(b=>b.active).length,c:T.white},{l:L.todayAllLabel,v:todayAll.length,c:T.mid},{l:L.totalBookingsLabel,v:bookings.filter(b=>!b.blocked).length,c:T.mid}].map(s=>(
               <div key={s.l} style={{background:T.card,border:`1px solid ${T.border}`,borderRadius:7,padding:"12px 13px"}}><Lbl style={{marginBottom:4}}>{s.l}</Lbl><div style={{fontSize:"1.45rem",color:s.c,fontWeight:600}}>{s.v}</div></div>
@@ -3929,7 +3968,7 @@ const [notifications,setNotifications] = useState([]);
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={startBarberEntry} lang={lang} setLang={setLang}/>;
   if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} shopId={shopId} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
+  if(role==="admin")  return <AdminPanel bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
 
   // Trial expired — block barber access
   if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)} lang={lang}/>;
@@ -3989,7 +4028,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={logoutBarber} lang={lang}/>}
-        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
       </main>
     </div>
   );
