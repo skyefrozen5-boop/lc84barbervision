@@ -3694,6 +3694,7 @@ const [notifications,setNotifications] = useState([]);
   const [role,setRole]                   = useState("entry");
   const [activeBarber,setActiveBarber]   = useState(null);
   const [bScreen,setBScreen]             = useState("dashboard");
+  const [viewBarberId,setViewBarberId]   = useState(null); // Proprietário: barbeiro cuja Agenda/Relatórios está a ver
   const [dataLoaded,setDataLoaded]       = useState(false);
   const [shopId,setShopId]               = useState(null);
   const [mySlug,setMySlug] = useState("");
@@ -3815,6 +3816,7 @@ const [notifications,setNotifications] = useState([]);
   const logoutBarber=()=>{
     try{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);}catch(e){}
     setActiveBarber(null);
+    setViewBarberId(null);
     setRole("entry");
   };
 
@@ -3975,6 +3977,9 @@ const [notifications,setNotifications] = useState([]);
 
   // BARBER APP
   const barber=barbers.find(b=>b.id===activeBarber?.id)||activeBarber;
+  // Só o Proprietário pode ver a Agenda e os Relatórios de outro barbeiro da equipa.
+  const teamActive=barbers.filter(x=>x.active!==false);
+  const viewedBarber=(barber&&barber.isOwner&&viewBarberId&&teamActive.find(x=>String(x.id)===String(viewBarberId)))||barber;
   const myUnread=notifications.filter(n=>n.barberId===barber.id&&!n.read).length;
   const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile},...(barber.isOwner?[{id:"shop",l:LANGS[lang].t.navShop}]:[])];
 
@@ -4022,10 +4027,23 @@ const [notifications,setNotifications] = useState([]);
 
       <main className="app-shell" style={{width:"100%",maxWidth:520,flex:1,paddingTop:mySlug!=="lc84"&&!subscription&&trialDays<=5?0:18,paddingBottom:40}}>
         {bScreen==="dashboard"&&<BDashboard bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
-        {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={barber} addNotification={addNotification} lang={lang}/>}
+        {(bScreen==="agenda"||bScreen==="reports")&&barber.isOwner&&teamActive.length>1&&(
+          <div style={{marginBottom:14}}>
+            <Lbl style={{marginBottom:6}}>{LANGS[lang].t.barbersLabel}</Lbl>
+            <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+              {teamActive.map(x=>{
+                const on=String(viewedBarber.id)===String(x.id);
+                return(
+                  <button key={x.id} onClick={()=>setViewBarberId(x.id)} style={{padding:"7px 14px",borderRadius:16,cursor:"pointer",fontSize:"0.76rem",fontFamily:"'Josefin Sans',sans-serif",background:on?T.gold:"transparent",color:on?"#000":T.silver,border:`1px solid ${on?T.gold:T.border}`}}>{x.name}</button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={viewedBarber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
         {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
-        {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang}/>}
+        {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={viewedBarber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={logoutBarber} lang={lang}/>}
         {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
