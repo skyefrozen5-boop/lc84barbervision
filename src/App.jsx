@@ -889,6 +889,7 @@ const SERVICE_NAME_TRANSLATIONS = {
   "Degradê":           {pt:"Degradê",en:"Fade",es:"Degradado",fr:"Dégradé",de:"Fade Cut"},
   "Tratamento Capilar":{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"},
 };
+const GRACE_MIN=60; // minutos de folga antes de um serviço contar como "esquecido"
 // Serviço "esquecido": marcação ainda como "confirmado" (nem concluída, nem falta, nem cancelada),
 // sem pagamento, cuja hora de fim (início + duração do serviço) já passou.
 function isOverdueBooking(b,svc){
@@ -896,7 +897,8 @@ function isOverdueBooking(b,svc){
   const [y,m,d]=String(b.date||"").split("-").map(Number);
   const [h,mi]=String(b.time||"").split(":").map(Number);
   if(!y||!m||!d||isNaN(h)||isNaN(mi))return false;
-  const end=new Date(y,m-1,d,h,mi).getTime()+((svc&&svc.duration)||30)*60000;
+  // Folga de 1 hora a seguir ao fim previsto (clientes atrasados, cortes mais demorados)
+  const end=new Date(y,m-1,d,h,mi).getTime()+((svc&&svc.duration)||30)*60000+GRACE_MIN*60000;
   return end<Date.now();
 }
 
@@ -965,10 +967,12 @@ function BookingForm({initial,services,barbers,bookings,onSave,onDelete,onClose,
 // ══════════════════════════════════════════════════════════════════════════════
 // 🔔 NOTIFICATIONS SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BNotifications({notifications,setNotifications,barber,lang,onOpenLink}){
+function BNotifications({notifications,setNotifications,bookings,setBookings,services,barber,lang,onOpenLink}){
   const L=LANGS[lang].t;
   const myNotifs=notifications.filter(n=>n.barberId===barber.id).sort((a,b)=>b.ts-a.ts);
   const unread=myNotifs.filter(n=>!n.read).length;
+  // Serviços por confirmar (já passaram da hora, com folga) deste barbeiro
+  const overdueItems=bookings.filter(b=>b.barberId===barber.id&&isOverdueBooking(b,services.find(x=>x.id===b.serviceId))).sort((a,b)=>a.date.localeCompare(b.date)||a.time.localeCompare(b.time));
 
   const markAll=()=>setNotifications(p=>p.map(n=>n.barberId===barber.id?{...n,read:true}:n));
   const markOne=id=>setNotifications(p=>p.map(n=>n.id===id?{...n,read:true}:n));
@@ -990,6 +994,8 @@ function BNotifications({notifications,setNotifications,barber,lang,onOpenLink})
           {myNotifs.length>0&&<Btn variant="danger" style={{padding:"5px 10px",fontSize:"0.58rem"}} onClick={clearAll}>{L.clearAllBtn}</Btn>}
         </div>
       </div>
+
+      <OverdueBanner items={overdueItems} services={services} setBookings={setBookings} lang={lang}/>
 
       {myNotifs.length===0?(
         <div style={{textAlign:"center",padding:"50px 0",color:T.silver}}>
@@ -1823,6 +1829,47 @@ const isDayFullyBlocked=date=>bookings.some(b=>b.barberId===barber.id&&b.date===
       {modal&&<Modal onClose={()=>setModal(null)} title={modal.mode==="add"?L.addBooking:L.editBooking}><BookingForm initial={modal.data} services={services} barbers={barbers} bookings={bookings} onSave={save} onDelete={modal.mode==="edit"?()=>del(modal.data.id):null} onClose={()=>setModal(null)} fixedBarberId={barber.id} lang={lang}/></Modal>}
     </div>
   );
+}
+
+// ─── FAIXA "SERVIÇOS POR CONFIRMAR" (separador Alertas) ──────────────────────
+function OverdueBanner({items,services,setBookings,lang}){
+  const L=LANGS[lang].t;
+  const [open,setOpen]=useState(true);
+  const [payFor,setPayFor]=useState(null);
+  const svc=id=>services.find(x=>x.id===id);
+  return(<>
+    {items.length>0&&(
+      <div style={{background:T.redLo,border:`1px solid ${T.red}`,borderRadius:8,marginBottom:16,overflow:"hidden"}}>
+        <div onClick={()=>setOpen(a=>!a)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 14px",cursor:"pointer"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8}}>
+            <span>⚠</span>
+            <div>
+              <div style={{fontSize:"0.85rem",color:T.red,fontWeight:600}}>{items.length} {items.length===1?L.serviceToConfirm:L.servicesToConfirm}</div>
+              <div style={{fontSize:"0.68rem",color:T.red,opacity:0.8,marginTop:1}}>{L.overdueHint}</div>
+            </div>
+          </div>
+          <span style={{color:T.red,fontSize:"0.8rem"}}>{open?"▲":"▼"}</span>
+        </div>
+        {open&&(
+          <div style={{borderTop:`1px solid ${T.red}44`}}>
+            {items.map(b=>(
+              <div key={b.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:`1px solid ${T.red}22`}}>
+                <div>
+                  <div style={{fontSize:"0.88rem",color:T.light,fontWeight:500}}>{b.name}</div>
+                  <div style={{fontSize:"0.68rem",color:T.silver,marginTop:2}}>{svcName(svc(b.serviceId),lang)} · {dateLabel(b.date,lang)} {b.time}h</div>
+                </div>
+                <div style={{display:"flex",gap:6,flexShrink:0,marginLeft:12}}>
+                  <button onClick={()=>setPayFor(b)} style={{padding:"5px 10px",background:T.gold,color:"#000",border:"none",borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.toConfirm}</button>
+                  <button onClick={()=>setBookings(p=>p.map(x=>x.id===b.id?{...x,status:"falta"}:x))} style={{padding:"5px 10px",background:"transparent",color:T.silver,border:`1px solid ${T.border}`,borderRadius:3,cursor:"pointer",fontSize:"0.6rem",letterSpacing:"0.12em",textTransform:"uppercase",fontFamily:"'Josefin Sans',sans-serif"}}>{L.noShow}</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+    {payFor&&<ConfirmPayModal booking={payFor} svc={svc} onConfirm={(id,method)=>{setBookings(p=>p.map(x=>x.id===id?{...x,status:"concluído",paid:true,payMethod:method}:x));setPayFor(null);}} onSkip={()=>{setBookings(p=>p.map(x=>x.id===payFor.id?{...x,status:"concluído"}:x));setPayFor(null);}} onClose={()=>setPayFor(null)} lang={lang}/>}
+  </>);
 }
 
 // ─── CONFIRM PAYMENT MODAL ───────────────────────────────────────────────────
@@ -3981,7 +4028,8 @@ const [notifications,setNotifications] = useState([]);
   const teamActive=barbers.filter(x=>x.active!==false);
   const viewedBarber=(barber&&barber.isOwner&&viewBarberId&&teamActive.find(x=>String(x.id)===String(viewBarberId)))||barber;
   const myUnread=notifications.filter(n=>n.barberId===barber.id&&!n.read).length;
-  const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile},...(barber.isOwner?[{id:"shop",l:LANGS[lang].t.navShop}]:[])];
+  const myOverdue=bookings.filter(b=>b.barberId===barber.id&&isOverdueBooking(b,services.find(x=>x.id===b.serviceId))).length;
+  const NAV=[{id:"dashboard",l:LANGS[lang].t.navHome},{id:"agenda",l:LANGS[lang].t.navAgenda},{id:"notifs",l:LANGS[lang].t.navAlerts,badge:myUnread+myOverdue},{id:"clients",l:LANGS[lang].t.navClients},{id:"reports",l:LANGS[lang].t.navReports},{id:"schedule",l:LANGS[lang].t.navSchedule},{id:"profile",l:LANGS[lang].t.navProfile},...(barber.isOwner?[{id:"shop",l:LANGS[lang].t.navShop}]:[])];
 
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
@@ -4041,7 +4089,7 @@ const [notifications,setNotifications] = useState([]);
           </div>
         )}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={viewedBarber} addNotification={addNotification} lang={lang}/>}
-        {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
+        {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
         {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={viewedBarber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
