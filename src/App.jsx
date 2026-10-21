@@ -138,6 +138,7 @@ const LANGS = {
       helpLink:"Ajuda", helpTitle:"Ajuda", helpQ1:"Não recebi o email de recuperação", helpA1:"Vê também a pasta de spam ou lixo. Se não chegar em poucos minutos, toca em «Esqueci-me da password» e confirma que escreveste o email da conta.", helpQ2:"O link do email já não é válido", helpA2:"Pede um link novo: no ecrã de login, toca em «Esqueci-me da password» e escreve o teu email outra vez.", helpQ3:"Esqueci-me da password", helpA3:"1. Toca em «Esqueci-me da password».\n2. Escreve o email da conta e toca em «Enviar link».\n3. Abre o email e escolhe a password nova (mínimo 6 caracteres).\n4. Entra com a password nova.", helpQ4:"Como entro sem escrever email e password?", helpA4:"Depois de entrares uma vez com email e password neste aparelho, aparece o botão «Entrar com biometria ou PIN». Se o aparelho não tiver biometria guardada, aparece «Entrar com PIN».",
       logoLabel:"Logótipo da barbearia", chooseLogo:"Escolher logótipo", changeLogo:"Trocar logótipo", removeLogo:"Remover logótipo", logoHint:"Aparece na Área do Proprietário, nos aparelhos onde já entraste.",
       skipPayBtn:"Concluir sem pagamento", serviceToConfirm:"serviço por confirmar", servicesToConfirm:"serviços por confirmar", overdueHint:"Confirma o pagamento ou marca como falta.",
+      tooManyTries:"Demasiadas tentativas. Tenta daqui a 10 minutos.", joinPendingLogin:"O teu pedido ainda não foi aprovado pelo dono.", joinSent:"Pedido enviado! O dono tem de te ativar antes de poderes entrar.", joinFailed:"Não foi possível enviar o pedido. Tenta outra vez.", joinTooMany:"Há demasiados pedidos por aprovar. Fala com o dono.", joinNotifTitle:"Novo pedido para entrar na equipa", joinNotifBody:"{name} quer juntar-se à equipa. Ativa-o em Loja, no separador Barbeiros.", slotTaken:"Esta hora acabou de ser ocupada. Escolhe outra.", bookingFailed:"Não foi possível marcar. Tenta outra vez.", tooManyBookings:"Já tens demasiadas marcações ativas nesta barbearia.", sessionExpired:"A tua sessão terminou. Entra outra vez com o código.",
       loadingText:"A CARREGAR...", shopNotFoundTitle:"Barbearia não encontrada", shopNotFoundBody:"O link que usaste não corresponde a nenhuma barbearia registada.", goToOwnerPortal:"Ir para a Área do Proprietário", ownerQuickEnter:"Entrar com biometria ou PIN", ownerQuickEnterPin:"Entrar com PIN",
       chatBtn:"💬 Mensagens", chatTitle:"Chat", chatEmpty:"Ainda não há mensagens. Diz olá!", chatPlaceholder:"Escreve uma mensagem…",
       chatWithBarberCta:"💬 Falar com o barbeiro", chatPickBarber:"Escolhe com quem falar", chatNoBarbers:"Ainda não tens marcações com nenhum barbeiro.",
@@ -244,6 +245,7 @@ const LANGS = {
       helpLink:"Help", helpTitle:"Help", helpQ1:"I did not receive the recovery email", helpA1:"Also check your spam or junk folder. If it does not arrive within a few minutes, tap “Forgot my password” and make sure you typed your account email.", helpQ2:"The email link is no longer valid", helpA2:"Request a new link: on the login screen, tap “Forgot my password” and enter your email again.", helpQ3:"Forgot my password", helpA3:"1. Tap “Forgot my password”.\n2. Enter your account email and tap “Send link”.\n3. Open the email and choose a new password (at least 6 characters).\n4. Sign in with the new password.", helpQ4:"How do I sign in without typing my email and password?", helpA4:"After you sign in once with email and password on this device, the “Sign in with biometrics or PIN” button appears. If the device has no biometrics saved, “Sign in with PIN” appears instead.",
       logoLabel:"Barbershop logo", chooseLogo:"Choose logo", changeLogo:"Change logo", removeLogo:"Remove logo", logoHint:"Shown in the Owner Portal on devices where you have already signed in.",
       skipPayBtn:"Complete without payment", serviceToConfirm:"service to confirm", servicesToConfirm:"services to confirm", overdueHint:"Confirm the payment or mark as no-show.",
+      tooManyTries:"Too many attempts. Try again in 10 minutes.", joinPendingLogin:"Your request has not been approved by the owner yet.", joinSent:"Request sent! The owner has to activate you before you can sign in.", joinFailed:"Could not send the request. Please try again.", joinTooMany:"There are too many requests waiting for approval. Talk to the owner.", joinNotifTitle:"New request to join the team", joinNotifBody:"{name} wants to join the team. Activate them in Shop, on the Barbers tab.", slotTaken:"This time slot has just been taken. Please choose another.", bookingFailed:"Could not book. Please try again.", tooManyBookings:"You already have too many active bookings at this barbershop.", sessionExpired:"Your session has ended. Sign in again with your code.",
       loadingText:"LOADING...", shopNotFoundTitle:"Barbershop not found", shopNotFoundBody:"The link you used doesn't match any registered barbershop.", goToOwnerPortal:"Go to Owner Portal", ownerQuickEnter:"Sign in with biometrics or PIN", ownerQuickEnterPin:"Sign in with PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"No messages yet. Say hi!", chatPlaceholder:"Write a message…",
       chatWithBarberCta:"💬 Message your barber", chatPickBarber:"Choose who to talk to", chatNoBarbers:"You don't have bookings with any barber yet.",
@@ -350,6 +352,7 @@ const LANGS = {
       helpLink:"Ayuda", helpTitle:"Ayuda", helpQ1:"No recibí el email de recuperación", helpA1:"Revisa también la carpeta de spam o correo no deseado. Si no llega en unos minutos, toca «Olvidé mi contraseña» y comprueba que escribiste el email de la cuenta.", helpQ2:"El enlace del email ya no es válido", helpA2:"Solicita un enlace nuevo: en el inicio de sesión, toca «Olvidé mi contraseña» y escribe tu email otra vez.", helpQ3:"Olvidé mi contraseña", helpA3:"1. Toca «Olvidé mi contraseña».\n2. Escribe el email de la cuenta y toca «Enviar enlace».\n3. Abre el email y elige la contraseña nueva (mínimo 6 caracteres).\n4. Entra con la contraseña nueva.", helpQ4:"¿Cómo entro sin escribir el email y la contraseña?", helpA4:"Después de entrar una vez con email y contraseña en este dispositivo, aparece el botón «Entrar con biometría o PIN». Si el dispositivo no tiene biometría guardada, aparece «Entrar con PIN».",
       logoLabel:"Logotipo de la barbería", chooseLogo:"Elegir logotipo", changeLogo:"Cambiar logotipo", removeLogo:"Quitar logotipo", logoHint:"Aparece en el Portal del Dueño, en los dispositivos donde ya has entrado.",
       skipPayBtn:"Concluir sin pago", serviceToConfirm:"servicio por confirmar", servicesToConfirm:"servicios por confirmar", overdueHint:"Confirma el pago o marca la falta.",
+      tooManyTries:"Demasiados intentos. Inténtalo de nuevo dentro de 10 minutos.", joinPendingLogin:"Tu solicitud todavía no ha sido aprobada por el dueño.", joinSent:"¡Solicitud enviada! El dueño tiene que activarte antes de que puedas entrar.", joinFailed:"No se pudo enviar la solicitud. Inténtalo de nuevo.", joinTooMany:"Hay demasiadas solicitudes pendientes de aprobación. Habla con el dueño.", joinNotifTitle:"Nueva solicitud para unirse al equipo", joinNotifBody:"{name} quiere unirse al equipo. Actívalo en Tienda, en la pestaña Barberos.", slotTaken:"Esta hora acaba de ser ocupada. Elige otra.", bookingFailed:"No se pudo reservar. Inténtalo de nuevo.", tooManyBookings:"Ya tienes demasiadas citas activas en esta barbería.", sessionExpired:"Tu sesión ha terminado. Entra otra vez con el código.",
       loadingText:"CARGANDO...", shopNotFoundTitle:"Barbería no encontrada", shopNotFoundBody:"El enlace que usaste no corresponde a ninguna barbería registrada.", goToOwnerPortal:"Ir al Portal del Dueño", ownerQuickEnter:"Entrar con biometría o PIN", ownerQuickEnterPin:"Entrar con PIN",
       chatBtn:"💬 Mensajes", chatTitle:"Chat", chatEmpty:"Aún no hay mensajes. ¡Saluda!", chatPlaceholder:"Escribe un mensaje…",
       chatWithBarberCta:"💬 Hablar con el barbero", chatPickBarber:"Elige con quién hablar", chatNoBarbers:"Aún no tienes reservas con ningún barbero.",
@@ -456,6 +459,7 @@ const LANGS = {
       helpLink:"Aide", helpTitle:"Aide", helpQ1:"Je n'ai pas reçu l'email de récupération", helpA1:"Vérifie aussi ton dossier spam ou courrier indésirable. S'il n'arrive pas en quelques minutes, touche « J'ai oublié mon mot de passe » et vérifie que tu as bien écrit l'email du compte.", helpQ2:"Le lien de l'email n'est plus valide", helpA2:"Demande un nouveau lien : sur l'écran de connexion, touche « J'ai oublié mon mot de passe » et écris à nouveau ton email.", helpQ3:"J'ai oublié mon mot de passe", helpA3:"1. Touche « J'ai oublié mon mot de passe ».\n2. Écris l'email du compte et touche « Envoyer le lien ».\n3. Ouvre l'email et choisis le nouveau mot de passe (6 caractères minimum).\n4. Connecte-toi avec le nouveau mot de passe.", helpQ4:"Comment me connecter sans écrire l'email et le mot de passe ?", helpA4:"Après t'être connecté une fois avec email et mot de passe sur cet appareil, le bouton « Se connecter avec biométrie ou PIN » apparaît. Si l'appareil n'a pas de biométrie enregistrée, « Se connecter avec PIN » apparaît à la place.",
       logoLabel:"Logo du salon", chooseLogo:"Choisir un logo", changeLogo:"Changer le logo", removeLogo:"Retirer le logo", logoHint:"Apparaît dans le Portail Propriétaire, sur les appareils où tu t'es déjà connecté.",
       skipPayBtn:"Terminer sans paiement", serviceToConfirm:"service à confirmer", servicesToConfirm:"services à confirmer", overdueHint:"Confirme le paiement ou marque l'absence.",
+      tooManyTries:"Trop de tentatives. Réessaie dans 10 minutes.", joinPendingLogin:"Ta demande n'a pas encore été approuvée par le propriétaire.", joinSent:"Demande envoyée ! Le propriétaire doit t'activer avant que tu puisses entrer.", joinFailed:"Impossible d'envoyer la demande. Réessaie.", joinTooMany:"Il y a trop de demandes en attente d'approbation. Parle au propriétaire.", joinNotifTitle:"Nouvelle demande pour rejoindre l'équipe", joinNotifBody:"{name} veut rejoindre l'équipe. Active-le dans Salon, onglet Barbiers.", slotTaken:"Ce créneau vient d'être pris. Choisis-en un autre.", bookingFailed:"Impossible de réserver. Réessaie.", tooManyBookings:"Tu as déjà trop de rendez-vous actifs dans ce salon.", sessionExpired:"Ta session est terminée. Reconnecte-toi avec ton code.",
       loadingText:"CHARGEMENT...", shopNotFoundTitle:"Salon introuvable", shopNotFoundBody:"Le lien que tu as utilisé ne correspond à aucun salon enregistré.", goToOwnerPortal:"Aller au Portail Propriétaire", ownerQuickEnter:"Se connecter avec biométrie ou PIN", ownerQuickEnterPin:"Se connecter avec PIN",
       chatBtn:"💬 Messages", chatTitle:"Chat", chatEmpty:"Pas encore de messages. Dis bonjour !", chatPlaceholder:"Écris un message…",
       chatWithBarberCta:"💬 Parler au barbier", chatPickBarber:"Choisis avec qui parler", chatNoBarbers:"Tu n'as pas encore de réservation avec un barbier.",
@@ -562,6 +566,7 @@ const LANGS = {
       helpLink:"Hilfe", helpTitle:"Hilfe", helpQ1:"Ich habe die Wiederherstellungs-E-Mail nicht erhalten", helpA1:"Prüfe auch deinen Spam- oder Junk-Ordner. Wenn die E-Mail nach einigen Minuten nicht ankommt, tippe auf „Passwort vergessen“ und prüfe, ob du die E-Mail-Adresse des Kontos richtig eingegeben hast.", helpQ2:"Der Link in der E-Mail ist nicht mehr gültig", helpA2:"Fordere einen neuen Link an: Tippe auf dem Anmeldebildschirm auf „Passwort vergessen“ und gib deine E-Mail noch einmal ein.", helpQ3:"Passwort vergessen", helpA3:"1. Tippe auf „Passwort vergessen“.\n2. Gib die E-Mail des Kontos ein und tippe auf „Link senden“.\n3. Öffne die E-Mail und wähle ein neues Passwort (mindestens 6 Zeichen).\n4. Melde dich mit dem neuen Passwort an.", helpQ4:"Wie melde ich mich an, ohne E-Mail und Passwort einzutippen?", helpA4:"Nachdem du dich auf diesem Gerät einmal mit E-Mail und Passwort angemeldet hast, erscheint die Schaltfläche „Mit Biometrie oder PIN anmelden“. Wenn auf dem Gerät keine Biometrie gespeichert ist, erscheint stattdessen „Mit PIN anmelden“.",
       logoLabel:"Logo des Salons", chooseLogo:"Logo wählen", changeLogo:"Logo ändern", removeLogo:"Logo entfernen", logoHint:"Wird im Inhaber-Portal auf Geräten angezeigt, auf denen du dich bereits angemeldet hast.",
       skipPayBtn:"Ohne Zahlung abschließen", serviceToConfirm:"Leistung zu bestätigen", servicesToConfirm:"Leistungen zu bestätigen", overdueHint:"Zahlung bestätigen oder als nicht erschienen markieren.",
+      tooManyTries:"Zu viele Versuche. Versuche es in 10 Minuten erneut.", joinPendingLogin:"Deine Anfrage wurde vom Inhaber noch nicht genehmigt.", joinSent:"Anfrage gesendet! Der Inhaber muss dich freischalten, bevor du dich anmelden kannst.", joinFailed:"Die Anfrage konnte nicht gesendet werden. Versuche es erneut.", joinTooMany:"Es warten zu viele Anfragen auf Genehmigung. Sprich mit dem Inhaber.", joinNotifTitle:"Neue Anfrage zum Beitritt zum Team", joinNotifBody:"{name} möchte dem Team beitreten. Schalte die Person im Salon auf dem Tab Barbiere frei.", slotTaken:"Dieser Termin wurde gerade vergeben. Wähle einen anderen.", bookingFailed:"Die Buchung war nicht möglich. Versuche es erneut.", tooManyBookings:"Du hast bereits zu viele aktive Termine in diesem Salon.", sessionExpired:"Deine Sitzung ist beendet. Melde dich erneut mit deinem Code an.",
       loadingText:"WIRD GELADEN...", shopNotFoundTitle:"Salon nicht gefunden", shopNotFoundBody:"Der verwendete Link entspricht keinem registrierten Salon.", goToOwnerPortal:"Zum Inhaber-Portal", ownerQuickEnter:"Mit Biometrie oder PIN anmelden", ownerQuickEnterPin:"Mit PIN anmelden",
       chatBtn:"💬 Nachrichten", chatTitle:"Chat", chatEmpty:"Noch keine Nachrichten. Sag Hallo!", chatPlaceholder:"Nachricht schreiben…",
       chatWithBarberCta:"💬 Mit dem Barbier schreiben", chatPickBarber:"Wähle, mit wem du sprichst", chatNoBarbers:"Du hast noch keine Termine bei einem Barbier.",
@@ -898,6 +903,15 @@ const SERVICE_NAME_TRANSLATIONS = {
   "Degradê":           {pt:"Degradê",en:"Fade",es:"Degradado",fr:"Dégradé",de:"Fade Cut"},
   "Tratamento Capilar":{pt:"Tratamento Capilar",en:"Hair Treatment",es:"Tratamiento Capilar",fr:"Soin Capillaire",de:"Haarbehandlung"},
 };
+// ── Bilhete de sessão do barbeiro/proprietário (guardado neste aparelho) ──
+const tokKey=slug=>`lc84_token_${slug}`;
+const lockKey=slug=>`lc84_locked_${slug}`;
+const getTok=slug=>{try{return localStorage.getItem(tokKey(slug))||"";}catch{return "";}};
+const setTok=(slug,t)=>{try{localStorage.setItem(tokKey(slug),t);localStorage.removeItem(lockKey(slug));}catch{/* sem armazenamento */}};
+const lockTok=slug=>{try{localStorage.setItem(lockKey(slug),"1");}catch{/* sem armazenamento */}};
+const dropTok=slug=>{try{localStorage.removeItem(tokKey(slug));localStorage.removeItem(lockKey(slug));}catch{/* sem armazenamento */}};
+const isLocked=slug=>{try{return localStorage.getItem(lockKey(slug))==="1";}catch{return false;}};
+
 const GRACE_MIN=60; // minutos de folga antes de um serviço contar como "esquecido"
 // Serviço "esquecido": marcação ainda como "confirmado" (nem concluída, nem falta, nem cancelada),
 // sem pagamento, cuja hora de fim (início + duração do serviço) já passou.
@@ -2290,7 +2304,7 @@ function BProfile({barber,setBarbers,shopId,onLogout,lang}){
 // ══════════════════════════════════════════════════════════════════════════════
 // ADMIN + CLIENT (simplified but complete)
 // ══════════════════════════════════════════════════════════════════════════════
-function AdminPanel({bookings,setBookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded,barber}){
+function AdminPanel({pinInUse,bookings,setBookings,barbers,setBarbers,services,setServices,shop,setShop,shopId,mySlug,onLogout,lang,embedded,barber}){
   const L=LANGS[lang].t;
   const [tab,setTab]=useState("overview");
   const [modal,setModal]=useState(null);
@@ -2309,7 +2323,19 @@ function AdminPanel({bookings,setBookings,barbers,setBarbers,services,setService
   const totalRev=bookings.filter(b=>b.paid).reduce((s,b)=>s+(svc(b.serviceId)?.price||0),0);
   const todayAll=bookings.filter(b=>b.date===TODAY&&!b.blocked);
   const openAddBarber=()=>{setBf({id:null,name:"",role:"Barbeiro",pin:"",phone:"",bio:"",avatar:"",color:T.gold,photoUrl:"",schedule:{workDays:[1,2,3,4,5],startHour:"09:00",endHour:"18:00",breakStart:"",breakEnd:""},active:true});setModal("barber");};
-  const saveBarber=()=>{if(!bf.name.trim()||!bf.pin.trim())return;if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?bf:b));else setBarbers(p=>[...p,{...bf,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);setModal(null);};
+  const [pinTaken,setPinTaken]=useState(false);
+  const saveBarber=async()=>{
+    const pinTxt=(bf.pin||"").trim();
+    if(!bf.name.trim())return;
+    if(!bf.id&&!pinTxt)return;                      // um barbeiro novo precisa de PIN; ao editar, em branco = manter
+    if(pinTxt&&pinInUse&&await pinInUse(pinTxt,bf.id)){setPinTaken(true);return;}
+    const clean={...bf};
+    delete clean.__lastOwnerErr;
+    if(pinTxt)clean.pin=pinTxt;else delete clean.pin;
+    if(bf.id)setBarbers(p=>p.map(b=>b.id===bf.id?{...b,...clean}:b));
+    else setBarbers(p=>[...p,{...clean,id:mkId(),avatar:bf.name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase()}]);
+    setModal(null);
+  };
   const [barberPhotoBusy,setBarberPhotoBusy]=useState(false);
   const [barberPhotoErr,setBarberPhotoErr]=useState("");
   const uploadBarberPhoto=async(file)=>{
@@ -2580,7 +2606,7 @@ function AdminPanel({bookings,setBookings,barbers,setBarbers,services,setService
               {barberPhotoErr&&<div style={{color:T.red,fontSize:"0.7rem",marginTop:6}}>{barberPhotoErr}</div>}
             </div>
             {[[L.nameLabel,"name","text"],[L.role,"role","text"],[L.phone,"phone","tel"],[L.pinLabel,"pin","text"]].map(([l,k,t])=>(
-              <div key={k} style={{marginBottom:10}}><Lbl>{l}</Lbl><Inp type={t} value={bf[k]||""} onChange={e=>setBf(p=>({...p,[k]:e.target.value}))}/></div>
+              <div key={k} style={{marginBottom:10}}><Lbl>{l}</Lbl><Inp type={t} value={bf[k]||""} placeholder={k==="pin"&&bf.id?L.keepPin:undefined} onChange={e=>{if(k==="pin")setPinTaken(false);setBf(p=>({...p,[k]:e.target.value}));}}/>{k==="pin"&&pinTaken&&<div style={{color:T.red,fontSize:"0.7rem",marginTop:4}}>{L.codeInUse}</div>}</div>
             ))}
             <div style={{marginBottom:10}}><Lbl>{L.bio}</Lbl><Txta rows={2} value={bf.bio||""} onChange={e=>setBf(p=>({...p,bio:e.target.value}))}/></div>
             <Lbl style={{marginBottom:7}}>{L.colorLabel}</Lbl>
@@ -2883,7 +2909,7 @@ function BookingCalendarStep({sel,setSel,barber,bookings,freeSlots,worksOnDate,o
     <Btn variant="ghost" style={{width:"100%",marginTop:7}} onClick={onBack}>{L.back}</Btn>
   </>);
 }
-function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotification,lang,onBack}){
+function ClientArea({bookings,setBookings,services,barbers,shop,shopId,slug,refreshPublic,lang,onBack}){
   const L=LANGS[lang].t;
   const [screen,setScreen]=useState("home");
   const [step,setStep]=useState(1);
@@ -2891,6 +2917,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const [done,setDone]=useState(null);
   const [clientPhone,setClientPhone]=useState("");
   const [myBk,setMyBk]=useState([]);
+  const busyRef=useRef(false);
   const [chatPhone,setChatPhone]=useState("");
   const [chatBarbers,setChatBarbers]=useState([]);
   const [chatBarber,setChatBarber]=useState(null);
@@ -2912,9 +2939,10 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
     })();
     return()=>{active=false;};
   },[shopId]);
-  const openChatList=()=>{
+  const openChatList=async()=>{
     if(chatPhone.trim().length<5)return;
-    const ids=[...new Set(bookings.filter(b=>b.phone===chatPhone.trim()).map(b=>b.barberId))];
+    const{data}=await supabase.rpc("get_my_bookings",{p_slug:slug,p_phone:chatPhone.trim()});
+    const ids=[...new Set((Array.isArray(data)?data:[]).map(b=>b.barberId))];
     setChatBarbers(barbers.filter(b=>ids.includes(b.id)));
     setScreen("chatlist");
   };
@@ -2943,23 +2971,42 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
   const barber=barbers.find(b=>b.id===sel.barberId);
   const selSvc=svc(sel.serviceId);
   const hours=barber?getBarberHours(barber):[];
-  const dayBk=sel.date&&sel.barberId?bookings.filter(b=>b.barberId===sel.barberId&&b.date===sel.date):[];
+  const dayBk=sel.date&&sel.barberId?bookings.filter(b=>b.barberId===sel.barberId&&b.date===sel.date&&b.status!=="cancelado"):[];
   const selDuration=selSvc?.duration||30;
   const freeSlots=hours.filter(h=>!dayBk.find(b=>slotsOverlap(h,selDuration,b.time,svc(b.serviceId)?.duration||30)));
   const worksOnDate=barber&&sel.date?barberWorksOnDate(barber,sel.date):true;
-  const confirm=()=>{
-    const b={id:mkId(),barberId:sel.barberId,date:sel.date,time:sel.time,serviceId:sel.serviceId,name:sel.name,phone:sel.phone.trim(),status:"confirmado",paid:false,payMethod:"",notes:"",blocked:false};
-    setBookings(p=>[...p,b]);setMyBk(p=>[...p,b]);setDone(b);
-    addNotification(sel.barberId,"new","Nova marcação",`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,{type:"client",key:sel.phone.trim()||sel.name});
-    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone.trim()||sel.name,title:"Nova marcação",text:`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`,type:"booking"}}).catch(()=>{});
+  const confirm=async()=>{
+    if(busyRef.current)return;
+    busyRef.current=true;
+    const title="Nova marcação";
+    const text=`${sel.name} marcou ${svcName(selSvc,lang)} para ${dateLabel(sel.date,lang)} às ${sel.time}h.`;
+    const{data,error}=await supabase.rpc("create_booking",{p_slug:slug,p_barber_id:sel.barberId,p_service_id:sel.serviceId,p_date:sel.date,p_time:sel.time,p_name:sel.name,p_phone:sel.phone.trim(),p_notif_title:title,p_notif_body:text});
+    busyRef.current=false;
+    if(error||!data){
+      const m=(error&&error.message)||"";
+      alert(/hora_ocupada|barbeiro_nao_trabalha|fora_do_horario/.test(m)?L.slotTaken:/demasiadas_marcacoes/.test(m)?L.tooManyBookings:L.bookingFailed);
+      if(/hora_ocupada/.test(m)){if(refreshPublic)refreshPublic();setStep(3);}
+      return;
+    }
+    setBookings(p=>[...p,{id:data.id,barberId:data.barberId,date:data.date,time:data.time,serviceId:data.serviceId,status:data.status,blocked:false}]);
+    setMyBk(p=>[...p,data]);setDone(data);
+    setScreen("success");supabase.functions.invoke("send-push",{body:{sender:"client",shop_id:shopId,barber_id:sel.barberId,client_key:sel.phone.trim()||sel.name,title,text,type:"booking"}}).catch(()=>{});
   };
-  const cancel=id=>{
-    const b=bookings.find(b=>b.id===id);
-    setBookings(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
-    setMyBk(p=>p.map(b=>b.id===id?{...b,status:"cancelado"}:b));
-    if(b)addNotification(b.barberId,"cancel",L.notifCancelTitle,L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time),{type:"client",key:b.phone||b.name});
+  const cancel=async id=>{
+    const b=myBk.find(x=>x.id===id);
+    if(!b)return;
+    const body=L.notifCancelBody.replace("{name}",b.name).replace("{date}",dateLabel(b.date,lang)).replace("{time}",b.time);
+    const{data,error}=await supabase.rpc("cancel_booking",{p_slug:slug,p_booking_id:id,p_phone:(b.phone||"").trim(),p_notif_title:L.notifCancelTitle,p_notif_body:body});
+    if(error||!data){alert(L.bookingFailed);return;}
+    setBookings(p=>p.map(x=>x.id===id?{...x,status:"cancelado"}:x));
+    setMyBk(p=>p.map(x=>x.id===id?{...x,status:"cancelado"}:x));
   };
-  const lookup=()=>{if(clientPhone.trim().length<5)return;setMyBk(bookings.filter(b=>b.phone===clientPhone.trim()));setScreen("mybookings");};
+  const lookup=async()=>{
+    const ph=clientPhone.trim();
+    if(ph.length<5)return;
+    const{data}=await supabase.rpc("get_my_bookings",{p_slug:slug,p_phone:ph});
+    setMyBk(Array.isArray(data)?data:[]);setScreen("mybookings");
+  };
   const reset=()=>{setSel({barberId:"",serviceId:"",date:"",time:"",name:"",phone:""});setStep(1);setDone(null);setScreen("home");};
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",fontFamily:"'Cormorant Garamond',Georgia,serif",color:T.light}}>
@@ -3089,8 +3136,7 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
       </main>
       {chatBarber&&(
         <Modal onClose={()=>setChatBarber(null)} title={`${L.chatTitle} · ${chatBarber.name}`}>
-          <ChatThread shopId={shopId} barberId={chatBarber.id} clientKey={chatPhone.trim()} sender="client" lang={lang}
-            onSent={msg=>addNotification(chatBarber.id,"message",L.notifNewMsgTitle,L.notifNewMsgBody.replace("{name}",clientProfile?.name||bookings.find(b=>b.phone===chatPhone.trim())?.name||chatPhone.trim()),{type:"chat",key:chatPhone.trim()})}/>
+          <ChatThread shopId={shopId} barberId={chatBarber.id} clientKey={chatPhone.trim()} sender="client" lang={lang}/>
         </Modal>
       )}
       {profilePromptBarber&&(
@@ -3107,27 +3153,37 @@ function ClientArea({bookings,setBookings,services,barbers,shop,shopId,addNotifi
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGIN + ENTRY
 // ══════════════════════════════════════════════════════════════════════════════
-function LoginScreen({barbers,setBarbers,shop,shopId,onBarberLogin,onAdminLogin,onBack,lang}){
+function LoginScreen({onPinLogin,onJoinRequest,onBack,lang}){
   const L=LANGS[lang].t;
   const [pin,setPin]=useState(""),[ err,setErr]=useState(false),[show,setShow]=useState(false);
   const [joinMode,setJoinMode]=useState(false);
   const [ownerErr,setOwnerErr]=useState(false);
   const [jName,setJName]=useState(""),[jPin,setJPin]=useState(""),[jPhone,setJPhone]=useState(""),[jErr,setJErr]=useState("");
-  const attempt=()=>{
-    // O PIN de um Proprietário só vale num aparelho onde ele já entrou pela Área do Proprietário (email+password).
-    const trusted=(ownerId)=>{try{return shopId&&(String(localStorage.getItem(`lc84_owner_device_${shopId}`))===String(ownerId)||String(localStorage.getItem(`lc84_barber_session_${shopId}`))===String(ownerId));}catch(e){return false;}};
-    const ownerB=barbers.find(b=>b.isOwner&&b.active!==false&&b.pin===pin);
-    if(ownerB){if(trusted(ownerB.id)){onBarberLogin(ownerB);return;}setPin("");setOwnerErr(true);return;}
-    if(shop.adminPin&&pin===shop.adminPin){const ownerAny=barbers.find(b=>b.isOwner&&b.active!==false);if(ownerAny&&trusted(ownerAny.id)){onAdminLogin();return;}setPin("");setOwnerErr(true);return;}
-    const b=barbers.find(b=>b.pin===pin&&b.active);if(b)onBarberLogin(b);else{setErr(true);setPin("");setTimeout(()=>setErr(false),1500);}};
-  const join=()=>{
+  const [busy,setBusy]=useState(false),[lockErr,setLockErr]=useState(false),[pendErr,setPendErr]=useState(false),[sentOk,setSentOk]=useState(false);
+  const attempt=async()=>{
+    if(busy||!pin)return;
+    setBusy(true);
+    const r=await onPinLogin(pin);
+    setBusy(false);
+    if(r&&r.ok)return;
+    setPin("");
+    const e=r&&r.error;
+    if(e==="owner_device"){setOwnerErr(true);return;}
+    if(e==="demasiadas_tentativas"){setLockErr(true);return;}
+    if(e==="pendente"){setPendErr(true);return;}
+    setErr(true);setTimeout(()=>setErr(false),1500);
+  };
+  const join=async()=>{
+    if(busy)return;
     setJErr("");
     if(!jName.trim()){setJErr(L.writeYourName);return;}
     if(!/^\d{4,6}$/.test(jPin)){setJErr(L.codeLength);return;}
-    if(jPin===shop.adminPin||barbers.find(b=>b.pin===jPin)){setJErr(L.codeInUse);return;}
-    const nb={id:mkId(),name:jName.trim(),role:"Barbeiro",pin:jPin,phone:jPhone||"",bio:"",avatar:jName.trim().split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase(),color:"#b8955a",schedule:{workDays:[1,2,3,4,5,6],startHour:"09:00",endHour:"19:00",breakStart:"",breakEnd:""},active:true};
-    setBarbers(p=>[...p,nb]);
-    onBarberLogin(nb);
+    setBusy(true);
+    const r=await onJoinRequest(jName.trim(),jPhone.trim(),jPin);
+    setBusy(false);
+    if(r&&r.ok){setSentOk(true);return;}
+    const e=r&&r.error;
+    setJErr(e==="pin_em_uso"?L.codeInUse:e==="demasiados_pedidos"?L.joinTooMany:L.joinFailed);
   };
   return(
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Cormorant Garamond',Georgia,serif"}}>
@@ -3143,11 +3199,13 @@ function LoginScreen({barbers,setBarbers,shop,shopId,onBarberLogin,onAdminLogin,
         <div style={{width:"100%",maxWidth:290}}>
           <Lbl style={{textAlign:"center",marginBottom:12}}>{L.accessCode}</Lbl>
           <div style={{position:"relative",marginBottom:12}}>
-            <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>{setPin(e.target.value);setOwnerErr(false);}} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
+            <Inp type={show?"text":"password"} placeholder="••••" value={pin} onChange={e=>{setPin(e.target.value);setOwnerErr(false);setLockErr(false);setPendErr(false);}} onKeyDown={e=>e.key==="Enter"&&attempt()} style={{textAlign:"center",fontSize:"1.35rem",letterSpacing:"0.4em",borderColor:err?T.red:T.border}}/>
             <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:9,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:T.silver,cursor:"pointer",fontSize:"0.7rem"}}>{show?L.hide:L.show}</button>
           </div>
           {err&&<div style={{textAlign:"center",color:T.red,fontSize:"0.76rem",marginBottom:9}}>{L.wrongPin}</div>}
           {ownerErr&&<div style={{color:T.red,fontSize:"0.72rem",textAlign:"center",marginBottom:12,lineHeight:1.5}}>{L.ownerUsePortal}</div>}
+          {lockErr&&<div style={{color:T.red,fontSize:"0.72rem",textAlign:"center",marginBottom:12,lineHeight:1.5}}>{L.tooManyTries}</div>}
+          {pendErr&&<div style={{color:T.gold,fontSize:"0.72rem",textAlign:"center",marginBottom:12,lineHeight:1.5}}>{L.joinPendingLogin}</div>}
           <Btn variant="gold" style={{width:"100%",marginBottom:13}} onClick={attempt}>{L.enter}</Btn>
           <div style={{textAlign:"center"}}>
             <button onClick={()=>setJoinMode(true)} style={{background:"none",border:"none",color:T.silver,fontSize:"0.72rem",cursor:"pointer",textDecoration:"underline"}}>{L.joinAsNew}</button>
@@ -3155,6 +3213,11 @@ function LoginScreen({barbers,setBarbers,shop,shopId,onBarberLogin,onAdminLogin,
           <div style={{textAlign:"center",marginTop:18}}>
             <button onClick={()=>{window.location.href=`${window.location.origin}${window.location.pathname}?dono=1`;}} style={{background:"none",border:"none",color:T.silver,fontSize:"0.68rem",cursor:"pointer",textDecoration:"underline",opacity:0.7}}>{L.goToOwnerPortal}</button>
           </div>
+        </div>
+      ):sentOk?(
+        <div style={{width:"100%",maxWidth:290,textAlign:"center"}}>
+          <div style={{color:T.gold,fontSize:"0.9rem",lineHeight:1.6,marginBottom:18}}>{L.joinSent}</div>
+          <Btn variant="gold" style={{width:"100%"}} onClick={()=>{setJoinMode(false);setSentOk(false);setJName("");setJPin("");setJPhone("");}}>{L.alreadyHaveCode}</Btn>
         </div>
       ):(
         <div style={{width:"100%",maxWidth:290}}>
@@ -3751,6 +3814,38 @@ const [notifications,setNotifications] = useState([]);
   const [activeBarber,setActiveBarber]   = useState(null);
   const [bScreen,setBScreen]             = useState("dashboard");
   const [viewBarberId,setViewBarberId]   = useState(null); // Proprietário: barbeiro cuja Agenda/Relatórios está a ver
+  const [token,setToken]                  = useState("");   // bilhete de sessão de quem entrou com PIN
+  const [staffLoaded,setStaffLoaded]      = useState(false); // a loja completa já foi carregada com o bilhete
+  const loadedAtRef=useRef(null);        // hora (do servidor) a que a loja completa foi carregada/gravada pela última vez
+  const skipSaveRef=useRef(false);       // não voltar a gravar o que acabou de vir do servidor
+  const pendingAutoRef=useRef(null);     // entrada automática com a sessão guardada
+
+  // Aplica a loja completa devolvida pelo servidor (só quem tem bilhete a recebe).
+  const applyFull=(res)=>{
+    const d=res.data||{};
+    skipSaveRef.current=true;
+    setBarbers(ensureOwner(d.barbers||INIT_BARBERS));
+    setServices(d.services||INIT_SERVICES);
+    setShop(d.shop||INIT_SHOP);
+    setBookings(d.bookings||[]);
+    setNotifications(d.notifications||[]);
+    setClientNotes(d.clientNotes||{});
+    setCutRecords(d.cutRecords||{});
+    setPurchaseHistory(d.purchaseHistory||{});
+    setManualClients(d.manualClients||{});
+    loadedAtRef.current=res.loadedAt;
+    setStaffLoaded(true);
+  };
+  // A "montra": o que qualquer pessoa pode ver (serviços, barbeiros sem PIN, horas ocupadas).
+  const loadPublic=async(slug)=>{
+    const{data:pub}=await supabase.rpc("get_public_shop",{p_slug:slug});
+    if(!pub)return;
+    setBarbers(ensureOwner(pub.barbers&&pub.barbers.length?pub.barbers:INIT_BARBERS));
+    setServices(pub.services&&pub.services.length?pub.services:INIT_SERVICES);
+    setShop(pub.shop&&Object.keys(pub.shop).length?pub.shop:INIT_SHOP);
+    setBookings(pub.occupied||[]);
+    setNotifications([]);setClientNotes({});setCutRecords({});setPurchaseHistory({});setManualClients({});
+  };
   const [dataLoaded,setDataLoaded]       = useState(false);
   const [shopId,setShopId]               = useState(null);
   const [mySlug,setMySlug] = useState("");
@@ -3793,29 +3888,26 @@ const [notifications,setNotifications] = useState([]);
         return;
       }
       localStorage.setItem("lc84_last_shop",slug);
-      const{data,error}=await supabase.from("shops").select("id,data").eq("slug",slug).maybeSingle();
-      if(error||!data){
+      const{data:pub,error}=await supabase.rpc("get_public_shop",{p_slug:slug});
+      if(error||!pub){
         if(error)console.error("Erro a carregar:",error);
         setShopNotFound(true);
         setDataLoaded(true);
         return;
       }
-      const d=data.data||{};
-      setShopId(data.id);
-      if(!d||Object.keys(d).length===0){
-        setBarbers(ensureOwner(INIT_BARBERS));setServices(INIT_SERVICES);setShop(INIT_SHOP);
-        setBookings(seedBookings(INIT_BARBERS));setNotifications(seedNotifications(INIT_BARBERS,lang));
-        setClientNotes(INIT_CLIENT_NOTES);setCutRecords({});setPurchaseHistory({});
-      } else {
-        setBarbers(ensureOwner(d.barbers||INIT_BARBERS));
-        setServices(d.services||INIT_SERVICES);
-        setShop(d.shop||INIT_SHOP);
-        setBookings(d.bookings||[]);
-        setNotifications(d.notifications||[]);
-        setClientNotes(d.clientNotes||{});
-        setCutRecords(d.cutRecords||{});
-        setPurchaseHistory(d.purchaseHistory||{});
-        setManualClients(d.manualClients||{});
+      setShopId(pub.id);
+      setBarbers(ensureOwner(pub.barbers&&pub.barbers.length?pub.barbers:INIT_BARBERS));
+      setServices(pub.services&&pub.services.length?pub.services:INIT_SERVICES);
+      setShop(pub.shop&&Object.keys(pub.shop).length?pub.shop:INIT_SHOP);
+      setBookings(pub.occupied||[]);
+      // Sessão guardada neste aparelho (quem não terminou sessão entra direto).
+      const tk=getTok(slug);
+      if(tk&&!isLocked(slug)){
+        const{data:f}=await supabase.rpc("get_shop_full",{p_token:tk});
+        if(f&&f.ok){
+          setToken(tk);applyFull(f);
+          if(params.get("entrar")!=="pin")pendingAutoRef.current={barberId:f.barberId,role:f.role};
+        }else if(f&&f.error==="sessao_invalida"){dropTok(slug);}
       }
       setDataLoaded(true);
     })();
@@ -3833,18 +3925,8 @@ const [notifications,setNotifications] = useState([]);
     return()=>unsub&&unsub();
   },[]);
 
-  useEffect(()=>{
-    if(!dataLoaded||!shopId)return;
-    const t=setTimeout(()=>{
-      supabase.from("shops").update({
-        data:{barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients},
-        updated_at:new Date().toISOString(),
-      }).eq("id",shopId).then(({error})=>{if(error)console.error("Erro a guardar:",error);});
-    },800);
-    return()=>clearTimeout(t);
-  },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients,dataLoaded,shopId]);
 
-  const onBarberLogin=(b)=>{
+  const onBarberLogin=(b,bkList=bookings)=>{
     setActiveBarber(b);setRole("barber");
     if(shopId)localStorage.setItem(`lc84_barber_session_${shopId}`,b.id);
     // Proprietário: marca este aparelho como autorizado (para o botão "Entrar com biometria ou PIN" da Área do Proprietário).
@@ -3860,9 +3942,9 @@ const [notifications,setNotifications] = useState([]);
     }else{
       setBScreen("dashboard");
     }
-    const todayCount=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
+    const todayCount=bkList.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).length;
     if(todayCount>0){
-      const first=bookings.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
+      const first=bkList.filter(bk=>bk.barberId===b.id&&bk.date===TODAY&&!bk.blocked).sort((a,bb)=>a.time.localeCompare(bb.time))[0];
       setNotifications(p=>[{id:mkId(),barberId:b.id,type:"reminder",title:LANGS[lang].t.notifGoodMorning.replace("{name}",b.name.split(" ")[0]),body:LANGS[lang].t.notifTodaySummary.replace("{n}",todayCount).replace("{time}",first?.time),ts:Date.now(),read:false},...p]);
     }
   };
@@ -3870,11 +3952,94 @@ const [notifications,setNotifications] = useState([]);
   // Terminar sessão (um só sítio, usado por todos os botões "Terminar sessão"):
   // apaga a sessão guardada, para a app não voltar a entrar sozinha.
   const logoutBarber=()=>{
-    try{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);}catch(e){}
+    try{if(shopId)localStorage.removeItem(`lc84_barber_session_${shopId}`);}catch{/* sem armazenamento */}
+    // O bilhete fica guardado, mas "trancado": só a impressão digital ou o PIN o voltam a abrir.
+    if(mySlug)lockTok(mySlug);
+    setToken("");setStaffLoaded(false);
     setActiveBarber(null);
     setViewBarberId(null);
     setRole("entry");
+    if(mySlug)loadPublic(mySlug);   // volta a ficar só com o que qualquer pessoa pode ver
   };
+
+  // Entrar com PIN: o servidor verifica e devolve um bilhete; com ele carregamos a loja completa.
+  const pinLogin=async(pinTxt)=>{
+    const slug=mySlug;
+    const{data:r,error}=await supabase.rpc("login_with_pin",{p_slug:slug,p_pin:pinTxt});
+    if(error||!r)return{ok:false,error:"erro"};
+    if(!r.ok)return r;
+    // O PIN de um Proprietário só vale num aparelho onde ele já entrou pela Área do Proprietário (email+password).
+    const trusted=(ownerId)=>{try{return shopId&&(String(localStorage.getItem(`lc84_owner_device_${shopId}`))===String(ownerId)||String(localStorage.getItem(`lc84_barber_session_${shopId}`))===String(ownerId));}catch{return false;}};
+    let okDevice=true;
+    if(r.role==="owner")okDevice=trusted(r.barberId);
+    if(r.role==="admin"){const ownerAny=barbers.find(b=>b.isOwner&&b.active!==false);okDevice=!!(ownerAny&&trusted(ownerAny.id));}
+    if(!okDevice){await supabase.rpc("logout_session",{p_token:r.token});return{ok:false,error:"owner_device"};}
+    const{data:f}=await supabase.rpc("get_shop_full",{p_token:r.token});
+    if(!f||!f.ok)return{ok:false,error:"erro"};
+    setTok(slug,r.token);setToken(r.token);applyFull(f);
+    if(r.role==="admin"){setRole("admin");return{ok:true};}
+    const b=(f.data.barbers||[]).find(x=>String(x.id)===String(r.barberId));
+    if(!b)return{ok:false,error:"erro"};
+    onBarberLogin(b,f.data.bookings||[]);
+    return{ok:true};
+  };
+
+  // Pedido para entrar na equipa: fica por aprovar até o Proprietário ativar o barbeiro.
+  const joinRequest=async(name,phone,pinTxt)=>{
+    const T2=LANGS[lang].t;
+    const{data:r,error}=await supabase.rpc("join_team",{p_slug:mySlug,p_name:name,p_phone:phone,p_pin:pinTxt,p_notif_title:T2.joinNotifTitle,p_notif_body:T2.joinNotifBody.replace("{name}",name)});
+    if(error||!r)return{ok:false,error:"erro"};
+    return r;
+  };
+
+  // "Este PIN já está em uso?" — o Proprietário pergunta ao servidor ao criar/editar barbeiros.
+  const pinInUse=async(pinTxt,exceptId)=>{
+    const{data}=await supabase.rpc("pin_in_use",{p_token:token,p_pin:pinTxt,p_except_barber_id:exceptId||null});
+    return !!data;
+  };
+
+  // Impressão digital: confirma que é a pessoa deste aparelho e abre o bilhete guardado.
+  const enterWithStoredToken=async(barberId)=>{
+    const slug=mySlug;const tk=getTok(slug);
+    if(!tk)return false;
+    const{data:f}=await supabase.rpc("get_shop_full",{p_token:tk});
+    if(!f||!f.ok){if(f&&f.error==="sessao_invalida")dropTok(slug);return false;}
+    if(f.role==="admin"||String(f.barberId)!==String(barberId))return false;
+    const b=(f.data.barbers||[]).find(x=>String(x.id)===String(barberId));
+    if(!b)return false;
+    setTok(slug,tk);setToken(tk);applyFull(f);
+    onBarberLogin(b,f.data.bookings||[]);
+    return true;
+  };
+
+  // Gravar a loja (só com bilhete): o servidor confere quem és e junta o que os clientes fizeram entretanto.
+  useEffect(()=>{
+    if(!dataLoaded||!shopId||!token||!staffLoaded)return;
+    if(skipSaveRef.current){skipSaveRef.current=false;return;}
+    const t=setTimeout(async()=>{
+      const{data:r,error}=await supabase.rpc("save_shop",{p_token:token,p_data:{barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients},p_loaded_at:loadedAtRef.current});
+      if(error){
+        console.error("Erro a guardar:",error);
+        if(/pin_em_uso/.test(error.message||"")){
+          alert(LANGS[lang].t.codeInUse);
+          const{data:f}=await supabase.rpc("get_shop_full",{p_token:token});
+          if(f&&f.ok)applyFull(f);
+        }
+        return;
+      }
+      if(r&&r.ok){
+        loadedAtRef.current=r.loadedAt;
+        if(Array.isArray(r.bookings)&&JSON.stringify(r.bookings)!==JSON.stringify(bookings)){skipSaveRef.current=true;setBookings(r.bookings);}
+        if(Array.isArray(r.notifications)&&JSON.stringify(r.notifications)!==JSON.stringify(notifications)){skipSaveRef.current=true;setNotifications(r.notifications);}
+        if(barbers.some(b=>b.pin)){skipSaveRef.current=true;setBarbers(p=>p.map(b=>{const c={...b};delete c.pin;return c;}));}
+      }else if(r&&r.error==="sessao_invalida"){
+        alert(LANGS[lang].t.sessionExpired);
+        dropTok(mySlug);
+        logoutBarber();
+      }
+    },800);
+    return()=>clearTimeout(t);
+  },[barbers,services,shop,bookings,notifications,clientNotes,cutRecords,purchaseHistory,manualClients,dataLoaded,shopId,token,staffLoaded]);
 
   // Toque em "Sou Barbeiro": se este aparelho tem biometria registada de um
   // único barbeiro, pede a impressão digital logo (o toque dá a autorização ao
@@ -3889,27 +4054,21 @@ const [notifications,setNotifications] = useState([]);
     const cands=barbers.filter(bb=>bb.active!==false&&ids.includes(String(bb.id)));
     if(cands.length!==1){setRole("login");return;}
     const ok=await verifyBiometric(shopId,cands[0].id);
-    if(ok)onBarberLogin(cands[0]); else setRole("login");
+    if(ok&&await enterWithStoredToken(cands[0].id))return;
+    setRole("login");
   };
 
-  // Sessão persistente: se este aparelho já tinha um barbeiro com sessão aberta
-  // nesta loja (e ninguém terminou sessão), entra direto ao abrir a app, sem
-  // pedir PIN nem impressão digital. Só corre UMA vez, ao abrir a app —
-  // voltar ao ecrã inicial depois disso mostra sempre o ecrã inicial.
-  // (Tem de ficar aqui, antes de qualquer "return" condicional da função,
-  // para não violar a ordem fixa dos hooks do React.)
-  const autoEntryDone=useRef(false);
+  // Sessão persistente: se este aparelho tem um bilhete válido e ninguém terminou sessão,
+  // entra direto ao abrir a app, sem pedir PIN nem impressão digital.
   useEffect(()=>{
-    if(!dataLoaded||!shopId||role!=="entry"||autoEntryDone.current)return;
-    autoEntryDone.current=true;
-    // Vindo do botão "Entrar com biometria ou PIN" da Área do Proprietário: esse caminho trata de tudo.
-    try{if(new URLSearchParams(window.location.search).get("entrar")==="pin")return;}catch(e){}
-    const savedId=localStorage.getItem(`lc84_barber_session_${shopId}`);
-    if(!savedId)return;
-    const b=barbers.find(bb=>String(bb.id)===String(savedId)&&bb.active);
-    if(!b)return;
-    setTimeout(()=>onBarberLogin(b),0);
-  },[dataLoaded,shopId,barbers,role]);
+    if(!dataLoaded||!shopId||role!=="entry"||!staffLoaded)return;
+    const p=pendingAutoRef.current;
+    if(!p)return;
+    pendingAutoRef.current=null;
+    if(p.role==="admin"){setTimeout(()=>setRole("admin"),0);return;}
+    const b=barbers.find(bb=>String(bb.id)===String(p.barberId)&&bb.active!==false);
+    if(b)setTimeout(()=>onBarberLogin(b),0);
+  },[dataLoaded,shopId,staffLoaded,barbers,role]);
 
   // Quando é um Proprietário a usar a app, guarda neste aparelho o logótipo da barbearia,
   // para a Área do Proprietário o mostrar logo à entrada (antes de fazer login).
@@ -3946,7 +4105,7 @@ const [notifications,setNotifications] = useState([]);
     const ok=await verifyBiometric(shopId,b.id);
     if(ok){
       setBiometricPending(null);
-      onBarberLogin(b);
+      if(!(await enterWithStoredToken(b.id)))setRole("login");
     }else{
       setBiometricPending(null);
       setRole("login"); // falhou/cancelou -> ecrã de PIN normal, como reserva
@@ -4024,9 +4183,9 @@ const [notifications,setNotifications] = useState([]);
   }
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={startBarberEntry} lang={lang} setLang={setLang}/>;
-  if(role==="login")  return <LoginScreen barbers={barbers} setBarbers={setBarbers} shop={shop} shopId={shopId} onBarberLogin={onBarberLogin} onAdminLogin={()=>setRole("admin")} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} addNotification={addNotification} onBack={()=>setRole("entry")} lang={lang}/>;
-  if(role==="admin")  return <AdminPanel bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
+  if(role==="login")  return <LoginScreen onPinLogin={pinLogin} onJoinRequest={joinRequest} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} slug={mySlug} refreshPublic={()=>loadPublic(mySlug)} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="admin")  return <AdminPanel pinInUse={pinInUse} bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
 
   // Trial expired — block barber access
   if(role==="barber" && trialExpired) return <ExpiredScreen onSubscribe={()=>setShowSub(true)} lang={lang}/>;
@@ -4103,7 +4262,7 @@ const [notifications,setNotifications] = useState([]);
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={viewedBarber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={logoutBarber} lang={lang}/>}
-        {bScreen==="shop"&&barber.isOwner&&<AdminPanel bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
+        {bScreen==="shop"&&barber.isOwner&&<AdminPanel pinInUse={pinInUse} bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang} embedded barber={barber}/>}
       </main>
     </div>
   );
