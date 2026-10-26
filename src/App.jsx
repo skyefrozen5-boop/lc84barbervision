@@ -687,8 +687,8 @@ async function generateUniqueSlug(base){
   let attempt = slug;
   let n = 2;
   while(true){
-    const {data} = await supabase.from("shops").select("id").eq("slug",attempt).maybeSingle();
-    if(!data) return attempt;
+    const {data:taken} = await supabase.rpc("shop_slug_taken",{p_slug:attempt});
+    if(taken!==true) return attempt;
     attempt = `${slug}-${n}`;
     n++;
   }
@@ -3536,15 +3536,13 @@ function OwnerPortal({lang,setLang}){
     setErr("");
     if(!email||!pass){setErr(L.fillEmailPass);return;}
     setBusy(true);
-    const{data,error}=await supabase.rpc("verify_owner_login",{p_email:email.trim(),p_password:pass});
+    const{data,error}=await supabase.rpc("owner_login_info",{p_email:email.trim(),p_password:pass});
     const row=Array.isArray(data)?data[0]:data;
     if(error||!row){setBusy(false);setErr(L.wrongCredentials);return;}
     // A password já prova quem é o proprietário: deixa a sessão dele
     // guardada neste aparelho para entrar direto na loja, sem PIN.
-    const{data:sd}=await supabase.from("shops").select("data").eq("id",row.id).maybeSingle();
-    const list=sd?.data?.barbers||[];
-    const ownerB=list.find(b=>b.isOwner&&b.active!==false);
-    if(ownerB){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerB.id));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerB.id));localStorage.setItem("lc84_owner_slug",row.slug);}
+    const ownerBId=row.owner_barber_id;
+    if(ownerBId){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerBId));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerBId));localStorage.setItem("lc84_owner_slug",row.slug);}
     setBusy(false);
     goToShop(row.slug);
   };
@@ -3584,8 +3582,6 @@ function OwnerPortal({lang,setLang}){
     if(!ownerName||!salonName||!suEmail||!suPass||!suPin){setErr(L.fillAllFields);return;}
     if(!/^\d{4,6}$/.test(suPin)){setErr(L.codeLength);return;}
     setBusy(true);
-    const{data:existing}=await supabase.from("shops").select("id").eq("owner_email",suEmail.trim().toLowerCase()).maybeSingle();
-    if(existing){setBusy(false);setErr(L.shopAlreadyExists);return;}
     const slug=await generateUniqueSlug(salonName);
     const ownerBarberId=mkId();
     const initData={
@@ -3596,15 +3592,15 @@ function OwnerPortal({lang,setLang}){
       notifications:[],
       clientNotes:{},
     };
-    const{data:created,error}=await supabase.from("shops").insert({
-      owner_email:suEmail.trim().toLowerCase(),
-      owner_password:suPass,
-      slug,
-      data:initData,
-    }).select("id").single();
+    const{data:createdId,error}=await supabase.rpc("create_owner_shop",{
+      p_email:suEmail.trim().toLowerCase(),
+      p_password:suPass,
+      p_slug:slug,
+      p_data:initData,
+    });
     setBusy(false);
-    if(error){setErr(L.createShopFailed);return;}
-    if(created?.id){localStorage.setItem(`lc84_barber_session_${created.id}`,ownerBarberId);localStorage.setItem(`lc84_owner_device_${created.id}`,ownerBarberId);localStorage.setItem("lc84_owner_slug",slug);}
+    if(error||!createdId){setErr(String(error?.message||"").includes("email_ja_existe")?L.shopAlreadyExists:L.createShopFailed);return;}
+    if(createdId){localStorage.setItem(`lc84_barber_session_${createdId}`,ownerBarberId);localStorage.setItem(`lc84_owner_device_${createdId}`,ownerBarberId);localStorage.setItem("lc84_owner_slug",slug);}
     goToShop(slug);
   };
 
