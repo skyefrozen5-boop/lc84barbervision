@@ -50,7 +50,7 @@ const LANGS = {
     pay:["Dinheiro","MB Way","Multibanco","Transferência","Outro"],
     t:{
       client:"Sou Cliente", bookCta:"Marcar Corte", clientSub:"Marcar serviços, consultar marcações e ver produtos", myBookingsLabel:"Ver as minhas marcações", phonePlaceholder:"O teu telemóvel", ourTeam:"A nossa equipa", barberLabel:"Barbeiro", priceLabel:"Valor", nameLabel:"Nome", namePlaceholder:"O teu nome", noBookingsFound:"Sem marcações encontradas",
-      barber:"Sou Barbeiro", barberSub:"Gerir agenda, atendimentos e clientes autorizados", ownerBtnSub:"Registar e gerir a minha barbearia",
+      barber:"Colaborador", barberSub:"Gerir agenda, atendimentos e clientes autorizados", ownerBtnSub:"Registar e gerir a minha barbearia",
       platform:"A tua plataforma de barbearia",
       accessCode:"Código de Acesso", enter:"Entrar", wrongPin:"Código incorreto",
       hide:"Ocultar", show:"Ver",
@@ -157,7 +157,7 @@ const LANGS = {
     pay:["Cash","MB Way","Debit Card","Transfer","Other"],
     t:{
       client:"I'm a Client", bookCta:"Book Appointment", clientSub:"Book services, view appointments and browse products", myBookingsLabel:"View My Bookings", phonePlaceholder:"Your phone number", ourTeam:"Our Team", barberLabel:"Barber", priceLabel:"Price", nameLabel:"Name", namePlaceholder:"Your name", noBookingsFound:"No bookings found",
-      barber:"I'm a Barber", barberSub:"Manage schedule, appointments and authorised clients", ownerBtnSub:"Register and manage my barbershop",
+      barber:"Team member", barberSub:"Manage schedule, appointments and authorised clients", ownerBtnSub:"Register and manage my barbershop",
       platform:"Your barbershop platform",
       accessCode:"Access Code", enter:"Enter", wrongPin:"Incorrect code",
       hide:"Hide", show:"Show",
@@ -264,7 +264,7 @@ const LANGS = {
     pay:["Efectivo","MB Way","Tarjeta","Transferencia","Otro"],
     t:{
       client:"Soy Cliente", bookCta:"Reservar Cita", clientSub:"Reservar servicios, consultar citas y ver productos", myBookingsLabel:"Ver Mis Citas", phonePlaceholder:"Su teléfono", ourTeam:"Nuestro Equipo", barberLabel:"Barbero", priceLabel:"Precio", nameLabel:"Nombre", namePlaceholder:"Su nombre", noBookingsFound:"No se encontraron citas",
-      barber:"Soy Barbero", barberSub:"Gestionar agenda, atenciones y clientes autorizados", ownerBtnSub:"Registrar y gestionar mi barbería",
+      barber:"Colaborador", barberSub:"Gestionar agenda, atenciones y clientes autorizados", ownerBtnSub:"Registrar y gestionar mi barbería",
       platform:"Tu plataforma de barbería",
       accessCode:"Código de Acceso", enter:"Entrar", wrongPin:"Código incorrecto",
       hide:"Ocultar", show:"Ver",
@@ -371,7 +371,7 @@ const LANGS = {
     pay:["Espèces","MB Way","Carte","Virement","Autre"],
     t:{
       client:"Je suis Client", bookCta:"Prendre RDV", clientSub:"Réserver des services, consulter mes rendez-vous et voir les produits", myBookingsLabel:"Voir Mes Rendez-vous", phonePlaceholder:"Votre téléphone", ourTeam:"Notre Équipe", barberLabel:"Coiffeur", priceLabel:"Prix", nameLabel:"Nom", namePlaceholder:"Votre nom", noBookingsFound:"Aucun rendez-vous trouvé",
-      barber:"Je suis Barbier", barberSub:"Gérer l'agenda, les prestations et les clients autorisés", ownerBtnSub:"Enregistrer et gérer mon salon",
+      barber:"Collaborateur", barberSub:"Gérer l'agenda, les prestations et les clients autorisés", ownerBtnSub:"Enregistrer et gérer mon salon",
       platform:"Votre plateforme de barbier",
       accessCode:"Code d'Accès", enter:"Entrer", wrongPin:"Code incorrect",
       hide:"Masquer", show:"Voir",
@@ -478,7 +478,7 @@ const LANGS = {
     pay:["Bargeld","MB Way","Karte","Überweisung","Sonstiges"],
     t:{
       client:"Ich bin Kunde", bookCta:"Termin buchen", clientSub:"Leistungen buchen, Termine ansehen und Produkte entdecken", myBookingsLabel:"Meine Termine ansehen", phonePlaceholder:"Ihre Telefonnummer", ourTeam:"Unser Team", barberLabel:"Friseur", priceLabel:"Preis", nameLabel:"Name", namePlaceholder:"Ihr Name", noBookingsFound:"Keine Termine gefunden",
-      barber:"Ich bin Friseur", barberSub:"Kalender, Termine und autorisierte Kunden verwalten", ownerBtnSub:"Meinen Salon registrieren und verwalten",
+      barber:"Mitarbeiter", barberSub:"Kalender, Termine und autorisierte Kunden verwalten", ownerBtnSub:"Meinen Salon registrieren und verwalten",
       platform:"Ihre Barbershop-Plattform",
       accessCode:"Zugangscode", enter:"Einloggen", wrongPin:"Falscher Code",
       hide:"Verbergen", show:"Anzeigen",
@@ -3536,15 +3536,14 @@ function OwnerPortal({lang,setLang}){
     setErr("");
     if(!email||!pass){setErr(L.fillEmailPass);return;}
     setBusy(true);
-    const{data,error}=await supabase.rpc("owner_login_info",{p_email:email.trim(),p_password:pass});
-    const row=Array.isArray(data)?data[0]:data;
-    if(error||!row){setBusy(false);setErr(L.wrongCredentials);return;}
-    // A password já prova quem é o proprietário: deixa a sessão dele
-    // guardada neste aparelho para entrar direto na loja, sem PIN.
-    const ownerBId=row.owner_barber_id;
-    if(ownerBId){localStorage.setItem(`lc84_barber_session_${row.id}`,String(ownerBId));localStorage.setItem(`lc84_owner_device_${row.id}`,String(ownerBId));localStorage.setItem("lc84_owner_slug",row.slug);}
+    const{data:r,error}=await supabase.rpc("owner_login_session",{p_email:email.trim(),p_password:pass});
+    if(error||!r||!r.ok){setBusy(false);setErr(L.wrongCredentials);return;}
+    // A password já prova quem é o proprietário: o servidor devolve o bilhete da sessão dele.
+    // Fica guardado neste aparelho, e a loja abre já dentro da conta (sem passar pelo menu nem pelo PIN).
+    setTok(r.slug,r.token);
+    try{localStorage.setItem(`lc84_barber_session_${r.shopId}`,String(r.barberId));localStorage.setItem(`lc84_owner_device_${r.shopId}`,String(r.barberId));localStorage.setItem("lc84_owner_slug",r.slug);}catch{/* sem armazenamento */}
     setBusy(false);
-    goToShop(row.slug);
+    goToShop(r.slug);
   };
 
   // Botão "Voltar ao início": só aparece se este aparelho já visitou uma barbearia
@@ -3815,6 +3814,7 @@ const [notifications,setNotifications] = useState([]);
   const loadedAtRef=useRef(null);        // hora (do servidor) a que a loja completa foi carregada/gravada pela última vez
   const skipSaveRef=useRef(false);       // não voltar a gravar o que acabou de vir do servidor
   const pendingAutoRef=useRef(null);     // entrada automática com a sessão guardada
+  const viaOwnerRef=useRef(false);       // true só quando o PIN foi aberto pela Área do Proprietário
 
   // Aplica a loja completa devolvida pelo servidor (só quem tem bilhete a recebe).
   const applyFull=(res)=>{
@@ -3964,6 +3964,8 @@ const [notifications,setNotifications] = useState([]);
     const{data:r,error}=await supabase.rpc("login_with_pin",{p_slug:slug,p_pin:pinTxt});
     if(error||!r)return{ok:false,error:"erro"};
     if(!r.ok)return r;
+    // O proprietário entra só pela Área do Proprietário: pelo ecrã de Colaborador, o PIN dele não abre a loja.
+    if((r.role==="owner"||r.role==="admin")&&!viaOwnerRef.current){await supabase.rpc("logout_session",{p_token:r.token});return{ok:false,error:"owner_device"};}
     // O PIN de um Proprietário só vale num aparelho onde ele já entrou pela Área do Proprietário (email+password).
     const trusted=(ownerId)=>{try{return shopId&&(String(localStorage.getItem(`lc84_owner_device_${shopId}`))===String(ownerId)||String(localStorage.getItem(`lc84_barber_session_${shopId}`))===String(ownerId));}catch{return false;}};
     let okDevice=true;
@@ -4041,13 +4043,14 @@ const [notifications,setNotifications] = useState([]);
   // único barbeiro, pede a impressão digital logo (o toque dá a autorização ao
   // browser). Se não houver, se falhar ou se houver vários, mostra o ecrã do PIN.
   const startBarberEntry=async()=>{
+    viaOwnerRef.current=false;
     if(!shopId){setRole("login");return;}
     let ids=[];
     try{
       const pre=`lc84_biometric_${shopId}_`;
       ids=Object.keys(localStorage).filter(k=>k.startsWith(pre)).map(k=>k.slice(pre.length));
     }catch(e){}
-    const cands=barbers.filter(bb=>bb.active!==false&&ids.includes(String(bb.id)));
+    const cands=barbers.filter(bb=>bb.active!==false&&!bb.isOwner&&ids.includes(String(bb.id)));
     if(cands.length!==1){setRole("login");return;}
     const ok=await verifyBiometric(shopId,cands[0].id);
     if(ok&&await enterWithStoredToken(cands[0].id))return;
@@ -4084,6 +4087,7 @@ const [notifications,setNotifications] = useState([]);
     let p=null;
     try{p=new URLSearchParams(window.location.search).get("entrar");}catch(e){return;}
     if(p!=="pin")return;
+    viaOwnerRef.current=true;
     try{const u=new URL(window.location.href);u.searchParams.delete("entrar");window.history.replaceState({},"",u.toString());}catch(e){}
     let ownerId=null;
     try{ownerId=localStorage.getItem(`lc84_owner_device_${shopId}`)||localStorage.getItem(`lc84_barber_session_${shopId}`);}catch(e){}
@@ -4179,7 +4183,7 @@ const [notifications,setNotifications] = useState([]);
   }
 
   if(role==="entry")  return <EntryScreen shop={shop} onClient={()=>setRole("client")} onBarber={startBarberEntry} lang={lang} setLang={setLang}/>;
-  if(role==="login")  return <LoginScreen onPinLogin={pinLogin} onJoinRequest={joinRequest} onBack={()=>setRole("entry")} lang={lang}/>;
+  if(role==="login")  return <LoginScreen onPinLogin={pinLogin} onJoinRequest={joinRequest} onBack={()=>{viaOwnerRef.current=false;setRole("entry");}} lang={lang}/>;
   if(role==="client") return <ClientArea bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} shop={shop} shopId={shopId} slug={mySlug} refreshPublic={()=>loadPublic(mySlug)} onBack={()=>setRole("entry")} lang={lang}/>;
   if(role==="admin")  return <AdminPanel pinInUse={pinInUse} bookings={bookings} setBookings={setBookings} barbers={barbers} setBarbers={setBarbers} services={services} setServices={setServices} shop={shop} setShop={setShop} shopId={shopId} mySlug={mySlug} onLogout={logoutBarber} lang={lang}/>;
 
