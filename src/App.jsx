@@ -54,7 +54,7 @@ const LANGS = {
       platform:"A tua plataforma de barbearia",
       accessCode:"Código de Acesso", enter:"Entrar", wrongPin:"Código incorreto",
       hide:"Ocultar", show:"Ver",
-      barberArea:"Área do Barbeiro", clientArea:"Área do Cliente",
+      barberArea:"Área do Colaborador", clientArea:"Área do Cliente",
       today:"Hoje", tomorrow:"Amanhã", yesterday:"Ontem",
       bookings:"marcações", concluded:"concluídas", toConfirm:"Confirmar",
       week:"Semana", revenue:"Receita Hoje", pendingRev:"por receber",
@@ -161,7 +161,7 @@ const LANGS = {
       platform:"Your barbershop platform",
       accessCode:"Access Code", enter:"Enter", wrongPin:"Incorrect code",
       hide:"Hide", show:"Show",
-      barberArea:"Barber Area", clientArea:"Client Area",
+      barberArea:"Team Member Area", clientArea:"Client Area",
       today:"Today", tomorrow:"Tomorrow", yesterday:"Yesterday",
       bookings:"bookings", concluded:"completed", toConfirm:"Confirm",
       week:"Week", revenue:"Today's Revenue", pendingRev:"pending",
@@ -268,7 +268,7 @@ const LANGS = {
       platform:"Tu plataforma de barbería",
       accessCode:"Código de Acceso", enter:"Entrar", wrongPin:"Código incorrecto",
       hide:"Ocultar", show:"Ver",
-      barberArea:"Área del Barbero", clientArea:"Área del Cliente",
+      barberArea:"Área del Colaborador", clientArea:"Área del Cliente",
       today:"Hoy", tomorrow:"Mañana", yesterday:"Ayer",
       bookings:"citas", concluded:"completadas", toConfirm:"Confirmar",
       week:"Semana", revenue:"Ingresos Hoy", pendingRev:"pendiente",
@@ -375,7 +375,7 @@ const LANGS = {
       platform:"Votre plateforme de barbier",
       accessCode:"Code d'Accès", enter:"Entrer", wrongPin:"Code incorrect",
       hide:"Masquer", show:"Voir",
-      barberArea:"Espace Barbier", clientArea:"Espace Client",
+      barberArea:"Espace Collaborateur", clientArea:"Espace Client",
       today:"Aujourd'hui", tomorrow:"Demain", yesterday:"Hier",
       bookings:"rendez-vous", concluded:"terminés", toConfirm:"Confirmer",
       week:"Semaine", revenue:"Revenus Aujourd'hui", pendingRev:"en attente",
@@ -482,7 +482,7 @@ const LANGS = {
       platform:"Ihre Barbershop-Plattform",
       accessCode:"Zugangscode", enter:"Einloggen", wrongPin:"Falscher Code",
       hide:"Verbergen", show:"Anzeigen",
-      barberArea:"Friseurbereich", clientArea:"Kundenbereich",
+      barberArea:"Mitarbeiterbereich", clientArea:"Kundenbereich",
       today:"Heute", tomorrow:"Morgen", yesterday:"Gestern",
       bookings:"Termine", concluded:"abgeschlossen", toConfirm:"Bestätigen",
       week:"Woche", revenue:"Heutiger Umsatz", pendingRev:"ausstehend",
@@ -3512,7 +3512,7 @@ function OwnerPortal({lang,setLang}){
     return used?last:"";
   }catch(e){return "";}})();
   const quickHasBio=(()=>{try{
-    if(!quickSlug||!window.PublicKeyCredential)return false;
+    if(!quickSlug||!window.PublicKeyCredential||!isMobileDevice())return false;
     const dk=Object.keys(localStorage).find(k=>k.startsWith("lc84_owner_device_"))||Object.keys(localStorage).find(k=>k.startsWith("lc84_barber_session_"));
     if(!dk)return false;
     const sid=dk.replace("lc84_owner_device_","").replace("lc84_barber_session_","");
@@ -3758,8 +3758,19 @@ function bufToB64u(buf){
   for(let i=0;i<bytes.length;i++)str+=String.fromCharCode(bytes[i]);
   return btoa(str).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 }
+// A biometria só se usa em telemóveis e tablets. Num PC não se pede nem se regista.
+function isMobileDevice(){
+  try{
+    const u=navigator.userAgentData;
+    if(u&&u.mobile===true)return true;
+    const ua=navigator.userAgent||"";
+    if(/Android|iPhone|iPad|iPod|Mobile/i.test(ua))return true;
+    if(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1)return true;   // iPad recente apresenta-se como Mac
+    return false;
+  }catch(e){return false;}
+}
 async function registerBiometric(shopId,barberId){
-  if(!shopId||!window.PublicKeyCredential)return;
+  if(!shopId||!window.PublicKeyCredential||!isMobileDevice())return;
   const key=`lc84_biometric_${shopId}_${barberId}`;
   if(localStorage.getItem(key))return; // já registado neste aparelho
   try{
@@ -4048,7 +4059,7 @@ const [notifications,setNotifications] = useState([]);
     let ids=[];
     try{
       const pre=`lc84_biometric_${shopId}_`;
-      ids=Object.keys(localStorage).filter(k=>k.startsWith(pre)).map(k=>k.slice(pre.length));
+      if(isMobileDevice())ids=Object.keys(localStorage).filter(k=>k.startsWith(pre)).map(k=>k.slice(pre.length));
     }catch(e){}
     const cands=barbers.filter(bb=>bb.active!==false&&!bb.isOwner&&ids.includes(String(bb.id)));
     if(cands.length!==1){setRole("login");return;}
@@ -4093,7 +4104,7 @@ const [notifications,setNotifications] = useState([]);
     try{ownerId=localStorage.getItem(`lc84_owner_device_${shopId}`)||localStorage.getItem(`lc84_barber_session_${shopId}`);}catch(e){}
     const b=ownerId?barbers.find(bb=>String(bb.id)===String(ownerId)&&bb.active!==false&&bb.isOwner):null;
     if(b){try{localStorage.setItem(`lc84_owner_device_${shopId}`,String(b.id));const sl=localStorage.getItem("lc84_last_shop");if(sl)localStorage.setItem("lc84_owner_slug",sl);}catch(e){}}
-    if(b&&localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`)){setBiometricPending(b);return;}
+    if(b&&isMobileDevice()&&localStorage.getItem(`lc84_biometric_${shopId}_${b.id}`)){setBiometricPending(b);return;}
     setRole("login");
   },[dataLoaded,shopId,barbers,role]);
 
