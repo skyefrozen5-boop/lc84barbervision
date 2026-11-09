@@ -29,10 +29,10 @@ function getFirebaseApp() {
 // telemóvel na tabela device_tokens, associado à loja e ao barbeiro.
 // Falha em silêncio (não interrompe o login) se algo correr mal —
 // por exemplo browsers/dispositivos sem suporte a notificações push.
-export async function registerPushForBarber(shopId, barberId) {
+export async function registerPushForBarber(shopId, barberId, sessionToken) {
   try {
     if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
-    if (!shopId || !barberId) return;
+    if (!shopId || !barberId || !sessionToken) return;
     if (!(window.isSecureContext)) return; // push só funciona em HTTPS
 
     const permission = await Notification.requestPermission();
@@ -52,19 +52,15 @@ export async function registerPushForBarber(shopId, barberId) {
     // os tokens de outros aparelhos, guardados no localStorage deles, não são tocados).
     const lsKeyBarber = `lc84_push_token_barber_${barberId}`;
     const prevTokenBarber = localStorage.getItem(lsKeyBarber);
-    if (prevTokenBarber && prevTokenBarber !== token) {
-      await supabase.from("device_tokens").delete().eq("token", prevTokenBarber);
-    }
 
-    await supabase.from("device_tokens").upsert(
-      {
-        shop_id: shopId,
-        barber_id: String(barberId),
-        token,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "token" },
-    );
+    // A gravação (e a troca do token antigo) é feita pela função da base de dados,
+    // que confirma o bilhete de sessão do barbeiro. A tabela já não é acedida diretamente.
+    const { data: okBarber, error: errBarber } = await supabase.rpc("register_barber_push", {
+      p_token: sessionToken,
+      p_push_token: token,
+      p_old_token: prevTokenBarber && prevTokenBarber !== token ? prevTokenBarber : null,
+    });
+    if (errBarber || okBarber !== true) return;
     localStorage.setItem(lsKeyBarber, token);
   } catch (e) {
     console.log("Falha ao registar notificações push:", e);
@@ -111,21 +107,16 @@ export async function registerPushForClient(shopId, clientKey) {
     // antes de gravar o novo, para não duplicar notificações.
     const lsKeyClient = `lc84_push_token_client_${clientKey}`;
     const prevTokenClient = localStorage.getItem(lsKeyClient);
-    if (prevTokenClient && prevTokenClient !== token) {
-      await supabase.from("device_tokens").delete().eq("token", prevTokenClient);
-    }
 
-    const { error: upsertError } = await supabase.from("device_tokens").upsert(
-      {
-        shop_id: shopId,
-        client_key: String(clientKey),
-        token,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "token" },
-    );
-        if (upsertError) {
-      
+    // Tal como no barbeiro: a gravação é feita pela função da base de dados,
+    // que valida a loja, o telefone e o formato do token.
+    const { data: okClient, error: errClient } = await supabase.rpc("register_client_push", {
+      p_shop_id: shopId,
+      p_client_key: String(clientKey),
+      p_push_token: token,
+      p_old_token: prevTokenClient && prevTokenClient !== token ? prevTokenClient : null,
+    });
+    if (errClient || okClient !== true) {
       return;
     }
     localStorage.setItem(lsKeyClient, token);

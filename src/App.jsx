@@ -3943,7 +3943,7 @@ const [notifications,setNotifications] = useState([]);
       if(sl)localStorage.setItem("lc84_owner_slug",sl);
     }catch(e){}}
     registerBiometric(shopId,b.id);
-    registerPushForBarber(shopId,b.id);
+    registerPushForBarber(shopId,b.id,getTok(mySlug));
     if(pendingChat&&String(pendingChat.barberId)===String(b.id)){
       setBScreen("clients");
     }else{
