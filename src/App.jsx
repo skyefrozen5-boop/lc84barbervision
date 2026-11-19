@@ -757,62 +757,76 @@ function Modal({onClose,title,children}){
   );
 }
 
-// ─── CHAT (cliente ↔ barbeiro, tempo real via Supabase Realtime) ──────────────
-function useChatThread(shopId,barberId,clientKey,sender){
+// ─── CHAT (cliente ↔ barbeiro; a app pergunta de novo de poucos em poucos segundos) ───
+// Tudo passa pelas funções da base de dados (chat_*): o barbeiro envia o bilhete de sessão (tok),
+// o cliente não (identifica-se pela loja, pelo barbeiro e pelo telemóvel).
+const CHAT_POLL_MS=4000;      // conversa aberta
+const UNREAD_POLL_MS=15000;   // contadores de mensagens por ler
+const CHAT_CHANGED_EVENT="lc84-chat-changed";
+const chatChanged=()=>{try{window.dispatchEvent(new Event(CHAT_CHANGED_EVENT));}catch{/* sem janela */}};
+
+function useChatThread(shopId,barberId,clientKey,sender,tok){
   const [messages,setMessages]=useState([]);
   const [loading,setLoading]=useState(true);
+  const seq=useRef(0);
+  const sess=sender==="barber"?(tok||""):"";
+  const noSession=sender==="barber"&&!sess;
   useEffect(()=>{
     if(!shopId||!barberId||!clientKey)return;
+    if(noSession){setLoading(false);return;}
     let active=true;
     setLoading(true);
-    (async()=>{
-      const{data}=await supabase.from("messages").select("*")
-        .eq("shop_id",shopId).eq("barber_id",barberId).eq("client_key",clientKey)
-        .order("created_at",{ascending:true});
-      if(active){setMessages(data||[]);setLoading(false);}
-    })();
-    const ch=supabase.channel(`chat-${shopId}-${barberId}-${clientKey}`)
-      .on("postgres_changes",{event:"INSERT",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},payload=>{
-        const m=payload.new;
-        if(m.barber_id!==barberId||m.client_key!==clientKey)return;
-        setMessages(p=>p.find(x=>x.id===m.id)?p:[...p,m]);
-      })
-      .subscribe();
-    return()=>{active=false;supabase.removeChannel(ch);};
-  },[shopId,barberId,clientKey]);
+    const load=async()=>{
+      const my=seq.current;
+      const{data,error}=await supabase.rpc("chat_get_thread",{p_session:sess,p_shop_id:shopId,p_barber_id:barberId,p_client_key:clientKey});
+      if(!active||my!==seq.current)return;
+      if(!error&&Array.isArray(data)){
+        setMessages(p=>(p.length===data.length&&p[p.length-1]?.id===data[data.length-1]?.id)?p:data);
+      }
+      setLoading(false);
+    };
+    load();
+    const run=()=>{if(!document.hidden)load();};
+    const iv=setInterval(run,CHAT_POLL_MS);
+    document.addEventListener("visibilitychange",run);
+    return()=>{active=false;clearInterval(iv);document.removeEventListener("visibilitychange",run);};
+  },[shopId,barberId,clientKey,sess,noSession]);
   const send=async(text)=>{
     const clean=text.trim();
-    if(!clean)return;
-    const{data,error}=await supabase.from("messages").insert({shop_id:shopId,barber_id:barberId,client_key:clientKey,sender,text:clean}).select().single();
-    if(!error&&data)setMessages(p=>p.find(x=>x.id===data.id)?p:[...p,data]);
+    if(!clean||noSession)return;
+    seq.current++;
+    const{data,error}=await supabase.rpc("chat_send_message",{p_session:sess,p_shop_id:shopId,p_barber_id:barberId,p_client_key:clientKey,p_text:clean});
+    seq.current++;
+    const row=Array.isArray(data)?data[0]:data;
+    if(!error&&row)setMessages(p=>p.find(x=>x.id===row.id)?p:[...p,row]);
+    chatChanged();
   };
   const markRead=async()=>{
-    const field=sender==="barber"?"read_barber":"read_client";
-    const other=sender==="barber"?"client":"barber";
-    await supabase.from("messages").update({[field]:true})
-      .eq("shop_id",shopId).eq("barber_id",barberId).eq("client_key",clientKey).eq("sender",other).eq(field,false);
+    if(noSession)return;
+    await supabase.rpc("chat_mark_read",{p_session:sess,p_shop_id:shopId,p_barber_id:barberId,p_client_key:clientKey});
+    chatChanged();
   };
   return{messages,loading,send,markRead};
 }
 
-function useBarberUnreadMap(shopId,barberId){
+function useBarberUnreadMap(shopId,barberId,tok){
   const [map,setMap]=useState({});
   useEffect(()=>{
-    if(!shopId||!barberId)return;
+    if(!shopId||!barberId||!tok)return;
     let active=true;
     const load=async()=>{
-      const{data}=await supabase.from("messages").select("client_key")
-        .eq("shop_id",shopId).eq("barber_id",barberId).eq("sender","client").eq("read_barber",false);
-      if(!active)return;
-      const m={};(data||[]).forEach(r=>{m[r.client_key]=(m[r.client_key]||0)+1;});
-      setMap(m);
+      const{data,error}=await supabase.rpc("chat_unread_barber",{p_session:tok});
+      if(!active||error)return;
+      const m={};(data||[]).forEach(r=>{m[r.client_key]=Number(r.total)||0;});
+      setMap(p=>JSON.stringify(p)===JSON.stringify(m)?p:m);
     };
     load();
-    const ch=supabase.channel(`unread-b-${shopId}-${barberId}`)
-      .on("postgres_changes",{event:"*",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},load)
-      .subscribe();
-    return()=>{active=false;supabase.removeChannel(ch);};
-  },[shopId,barberId]);
+    const run=()=>{if(!document.hidden)load();};
+    const iv=setInterval(run,UNREAD_POLL_MS);
+    document.addEventListener("visibilitychange",run);
+    window.addEventListener(CHAT_CHANGED_EVENT,load);
+    return()=>{active=false;clearInterval(iv);document.removeEventListener("visibilitychange",run);window.removeEventListener(CHAT_CHANGED_EVENT,load);};
+  },[shopId,barberId,tok]);
   return map;
 }
 
@@ -822,24 +836,24 @@ function useClientUnreadMap(shopId,clientKey){
     if(!shopId||!clientKey)return;
     let active=true;
     const load=async()=>{
-      const{data}=await supabase.from("messages").select("barber_id")
-        .eq("shop_id",shopId).eq("client_key",clientKey).eq("sender","barber").eq("read_client",false);
-      if(!active)return;
-      const m={};(data||[]).forEach(r=>{m[r.barber_id]=(m[r.barber_id]||0)+1;});
-      setMap(m);
+      const{data,error}=await supabase.rpc("chat_unread_client",{p_shop_id:shopId,p_client_key:clientKey});
+      if(!active||error)return;
+      const m={};(data||[]).forEach(r=>{m[r.barber_id]=Number(r.total)||0;});
+      setMap(p=>JSON.stringify(p)===JSON.stringify(m)?p:m);
     };
     load();
-    const ch=supabase.channel(`unread-c-${shopId}-${clientKey}`)
-      .on("postgres_changes",{event:"*",schema:"public",table:"messages",filter:`shop_id=eq.${shopId}`},load)
-      .subscribe();
-    return()=>{active=false;supabase.removeChannel(ch);};
+    const run=()=>{if(!document.hidden)load();};
+    const iv=setInterval(run,UNREAD_POLL_MS);
+    document.addEventListener("visibilitychange",run);
+    window.addEventListener(CHAT_CHANGED_EVENT,load);
+    return()=>{active=false;clearInterval(iv);document.removeEventListener("visibilitychange",run);window.removeEventListener(CHAT_CHANGED_EVENT,load);};
   },[shopId,clientKey]);
   return map;
 }
 
-function ChatThread({shopId,barberId,clientKey,sender,lang,onSent}){
+function ChatThread({shopId,barberId,clientKey,sender,lang,onSent,tok}){
   const L=LANGS[lang].t;
-  const{messages,loading,send,markRead}=useChatThread(shopId,barberId,clientKey,sender);
+  const{messages,loading,send,markRead}=useChatThread(shopId,barberId,clientKey,sender,tok);
   const [text,setText]=useState("");
   const endRef=useRef(null);
   useEffect(()=>{endRef.current?.scrollIntoView({block:"end"});},[messages.length]);
@@ -1044,7 +1058,7 @@ function BNotifications({notifications,setNotifications,bookings,setBookings,ser
 // ══════════════════════════════════════════════════════════════════════════════
 // 👥 CLIENTS HISTORY SCREEN
 // ══════════════════════════════════════════════════════════════════════════════
-function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
+function BClients({bookings,setBookings,services,barber,clientNotes,setClientNotes,cutRecords,setCutRecords,purchaseHistory,setPurchaseHistory,manualClients,setManualClients,shopId,mySlug,lang,autoOpenChatKey,onAutoOpenChatDone,autoOpenProfileKey,onAutoOpenProfileDone}){
   const L=LANGS[lang].t;
   const [search,setSearch]=useState("");
   const [openClient,setOpenClient]=useState(null);
@@ -1068,7 +1082,8 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
   const [newClientPhone,setNewClientPhone]=useState("");
   const [newClientErr,setNewClientErr]=useState("");
   const [chatClient,setChatClient]=useState(null);
-  const unreadMap=useBarberUnreadMap(shopId,barber.id);
+  const chatTok=getTok(mySlug);
+  const unreadMap=useBarberUnreadMap(shopId,barber.id,chatTok);
   const svc=id=>services.find(s=>s.id===id);
 
   // Build client map from this barber's bookings
@@ -1470,7 +1485,7 @@ function BClients({bookings,setBookings,services,barber,clientNotes,setClientNot
       {/* Chat com o cliente */}
       {chatClient&&(
         <Modal onClose={()=>setChatClient(null)} title={`${L.chatTitle} · ${chatClient.name}`}>
-          <ChatThread shopId={shopId} barberId={barber.id} clientKey={chatClient.phone||chatClient.name} sender="barber" lang={lang}/>
+          <ChatThread shopId={shopId} barberId={barber.id} clientKey={chatClient.phone||chatClient.name} sender="barber" lang={lang} tok={chatTok}/>
         </Modal>
       )}
 
@@ -2698,7 +2713,7 @@ function AdminPanel({pinInUse,bookings,setBookings,barbers,setBarbers,services,s
               </div>
               <Btn variant="ghost" style={{width:"100%"}} onClick={()=>setModal("support")}>💬 Falar com o Suporte</Btn>
               {modal==="support"&&<Modal onClose={()=>setModal(null)} title="Suporte LC.84">
-                <ChatThread shopId={shopId} barberId={barber.id} clientKey="SUPORTE_LC84" sender="barber" lang={lang}/>
+                <ChatThread shopId={shopId} barberId={barber.id} clientKey="SUPORTE_LC84" sender="barber" lang={lang} tok={getTok(mySlug)}/>
               </Modal>}
             </div>
           )}
@@ -4269,7 +4284,7 @@ const [notifications,setNotifications] = useState([]);
         )}
         {bScreen==="agenda"   &&<BAgenda    bookings={bookings} setBookings={setBookings} services={services} barbers={barbers} barber={viewedBarber} addNotification={addNotification} lang={lang}/>}
         {bScreen==="notifs"   &&<BNotifications notifications={notifications} setNotifications={setNotifications} bookings={bookings} setBookings={setBookings} services={services} barber={barber} lang={lang} onOpenLink={link=>{if(!link)return;setPendingChat({barberId:barber.id,clientKey:link.key,mode:link.type==="chat"?"chat":"profile"});setBScreen("clients");}}/>}
-        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
+        {bScreen==="clients"  &&<BClients   bookings={bookings} setBookings={setBookings} services={services} barber={barber} clientNotes={clientNotes} setClientNotes={setClientNotes} cutRecords={cutRecords} setCutRecords={setCutRecords} purchaseHistory={purchaseHistory} setPurchaseHistory={setPurchaseHistory} manualClients={manualClients} setManualClients={setManualClients} shopId={shopId} mySlug={mySlug} lang={lang} autoOpenChatKey={pendingChat&&pendingChat.mode!=="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenChatDone={()=>setPendingChat(null)} autoOpenProfileKey={pendingChat&&pendingChat.mode==="profile"&&String(pendingChat.barberId)===String(barber.id)?pendingChat.clientKey:null} onAutoOpenProfileDone={()=>setPendingChat(null)}/>}
         {bScreen==="reports"  &&<BReports   bookings={bookings} setBookings={setBookings} services={services} barber={viewedBarber} lang={lang}/>}
         {bScreen==="schedule" &&<BSchedule  barber={barber} setBarbers={setBarbers} lang={lang}/>}
         {bScreen==="profile"  &&<BProfile   barber={barber} setBarbers={setBarbers} shopId={shopId} onLogout={logoutBarber} lang={lang}/>}
