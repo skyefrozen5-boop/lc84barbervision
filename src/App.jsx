@@ -2435,11 +2435,11 @@ function AdminPanel({pinInUse,bookings,setBookings,barbers,setBarbers,services,s
     if(!shopId)return;
     let active=true;
     (async()=>{
-      const{data}=await supabase.from("product_orders").select("*").eq("shop_id",shopId).order("created_at",{ascending:false});
-      if(active){setOrders(data||[]);setOrdersLoading(false);}
+      const{data}=await supabase.rpc("porder_list",{p_session:getTok(mySlug)||""});
+      if(active){setOrders(Array.isArray(data)?data:[]);setOrdersLoading(false);}
     })();
     return()=>{active=false;};
-  },[shopId]);
+  },[shopId,mySlug]);
   const stageOrderPhoto=file=>{
     if(!file)return;
     if(file.size>5*1024*1024){setOrderErr(L.photoTooLarge);return;}
@@ -2461,17 +2461,18 @@ function AdminPanel({pinInUse,bookings,setBookings,barbers,setBarbers,services,s
       photo_url=supabase.storage.from("salon-photos").getPublicUrl(path).data.publicUrl;
       setOrderPhotoBusy(false);
     }
-    const{data,error}=await supabase.from("product_orders").insert({shop_id:shopId,text:clean||null,photo_url}).select().single();
-    if(!error&&data){
-      setOrders(p=>[data,...p]);setOrderText("");setOrderPhotoFile(null);setOrderPhotoPreview("");
+    const{data,error}=await supabase.rpc("porder_add",{p_session:getTok(mySlug)||"",p_text:clean||null,p_photo_url:photo_url});
+    const row=Array.isArray(data)?data[0]:data;
+    if(!error&&row){
+      setOrders(p=>[row,...p]);setOrderText("");setOrderPhotoFile(null);setOrderPhotoPreview("");
     } else if(error){setOrderErr(L.uploadFailed);}
   };
   const toggleOrderDone=async(o)=>{
-    const{error}=await supabase.from("product_orders").update({done:!o.done}).eq("id",o.id);
+    const{error}=await supabase.rpc("porder_toggle",{p_session:getTok(mySlug)||"",p_id:o.id});
     if(!error)setOrders(p=>p.map(x=>x.id===o.id?{...x,done:!o.done}:x));
   };
   const deleteOrder=async(id)=>{
-    const{error}=await supabase.from("product_orders").delete().eq("id",id);
+    const{error}=await supabase.rpc("porder_delete",{p_session:getTok(mySlug)||"",p_id:id});
     if(!error)setOrders(p=>p.filter(x=>x.id!==id));
   };
   const [photoBusy,setPhotoBusy]=useState(false);
